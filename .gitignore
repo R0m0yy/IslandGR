@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+blender/out/
+dist/
+godot/.godot/
+*.blend1
