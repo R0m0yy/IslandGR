@@ -1,0 +1,8 @@
+OK assets/glb/village_massing_v02.glb
+ bytes=3087828 nodes=141 meshes=141 materials=1 triangles=27720 degenerate_tris=0
+ bounds(m) min=[-50.0, -3.1, -40.0] max=[50.0, 27.88, 37.0]
+OK assets/glb/village_nav_overlay_v02.glb
+ bytes=434188 nodes=10 meshes=10 materials=1 triangles=3952 degenerate_tris=0
+ bounds(m) min=[-39.76, 0.64, -28.07] max=[35.47, 19.97, 26.26]
+c21c3d5003568b1635c5923641eed68127dd98e58e1862565f234b3738f7013c  assets/glb/village_massing_v02.glb
+ff97242a00cdda0b5e700c9f5cbd24aab8405a7f57d1aa792a5526763f9cc838  assets/glb/village_nav_overlay_v02.glb

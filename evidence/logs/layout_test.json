@@ -1,0 +1,28 @@
+{
+ "buildings": 30,
+ "homes": 21,
+ "businesses": 10,
+ "levels": 8,
+ "nav_nodes": 122,
+ "nav_edges": 126,
+ "stairs": 8,
+ "ladders": 1,
+ "bridges": 1,
+ "door_pairs_routed": 435,
+ "door_pairs_expected": 435,
+ "mean_route_m": 48.2,
+ "longest_route": {
+  "m": 119.3,
+  "a": "door_P03",
+  "b": "door_H19"
+ },
+ "single_points_of_failure": {
+  "s7_bot-s7_top": [
+   "H19"
+  ]
+ },
+ "household_capacity": 70,
+ "job_slots": 24,
+ "interaction_anchor_stubs": 368,
+ "failures": []
+}

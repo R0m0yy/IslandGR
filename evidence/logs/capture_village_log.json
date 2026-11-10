@@ -1,0 +1,182 @@
+{
+ "V01_overview_day": {
+  "query": "mode=day&zoom=54&tx=-1&ty=5&tz=-3",
+  "glb": "/assets/glb/village_massing_v02.glb",
+  "stats": {
+   "objects": 141,
+   "triangles": 27720,
+   "drawCalls": 142,
+   "lights": 16,
+   "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+   "glError": 0,
+   "mode": "day",
+   "size": [
+    1200,
+    1200
+   ]
+  },
+  "error": null,
+  "console_errors": [],
+  "file": "evidence/renders_village/V01_overview_day.png"
+ },
+ "V02_overview_sunset": {
+  "query": "mode=sunset&zoom=54&tx=-1&ty=5&tz=-3",
+  "glb": "/assets/glb/village_massing_v02.glb",
+  "stats": {
+   "objects": 141,
+   "triangles": 27720,
+   "drawCalls": 142,
+   "lights": 16,
+   "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+   "glError": 0,
+   "mode": "sunset",
+   "size": [
+    1200,
+    1200
+   ]
+  },
+  "error": null,
+  "console_errors": [],
+  "file": "evidence/renders_village/V02_overview_sunset.png"
+ },
+ "V03_overview_night": {
+  "query": "mode=night&zoom=54&tx=-1&ty=5&tz=-3",
+  "glb": "/assets/glb/village_massing_v02.glb",
+  "stats": {
+   "objects": 141,
+   "triangles": 27720,
+   "drawCalls": 142,
+   "lights": 16,
+   "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+   "glError": 0,
+   "mode": "night",
+   "size": [
+    1200,
+    1200
+   ]
+  },
+  "error": null,
+  "console_errors": [],
+  "file": "evidence/renders_village/V03_overview_night.png"
+ },
+ "V04_residential_hillside_day": {
+  "query": "mode=day&zoom=24&tx=-18&ty=11&tz=-10&pitch=30",
+  "glb": "/assets/glb/village_massing_v02.glb",
+  "stats": {
+   "objects": 141,
+   "triangles": 27720,
+   "drawCalls": 142,
+   "lights": 16,
+   "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+   "glError": 0,
+   "mode": "day",
+   "size": [
+    1200,
+    1200
+   ]
+  },
+  "error": null,
+  "console_errors": [],
+  "file": "evidence/renders_village/V04_residential_hillside_day.png"
+ },
+ "V05_harbour_day": {
+  "query": "mode=day&zoom=22&tx=6&ty=3&tz=10&pitch=32",
+  "glb": "/assets/glb/village_massing_v02.glb",
+  "stats": {
+   "objects": 141,
+   "triangles": 27720,
+   "drawCalls": 142,
+   "lights": 16,
+   "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+   "glError": 0,
+   "mode": "day",
+   "size": [
+    1200,
+    1200
+   ]
+  },
+  "error": null,
+  "console_errors": [],
+  "file": "evidence/renders_village/V05_harbour_day.png"
+ },
+ "V06_route_network": {
+  "query": "mode=day&zoom=54&tx=-1&ty=5&tz=-3&desat=1",
+  "glb": "/assets/glb/village_massing_v02.glb,/assets/glb/village_nav_overlay_v02.glb",
+  "stats": {
+   "objects": 151,
+   "triangles": 31672,
+   "drawCalls": 152,
+   "lights": 16,
+   "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+   "glError": 0,
+   "mode": "day",
+   "size": [
+    1200,
+    1200
+   ]
+  },
+  "error": null,
+  "console_errors": [],
+  "file": "evidence/renders_village/V06_route_network.png"
+ },
+ "V07_route_network_plan": {
+  "query": "mode=day&zoom=46&tx=-1&ty=5&tz=-3&desat=1&pitch=80&yaw=0",
+  "glb": "/assets/glb/village_massing_v02.glb,/assets/glb/village_nav_overlay_v02.glb",
+  "stats": {
+   "objects": 151,
+   "triangles": 31672,
+   "drawCalls": 152,
+   "lights": 16,
+   "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+   "glError": 0,
+   "mode": "day",
+   "size": [
+    1200,
+    1200
+   ]
+  },
+  "error": null,
+  "console_errors": [],
+  "file": "evidence/renders_village/V07_route_network_plan.png"
+ },
+ "V08_gate_arch_and_bridge_day": {
+  "query": "mode=day&zoom=22&tx=26&ty=6&tz=0&pitch=28&yaw=20",
+  "glb": "/assets/glb/village_massing_v02.glb",
+  "stats": {
+   "objects": 141,
+   "triangles": 27720,
+   "drawCalls": 142,
+   "lights": 16,
+   "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+   "glError": 0,
+   "mode": "day",
+   "size": [
+    1200,
+    1200
+   ]
+  },
+  "error": null,
+  "console_errors": [],
+  "file": "evidence/renders_village/V08_gate_arch_and_bridge_day.png"
+ },
+ "V09_harbour_night": {
+  "query": "mode=night&zoom=24&tx=2&ty=4&tz=6&pitch=32",
+  "glb": "/assets/glb/village_massing_v02.glb",
+  "stats": {
+   "objects": 141,
+   "triangles": 27720,
+   "drawCalls": 142,
+   "lights": 16,
+   "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+   "glError": 0,
+   "mode": "night",
+   "size": [
+    1200,
+    1200
+   ]
+  },
+  "error": null,
+  "console_errors": [],
+  "file": "evidence/renders_village/V09_harbour_night.png"
+ }
+}

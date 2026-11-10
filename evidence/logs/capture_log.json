@@ -1,0 +1,149 @@
+{
+ "01_overview_day": {
+  "query": "mode=day",
+  "stats": {
+   "objects": 60,
+   "triangles": 5546,
+   "drawCalls": 61,
+   "lights": 3,
+   "msPerFrame": 0.3,
+   "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+   "glError": 0,
+   "mode": "day",
+   "size": [
+    1400,
+    1400
+   ]
+  },
+  "error": null,
+  "console": [
+   "[.WebGL-0x8cc001aac00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+   "Failed to load resource: the server responded with a status of 404 (File not found)",
+   "[.WebGL-0x8cc001aac00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+  ],
+  "file": "evidence/renders/01_overview_day.png"
+ },
+ "02_overview_sunset": {
+  "query": "mode=sunset",
+  "stats": {
+   "objects": 60,
+   "triangles": 5546,
+   "drawCalls": 61,
+   "lights": 3,
+   "msPerFrame": 0.3,
+   "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+   "glError": 0,
+   "mode": "sunset",
+   "size": [
+    1400,
+    1400
+   ]
+  },
+  "error": null,
+  "console": [
+   "[.WebGL-0x8cc001cac00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+   "[.WebGL-0x8cc001cac00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)"
+  ],
+  "file": "evidence/renders/02_overview_sunset.png"
+ },
+ "03_overview_night": {
+  "query": "mode=night",
+  "stats": {
+   "objects": 60,
+   "triangles": 5546,
+   "drawCalls": 61,
+   "lights": 3,
+   "msPerFrame": 0.2,
+   "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+   "glError": 0,
+   "mode": "night",
+   "size": [
+    1400,
+    1400
+   ]
+  },
+  "error": null,
+  "console": [],
+  "file": "evidence/renders/03_overview_night.png"
+ },
+ "04_cottage_closeup_day": {
+  "query": "mode=day&zoom=4.2&tx=-0.6&ty=4.3&tz=1.6&pitch=28",
+  "stats": {
+   "objects": 60,
+   "triangles": 5546,
+   "drawCalls": 61,
+   "lights": 3,
+   "msPerFrame": 0.2,
+   "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+   "glError": 0,
+   "mode": "day",
+   "size": [
+    1400,
+    1400
+   ]
+  },
+  "error": null,
+  "console": [],
+  "file": "evidence/renders/04_cottage_closeup_day.png"
+ },
+ "05_dock_closeup_day": {
+  "query": "mode=day&zoom=4.0&tx=5.6&ty=1.0&tz=2.8&pitch=30&yaw=30",
+  "stats": {
+   "objects": 60,
+   "triangles": 5546,
+   "drawCalls": 61,
+   "lights": 3,
+   "msPerFrame": 0.1,
+   "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+   "glError": 0,
+   "mode": "day",
+   "size": [
+    1400,
+    1400
+   ]
+  },
+  "error": null,
+  "console": [],
+  "file": "evidence/renders/05_dock_closeup_day.png"
+ },
+ "06_reverse_angle_day": {
+  "query": "mode=day&yaw=-40&pitch=30",
+  "stats": {
+   "objects": 60,
+   "triangles": 5546,
+   "drawCalls": 61,
+   "lights": 3,
+   "msPerFrame": 0.3,
+   "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+   "glError": 0,
+   "mode": "day",
+   "size": [
+    1400,
+    1400
+   ]
+  },
+  "error": null,
+  "console": [],
+  "file": "evidence/renders/06_reverse_angle_day.png"
+ },
+ "07_cottage_closeup_night": {
+  "query": "mode=night&zoom=4.2&tx=-0.6&ty=4.3&tz=1.6&pitch=28",
+  "stats": {
+   "objects": 60,
+   "triangles": 5546,
+   "drawCalls": 61,
+   "lights": 3,
+   "msPerFrame": 0.2,
+   "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+   "glError": 0,
+   "mode": "night",
+   "size": [
+    1400,
+    1400
+   ]
+  },
+  "error": null,
+  "console": [],
+  "file": "evidence/renders/07_cottage_closeup_night.png"
+ }
+}

@@ -1,0 +1,14 @@
+date: Mon Nov  9 22:56:38 UTC 2026
+blender: NOT FOUND
+ModuleNotFoundError: No module named 'bpy'
+godot: NOT FOUND
+pip download bpy:
+ERROR: No matching distribution found for bpy
+npm view three:
+npm error code ENOTFOUND
+cpu cores: 2
+Mem:            8022         566        6706          16        1051        7455
+gpu: none
+Google Chrome for Testing 153.0.8010.12 
+Python 3.13.18
+v22.23.4

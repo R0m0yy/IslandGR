@@ -1,0 +1,15 @@
+date: Mon Nov  9 23:49:03 UTC 2026
+blender: NOT FOUND
+godot: NOT FOUND
+ModuleNotFoundError: No module named 'bpy'
+pip download bpy: ERROR: No matching distribution found for bpy
+https://pypi.org/simple/bpy/ -> 000
+https://github.com/godotengine/godot/releases -> 403
+https://download.blender.org/release/ -> 000
+/usr/bin/python3.11
+/usr/bin/python3.12
+/usr/bin/python3.13
+/root/.local/bin/uv
+/usr/bin/Xvfb
+/usr/local/bin/ffmpeg
+cores 2

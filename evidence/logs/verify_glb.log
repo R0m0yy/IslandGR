@@ -1,0 +1,6 @@
+OK assets/glb/lt_pipeline_test_01.glb
+ bytes=639336 nodes=60 meshes=60 materials=1 triangles=5546 degenerate_tris=0
+ bounds(m) min=[-8.5, -1.07, -8.5] max=[10.5, 8.08, 10.5]
+ nodes with extras: ['house_window_front_glass', 'house_window_side_glass', 'lantern_glow']
+ node names: boat_hull, boat_mooring, boat_oars, boat_seats, bushes, cliff_ledge, cliff_ledge_top, cliff_main, cliff_main_top, deck_planks, deck_rail_posts, deck_rail_rope, deck_structure, dock_piles, dock_planks, dock_structure, house_corner_posts, house_door_frame, house_door_leaf, house_door_step, house_floor, house_footings, house_roof_patch, house_roof_rafters, house_roof_sheets, house_roof_weights, house_wall_back, house_wall_front, house_wall_left, house_wall_right, house_window_front_frame, house_window_front_glass, house_window_front_shutters, house_window_side_frame, house_window_side_glass, house_window_side_shutters, ladder_rails, ladder_rungs, lantern_glow, lantern_post, palm_crown, palm_fronds, palm_trunk, prop_barrels, prop_buoys, prop_crates, prop_laundry_cloth, prop_laundry_line, prop_laundry_poles, prop_life_ring, prop_net_pile, prop_pot_plants, prop_pots, prop_stool, rocks_sea, seabirds, tree_canopy, tree_trunk, water_slab, water_surface
+ad016978405193efb0b7a8776291badf842181575dd55afae417f0c5fff2af2e  assets/glb/lt_pipeline_test_01.glb
