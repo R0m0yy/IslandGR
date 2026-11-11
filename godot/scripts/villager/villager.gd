@@ -308,6 +308,7 @@ func on_catch(_spot) -> void:
 	## hand-line catch from a pier or the shore: straight into the household pantry
 	world.ledger.mint(hh, "fish", 1, "handline_catch")
 	stats["fish_caught"] += 1
+	world.economy.sell_handline(self)
 	var st = fsm.current
 	if st and st.has_method("on_catch"):
 		st.on_catch()

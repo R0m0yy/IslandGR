@@ -24,3 +24,15 @@ saved L04_fish_market_inspector_journal  Day 1  10:20  [clear, waxing gibbous]  
 saved L05_gull_raid  Day 1  15:09  [clear, waxing gibbous]  gull gull1 (hunger 55) closing on fish at BIZ_P01
 saved L06_gull_raid_outcome  Day 1  15:09  [clear, waxing gibbous]  outcome: took a fish; thefts so far 7
 saved L09_storm_harbour  Day 2  13:49  [storm, full moon]  storm forced (setup); sheltering: 11
+saved L10_golden_hour_overview  Day 2  18:29  [clear, full moon]  environment only
+saved L11_watching_the_sunset  Day 2  18:34  [clear, full moon]  Dov at sp_1
+saved L12_night_moonlight  Day 2  21:34  [clear, full moon]  environment only; moon full moon
+saved L13_night_sky_moon_stars  Day 2  21:34  [clear, full moon]  looking out to sea
+saved L14_village_inspector_journal  Day 2  23:04  [clear, full moon]  after one day
+saved L15_family_tree_after_24_years  Day 25  05:59  [storm, first quarter]  loaded save from scenario E (24 accelerated years)
+saved L16_resident_timeline  Day 25  05:59  [storm, first quarter]  same resident's life history
+WARNING: ObjectDB instances leaked at exit (run with --verbose for details).
+     at: cleanup (core/object/object.cpp:2284)
+ERROR: 6 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:604)
+EXIT 0

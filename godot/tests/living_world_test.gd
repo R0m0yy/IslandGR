@@ -450,6 +450,24 @@ func scenario_Y() -> void:
 	report["Y"]["economy"] = v.economy.stats.duplicate()
 	report["Y"]["owed_to_fishers"] = v.economy.owed_to_fishers()
 	report["Y"]["tills"] = {"market": v.ledger.money(Economy.MARKET), "council": v.ledger.money(Economy.COUNCIL), "eatery": v.ledger.money(Economy.EATERY), "store": v.ledger.money(Economy.STORE)}
+	var rich: Array = []
+	for hh in v.households:
+		if v.households[hh]["members"] > 0:
+			rich.append([v.ledger.money(hh), hh])
+	rich.sort()
+	rich.reverse()
+	var prof := []
+	for r in rich.slice(0, 3) + rich.slice(rich.size() - 3):
+		var inc := {}
+		var out := {}
+		for e in v.ledger.log:
+			if e[4] == "money" and e[3] == r[1]:
+				inc[e[1]] = int(inc.get(e[1], 0)) + e[5]
+			if e[4] == "money" and e[2] == r[1]:
+				out[e[1]] = int(out.get(e[1], 0)) + e[5]
+		prof.append({"hh": r[1], "money": r[0], "members": v.villagers.filter(func(x): return x.hh == r[1]).map(func(x): return "%s %d %s" % [x.display_name, int(x.age), x.job["role"] if x.job != null else "-"]), "income": inc, "spending": out})
+	report["Y"]["household_profiles"] = prof
+	report["Y"]["unpaid_by_workplace"] = v.economy.unpaid_by.duplicate()
 	report["Y"]["starving"] = v.villagers.filter(func(x): return x.stats["starve_minutes"] > 60.0).map(func(x): return {"id": x.villager_id, "age": int(x.age), "job": x.job, "hh": x.hh, "min": int(x.stats["starve_minutes"]), "money": v.ledger.money(x.hh)})
 	report["Y"]["ecosystem"] = v.ecosystem.stats.duplicate(true)
 	report["Y"]["society"] = v.society.counts.duplicate()

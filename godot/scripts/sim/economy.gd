@@ -30,9 +30,10 @@ var stats := {"wages_paid": 0, "wages_unpaid": 0, "levy_paid": 0, "levy_missed":
 	"fish_kept": 0, "fish_bought": 0, "meals_sold": 0, "repairs": 0, "repairs_unaffordable": 0, "bait_made": 0, "bait_sold": 0, "credit_sales": 0, "credit_repaid": 0,
 	"gifts": 0, "gift_items": 0, "spoiled_home": 0, "spoiled_market": 0, "rotted": 0, "bait_cut": 0, "house_repairs": 0, "house_repairs_unpaid": 0, "successions": 0,
 	"consigned": 0, "payables_settled": 0, "stall_rent": 0, "stall_rent_missed": 0,
-	"levy_waived_days": 0, "subsidised_wages": 0}
+	"levy_waived_days": 0, "subsidised_wages": 0, "handline_sold": 0}
 const COUNCIL_RESERVE := 250          # above this the council waives levy and rent and props up wages
 var _waiving := false
+var unpaid_by: Dictionary = {}
 const STALL_RENT := {"BIZ_P01": 8, "BIZ_P06": 4, "BIZ_P05": 4}
 const MARKET_ROOM := 35             # fish the market will take in (ice box + the day's slab)
 var debts: Dictionary = {}            # household -> money owed to the market
@@ -91,7 +92,9 @@ func daily(day: int) -> void:
 	for hh in village.households:
 		if village.households[hh].get("members", 0) <= 0 or waive:
 			continue
-		if ledger.pay(hh, COUNCIL, LEVY, "levy"):
+		# harbour dues by means: a flat part plus a share of what the household holds above 60
+		var due: int = LEVY / 2 + int(maxf(0.0, ledger.money(hh) - 60.0) * 0.03)
+		if ledger.pay(hh, COUNCIL, due, "levy"):
 			stats["levy_paid"] += 1
 		else:
 			stats["levy_missed"] += 1
@@ -186,6 +189,7 @@ func work_done(v, obj) -> void:
 		v.stats["wages"] += WAGE
 	else:
 		stats["wages_unpaid"] += 1
+		unpaid_by[v.job["place"]] = int(unpaid_by.get(v.job["place"], 0)) + 1
 
 func land_catch(v, boat: Boat) -> void:
 	## Unload a boat: sell to the market while it can pay and has room; the rest goes home.
@@ -402,3 +406,22 @@ func load_extra(d: Dictionary) -> void:
 		payables[k] = int(d["payables"][k])
 	_payable_order = d.get("payable_order", []).duplicate()
 	_waiving = bool(d.get("waiving", false))
+
+func sell_handline(v) -> void:
+	## Someone without a job sells what the household cannot eat to the market,
+	## like any small shore fisher. Paid now if the till allows, else on account.
+	if v.job != null or ledger.qty(v.hh, "fish") <= HOME_KEEP:
+		return
+	if ledger.qty(MARKET, "fish") >= MARKET_ROOM:
+		return
+	var p := fish_buy_price()
+	if ledger.money(MARKET) - owed_to_fishers() >= p:
+		ledger.move(v.hh, MARKET, "fish", 1, "handline_sale")
+		ledger.pay(MARKET, v.hh, p, "handline_sale")
+	else:
+		ledger.move(v.hh, MARKET, "fish", 1, "handline_consigned")
+		if not payables.has(v.hh):
+			_payable_order.append(v.hh)
+		payables[v.hh] = int(payables.get(v.hh, 0)) + p
+	stats["handline_sold"] += 1
+	v.stats["income"] += p

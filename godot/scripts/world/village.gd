@@ -480,3 +480,6 @@ func parents_of(id: String) -> Array:
 	if v:
 		return v.parents
 	return people[id].get("parents", []) if people.has(id) else []
+
+func earners(hh: String) -> int:
+	return villagers.filter(func(x): return x.hh == hh and x.job != null).size()

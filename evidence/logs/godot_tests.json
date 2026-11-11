@@ -1,98 +1,192 @@
 {
  "days": 7,
  "economy": {
-  "fish_bought": 162,
-  "fish_kept": 943,
-  "fish_sold_to_market": 193,
-  "levy_missed": 21,
-  "levy_paid": 168,
-  "meals_sold": 16,
-  "repairs": 9,
+  "bait_cut": 0,
+  "bait_made": 136,
+  "bait_sold": 36,
+  "consigned": 122,
+  "credit_repaid": 0,
+  "credit_sales": 3,
+  "fish_bought": 140,
+  "fish_kept": 139,
+  "fish_sold_to_market": 114,
+  "gift_items": 2,
+  "gifts": 1,
+  "house_repairs": 15,
+  "house_repairs_unpaid": 2,
+  "levy_missed": 14,
+  "levy_paid": 112,
+  "levy_waived_days": 3,
+  "meals_sold": 25,
+  "payables_settled": 381,
+  "repairs": 1,
   "repairs_unaffordable": 0,
-  "wages_paid": 487,
-  "wages_unpaid": 64
+  "rotted": 43,
+  "spoiled_home": 64,
+  "spoiled_market": 6,
+  "stall_rent": 36,
+  "stall_rent_missed": 12,
+  "subsidised_wages": 85,
+  "successions": 0,
+  "wages_paid": 334,
+  "wages_unpaid": 218
  },
  "engine": "4.3-stable (official)",
- "failed": 0,
+ "failed": 3,
  "ledger_totals": {
   "boat_catch": {
    "money": 0,
-   "n": 772,
-   "qty": 1136
+   "n": 249,
+   "qty": 378
   },
   "boat_repair": {
-   "money": 108,
-   "n": 9,
+   "money": 12,
+   "n": 1,
+   "qty": 0
+  },
+  "consignment_paid": {
+   "money": 381,
+   "n": 48,
    "qty": 0
   },
   "cooked": {
    "money": 0,
-   "n": 638,
-   "qty": 1276
+   "n": 610,
+   "qty": 1220
   },
   "eaten": {
    "money": 0,
-   "n": 962,
-   "qty": 962
+   "n": 918,
+   "qty": 918
+  },
+  "eaten_by_gulls": {
+   "money": 0,
+   "n": 25,
+   "qty": 25
   },
   "eaten_out": {
    "money": 0,
-   "n": 16,
-   "qty": 16
+   "n": 25,
+   "qty": 25
   },
   "eatery_cook": {
    "money": 0,
-   "n": 18,
-   "qty": 36
+   "n": 24,
+   "qty": 48
   },
   "eatery_sale": {
-   "money": 64,
-   "n": 16,
+   "money": 100,
+   "n": 25,
    "qty": 0
   },
   "eatery_supply": {
-   "money": 54,
-   "n": 20,
-   "qty": 10
+   "money": 90,
+   "n": 24,
+   "qty": 12
+  },
+  "gift": {
+   "money": 0,
+   "n": 1,
+   "qty": 2
   },
   "handline_catch": {
    "money": 0,
-   "n": 90,
-   "qty": 90
+   "n": 101,
+   "qty": 101
+  },
+  "landing_consigned": {
+   "money": 0,
+   "n": 122,
+   "qty": 122
   },
   "landing_home": {
    "money": 0,
-   "n": 943,
-   "qty": 943
+   "n": 139,
+   "qty": 139
   },
   "landing_sale": {
-   "money": 610,
-   "n": 386,
-   "qty": 193
+   "money": 502,
+   "n": 228,
+   "qty": 114
   },
   "levy": {
-   "money": 1008,
-   "n": 168,
+   "money": 672,
+   "n": 112,
    "qty": 0
   },
+  "market_credit": {
+   "money": 0,
+   "n": 3,
+   "qty": 3
+  },
   "market_sale": {
-   "money": 812,
-   "n": 324,
-   "qty": 162
+   "money": 785,
+   "n": 274,
+   "qty": 137
+  },
+  "market_spoilage": {
+   "money": 0,
+   "n": 4,
+   "qty": 6
+  },
+  "net_loft_made": {
+   "money": 0,
+   "n": 34,
+   "qty": 136
+  },
+  "rotted": {
+   "money": 0,
+   "n": 8,
+   "qty": 43
+  },
+  "spoiled_thrown_out": {
+   "money": 0,
+   "n": 24,
+   "qty": 64
+  },
+  "stall_rent": {
+   "money": 36,
+   "n": 6,
+   "qty": 0
   },
   "start_stock": {
    "money": 0,
-   "n": 43,
-   "qty": 48
+   "n": 50,
+   "qty": 72
+  },
+  "stolen_by_gull": {
+   "money": 0,
+   "n": 87,
+   "qty": 87
+  },
+  "store_sale": {
+   "money": 72,
+   "n": 72,
+   "qty": 36
+  },
+  "store_supply": {
+   "money": 40,
+   "n": 80,
+   "qty": 40
+  },
+  "storm_repair": {
+   "money": 104,
+   "n": 13,
+   "qty": 0
+  },
+  "used_at_sea": {
+   "money": 0,
+   "n": 46,
+   "qty": 46
   },
   "wage": {
-   "money": 1948,
-   "n": 487,
+   "money": 1336,
+   "n": 334,
    "qty": 0
   }
  },
  "nav_nodes": 496,
- "passed": 57,
+ "passed": 54,
  "results": [
   {
    "detail": 30,
@@ -215,10 +309,11 @@
     "sit",
     "sleep",
     "fish",
-    "work"
+    "work",
+    "wave"
    ],
    "passed": true,
-   "test": "placeholder rig exposes all 11 animation clips"
+   "test": "placeholder rig exposes all 12 animation clips"
   },
   {
    "detail": "walk",
@@ -229,49 +324,49 @@
    "detail": {
     "clock": "Day 8  06:00",
     "steps": 100800,
-    "wall_ms": 32744
+    "wall_ms": 35555
    },
    "passed": true,
    "test": "simulation ran 7 game days"
   },
   {
    "detail": {
-    "never_slept": 0,
-    "sleeps": 476
+    "never_slept": 1,
+    "sleeps": 457
    },
-   "passed": true,
+   "passed": false,
    "test": "villagers sleep (everyone at least once)"
   },
   {
-   "detail": 843,
+   "detail": 810,
    "passed": true,
    "test": "villagers cook"
   },
   {
    "detail": {
-    "meals_eaten": 854,
-    "never_ate": 0
+    "meals_eaten": 827,
+    "never_ate": 1
    },
-   "passed": true,
+   "passed": false,
    "test": "villagers eat (everyone at least once)"
   },
   {
-   "detail": 1207,
+   "detail": 452,
    "passed": true,
    "test": "villagers fish and land a catch"
   },
   {
-   "detail": 468,
+   "detail": 475,
    "passed": true,
    "test": "villagers work"
   },
   {
-   "detail": 2232,
+   "detail": 2018,
    "passed": true,
    "test": "doors are opened by villagers"
   },
   {
-   "detail": 3531,
+   "detail": 3337,
    "passed": true,
    "test": "stairs are climbed"
   },
@@ -285,14 +380,16 @@
   {
    "detail": {
     "consumed": {
-     "fish": 328,
-     "meal": 978
+     "bait": 46,
+     "fish": 472,
+     "meal": 943
     },
     "minted": {
-     "fish": 1253,
-     "meal": 1005
+     "bait": 160,
+     "fish": 506,
+     "meal": 972
     },
-    "money": 2040,
+    "money": 2100,
     "problems": []
    },
    "passed": true,
@@ -313,22 +410,22 @@
   },
   {
    "detail": {
-    "aborted_by_weather": 1,
-    "fish_landed": 1130,
-    "trips": 96
+    "aborted_by_weather": 2,
+    "fish_landed": 369,
+    "trips": 45
    },
    "passed": true,
    "test": "boats: crews board, sail, fish and land a catch"
   },
   {
    "detail": {
-    "kept_for_home": 943,
+    "kept_for_home": 139,
     "paid": {
-     "money": 610,
-     "n": 386,
-     "qty": 193
+     "money": 502,
+     "n": 228,
+     "qty": 114
     },
-    "sold": 187
+    "sold": 111
    },
    "passed": true,
    "test": "landed fish is sold to the market for money"
@@ -340,71 +437,72 @@
   },
   {
    "detail": {
-    "fish_bought": 148,
-    "meals_sold_by_eatery": 14
+    "fish_bought": 136,
+    "meals_sold_by_eatery": 16
    },
    "passed": true,
    "test": "households buy fish and meals with money"
   },
   {
    "detail": {
-    "council": 204,
-    "levy_missed": 16,
-    "levy_paid": 152,
-    "unpaid": 51,
-    "wages_paid": 417
+    "council": 286,
+    "levy_missed": 10,
+    "levy_paid": 95,
+    "unpaid": 176,
+    "wages_paid": 299
    },
    "passed": true,
    "test": "wages are paid; levy funds the council"
   },
   {
    "detail": {
-    "buy": 3,
-    "sell": 5,
-    "stock": 36
+    "buy": 7,
+    "sell": 9,
+    "stock": 0
    },
    "passed": true,
    "test": "market price responds to stock"
   },
   {
    "detail": {
-    "repairs": 9,
+    "repairs": 1,
     "unaffordable": 0,
-    "worst_condition": 0.65
+    "worst_condition": 0.58
    },
    "passed": true,
    "test": "boat wear leads to paid repairs"
   },
   {
    "detail": {
-    "drinks": 499,
-    "washes": 162
+    "drinks": 467,
+    "washes": 157
    },
    "passed": true,
    "test": "villagers drink and wash"
   },
   {
    "detail": {
-    "clear": 118,
-    "cloudy": 35,
-    "rain": 20,
-    "storm": 18
+    "clear": 107,
+    "cloudy": 25,
+    "heavy_rain": 24,
+    "light_rain": 17,
+    "storm": 19
    },
    "passed": true,
    "test": "weather changed during the run"
   },
   {
    "detail": {
-    "pairs": 660,
-    "strong": 24
+    "pairs": 705,
+    "strong": 25
    },
    "passed": true,
    "test": "friendships form from time spent together"
   },
   {
    "detail": {
-    "poorest": 0,
-    "richest": 337
+    "poorest": 3,
+    "richest": 331
    },
    "passed": true,
    "test": "no household has negative money"
@@ -412,7 +510,7 @@
   {
    "detail": {
     "boat": "BOAT_02",
-    "crew_then": "rest_home"
+    "crew_then": "drink"
    },
    "passed": true,
    "test": "storm interrupts a trip: boat returns and moors, crew moves on"
@@ -437,7 +535,7 @@
   },
   {
    "detail": {
-    "clock": "Day 10  04:08"
+    "clock": "Day 10  05:16"
    },
    "passed": true,
    "test": "simulation continues for a day after loading"
@@ -454,34 +552,37 @@
   },
   {
    "detail": {
-    "births": 7,
-    "came_of_age": 7,
-    "deaths": 34,
-    "estates": 12,
-    "moves": 5,
-    "partnerships": 1,
-    "retired": 37
+    "births": 29,
+    "came_of_age": 17,
+    "deaths": 36,
+    "estates": 9,
+    "greetings": 1507,
+    "illnesses": 17,
+    "moves": 18,
+    "newcomers": 8,
+    "partnerships": 13,
+    "retired": 36
    },
    "passed": true,
    "test": "generations: births happen"
   },
   {
    "detail": {
-    "deaths": 34,
-    "retired": 37
+    "deaths": 36,
+    "retired": 36
    },
    "passed": true,
    "test": "generations: residents age, retire and die"
   },
   {
-   "detail": 7,
+   "detail": 17,
    "passed": true,
    "test": "generations: children come of age"
   },
   {
    "detail": {
     "audit": [],
-    "estates": 12
+    "estates": 9
    },
    "passed": true,
    "test": "generations: estates settle and the books still balance"
@@ -498,27 +599,32 @@
   {
    "detail": [
     {
-     "day": 44,
-     "detail": "shop_hand",
-     "type": "retired",
+     "day": 45,
+     "detail": "to Eli and Fen",
+     "type": "birth",
      "who": [
-      "V22"
+      "V1033",
+      "V1004",
+      "V1005"
      ]
     },
     {
      "day": 45,
-     "detail": "Dov, aged 74",
-     "type": "death",
+     "detail": "to Taia and Feno",
+     "type": "birth",
      "who": [
-      "V05"
+      "V1034",
+      "V1025",
+      "V1026"
      ]
     },
     {
      "day": 45,
-     "detail": "household HH_H02 closed, estate to HH_H20",
-     "type": "estate",
+     "detail": "Isaa and Pazo took the empty house H02",
+     "type": "newcomers",
      "who": [
-      "V05"
+      "V1035",
+      "V1036"
      ]
     }
    ],
@@ -527,85 +633,98 @@
   },
   {
    "detail": {
-    "population": 15,
-    "starved": 0
+    "population": 43,
+    "starved": 2
    },
-   "passed": true,
+   "passed": false,
    "test": "generations: village still fed after 45 days"
   },
   {
    "detail": [
     "climb_stairs",
     "walk",
-    "work",
-    "eat",
-    "climb_ladder",
-    "fish_trip",
     "idle",
+    "open_door",
+    "eat",
+    "fish_trip",
+    "work",
     "cross_bridge",
     "cook",
-    "sleep",
-    "open_door",
     "drink",
-    "fish",
+    "sleep",
+    "climb_ladder",
     "sit",
+    "shop",
+    "fish",
     "wash",
-    "shop"
+    "mend_nets"
    ],
    "passed": true,
    "test": "all activity states observed"
   }
  ],
- "sim_wall_ms": 32744,
+ "sim_wall_ms": 35555,
  "society": {
-  "births": 7,
-  "came_of_age": 7,
-  "deaths": 34,
-  "estates": 12,
-  "moves": 5,
-  "partnerships": 1,
-  "retired": 37
+  "births": 29,
+  "came_of_age": 17,
+  "deaths": 36,
+  "estates": 9,
+  "greetings": 1507,
+  "illnesses": 17,
+  "moves": 18,
+  "newcomers": 8,
+  "partnerships": 13,
+  "retired": 36
  },
  "state_samples": {
-  "climb_ladder": 50,
-  "climb_stairs": 535,
-  "cook": 130,
-  "cross_bridge": 67,
-  "drink": 33,
-  "eat": 267,
-  "fish": 33,
-  "fish_trip": 249,
-  "idle": 340,
-  "open_door": 80,
-  "shop": 5,
-  "sit": 277,
-  "sleep": 3294,
-  "walk": 1357,
-  "wash": 26,
-  "work": 704
+  "climb_ladder": 40,
+  "climb_stairs": 508,
+  "cook": 129,
+  "cross_bridge": 56,
+  "drink": 28,
+  "eat": 261,
+  "fish": 44,
+  "fish_trip": 133,
+  "idle": 335,
+  "mend_nets": 7,
+  "open_door": 67,
+  "shop": 10,
+  "sit": 449,
+  "sleep": 3128,
+  "walk": 1230,
+  "wash": 18,
+  "work": 706
  },
  "totals": {
-  "boat_trips": 96,
-  "bridges_crossed": 230,
-  "doors_opened": 2312,
-  "drinks": 499,
+  "boat_trips": 45,
+  "bridges_crossed": 181,
+  "doors_opened": 2107,
+  "drinks": 467,
+  "empty_trips": 5,
   "failed_paths": 0,
   "failed_uses": 0,
   "fish_bought": 0,
-  "fish_caught": 1207,
+  "fish_caught": 452,
   "fish_sold": 0,
-  "income": 592,
-  "ladders_climbed": 309,
-  "meals_cooked": 843,
-  "meals_eaten": 854,
-  "metres": 156966,
-  "plans": 5130,
-  "sleeps": 476,
-  "stairs_climbed": 3531,
+  "gifts_given": 2,
+  "gifts_received": 4,
+  "income": 481,
+  "ladders_climbed": 255,
+  "meals_cooked": 810,
+  "meals_eaten": 827,
+  "metres": 144503,
+  "nets_mended": 4,
+  "plans": 4716,
+  "repairs_done": 13,
+  "sheltered": 45,
+  "sleeps": 457,
+  "stairs_climbed": 3337,
   "starve_minutes": 0,
-  "wages": 1668,
-  "washes": 162,
-  "work_blocks": 468
+  "stayed_ashore": 6,
+  "thefts_suffered": 46,
+  "wages": 1196,
+  "washes": 157,
+  "work_blocks": 475
  },
  "villagers": 45
 }

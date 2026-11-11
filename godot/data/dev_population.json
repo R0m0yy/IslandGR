@@ -10,11 +10,11 @@
    "home": "P05",
    "bed_slot": 0,
    "job": {
-    "role": "fisher",
-    "place": "BOAT_02",
+    "role": "carpenter",
+    "place": "P07",
     "hours": [
      6,
-     15
+     18
     ]
    },
    "placeholder": true
@@ -34,18 +34,9 @@
    "household": "HH_H01",
    "home": "H01",
    "bed_slot": 0,
-   "job": null,
-   "placeholder": true
-  },
-  {
-   "id": "V04",
-   "name": "Ivo",
-   "household": "HH_H01",
-   "home": "H01",
-   "bed_slot": 1,
    "job": {
     "role": "apprentice",
-    "place": "P07",
+    "place": "P02",
     "hours": [
      6,
      18
@@ -54,12 +45,28 @@
    "placeholder": true
   },
   {
+   "id": "V04",
+   "name": "Ivo",
+   "household": "HH_H01",
+   "home": "H01",
+   "bed_slot": 1,
+   "job": null,
+   "placeholder": true
+  },
+  {
    "id": "V05",
    "name": "Dov",
    "household": "HH_H02",
    "home": "H02",
    "bed_slot": 0,
-   "job": null,
+   "job": {
+    "role": "fishmonger",
+    "place": "P01",
+    "hours": [
+     6,
+     18
+    ]
+   },
    "placeholder": true
   },
   {
@@ -77,18 +84,9 @@
    "household": "HH_H03",
    "home": "H03",
    "bed_slot": 0,
-   "job": null,
-   "placeholder": true
-  },
-  {
-   "id": "V08",
-   "name": "Nell",
-   "household": "HH_H03",
-   "home": "H03",
-   "bed_slot": 1,
    "job": {
-    "role": "caretaker",
-    "place": "P08",
+    "role": "boatwright",
+    "place": "P02",
     "hours": [
      6,
      18
@@ -97,12 +95,28 @@
    "placeholder": true
   },
   {
+   "id": "V08",
+   "name": "Nell",
+   "household": "HH_H03",
+   "home": "H03",
+   "bed_slot": 1,
+   "job": null,
+   "placeholder": true
+  },
+  {
    "id": "V09",
    "name": "Ada",
    "household": "HH_H04",
    "home": "H04",
    "bed_slot": 0,
-   "job": null,
+   "job": {
+    "role": "fisher",
+    "place": "BOAT_02",
+    "hours": [
+     6,
+     15
+    ]
+   },
    "placeholder": true
   },
   {
@@ -120,14 +134,7 @@
    "household": "HH_H05",
    "home": "H05",
    "bed_slot": 0,
-   "job": {
-    "role": "fisher",
-    "place": "BOAT_01",
-    "hours": [
-     6,
-     15
-    ]
-   },
+   "job": null,
    "placeholder": true
   },
   {
@@ -137,8 +144,8 @@
    "home": "H05",
    "bed_slot": 1,
    "job": {
-    "role": "apprentice",
-    "place": "P02",
+    "role": "market_clerk",
+    "place": "P01",
     "hours": [
      6,
      18
@@ -153,8 +160,8 @@
    "home": "H06",
    "bed_slot": 0,
    "job": {
-    "role": "carpenter",
-    "place": "P07",
+    "role": "cook",
+    "place": "P06",
     "hours": [
      6,
      18
@@ -178,8 +185,8 @@
    "home": "H07",
    "bed_slot": 0,
    "job": {
-    "role": "teacher",
-    "place": "P09",
+    "role": "healer",
+    "place": "P10",
     "hours": [
      6,
      18
@@ -202,14 +209,7 @@
    "household": "HH_H08",
    "home": "H08",
    "bed_slot": 0,
-   "job": {
-    "role": "server",
-    "place": "P06",
-    "hours": [
-     6,
-     18
-    ]
-   },
+   "job": null,
    "placeholder": true
   },
   {
@@ -218,7 +218,14 @@
    "household": "HH_H08",
    "home": "H08",
    "bed_slot": 1,
-   "job": null,
+   "job": {
+    "role": "teacher",
+    "place": "P09",
+    "hours": [
+     6,
+     18
+    ]
+   },
    "placeholder": true
   },
   {
@@ -227,14 +234,7 @@
    "household": "HH_H09",
    "home": "H09",
    "bed_slot": 0,
-   "job": {
-    "role": "fisher",
-    "place": "BOAT_04",
-    "hours": [
-     6,
-     15
-    ]
-   },
+   "job": null,
    "placeholder": true
   },
   {
@@ -244,8 +244,8 @@
    "home": "H09",
    "bed_slot": 1,
    "job": {
-    "role": "fishmonger",
-    "place": "P01",
+    "role": "net_maker",
+    "place": "P04",
     "hours": [
      6,
      18
@@ -259,14 +259,7 @@
    "household": "HH_H10",
    "home": "H10",
    "bed_slot": 0,
-   "job": {
-    "role": "boatwright",
-    "place": "P02",
-    "hours": [
-     6,
-     18
-    ]
-   },
+   "job": null,
    "placeholder": true
   },
   {
@@ -276,8 +269,8 @@
    "home": "H10",
    "bed_slot": 1,
    "job": {
-    "role": "shop_hand",
-    "place": "P05",
+    "role": "server",
+    "place": "P06",
     "hours": [
      6,
      18
@@ -300,7 +293,14 @@
    "household": "HH_H11",
    "home": "H11",
    "bed_slot": 1,
-   "job": null,
+   "job": {
+    "role": "apprentice",
+    "place": "P07",
+    "hours": [
+     6,
+     18
+    ]
+   },
    "placeholder": true
   },
   {
@@ -310,11 +310,11 @@
    "home": "H12",
    "bed_slot": 0,
    "job": {
-    "role": "fisher",
-    "place": "BOAT_03",
+    "role": "shopkeeper",
+    "place": "P05",
     "hours": [
      6,
-     15
+     18
     ]
    },
    "placeholder": true
@@ -335,11 +335,11 @@
    "home": "H13",
    "bed_slot": 0,
    "job": {
-    "role": "fishmonger",
-    "place": "P01",
+    "role": "fisher",
+    "place": "BOAT_06",
     "hours": [
      6,
-     18
+     15
     ]
    },
    "placeholder": true
@@ -368,7 +368,14 @@
    "household": "HH_H14",
    "home": "H14",
    "bed_slot": 1,
-   "job": null,
+   "job": {
+    "role": "fisher",
+    "place": "BOAT_03",
+    "hours": [
+     6,
+     15
+    ]
+   },
    "placeholder": true
   },
   {
@@ -377,7 +384,14 @@
    "household": "HH_H15",
    "home": "H15",
    "bed_slot": 0,
-   "job": null,
+   "job": {
+    "role": "fishmonger",
+    "place": "P01",
+    "hours": [
+     6,
+     18
+    ]
+   },
    "placeholder": true
   },
   {
@@ -387,11 +401,11 @@
    "home": "H15",
    "bed_slot": 1,
    "job": {
-    "role": "shopkeeper",
-    "place": "P05",
+    "role": "fisher",
+    "place": "BOAT_05",
     "hours": [
      6,
-     18
+     15
     ]
    },
    "placeholder": true
@@ -403,11 +417,11 @@
    "home": "H16",
    "bed_slot": 0,
    "job": {
-    "role": "healer",
-    "place": "P10",
+    "role": "fisher",
+    "place": "BOAT_01",
     "hours": [
      6,
-     18
+     15
     ]
    },
    "placeholder": true
@@ -418,14 +432,7 @@
    "household": "HH_H16",
    "home": "H16",
    "bed_slot": 1,
-   "job": {
-    "role": "storekeeper",
-    "place": "P03",
-    "hours": [
-     6,
-     18
-    ]
-   },
+   "job": null,
    "placeholder": true
   },
   {
@@ -434,7 +441,14 @@
    "household": "HH_H17",
    "home": "H17",
    "bed_slot": 0,
-   "job": null,
+   "job": {
+    "role": "caretaker",
+    "place": "P08",
+    "hours": [
+     6,
+     18
+    ]
+   },
    "placeholder": true
   },
   {
@@ -443,14 +457,7 @@
    "household": "HH_H17",
    "home": "H17",
    "bed_slot": 1,
-   "job": {
-    "role": "net_maker",
-    "place": "P04",
-    "hours": [
-     6,
-     18
-    ]
-   },
+   "job": null,
    "placeholder": true
   },
   {
@@ -459,7 +466,14 @@
    "household": "HH_H18",
    "home": "H18",
    "bed_slot": 0,
-   "job": null,
+   "job": {
+    "role": "shop_hand",
+    "place": "P05",
+    "hours": [
+     6,
+     18
+    ]
+   },
    "placeholder": true
   },
   {
@@ -468,14 +482,7 @@
    "household": "HH_H18",
    "home": "H18",
    "bed_slot": 1,
-   "job": {
-    "role": "market_clerk",
-    "place": "P01",
-    "hours": [
-     6,
-     18
-    ]
-   },
+   "job": null,
    "placeholder": true
   },
   {
@@ -486,7 +493,7 @@
    "bed_slot": 0,
    "job": {
     "role": "fisher",
-    "place": "BOAT_06",
+    "place": "BOAT_04",
     "hours": [
      6,
      15
@@ -500,14 +507,7 @@
    "household": "HH_H19",
    "home": "H19",
    "bed_slot": 1,
-   "job": {
-    "role": "fisher",
-    "place": "BOAT_05",
-    "hours": [
-     6,
-     15
-    ]
-   },
+   "job": null,
    "placeholder": true
   },
   {
@@ -516,14 +516,7 @@
    "household": "HH_H20",
    "home": "H20",
    "bed_slot": 0,
-   "job": {
-    "role": "cook",
-    "place": "P06",
-    "hours": [
-     6,
-     18
-    ]
-   },
+   "job": null,
    "placeholder": true
   },
   {
@@ -532,7 +525,14 @@
    "household": "HH_H20",
    "home": "H20",
    "bed_slot": 1,
-   "job": null,
+   "job": {
+    "role": "storekeeper",
+    "place": "P03",
+    "hours": [
+     6,
+     18
+    ]
+   },
    "placeholder": true
   }
  ],

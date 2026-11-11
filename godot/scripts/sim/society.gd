@@ -99,8 +99,6 @@ func _new_day() -> void:
 		if before < 16 and int(v.age) >= 16:
 			counts["came_of_age"] += 1
 			record("came_of_age", [v.villager_id], "", "sixteenth birthday")
-		if v.age >= 16.0 and v.age < 65.0 and v.job == null:
-			village.assign_free_job(v)
 		if v.age >= 12.0 and v.shares_bed_of != "":
 			# too big to share: take a spare bed at home, else an empty house in the village
 			var nb = village.free_bed(v.home)
@@ -113,7 +111,7 @@ func _new_day() -> void:
 			for hh2 in village.households:
 				if village.households[hh2]["members"] == 0 and village.move_household(v, hh2):
 					# a young adult sets up home with a share of the family purse
-					var share_m: int = village.ledger.money(village.households.keys()[0]) * 0
+					var share_m := 0
 					var old_hh: String = ""
 					for par_id in v.parents:
 						var par = village.villager_by_id(par_id)
@@ -143,6 +141,13 @@ func _new_day() -> void:
 			record("illness", [v.villager_id], "", "chance%s" % (", poor hygiene" if v.needs["hygiene"] < 25.0 else ""))
 		if v.age >= settings["old_age"] and rng.randf() < 0.035 * (v.age - settings["old_age"] + 1.0) * years * 4.0:
 			_death(v)
+	# open jobs go first to adults in households where no one is earning
+	var seekers: Array = village.villagers.filter(func(x): return x.job == null and x.age >= 16.0 and x.age < 65.0)
+	seekers.sort_custom(func(a, b): return village.earners(a.hh) < village.earners(b.hh))
+	for x in seekers:
+		if village.open_jobs.is_empty():
+			break
+		village.assign_free_job(x)
 	_acquaint(years)
 	_partnerships()
 	_births(years)

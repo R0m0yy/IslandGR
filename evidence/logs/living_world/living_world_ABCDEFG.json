@@ -1,7 +1,7 @@
 {
  "engine": "4.3-stable (official)",
- "failed": 1,
- "passed": 46,
+ "failed": 2,
+ "passed": 45,
  "report": {
   "A": {
    "decision_log": [
@@ -14,14 +14,22 @@
     "Day 1  16:52 plan sleep",
     "Day 2  05:57 plan eat",
     "Day 2  06:20 plan stroll",
-    "Day 2  07:52 plan stroll",
-    "Day 2  09:34 plan eat",
-    "Day 2  10:15 plan buy_bait",
-    "Day 2  10:32 plan boat_trip"
+    "Day 2  07:41 plan stroll",
+    "Day 2  08:22 plan stroll",
+    "Day 2  10:22 plan stroll",
+    "Day 2  11:47 plan drink",
+    "Day 2  11:50 plan stroll",
+    "Day 2  12:49 plan stroll",
+    "Day 2  14:19 plan eat",
+    "Day 2  15:25 plan sleep",
+    "Day 2  19:10 went to watch the sunset",
+    "Day 2  19:10 plan stroll",
+    "Day 2  21:33 plan sleep",
+    "Day 3  05:57 plan eat"
    ],
    "fisher": {
     "boat": "BOAT_02",
-    "game_minutes": 1720,
+    "game_minutes": 2880,
     "ground": "Reef beyond The Gate",
     "id": "V01",
     "ledger": [
@@ -48,14 +56,6 @@
       "HH_P05",
       "bait",
       2
-     ],
-     [
-      360.1,
-      "levy",
-      "HH_P05",
-      "council",
-      "money",
-      6
      ],
      [
       362.7,
@@ -139,51 +139,35 @@
      ],
      [
       657.1,
-      "landing_sale",
+      "landing_home",
       "BOAT_02",
-      "BIZ_P01",
+      "HH_P05",
       "fish",
       1
      ],
      [
       657.1,
-      "landing_sale",
-      "BIZ_P01",
-      "HH_P05",
-      "money",
-      3
-     ],
-     [
-      657.1,
-      "landing_sale",
+      "landing_home",
       "BOAT_02",
-      "BIZ_P01",
+      "HH_P05",
       "fish",
       1
      ],
      [
       657.1,
-      "landing_sale",
-      "BIZ_P01",
-      "HH_P05",
-      "money",
-      3
-     ],
-     [
-      657.1,
-      "landing_sale",
+      "landing_home",
       "BOAT_02",
-      "BIZ_P01",
+      "HH_P05",
       "fish",
       1
      ],
      [
       657.1,
-      "landing_sale",
-      "BIZ_P01",
+      "landing_home",
+      "BOAT_02",
       "HH_P05",
-      "money",
-      3
+      "fish",
+      1
      ],
      [
       657.1,
@@ -199,7 +183,7 @@
       "BIZ_P01",
       "HH_P05",
       "money",
-      2
+      4
      ],
      [
       657.1,
@@ -215,7 +199,7 @@
       "BIZ_P01",
       "HH_P05",
       "money",
-      2
+      4
      ],
      [
       657.1,
@@ -231,7 +215,7 @@
       "BIZ_P01",
       "HH_P05",
       "money",
-      2
+      4
      ],
      [
       657.1,
@@ -247,23 +231,7 @@
       "BIZ_P01",
       "HH_P05",
       "money",
-      2
-     ],
-     [
-      657.1,
-      "landing_sale",
-      "BOAT_02",
-      "BIZ_P01",
-      "fish",
-      1
-     ],
-     [
-      657.1,
-      "landing_sale",
-      "BIZ_P01",
-      "HH_P05",
-      "money",
-      2
+      4
      ],
      [
       662.9,
@@ -330,36 +298,12 @@
       1
      ],
      [
-      948.9,
-      "boat_catch",
-      "",
-      "BOAT_02",
-      "fish",
-      1
-     ],
-     [
-      970.6,
-      "stolen_by_gull",
-      "BOAT_02",
-      "",
-      "fish",
-      1
-     ],
-     [
       980.2,
-      "landing_sale",
+      "landing_home",
       "BOAT_02",
-      "BIZ_P01",
-      "fish",
-      1
-     ],
-     [
-      980.2,
-      "landing_sale",
-      "BIZ_P01",
       "HH_P05",
-      "money",
-      2
+      "fish",
+      1
      ],
      [
       980.2,
@@ -451,19 +395,11 @@
      ],
      [
       1440.1,
-      "levy",
-      "HH_P05",
-      "council",
-      "money",
-      6
-     ],
-     [
-      1440.1,
       "spoiled_thrown_out",
       "HH_P05",
       "scraps",
       "fish",
-      2
+      4
      ],
      [
       1799.6,
@@ -490,23 +426,95 @@
       1
      ],
      [
-      2072.5,
-      "store_sale",
-      "BIZ_P05",
+      2222.7,
+      "cooked",
       "HH_P05",
-      "bait",
+      "",
+      "fish",
       1
      ],
      [
-      2072.5,
-      "store_sale",
+      2222.7,
+      "cooked",
+      "",
       "HH_P05",
-      "BIZ_P05",
+      "meal",
+      3
+     ],
+     [
+      2345.4,
+      "eaten",
+      "HH_P05",
+      "",
+      "meal",
+      1
+     ],
+     [
+      2407.8,
+      "eaten",
+      "HH_P05",
+      "",
+      "meal",
+      1
+     ],
+     [
+      2693.7,
+      "eaten",
+      "HH_P05",
+      "",
+      "meal",
+      1
+     ],
+     [
+      2880.1,
+      "levy",
+      "HH_P05",
+      "council",
       "money",
+      6
+     ],
+     [
+      2880.1,
+      "spoiled_thrown_out",
+      "HH_P05",
+      "scraps",
+      "fish",
       2
+     ],
+     [
+      3229.8,
+      "cooked",
+      "HH_P05",
+      "",
+      "fish",
+      1
+     ],
+     [
+      3229.8,
+      "cooked",
+      "",
+      "HH_P05",
+      "meal",
+      3
+     ],
+     [
+      3231.3,
+      "eaten",
+      "HH_P05",
+      "",
+      "meal",
+      1
+     ],
+     [
+      3232.5,
+      "eaten",
+      "HH_P05",
+      "",
+      "meal",
+      1
      ]
     ],
-    "money_after": 63,
+    "money_after": 70,
     "money_before": 60,
     "name": "Cleo",
     "trace": [
@@ -805,187 +813,432 @@
       "s6_top"
      ],
      [
-      "Day 2  07:17",
-      "climb_stairs",
-      "stroll",
-      "s7_bot"
-     ],
-     [
-      "Day 2  07:25",
-      "walk",
-      "stroll",
-      "s7_top"
-     ],
-     [
-      "Day 2  07:40",
+      "Day 2  07:22",
       "idle",
       "stroll",
-      "k_tree"
+      "c_hall"
      ],
      [
-      "Day 2  07:52",
+      "Day 2  07:41",
       "walk",
       "stroll",
-      "k_tree"
+      "c_hall"
      ],
      [
-      "Day 2  08:07",
+      "Day 2  07:47",
+      "climb_stairs",
+      "stroll",
+      "s7_bot"
+     ],
+     [
+      "Day 2  07:56",
+      "walk",
+      "stroll",
+      "s7_top"
+     ],
+     [
+      "Day 2  08:13",
+      "idle",
+      "stroll",
+      "k_look"
+     ],
+     [
+      "Day 2  08:22",
+      "walk",
+      "stroll",
+      "k_look"
+     ],
+     [
+      "Day 2  08:39",
       "climb_stairs",
       "stroll",
       "s7_top"
      ],
      [
-      "Day 2  08:15",
+      "Day 2  08:48",
       "walk",
       "stroll",
       "s7_bot"
      ],
      [
-      "Day 2  08:33",
+      "Day 2  09:10",
+      "climb_stairs",
+      "stroll",
+      "s3_top"
+     ],
+     [
+      "Day 2  09:19",
+      "walk",
+      "stroll",
+      "s3_bot"
+     ],
+     [
+      "Day 2  09:27",
+      "cross_bridge",
+      "stroll",
+      "br_a"
+     ],
+     [
+      "Day 2  09:45",
+      "walk",
+      "stroll",
+      "hd_br"
+     ],
+     [
+      "Day 2  10:04",
+      "idle",
+      "stroll",
+      "st_beacon"
+     ],
+     [
+      "Day 2  10:22",
+      "walk",
+      "stroll",
+      "st_beacon"
+     ],
+     [
+      "Day 2  10:41",
+      "cross_bridge",
+      "stroll",
+      "hd_br"
+     ],
+     [
+      "Day 2  10:59",
+      "walk",
+      "stroll",
+      "br_a"
+     ],
+     [
+      "Day 2  11:16",
+      "climb_stairs",
+      "stroll",
+      "s2_top"
+     ],
+     [
+      "Day 2  11:24",
+      "walk",
+      "stroll",
+      "s2_bot"
+     ],
+     [
+      "Day 2  11:29",
+      "idle",
+      "stroll",
+      "plaza"
+     ],
+     [
+      "Day 2  11:47",
+      "drink",
+      "drink",
+      "plaza"
+     ],
+     [
+      "Day 2  11:50",
+      "walk",
+      "stroll",
+      "plaza"
+     ],
+     [
+      "Day 2  11:55",
+      "climb_stairs",
+      "stroll",
+      "s2_bot"
+     ],
+     [
+      "Day 2  12:03",
+      "walk",
+      "stroll",
+      "s2_top"
+     ],
+     [
+      "Day 2  12:13",
+      "climb_stairs",
+      "stroll",
+      "s3_bot"
+     ],
+     [
+      "Day 2  12:22",
+      "walk",
+      "stroll",
+      "s3_top"
+     ],
+     [
+      "Day 2  12:38",
+      "idle",
+      "stroll",
+      "c_hall"
+     ],
+     [
+      "Day 2  12:49",
+      "walk",
+      "stroll",
+      "c_hall"
+     ],
+     [
+      "Day 2  13:11",
       "climb_stairs",
       "stroll",
       "s6_top"
      ],
      [
-      "Day 2  08:42",
+      "Day 2  13:20",
       "walk",
       "stroll",
       "s6_bot"
      ],
      [
-      "Day 2  08:47",
+      "Day 2  13:25",
       "climb_stairs",
       "stroll",
       "s4_top"
      ],
      [
-      "Day 2  08:56",
+      "Day 2  13:35",
       "walk",
       "stroll",
       "s4_bot"
      ],
      [
-      "Day 2  09:03",
+      "Day 2  13:41",
       "climb_stairs",
       "stroll",
       "s5_top"
      ],
      [
-      "Day 2  09:11",
+      "Day 2  13:50",
       "walk",
       "stroll",
       "s5_bot"
      ],
      [
-      "Day 2  09:23",
+      "Day 2  14:07",
       "idle",
       "stroll",
-      "bw_2"
+      "sp_1"
      ],
      [
-      "Day 2  09:34",
+      "Day 2  14:19",
       "walk",
       "eat",
-      "bw_2"
+      "sp_1"
      ],
      [
-      "Day 2  09:46",
+      "Day 2  14:36",
       "climb_stairs",
       "eat",
       "s5_bot"
      ],
      [
-      "Day 2  09:55",
+      "Day 2  14:45",
       "walk",
       "eat",
       "s5_top"
      ],
      [
-      "Day 2  10:03",
+      "Day 2  14:53",
       "open_door",
       "eat",
       "door_P05"
      ],
      [
-      "Day 2  10:05",
+      "Day 2  14:55",
       "walk",
       "eat",
       "P05:in"
      ],
      [
-      "Day 2  10:08",
+      "Day 2  14:58",
       "climb_stairs",
       "eat",
       "P05:stair_bot"
      ],
      [
-      "Day 2  10:12",
+      "Day 2  15:02",
       "walk",
       "eat",
       "P05:stair_top"
      ],
      [
-      "Day 2  10:15",
+      "Day 2  15:05",
       "eat",
       "eat",
-      "P05:IA_chair_1"
+      "P05:IA_chair_0"
      ],
      [
-      "Day 2  10:15",
+      "Day 2  15:25",
       "walk",
-      "buy_bait",
-      "P05:IA_chair_1"
+      "sleep",
+      "P05:IA_chair_0"
      ],
      [
-      "Day 2  10:18",
+      "Day 2  15:27",
+      "sleep",
+      "sleep",
+      "P05:IA_bed_0"
+     ],
+     [
+      "Day 2  19:10",
+      "walk",
+      "stroll",
+      "P05:IA_bed_0"
+     ],
+     [
+      "Day 2  19:14",
       "climb_stairs",
-      "buy_bait",
+      "stroll",
       "P05:stair_top"
      ],
      [
-      "Day 2  10:22",
+      "Day 2  19:18",
       "walk",
-      "buy_bait",
+      "stroll",
       "P05:stair_bot"
      ],
      [
-      "Day 2  10:26",
-      "shop",
-      "buy_bait",
-      "P05:IA_counter_0"
-     ],
-     [
-      "Day 2  10:32",
-      "walk",
-      "boat_trip",
-      "P05:IA_counter_0"
-     ],
-     [
-      "Day 2  10:35",
+      "Day 2  19:21",
       "open_door",
-      "boat_trip",
+      "stroll",
       "P05:in"
      ],
      [
-      "Day 2  10:36",
+      "Day 2  19:23",
       "walk",
-      "boat_trip",
+      "stroll",
       "door_P05"
+     ],
+     [
+      "Day 2  19:27",
+      "climb_stairs",
+      "stroll",
+      "s4_bot"
+     ],
+     [
+      "Day 2  19:36",
+      "walk",
+      "stroll",
+      "s4_top"
+     ],
+     [
+      "Day 2  19:42",
+      "climb_stairs",
+      "stroll",
+      "s6_bot"
+     ],
+     [
+      "Day 2  19:51",
+      "walk",
+      "stroll",
+      "s6_top"
+     ],
+     [
+      "Day 2  20:08",
+      "climb_stairs",
+      "stroll",
+      "s7_bot"
+     ],
+     [
+      "Day 2  20:17",
+      "walk",
+      "stroll",
+      "s7_top"
+     ],
+     [
+      "Day 2  20:34",
+      "idle",
+      "stroll",
+      "k_look"
+     ],
+     [
+      "Day 2  21:33",
+      "walk",
+      "sleep",
+      "k_look"
+     ],
+     [
+      "Day 2  21:51",
+      "climb_stairs",
+      "sleep",
+      "s7_top"
+     ],
+     [
+      "Day 2  21:59",
+      "walk",
+      "sleep",
+      "s7_bot"
+     ],
+     [
+      "Day 2  22:17",
+      "climb_stairs",
+      "sleep",
+      "s6_top"
+     ],
+     [
+      "Day 2  22:26",
+      "walk",
+      "sleep",
+      "s6_bot"
+     ],
+     [
+      "Day 2  22:31",
+      "climb_stairs",
+      "sleep",
+      "s4_top"
+     ],
+     [
+      "Day 2  22:40",
+      "walk",
+      "sleep",
+      "s4_bot"
+     ],
+     [
+      "Day 2  22:45",
+      "open_door",
+      "sleep",
+      "door_P05"
+     ],
+     [
+      "Day 2  22:47",
+      "walk",
+      "sleep",
+      "P05:in"
+     ],
+     [
+      "Day 2  22:49",
+      "climb_stairs",
+      "sleep",
+      "P05:stair_bot"
+     ],
+     [
+      "Day 2  22:53",
+      "walk",
+      "sleep",
+      "P05:stair_top"
+     ],
+     [
+      "Day 2  22:57",
+      "sleep",
+      "sleep",
+      "P05:IA_bed_0"
+     ],
+     [
+      "Day 3  05:57",
+      "walk",
+      "eat",
+      "P05:IA_bed_0"
      ]
     ]
    },
    "last_scores": {
-    "boat_trip": 58.1638945378363,
     "buy_food": 0,
     "cook": 0,
-    "drink": 49.2008978522625,
-    "eat": 0,
+    "drink": 66.7094108461692,
+    "eat": 81.1019121917156,
     "eat_out": 0,
     "fish": 0,
-    "rest_home": 11.2369222640991,
+    "rest_home": 9.77207779884338,
     "sleep": 0,
-    "stroll": 20.0829376854632,
-    "wash": 41.1814193186769
+    "stroll": 20.7328926802344,
+    "wash": 58.6474983630179
    },
    "setup": "clear weather held for the day; nothing else changed",
    "store_bait_netloft_bait_home_bait_home_fish": [
@@ -1008,31 +1261,31 @@
      16,
      4,
      1,
-     0
+     4
     ],
     [
      "Day 1  14:00",
      16,
      4,
      0,
-     0
+     4
     ],
     [
      "Day 1  16:00",
      16,
      8,
      0,
-     0
+     4
     ],
     [
      "Day 1  18:00",
      16,
      12,
      0,
-     8
+     13
     ]
    ],
-   "wall_ms": 6689
+   "wall_ms": 11294
   },
   "B": {
    "gift": [
@@ -1053,7 +1306,7 @@
      "cause": "neighbour in need; Milo had 8 to spare",
      "day": 0,
      "minute": 447.1,
-     "n": 2,
+     "n": 3,
      "notable": true,
      "text": "Milo brought 3 fish to the household at Terrace house 2, who had run out of food.",
      "type": "community",
@@ -1065,10 +1318,10 @@
     }
    ],
    "setup": [
-    "household HH_H07: food spoiled (fish+meals), savings lost (54), credit exhausted, members hungry 80",
+    "household HH_H07: food spoiled (fish+meals), savings lost (60), credit exhausted, members hungry 80",
     "Milo's household had a good catch: +8 fish"
    ],
-   "wall_ms": 1760
+   "wall_ms": 1894
   },
   "C": {
    "setup": "none: gulls get hungry on their own; clear weather held",
@@ -1076,8 +1329,8 @@
     "bird_catches": 7,
     "bird_dives": 11,
     "caught_by_boats": {
-     "mackerel": 11,
-     "scad": 53,
+     "mackerel": 10,
+     "scad": 45,
      "snapper": 13
     },
     "crab_bolts": 0,
@@ -1137,7 +1390,7 @@
      "cause": "hungry gull (70), unattended fish in the open",
      "day": 0,
      "minute": 361.3,
-     "n": 0,
+     "n": 1,
      "notable": true,
      "text": "A gull snatched a fish from the market stalls.",
      "type": "wildlife",
@@ -1152,7 +1405,7 @@
      "cause": "hungry gull (76), unattended fish in the open",
      "day": 0,
      "minute": 363.6,
-     "n": 1,
+     "n": 2,
      "notable": true,
      "text": "A gull snatched a fish from the market stalls.",
      "type": "wildlife",
@@ -1167,7 +1420,7 @@
      "cause": "hungry gull (93), unattended fish in the open",
      "day": 0,
      "minute": 748,
-     "n": 6,
+     "n": 7,
      "notable": true,
      "text": "A gull snatched a fish from the market stalls.",
      "type": "wildlife",
@@ -1182,7 +1435,7 @@
      "cause": "hungry gull (99), unattended fish in the open",
      "day": 0,
      "minute": 749.1,
-     "n": 7,
+     "n": 8,
      "notable": true,
      "text": "A gull snatched a fish from the market stalls.",
      "type": "wildlife",
@@ -1197,7 +1450,7 @@
      "cause": "hungry gull (61), unattended fish in the open",
      "day": 0,
      "minute": 749.9,
-     "n": 8,
+     "n": 9,
      "notable": true,
      "text": "A gull snatched a fish from the market stalls.",
      "type": "wildlife",
@@ -1208,7 +1461,7 @@
      ]
     }
    ],
-   "wall_ms": 2040
+   "wall_ms": 1982
   },
   "D": {
    "journal_storm": [
@@ -1219,43 +1472,24 @@
      "cause": "storm broke while walking to the harbour",
      "day": 0,
      "minute": 689.3,
-     "n": 13,
+     "n": 12,
      "notable": false,
      "text": "Greta got down to BOAT_04, saw the sea and did not cast off.",
      "type": "fishing"
     },
     {
-     "actors": [
-      "V25"
-     ],
-     "cause": "few fish on the ground (0 near Open water south)",
+     "actors": [],
+     "cause": "storm",
      "day": 0,
-     "minute": 677.8,
-     "n": 12,
-     "notable": false,
-     "text": "Hale came home with an empty boat.",
-     "type": "fishing",
-     "where": [
-      7.59999990463257,
-      0,
-      12.5
-     ]
-    },
-    {
-     "actors": [
-      "V25"
-     ],
-     "cause": "storm at sea",
-     "day": 0,
-     "minute": 660.1,
+     "minute": 660,
      "n": 11,
-     "notable": true,
-     "text": "Hale turned BOAT_03 back as the storm broke.",
-     "type": "fishing",
+     "notable": false,
+     "text": "The storm tore sheets from the roof of Crown cottage.",
+     "type": "damage",
      "where": [
-      14.2391052246094,
-      0,
-      16.8298511505127
+      -17,
+      19,
+      -28.5
      ]
     },
     {
@@ -1265,25 +1499,10 @@
      "minute": 660,
      "n": 10,
      "notable": false,
-     "text": "The storm tore sheets from the roof of Keeper's house.",
+     "text": "The storm tore sheets from the roof of High row house 3.",
      "type": "damage",
      "where": [
-      35,
-      9,
-      -5.90000009536743
-     ]
-    },
-    {
-     "actors": [],
-     "cause": "storm",
-     "day": 0,
-     "minute": 660,
-     "n": 9,
-     "notable": false,
-     "text": "The storm tore sheets from the roof of High row house 4.",
-     "type": "damage",
-     "where": [
-      8.5,
+      -4.5,
       10,
       -15
      ]
@@ -1293,12 +1512,12 @@
      "cause": "storm",
      "day": 0,
      "minute": 660,
-     "n": 8,
+     "n": 9,
      "notable": false,
-     "text": "The storm tore sheets from the roof of First-aid house.",
+     "text": "The storm tore sheets from the roof of School.",
      "type": "damage",
      "where": [
-      -1.5,
+      -10,
       14.5,
       -21.75
      ]
@@ -1308,14 +1527,14 @@
      "cause": "storm",
      "day": 0,
      "minute": 660,
-     "n": 7,
+     "n": 8,
      "notable": false,
-     "text": "The storm tore sheets from the roof of Net loft.",
+     "text": "The storm tore sheets from the roof of Warehouse.",
      "type": "damage",
      "where": [
-      -8,
+      19.5,
       1.5,
-      17.5
+      0.75
      ]
     },
     {
@@ -1323,7 +1542,7 @@
      "cause": "weather turned from heavy rain",
      "day": 0,
      "minute": 660,
-     "n": 6,
+     "n": 7,
      "notable": true,
      "text": "A storm broke over Saltcrown.",
      "type": "weather"
@@ -1335,9 +1554,9 @@
      "cause": "good shoals at Reef beyond The Gate",
      "day": 0,
      "minute": 657.1,
-     "n": 5,
+     "n": 6,
      "notable": true,
-     "text": "Cleo landed a full boat: 8 fish ({ \"scad\": 7, \"mackerel\": 1 }), 8 sold for 19.",
+     "text": "Cleo landed a full boat: 8 fish ({ \"scad\": 7, \"mackerel\": 1 }), 8 sold for 16.",
      "type": "fishing",
      "where": [
       7.30000019073486,
@@ -1352,9 +1571,9 @@
      "cause": "good shoals at Open water south",
      "day": 0,
      "minute": 623,
-     "n": 4,
+     "n": 5,
      "notable": true,
-     "text": "Suki landed a full boat: 10 fish ({ \"snapper\": 5, \"scad\": 4, \"mackerel\": 1 }), 10 sold for 35.",
+     "text": "Suki landed a full boat: 10 fish ({ \"snapper\": 5, \"scad\": 4, \"mackerel\": 1 }), 10 sold for 34.",
      "type": "fishing",
      "where": [
       9.5,
@@ -1369,9 +1588,9 @@
      "cause": "good shoals at Harbour mouth",
      "day": 0,
      "minute": 609.8,
-     "n": 3,
+     "n": 4,
      "notable": true,
-     "text": "Cass landed a full boat: 10 fish ({ \"mackerel\": 2, \"scad\": 7, \"snapper\": 1 }), 10 sold for 49.",
+     "text": "Cass landed a full boat: 10 fish ({ \"mackerel\": 2, \"scad\": 7, \"snapper\": 1 }), 10 sold for 35.",
      "type": "fishing",
      "where": [
       3.20000004768372,
@@ -1386,36 +1605,67 @@
      "cause": "good shoals at Harbour mouth",
      "day": 0,
      "minute": 593.9,
-     "n": 2,
+     "n": 3,
      "notable": true,
-     "text": "Greta landed a full boat: 10 fish ({ \"scad\": 4, \"snapper\": 4, \"mackerel\": 2 }), 10 sold for 64.",
+     "text": "Greta landed a full boat: 10 fish ({ \"scad\": 4, \"snapper\": 4, \"mackerel\": 2 }), 10 sold for 40.",
      "type": "fishing",
      "where": [
       12.1999998092651,
       0,
       11
      ]
+    },
+    {
+     "actors": [],
+     "cause": "hungry gull (76), unattended fish in the open",
+     "day": 0,
+     "minute": 363.6,
+     "n": 2,
+     "notable": true,
+     "text": "A gull snatched a fish from the market stalls.",
+     "type": "wildlife",
+     "where": [
+      9,
+      2.5,
+      2
+     ]
+    },
+    {
+     "actors": [],
+     "cause": "hungry gull (70), unattended fish in the open",
+     "day": 0,
+     "minute": 361.3,
+     "n": 1,
+     "notable": true,
+     "text": "A gull snatched a fish from the market stalls.",
+     "type": "wildlife",
+     "where": [
+      9,
+      2.5,
+      2
+     ]
     }
    ],
-   "setup": "at Day 1  11:00 the weather is forced to storm and held for 3 hours (2 boats at sea, 11 people outdoors)",
-   "wall_ms": 7116
+   "setup": "at Day 1  11:00 the weather is forced to storm and held for 3 hours (1 boats at sea, 12 people outdoors)",
+   "wall_ms": 6361
   },
   "E": {
    "counts": {
-    "births": 6,
-    "came_of_age": 6,
+    "births": 15,
+    "came_of_age": 14,
     "deaths": 10,
     "estates": 0,
-    "illnesses": 7,
-    "moves": 0,
+    "greetings": 874,
+    "illnesses": 9,
+    "moves": 8,
     "newcomers": 0,
-    "partnerships": 0,
+    "partnerships": 10,
     "retired": 17
    },
    "grown_children": [
     {
      "age": 24,
-     "home": "H01",
+     "home": "H10",
      "id": "V1000",
      "job": {
       "hours": [
@@ -1427,13 +1677,13 @@
      },
      "name": "Ari",
      "parents": [
-      "V03",
-      "V04"
+      "V01",
+      "V02"
      ]
     },
     {
      "age": 24,
-     "home": "H06",
+     "home": "H04",
      "id": "V1001",
      "job": {
       "hours": [
@@ -1445,13 +1695,13 @@
      },
      "name": "Bea",
      "parents": [
-      "V13",
-      "V14"
+      "V05",
+      "V06"
      ]
     },
     {
      "age": 24,
-     "home": "H08",
+     "home": "H19",
      "id": "V1002",
      "job": {
       "hours": [
@@ -1463,13 +1713,13 @@
      },
      "name": "Cai",
      "parents": [
-      "V17",
-      "V18"
+      "V13",
+      "V14"
      ]
     },
     {
      "age": 24,
-     "home": "H14",
+     "home": "H08",
      "id": "V1003",
      "job": {
       "hours": [
@@ -1481,16 +1731,49 @@
      },
      "name": "Dee",
      "parents": [
+      "V17",
+      "V18"
+     ]
+    },
+    {
+     "age": 24,
+     "home": "H14",
+     "id": "V1004",
+     "job": null,
+     "name": "Eli",
+     "parents": [
       "V29",
       "V30"
      ]
     },
     {
      "age": 24,
-     "home": "H15",
-     "id": "V1004",
+     "home": "H14",
+     "id": "V1005",
      "job": null,
-     "name": "Eli",
+     "name": "Fen",
+     "parents": [
+      "V41",
+      "V42"
+     ]
+    },
+    {
+     "age": 23,
+     "home": "H17",
+     "id": "V1006",
+     "job": null,
+     "name": "Gil",
+     "parents": [
+      "V03",
+      "V04"
+     ]
+    },
+    {
+     "age": 23,
+     "home": "H15",
+     "id": "V1007",
+     "job": null,
+     "name": "Hana",
      "parents": [
       "V31",
       "V32"
@@ -1498,113 +1781,174 @@
     },
     {
      "age": 22,
-     "home": "H18",
-     "id": "V1005",
+     "home": "P05",
+     "id": "V1008",
      "job": null,
-     "name": "Fen",
+     "name": "Isa",
      "parents": [
-      "V37",
-      "V38"
+      "V01",
+      "V02"
+     ]
+    },
+    {
+     "age": 21,
+     "home": "H13",
+     "id": "V1009",
+     "job": null,
+     "name": "Jem",
+     "parents": [
+      "V31",
+      "V32"
+     ]
+    },
+    {
+     "age": 20,
+     "home": "H06",
+     "id": "V1010",
+     "job": null,
+     "name": "Kel",
+     "parents": [
+      "V13",
+      "V14"
+     ]
+    },
+    {
+     "age": 20,
+     "home": "H08",
+     "id": "V1011",
+     "job": null,
+     "name": "Lio",
+     "parents": [
+      "V17",
+      "V18"
+     ]
+    },
+    {
+     "age": 19,
+     "home": "H16",
+     "id": "V1012",
+     "job": null,
+     "name": "Mae",
+     "parents": [
+      "V31",
+      "V32"
+     ]
+    },
+    {
+     "age": 18,
+     "home": "H06",
+     "id": "V1013",
+     "job": null,
+     "name": "Nico",
+     "parents": [
+      "V13",
+      "V14"
      ]
     }
    ],
    "journal_kinds": {
-    "birth": 6,
+    "birth": 15,
     "business": 5,
-    "came_of_age": 6,
-    "community": 38,
-    "damage": 53,
+    "came_of_age": 14,
+    "community": 63,
+    "damage": 61,
     "death": 10,
-    "economy": 8,
-    "fishing": 165,
+    "economy": 91,
+    "fishing": 145,
     "hired": 17,
-    "illness": 7,
-    "recovery": 5,
-    "repair": 38,
+    "illness": 9,
+    "moved": 8,
+    "partnership": 10,
+    "recovery": 8,
+    "repair": 40,
     "retired": 17,
     "weather": 88,
-    "wildlife": 83
+    "wildlife": 123
    },
    "setup": "accelerated calendar: 1 game day = 1 year of life; 24 days",
-   "wall_ms": 134056
+   "wall_ms": 147719
   },
   "F": {
    "normal": {
-    "avg_price": 5.57,
-    "bought_fish": 68,
-    "caught": 241,
-    "fish_stock_in_sea": 553,
-    "gifts": 0,
-    "hh_hours_without_food": 140,
+    "avg_price": 5.04,
+    "bought_fish": 60,
+    "caught": 270,
+    "fish_stock_in_sea": 533,
+    "gifts": 2,
+    "hh_hours_without_food": 155,
     "households_without_food_at_some_point": 16,
-    "landed": 218,
+    "landed": 226,
     "on_credit": 0,
     "spend_by_household": {
-     "HH_H01": 17,
-     "HH_H02": 29,
-     "HH_H03": 8,
-     "HH_H04": 27,
+     "HH_H01": 10,
+     "HH_H02": 28,
+     "HH_H03": 4,
+     "HH_H04": 18,
      "HH_H06": 16,
-     "HH_H07": 30,
-     "HH_H08": 30,
-     "HH_H10": 30,
-     "HH_H11": 24,
-     "HH_H13": 8,
-     "HH_H14": 32,
-     "HH_H15": 42,
-     "HH_H16": 26,
-     "HH_H17": 12,
-     "HH_H20": 6
+     "HH_H07": 24,
+     "HH_H08": 10,
+     "HH_H10": 20,
+     "HH_H11": 34,
+     "HH_H13": 15,
+     "HH_H14": 26,
+     "HH_H15": 30,
+     "HH_H16": 22,
+     "HH_H17": 26,
+     "HH_H20": 8
     }
    },
    "poor_season": {
-    "avg_price": 8.79,
-    "bought_fish": 19,
-    "caught": 190,
-    "fish_stock_in_sea": 72,
-    "gifts": 0,
-    "hh_hours_without_food": 127,
-    "households_without_food_at_some_point": 18,
-    "landed": 118,
-    "on_credit": 4,
+    "avg_price": 4.9,
+    "bought_fish": 46,
+    "caught": 147,
+    "fish_stock_in_sea": 79,
+    "gifts": 2,
+    "hh_hours_without_food": 73,
+    "households_without_food_at_some_point": 15,
+    "landed": 64,
+    "on_credit": 2,
     "spend_by_household": {
-     "HH_H01": 16,
-     "HH_H02": 7,
-     "HH_H04": 7,
-     "HH_H06": 38,
-     "HH_H07": 16,
-     "HH_H08": 16,
+     "HH_H01": 25,
+     "HH_H02": 16,
+     "HH_H03": 16,
+     "HH_H04": 10,
+     "HH_H05": 4,
+     "HH_H06": 24,
+     "HH_H07": 30,
+     "HH_H08": 20,
      "HH_H10": 4,
-     "HH_H11": 7,
-     "HH_H15": 18,
-     "HH_H16": 8,
-     "HH_H17": 38,
-     "HH_H18": 4
+     "HH_H13": 16,
+     "HH_H14": 12,
+     "HH_H15": 17,
+     "HH_H16": 18,
+     "HH_H17": 10,
+     "HH_H18": 4,
+     "HH_H20": 10
     }
    },
    "setup": "after 3 normal days, a poor season: fish regrowth x0.15 and the schools thinned to 30% (as after a marine heatwave)",
-   "wall_ms": 33316
+   "wall_ms": 34910
   },
   "G": {
    "setup": "none; natural weather",
    "stats": {
-    "bird_catches": 13,
-    "bird_dives": 30,
+    "bird_catches": 12,
+    "bird_dives": 25,
     "caught_by_boats": {
-     "mackerel": 18,
+     "mackerel": 19,
      "scad": 73,
-     "snapper": 17
+     "snapper": 12
     },
-    "crab_bolts": 17,
+    "crab_bolts": 19,
     "dolphin_feeds": 3,
     "predator_kills": 15,
-    "robbed_in_air": 3,
-    "scavenged": 0,
-    "school_flights": 29,
-    "theft_attempts": 47,
-    "thefts": 22
+    "robbed_in_air": 2,
+    "scavenged": 1,
+    "school_flights": 24,
+    "theft_attempts": 43,
+    "thefts": 23
    },
-   "wall_ms": 5786
+   "wall_ms": 5973
   }
  },
  "results": [
@@ -1617,17 +1961,17 @@
    "test": "left home and boarded the assigned boat"
   },
   {
-   "detail": 18,
+   "detail": 17,
    "passed": true,
    "scenario": "A",
    "test": "caught fish from the sea (minted into the boat by the catch rule)"
   },
   {
    "detail": {
-    "caught": 18,
-    "kept_for_home": 8,
-    "sold": 9,
-    "stolen_by_gulls_while_unloading": 1
+    "caught": 17,
+    "kept_for_home": 13,
+    "sold": 4,
+    "stolen_by_gulls_while_unloading": 0
    },
    "passed": true,
    "scenario": "A",
@@ -1635,20 +1979,16 @@
   },
   {
    "detail": {
-    "fish_sold": 9,
-    "paid": 21
+    "fish_sold": 4,
+    "paid": 16
    },
    "passed": true,
    "scenario": "A",
    "test": "sold to the market: market stock and household money moved by the same sale"
   },
   {
-   "detail": [
-    "store_sale 2 at Day 2 10:32",
-    "store_sale 2 at Day 2 10:32",
-    "store_sale 2 at Day 2 10:32"
-   ],
-   "passed": true,
+   "detail": [],
+   "passed": false,
    "scenario": "A",
    "test": "bought household supplies with money"
   },
@@ -1774,7 +2114,7 @@
   },
   {
    "detail": {
-    "at_sea_when_it_broke": 2,
+    "at_sea_when_it_broke": 1,
     "departures": 0,
     "moored_now": 6
    },
@@ -1808,17 +2148,17 @@
   },
   {
    "detail": [
-    "P04",
-    "P10",
-    "H16",
-    "H20"
+    "P03",
+    "P09",
+    "H15",
+    "H19"
    ],
    "passed": true,
    "scenario": "D",
    "test": "the storm did real damage"
   },
   {
-   "detail": 8,
+   "detail": 6,
    "passed": true,
    "scenario": "D",
    "test": "life resumed: boats went out again after the storm"
@@ -1827,10 +2167,10 @@
    "detail": {
     "damaged": 4,
     "journal": [
-     "Ansel mended the storm damage at Net loft.",
-     "Ansel mended the storm damage at First-aid house.",
-     "Bram mended the storm damage at High row house 4.",
-     "Ivo mended the storm damage at Keeper's house."
+     "Ansel mended the storm damage at Warehouse.",
+     "Bram mended the storm damage at School.",
+     "Bram mended the storm damage at High row house 3.",
+     "Bram mended the storm damage at Crown cottage."
     ],
     "repaired": 4
    },
@@ -1846,10 +2186,10 @@
   },
   {
    "detail": {
-    "births": 6,
+    "births": 15,
     "hired": 17,
-    "moves": 0,
-    "partnerships": 0
+    "moves": 8,
+    "partnerships": 10
    },
    "passed": true,
    "scenario": "E",
@@ -1859,7 +2199,7 @@
    "detail": [
     {
      "age": 24,
-     "home": "H01",
+     "home": "H10",
      "id": "V1000",
      "job": {
       "hours": [
@@ -1871,13 +2211,13 @@
      },
      "name": "Ari",
      "parents": [
-      "V03",
-      "V04"
+      "V01",
+      "V02"
      ]
     },
     {
      "age": 24,
-     "home": "H06",
+     "home": "H04",
      "id": "V1001",
      "job": {
       "hours": [
@@ -1889,13 +2229,13 @@
      },
      "name": "Bea",
      "parents": [
-      "V13",
-      "V14"
+      "V05",
+      "V06"
      ]
     },
     {
      "age": 24,
-     "home": "H08",
+     "home": "H19",
      "id": "V1002",
      "job": {
       "hours": [
@@ -1907,13 +2247,13 @@
      },
      "name": "Cai",
      "parents": [
-      "V17",
-      "V18"
+      "V13",
+      "V14"
      ]
     },
     {
      "age": 24,
-     "home": "H14",
+     "home": "H08",
      "id": "V1003",
      "job": {
       "hours": [
@@ -1925,8 +2265,8 @@
      },
      "name": "Dee",
      "parents": [
-      "V29",
-      "V30"
+      "V17",
+      "V18"
      ]
     }
    ],
@@ -1935,21 +2275,15 @@
    "test": "a child born here grew up and took a job"
   },
   {
-   "detail": [
-    "V01",
-    "V05",
-    "V08",
-    "V13",
-    "V14"
-   ],
-   "passed": false,
+   "detail": [],
+   "passed": true,
    "scenario": "E",
    "test": "after save and reload: households, partners, children, jobs and memories identical"
   },
   {
    "detail": {
-    "after": 546,
-    "before": 546
+    "after": 724,
+    "before": 724
    },
    "passed": true,
    "scenario": "E",
@@ -1963,8 +2297,8 @@
   },
   {
    "detail": {
-    "normal": 218,
-    "poor": 118
+    "normal": 226,
+    "poor": 64
    },
    "passed": true,
    "scenario": "F",
@@ -1972,30 +2306,30 @@
   },
   {
    "detail": {
-    "normal": 5.57,
-    "poor": 8.79
+    "normal": 5.04,
+    "poor": 4.9
    },
-   "passed": true,
+   "passed": false,
    "scenario": "F",
    "test": "the market responded: fish got dearer"
   },
   {
    "detail": {
     "bought_fish": [
-     68,
-     19
+     60,
+     46
     ],
     "handline_fish": [
-     23,
-     72
+     44,
+     83
     ],
     "households_ever_without_food": [
      16,
-     18
+     15
     ],
     "on_credit": [
      0,
-     4
+     2
     ]
    },
    "passed": true,
@@ -2005,12 +2339,12 @@
   {
    "detail": {
     "poorest": [
-     0,
-     "HH_H02"
+     2,
+     "HH_H04"
     ],
     "richest": [
-     274,
-     "HH_H09"
+     246,
+     "HH_H16"
     ]
    },
    "passed": true,
@@ -2024,13 +2358,13 @@
    "test": "ledger audit clean"
   },
   {
-   "detail": 543,
+   "detail": 656,
    "passed": true,
    "scenario": "G",
    "test": "fish schools travel"
   },
   {
-   "detail": 29,
+   "detail": 24,
    "passed": true,
    "scenario": "G",
    "test": "schools bolt from predators and boats"
@@ -2043,7 +2377,7 @@
   },
   {
    "detail": {
-    "breach_samples": 5,
+    "breach_samples": 4,
     "feeds": 3
    },
    "passed": true,
@@ -2051,22 +2385,22 @@
    "test": "the dolphin pod feeds and breaches"
   },
   {
-   "detail": 11,
+   "detail": 21,
    "passed": true,
    "scenario": "G",
    "test": "turtles surface to breathe"
   },
   {
    "detail": {
-    "catches": 13,
-    "dives": 30
+    "catches": 12,
+    "dives": 25
    },
    "passed": true,
    "scenario": "G",
    "test": "pelicans and terns dive on schools"
   },
   {
-   "detail": 206,
+   "detail": 148,
    "passed": true,
    "scenario": "G",
    "test": "crabs come out on the spit around dusk and dawn"
@@ -2082,9 +2416,9 @@
   },
   {
    "detail": {
-    "mackerel": 18,
+    "mackerel": 19,
     "scad": 73,
-    "snapper": 17
+    "snapper": 12
    },
    "passed": true,
    "scenario": "G",

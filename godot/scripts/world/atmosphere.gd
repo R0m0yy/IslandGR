@@ -249,6 +249,8 @@ func _process(dt: float) -> void:
 		_sea.set_shader_parameter("sim_time", oc.time)
 		_sea.set_shader_parameter("tide", oc.tide())
 		_sea.set_shader_parameter("storm", w.cloud)
+		if village.day_night:
+			_sea.set_shader_parameter("light_level", village.day_night.light_level)
 	if _sway:
 		_sway.set_shader_parameter("wind", 0.25 + w.wind)
 	# boats ride the same surface the shader draws, pitch and roll to its slope

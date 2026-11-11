@@ -64,6 +64,10 @@ func _ready() -> void:
 	rig.set_process_unhandled_input(false)
 	village.hud.journal_mode = 0
 	village.weather.locked = true
+	if OS.get_cmdline_user_args().has("--night"):
+		await _night_only()
+		get_tree().quit()
+		return
 	# ---- 1. a resident's morning: fisherman leaves home (inspector shows the day's schedule)
 	var fisher = village.villagers.filter(func(x): return x.job != null and x.job["role"] == "fisher")[0]
 	await until(func(): return fisher.fsm.current_name in ["walk", "climb_stairs", "open_door"] and fisher.activity in ["boat_trip", "buy_bait"], 300.0)
@@ -220,3 +224,18 @@ func _ready() -> void:
 	f.store_string("\n".join(log_lines))
 	f.close()
 	get_tree().quit()
+
+func _night_only() -> void:
+	village.hud.hidden_ui = true
+	village.set_figures_visible(false)
+	to_hour(21.5)
+	frame(Vector3(2, 3, 6), 34.0, -20.0, 52.0)
+	await shot("L12_night_moonlight", "environment only; moon %s" % village.day_night.phase_name())
+	frame(Vector3(-4, 10, 0), 200.0, -12.0, 110.0)
+	await shot("L13_night_sky_moon_stars", "looking out to sea")
+	to_hour(19.0)
+	frame(Vector3(-4, 6, 0), 40.0, -18.0, 100.0)
+	await shot("L10b_sunset_overview", "environment only")
+	var f := FileAccess.open("%s/capture_living_night_log.txt" % out_dir, FileAccess.WRITE)
+	f.store_string("\n".join(log_lines))
+	f.close()

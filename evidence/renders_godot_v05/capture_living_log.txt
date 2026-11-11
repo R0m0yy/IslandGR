@@ -1,0 +1,14 @@
+L01_fisherman_morning_inspector  Day 1  06:29  [clear, waxing gibbous]  Cleo on his way: boat_trip
+L02_boat_riding_waves_rough  Day 1  07:29  [heavy_rain, waxing gibbous]  setup: wind forced to 0.75 for the frame; BOAT_02 fishing at Reef beyond The Gate
+L03_boat_unloading  Day 1  10:05  [clear, waxing gibbous]  BOAT_02 unloading 10 fish
+L04_fish_market_inspector_journal  Day 1  10:20  [clear, waxing gibbous]  market stock 28, till 46
+L05_gull_raid  Day 1  15:09  [clear, waxing gibbous]  gull gull1 (hunger 55) closing on fish at BIZ_P01
+L06_gull_raid_outcome  Day 1  15:09  [clear, waxing gibbous]  outcome: took a fish; thefts so far 7
+L09_storm_harbour  Day 2  13:49  [storm, full moon]  storm forced (setup); sheltering: 11
+L10_golden_hour_overview  Day 2  18:29  [clear, full moon]  environment only
+L11_watching_the_sunset  Day 2  18:34  [clear, full moon]  Dov at sp_1
+L12_night_moonlight  Day 2  21:34  [clear, full moon]  environment only; moon full moon
+L13_night_sky_moon_stars  Day 2  21:34  [clear, full moon]  looking out to sea
+L14_village_inspector_journal  Day 2  23:04  [clear, full moon]  after one day
+L15_family_tree_after_24_years  Day 25  05:59  [storm, first quarter]  loaded save from scenario E (24 accelerated years)
+L16_resident_timeline  Day 25  05:59  [storm, first quarter]  same resident's life history

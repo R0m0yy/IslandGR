@@ -48,8 +48,15 @@ func decide() -> Dictionary:
 		s["cook"] = (need * 1.1 + 12.0) if (meals == 0 and raw > 0 and need > 30.0) else 0.0
 		var shop_open := h >= 6.0 and h < 20.0
 		s["buy_food"] = (need * 1.0 + 11.0) if (meals == 0 and raw == 0 and shop_open and w.weather.state != "storm" and l.qty(Economy.MARKET, "fish") > 0 and purse >= w.economy.fish_sell_price()) else 0.0
-		s["eat_out"] = (hunger * 1.05 + 4.0) if (meals == 0 and hunger > 45.0 and h >= 7.0 and h < 21.0 and l.qty(Economy.EATERY, "meal") > 0 and purse >= Economy.MEAL_PRICE + 6) else 0.0
+		var eatery_open: bool = h >= 7.0 and h < 21.0 and l.qty(Economy.EATERY, "meal") > 0
+		s["eat_out"] = (hunger * 1.05 + 4.0) if (meals == 0 and hunger > 45.0 and eatery_open and purse >= Economy.MEAL_PRICE + 6) else 0.0
+		if eatery_open and purse > 90 and hunger > 35.0:
+			# a household with money to spare treats itself now and then
+			s["eat_out"] = maxf(s["eat_out"], hunger * 0.9 + 10.0 * v.sociability)
 		s["fish"] = (need * 0.95 + 8.0) * (1.0 if out_f > 0.0 else 0.0) if (meals == 0 and raw == 0 and (not night or need > 70.0)) else 0.0
+		if v.job == null and v.age < 65.0 and not night and purse < 40:
+			# no job and a thin purse: go and fish from the pier to eat and to sell
+			s["fish"] = maxf(s["fish"], (34.0 + (40.0 - purse) * 0.5) * out_f)
 		var job = v.job
 		var rest_day: bool = GameClock.day() % 7 == 6
 		if job != null and not rest_day and v.age < 65.0 and v.sick_days <= 0:

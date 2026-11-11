@@ -29,9 +29,21 @@ for b in homes:
         villagers.append(dict(id=f"V{n+1:02d}", name=GIVEN[n % len(GIVEN)], household=b["household"]["id"], home=b["id"],
                               bed_slot=k, job=None, placeholder=True))
         n += 1
-order = list(range(len(villagers))); rng.shuffle(order)
-for vi, job in zip(order, jobs):
-    villagers[vi]["job"] = job
+# deal jobs one per household first, so no placeholder household starts with no earner
+rng.shuffle(jobs)
+by_hh = {}
+for i, vv in enumerate(villagers):
+    by_hh.setdefault(vv["household"], []).append(i)
+hh_order = list(by_hh); rng.shuffle(hh_order)
+free = list(jobs)
+for hh in hh_order:
+    if not free:
+        break
+    villagers[rng.choice(by_hh[hh])]["job"] = free.pop()
+rest = [i for i, vv in enumerate(villagers) if vv["job"] is None]
+rng.shuffle(rest)
+for i, job in zip(rest, free):
+    villagers[i]["job"] = job
 out = dict(schema="living-tides.dev_population", version=1,
            note="PLACEHOLDER villagers for simulation development. Final characters are undecided.",
            villagers=villagers,
