@@ -17,6 +17,7 @@ var interactables: Array = []
 var doors: Array = []
 var fishing_spots: Array = []
 var stroll_nodes: Array = []
+var figures_visible: bool = true
 var street_lamps: Array = []
 var market_stock: int = 4          # raw fish on the market stalls (P01)
 var sim: Simulation
@@ -47,12 +48,16 @@ func _build_environment() -> void:
 	var env := Node3D.new()
 	env.name = "Environment"
 	add_child(env)
-	for n in ["terrain", "cliffs", "gate", "structures", "props", "vegetation", "boats"]:
+	for n in ["island", "seabed", "structures", "props", "vegetation", "boats"]:
 		var path := "res://assets/env/%s.glb" % n
 		if ResourceLoader.exists(path):
 			var inst: Node3D = load(path).instantiate()
 			inst.name = n
 			env.add_child(inst)
+			if n == "island":
+				# real collision geometry for the rock (ray picks, future physics)
+				for mi in inst.find_children("*", "MeshInstance3D", true, false):
+					mi.create_trimesh_collision()
 	var sea := MeshInstance3D.new()
 	sea.name = "Sea"
 	var pm := PlaneMesh.new()
@@ -187,6 +192,13 @@ func _build_presentation() -> void:
 	hud.name = "HUD"
 	add_child(hud)
 	hud.village = self
+
+func set_figures_visible(on: bool) -> void:
+	## Simulation agents keep running; only the temporary figures are hidden.
+	figures_visible = on
+	for v in villagers:
+		if v.animator:
+			v.animator.visible = on
 
 func cut_sides() -> Array:
 	## Wall groups that face the camera and should fade.

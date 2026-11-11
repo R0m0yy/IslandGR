@@ -18,17 +18,21 @@ var playback: AnimationNodeStateMachinePlayback
 var current: String = ""
 var rig: Node3D
 
-func build(shirt: Color) -> void:
+func build(_tint: Color = Color.WHITE) -> void:
+	## NEUTRAL TEMPORARY FIGURE. Character design is frozen until the owner
+	## approves a direction: one plain mannequin for everyone, no faces, hair,
+	## outfits or individual colours. It exists only so that movement and
+	## interactions can be seen and tested.
 	rig = Node3D.new()
 	rig.name = "Rig"
 	add_child(rig)
-	var skin := Color(0.85, 0.64, 0.49)
-	_part("Body", CapsuleMesh.new(), Vector3(0, 0.98, 0), shirt, {"radius": 0.19, "height": 0.82})
-	_part("Head", SphereMesh.new(), Vector3(0, 1.56, 0), skin, {"radius": 0.15, "height": 0.3})
-	_limb("ArmL", Vector3(-0.26, 1.3, 0), Vector3(0.085, 0.54, 0.085), shirt.darkened(0.15))
-	_limb("ArmR", Vector3(0.26, 1.3, 0), Vector3(0.085, 0.54, 0.085), shirt.darkened(0.15))
-	_limb("LegL", Vector3(-0.1, 0.62, 0), Vector3(0.11, 0.62, 0.11), Color(0.25, 0.27, 0.36))
-	_limb("LegR", Vector3(0.1, 0.62, 0), Vector3(0.11, 0.62, 0.11), Color(0.25, 0.27, 0.36))
+	var grey := Color(0.78, 0.76, 0.72)
+	_part("Body", CapsuleMesh.new(), Vector3(0, 1.0, 0), grey, {"radius": 0.17, "height": 0.86})
+	_part("Head", SphereMesh.new(), Vector3(0, 1.58, 0), grey, {"radius": 0.115, "height": 0.23})
+	_limb("ArmL", Vector3(-0.24, 1.32, 0), Vector3(0.08, 0.56, 0.08), grey.darkened(0.08))
+	_limb("ArmR", Vector3(0.24, 1.32, 0), Vector3(0.08, 0.56, 0.08), grey.darkened(0.08))
+	_limb("LegL", Vector3(-0.09, 0.64, 0), Vector3(0.1, 0.64, 0.1), grey.darkened(0.16))
+	_limb("LegR", Vector3(0.09, 0.64, 0), Vector3(0.1, 0.64, 0.1), grey.darkened(0.16))
 	# fishing rod, shown only by the `fish` clip
 	var rod := MeshInstance3D.new()
 	rod.name = "Rod"

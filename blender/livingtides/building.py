@@ -18,7 +18,7 @@ Mesh groups follow BUILDING_CONTRACT.md so that any side can fade:
 """
 from __future__ import annotations
 import math
-from . import parts, furniture as F
+from . import parts, furniture as F, dressing
 from .geom import Mesh, T, Rz, rng_for
 from .parts import Vol
 from .world import STOREY, T_WALL, FLOOR_Z, DOOR_W, DOOR_H, compass, side_clearance, to_godot
@@ -356,6 +356,7 @@ def build(b, L):
             F.net_rack(fm, rng, w=1.3)
         feats.append("net rack")
     out.meta["features"] = feats
+    out.meta["dressing"] = dressing.dress(out, b, L, vol, wm, roof, rng, fam, H, flank, is_open_front, ridge_x, zr)
 
     # ---------------- interior: anchors
     _furnish(out, b, vol, rng, stair, floor2, inter, roof, zr, fam, is_open_front)
@@ -618,7 +619,9 @@ def sidecar(out, L):
         anchors.append(d)
     return dict(
         schema="living-tides.building", version=1, id=b["id"], name=b["name"], kind=b["kind"],
-        family=family_of(b), origin=list(origin), yaw_deg=yaw, storeys=b["storeys"],
+        family=family_of(b), origin=list(origin), yaw_deg=yaw + visual_yaw(b, L), layout_yaw_deg=yaw, storeys=b["storeys"],
+        dressing=out.meta.get("dressing", []),
+        door_lantern=g(out.meta["door_lantern"]) if "door_lantern" in out.meta else None,
         frame="Godot-local: +x right, +y up, +z out of the front door. Pivot = front-door threshold at terrace level.",
         groups=sorted(out.meshes), compass=compass(b), features=out.meta.get("features", []),
         door=dict(node="DOOR_main", pivot=g(out.meta["door_pivot"]), open_deg=100.0) if "door_pivot" in out.meta else None,
@@ -629,3 +632,16 @@ def sidecar(out, L):
         unplaced=[dict(layout_index=i, type=t) for i, t in out.unplaced],
         tris=out.tri_count,
     )
+
+
+def visual_yaw(b, L):
+    """Small rotation about the door threshold so rows do not read as ruled
+    lines (ART_BIBLE §3: nothing perfectly square).  The door stays put, so the
+    walk graph is unaffected.  Tight plots get almost none."""
+    if b["level"] == "DECK":
+        return 0.0
+    rng = rng_for("yaw", b["id"])
+    roomy = side_clearance(L, b, "left", 0.9) > 0 and side_clearance(L, b, "right", 0.9) > 0
+    amp = 5.0 if roomy else 1.5
+    a = rng.uniform(1.5, amp) * rng.choice([-1, 1]) if roomy else rng.uniform(-amp, amp)
+    return round(a, 2)

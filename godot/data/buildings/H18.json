@@ -10,8 +10,23 @@
   14.5,
   -4.5
  ],
- "yaw_deg": 90.0,
+ "yaw_deg": 94.74,
+ "layout_yaw_deg": 90.0,
  "storeys": 1,
+ "dressing": [
+  "gutter + rain barrel",
+  "door lantern",
+  "patch planks",
+  "laundry line (left)",
+  "kitchen garden",
+  "creeper",
+  "roof load"
+ ],
+ "door_lantern": [
+  0.75,
+  1.8,
+  0.2
+ ],
  "frame": "Godot-local: +x right, +y up, +z out of the front door. Pivot = front-door threshold at terrace level.",
  "groups": [
   "BASE",
@@ -464,5 +479,5 @@
   "entry_matches": "door_H18"
  },
  "unplaced": [],
- "tris": 11922
+ "tris": 13750
 }

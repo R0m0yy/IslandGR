@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://c6331457wk5au"
-path="res://.godot/imported/terrain.glb-aa09e3d824218c2be83efe9573b028ad.scn"
+uid="uid://xvm13du0g33p"
+path="res://.godot/imported/seabed.glb-ae11fe049e696abfa9dee2eebaf97c9c.scn"
 
 [deps]
 
-source_file="res://assets/env/terrain.glb"
-dest_files=["res://.godot/imported/terrain.glb-aa09e3d824218c2be83efe9573b028ad.scn"]
+source_file="res://assets/env/seabed.glb"
+dest_files=["res://.godot/imported/seabed.glb-ae11fe049e696abfa9dee2eebaf97c9c.scn"]
 
 [params]
 

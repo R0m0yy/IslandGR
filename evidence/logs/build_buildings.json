@@ -1,15 +1,15 @@
 {
  "blender": "4.5.15 LTS",
- "seconds": 4.0,
+ "seconds": 5.1,
  "buildings": [
   {
    "id": "P01",
    "family": "long_shed",
-   "tris": 14292,
+   "tris": 15052,
    "anchors": 7,
    "stubs": 7,
    "unplaced": 0,
-   "glb_bytes": 1037080,
+   "glb_bytes": 1099284,
    "features": [
     "open front + awning"
    ]
@@ -17,11 +17,11 @@
   {
    "id": "P02",
    "family": "long_shed",
-   "tris": 9180,
+   "tris": 9824,
    "anchors": 7,
    "stubs": 7,
    "unplaced": 0,
-   "glb_bytes": 677788,
+   "glb_bytes": 725488,
    "features": [
     "open front + awning"
    ]
@@ -29,11 +29,11 @@
   {
    "id": "P03",
    "family": "long_shed",
-   "tris": 17054,
+   "tris": 17318,
    "anchors": 7,
    "stubs": 7,
    "unplaced": 0,
-   "glb_bytes": 1251904,
+   "glb_bytes": 1274736,
    "features": [
     "entrance porch",
     "lean-to store (E)"
@@ -42,11 +42,11 @@
   {
    "id": "P04",
    "family": "stacked",
-   "tris": 14368,
+   "tris": 15200,
    "anchors": 5,
    "stubs": 5,
    "unplaced": 0,
-   "glb_bytes": 1090036,
+   "glb_bytes": 1168620,
    "features": [
     "awning + sign"
    ]
@@ -54,11 +54,11 @@
   {
    "id": "P05",
    "family": "stacked",
-   "tris": 17746,
+   "tris": 19050,
    "anchors": 12,
    "stubs": 12,
    "unplaced": 0,
-   "glb_bytes": 1344072,
+   "glb_bytes": 1457748,
    "features": [
     "awning + sign",
     "lean-to store (N)"
@@ -67,11 +67,11 @@
   {
    "id": "P06",
    "family": "stacked",
-   "tris": 10956,
+   "tris": 11792,
    "anchors": 14,
    "stubs": 15,
    "unplaced": 1,
-   "glb_bytes": 820928,
+   "glb_bytes": 884008,
    "features": [
     "awning + sign"
    ]
@@ -79,11 +79,11 @@
   {
    "id": "P07",
    "family": "long_shed",
-   "tris": 9896,
+   "tris": 10412,
    "anchors": 7,
    "stubs": 7,
    "unplaced": 0,
-   "glb_bytes": 739512,
+   "glb_bytes": 771088,
    "features": [
     "entrance porch"
    ]
@@ -91,11 +91,11 @@
   {
    "id": "P08",
    "family": "civic",
-   "tris": 18038,
+   "tris": 18846,
    "anchors": 10,
    "stubs": 10,
    "unplaced": 0,
-   "glb_bytes": 1349012,
+   "glb_bytes": 1421468,
    "features": [
     "entrance porch",
     "bell-cot",
@@ -105,11 +105,11 @@
   {
    "id": "P09",
    "family": "civic",
-   "tris": 12090,
+   "tris": 12798,
    "anchors": 8,
    "stubs": 8,
    "unplaced": 0,
-   "glb_bytes": 903240,
+   "glb_bytes": 957136,
    "features": [
     "entrance porch",
     "bell-cot",
@@ -119,11 +119,11 @@
   {
    "id": "P10",
    "family": "cottage",
-   "tris": 9902,
+   "tris": 11538,
    "anchors": 7,
    "stubs": 7,
    "unplaced": 0,
-   "glb_bytes": 753160,
+   "glb_bytes": 898904,
    "features": [
     "door canopy",
     "lean-to store (E)"
@@ -132,11 +132,11 @@
   {
    "id": "H01",
    "family": "cottage",
-   "tris": 10998,
+   "tris": 12922,
    "anchors": 13,
    "stubs": 13,
    "unplaced": 0,
-   "glb_bytes": 846448,
+   "glb_bytes": 1024608,
    "features": [
     "door canopy",
     "lean-to store (S)"
@@ -145,11 +145,11 @@
   {
    "id": "H02",
    "family": "family_house",
-   "tris": 17146,
+   "tris": 18582,
    "anchors": 18,
    "stubs": 18,
    "unplaced": 0,
-   "glb_bytes": 1294940,
+   "glb_bytes": 1426392,
    "features": [
     "front balcony under the gable",
     "lean-to store (W)"
@@ -158,11 +158,11 @@
   {
    "id": "H03",
    "family": "stilt",
-   "tris": 9032,
+   "tris": 9288,
    "anchors": 14,
    "stubs": 14,
    "unplaced": 0,
-   "glb_bytes": 697360,
+   "glb_bytes": 719648,
    "features": [
     "door canopy",
     "net rack"
@@ -171,11 +171,11 @@
   {
    "id": "H04",
    "family": "stilt",
-   "tris": 9212,
+   "tris": 9148,
    "anchors": 14,
    "stubs": 14,
    "unplaced": 0,
-   "glb_bytes": 713564,
+   "glb_bytes": 707364,
    "features": [
     "door canopy",
     "net rack"
@@ -184,11 +184,11 @@
   {
    "id": "H05",
    "family": "stilt",
-   "tris": 8932,
+   "tris": 9644,
    "anchors": 14,
    "stubs": 14,
    "unplaced": 0,
-   "glb_bytes": 690288,
+   "glb_bytes": 746412,
    "features": [
     "door canopy",
     "net rack"
@@ -197,11 +197,11 @@
   {
    "id": "H06",
    "family": "cottage",
-   "tris": 10198,
+   "tris": 10622,
    "anchors": 13,
    "stubs": 13,
    "unplaced": 0,
-   "glb_bytes": 771024,
+   "glb_bytes": 800232,
    "features": [
     "door canopy",
     "lean-to store (W)"
@@ -210,11 +210,11 @@
   {
    "id": "H07",
    "family": "family_house",
-   "tris": 13984,
+   "tris": 14228,
    "anchors": 18,
    "stubs": 18,
    "unplaced": 0,
-   "glb_bytes": 1076760,
+   "glb_bytes": 1100972,
    "features": [
     "front balcony under the gable"
    ]
@@ -222,11 +222,11 @@
   {
    "id": "H08",
    "family": "cottage",
-   "tris": 9560,
+   "tris": 10400,
    "anchors": 13,
    "stubs": 13,
    "unplaced": 0,
-   "glb_bytes": 721556,
+   "glb_bytes": 791112,
    "features": [
     "door canopy"
    ]
@@ -234,11 +234,11 @@
   {
    "id": "H09",
    "family": "cottage",
-   "tris": 10086,
+   "tris": 10934,
    "anchors": 13,
    "stubs": 13,
    "unplaced": 0,
-   "glb_bytes": 763296,
+   "glb_bytes": 821424,
    "features": [
     "door canopy",
     "lean-to store (E)"
@@ -247,11 +247,11 @@
   {
    "id": "H10",
    "family": "cottage",
-   "tris": 12278,
+   "tris": 12222,
    "anchors": 13,
    "stubs": 13,
    "unplaced": 0,
-   "glb_bytes": 925124,
+   "glb_bytes": 937484,
    "features": [
     "door canopy",
     "lean-to store (N)"
@@ -260,11 +260,11 @@
   {
    "id": "H11",
    "family": "family_house",
-   "tris": 16260,
+   "tris": 17652,
    "anchors": 18,
    "stubs": 18,
    "unplaced": 0,
-   "glb_bytes": 1234672,
+   "glb_bytes": 1353592,
    "features": [
     "front balcony under the gable"
    ]
@@ -272,11 +272,11 @@
   {
    "id": "H12",
    "family": "cottage",
-   "tris": 10644,
+   "tris": 12600,
    "anchors": 13,
    "stubs": 13,
    "unplaced": 0,
-   "glb_bytes": 794512,
+   "glb_bytes": 975236,
    "features": [
     "door canopy"
    ]
@@ -284,11 +284,11 @@
   {
    "id": "H13",
    "family": "cottage",
-   "tris": 11014,
+   "tris": 11514,
    "anchors": 13,
    "stubs": 13,
    "unplaced": 0,
-   "glb_bytes": 823592,
+   "glb_bytes": 868604,
    "features": [
     "door canopy",
     "lean-to store (W)"
@@ -297,11 +297,11 @@
   {
    "id": "H14",
    "family": "family_house",
-   "tris": 14704,
+   "tris": 15988,
    "anchors": 18,
    "stubs": 18,
    "unplaced": 0,
-   "glb_bytes": 1116060,
+   "glb_bytes": 1227180,
    "features": [
     "front balcony under the gable"
    ]
@@ -309,11 +309,11 @@
   {
    "id": "H15",
    "family": "cottage",
-   "tris": 10282,
+   "tris": 11474,
    "anchors": 13,
    "stubs": 13,
    "unplaced": 0,
-   "glb_bytes": 768640,
+   "glb_bytes": 846236,
    "features": [
     "door canopy",
     "lean-to store (E)"
@@ -322,11 +322,11 @@
   {
    "id": "H16",
    "family": "cottage",
-   "tris": 10942,
+   "tris": 11058,
    "anchors": 13,
    "stubs": 13,
    "unplaced": 0,
-   "glb_bytes": 823440,
+   "glb_bytes": 831812,
    "features": [
     "door canopy",
     "lean-to store (W)"
@@ -335,11 +335,11 @@
   {
    "id": "H17",
    "family": "cottage",
-   "tris": 10194,
+   "tris": 12330,
    "anchors": 13,
    "stubs": 13,
    "unplaced": 0,
-   "glb_bytes": 767340,
+   "glb_bytes": 961504,
    "features": [
     "door canopy",
     "lean-to store (N)"
@@ -348,11 +348,11 @@
   {
    "id": "H18",
    "family": "cottage",
-   "tris": 11922,
+   "tris": 13750,
    "anchors": 13,
    "stubs": 13,
    "unplaced": 0,
-   "glb_bytes": 885400,
+   "glb_bytes": 1054528,
    "features": [
     "door canopy",
     "lean-to store (N)"
@@ -361,11 +361,11 @@
   {
    "id": "H19",
    "family": "cottage",
-   "tris": 9954,
+   "tris": 11186,
    "anchors": 13,
    "stubs": 13,
    "unplaced": 0,
-   "glb_bytes": 749720,
+   "glb_bytes": 849456,
    "features": [
     "door canopy",
     "lean-to store (E)"
@@ -374,18 +374,18 @@
   {
    "id": "H20",
    "family": "cottage",
-   "tris": 11354,
+   "tris": 12602,
    "anchors": 13,
    "stubs": 13,
    "unplaced": 0,
-   "glb_bytes": 854876,
+   "glb_bytes": 985104,
    "features": [
     "door canopy",
     "lean-to store (E)"
    ]
   }
  ],
- "total_tris": 362218,
+ "total_tris": 389974,
  "anchors": 367,
  "stubs": 368,
  "unplaced": 1

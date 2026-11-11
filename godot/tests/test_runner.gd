@@ -47,7 +47,7 @@ func _ready() -> void:
 			missing.append(id + ":door")
 	check("every prefab has ROOF, BASE, wall groups and a hinged door node", missing.is_empty(), missing)
 	var env_ok := true
-	for n in ["terrain", "cliffs", "gate", "structures", "props", "vegetation", "boats"]:
+	for n in ["island", "seabed", "structures", "props", "vegetation", "boats"]:
 		env_ok = env_ok and village.get_node_or_null("Environment/" + n) != null
 	check("environment GLBs loaded", env_ok)
 	var n_anchor := 0

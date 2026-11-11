@@ -422,6 +422,7 @@ def structures(L, ter):
                         m.box(x + 0.02, y0 + 0.02 + rng.uniform(-0.04, 0.04), -0.05, x + Ls - 0.02, y1 - 0.02 + rng.uniform(-0.04, 0.04), 0.022,
                               "path", wob=0.012, rng=rng, vary=0.06)
                     x += Ls
+    m.merge(edge_rails(L, ter))
     # decks
     for dk in L["decks"]:
         x0, x1, z0, z1 = dk["rect"]; y = dk["y"]
@@ -762,6 +763,8 @@ def props(L, ter):
             with veg.push(T(*P(x, g, z))): shrub(veg, rng)
             count["shrub"] += 1
     info["vegetation"] = count
+    info["ground_cover"] = ground_cover(L, ter, veg)
+    beach_life(L, m, rng)
     # harbour clutter on the quay and decks: crates, barrels, coiled rope, bollards
     for nid in ("q_n_pierA", "q_n_pierB", "q_n_mkt", "q_w_yard", "q_w_loft", "q_n_wh", "q_corner", "q_w_bw"):
         n = nodes[nid]
@@ -798,3 +801,125 @@ def sea_preview(L):
             for tri in ((0, 3, 2), (0, 2, 1)):
                 m.f.append(tuple(base + q for q in tri)); m.fm.append("sea"); m.ft.append(1.0 + rng.uniform(-0.1, 0.1))
     return m
+
+
+# ================================================================ session 4 dressing
+def edge_rails(L, ter):
+    """Rope-and-post railings along terrace lips next to where people walk."""
+    from .world import pt_in_poly
+    m = Mesh("LT_RAILS")
+    rng = rng_for("rails")
+    nodes = L["nav"]["nodes"]
+    specials = [(n["x"], n["z"]) for k, n in nodes.items() if k.startswith(("s", "lad", "br", "hd_br")) and ("_bot" in k or "_top" in k or k.startswith(("br_", "hd_br")))]
+    for l in L["land"]:
+        if l["id"] in ("SP", "T1", "ST"):
+            continue
+        poly = l["poly"]; h = l["h"]
+        for i in range(len(poly)):
+            ax, az = poly[i]; bx, bz = poly[(i + 1) % len(poly)]
+            Ls = math.hypot(bx - ax, bz - az)
+            tx, tz = (bx - ax) / Ls, (bz - az) / Ls
+            nx, nz = tz, -tx
+            if pt_in_poly((ax + bx) / 2 + nx * 0.4, (az + bz) / 2 + nz * 0.4, poly):
+                nx, nz = -nx, -nz
+            prev = None
+            s = 0.5
+            while s < Ls - 0.3:
+                x, z = ax + tx * s - nx * 0.32, az + tz * s - nz * 0.32
+                lower = ground_h(L, x + nx * 2.2, z + nz * 2.2)
+                ok = (lower is None or h - lower >= 2.5) and ter.is_keep(x - nx * 1.2, z - nz * 1.2) \
+                    and all(math.hypot(x - sx, z - sz) > 1.7 for sx, sz in specials) \
+                    and not any(o["footprint"][0] - 0.5 < x < o["footprint"][1] + 0.5 and o["footprint"][2] - 0.5 < z < o["footprint"][3] + 0.5 for o in L["buildings"])
+                if ok:
+                    hh = 0.95 + rng.uniform(-0.05, 0.08)
+                    with m.push(T(*P(x, h, z)), Rz(rng.uniform(0, 3.1))):
+                        m.box(-0.045, -0.045, -0.25, 0.045, 0.045, hh, "wood_mid", wob=0.012, rng=rng, vary=0.1)
+                        m.box(-0.06, -0.06, hh - 0.02, 0.06, 0.06, hh + 0.03, "wood_dark")
+                    cur = (P(x, h, z), hh)
+                    if prev is not None:
+                        (pa, ha), (pb, hb) = prev, cur
+                        for lvl in (0.88, 0.5):
+                            seg = 5
+                            for q in range(seg):
+                                k0, k1 = q / seg, (q + 1) / seg
+                                p0 = [pa[c] + (pb[c] - pa[c]) * k0 for c in range(3)]; p1 = [pa[c] + (pb[c] - pa[c]) * k1 for c in range(3)]
+                                p0[2] += ha * lvl - 0.13 * math.sin(math.pi * k0); p1[2] += hb * lvl - 0.13 * math.sin(math.pi * k1)
+                                m.beam(p0, p1, 0.028, 0.028, "rope")
+                    prev = cur
+                else:
+                    prev = None
+                s += 1.55 + rng.uniform(-0.1, 0.1)
+    return m
+
+
+def ground_cover(L, ter, veg):
+    """Grass tufts, wild flowers, plants hanging from the cliff lips, and the
+    working beach on the spit.  Appends to the vegetation mesh; returns counts."""
+    from .world import pt_in_poly
+    rng = rng_for("cover")
+    cnt = dict(tufts=0, hanging=0, beach=0)
+    # tufts: only off the walkways
+    for _ in range(9000):
+        if cnt["tufts"] >= 520:
+            break
+        x, z = rng.uniform(-44, 42), rng.uniform(-34, 28)
+        g = ground_h(L, x, z)
+        if g is None or g < 1.0 or ter.is_keep(x, z):
+            continue
+        if float(n2(x * 0.9, z * 0.9, 11.0)) + (0.3 if g > 9 else -0.1) < 0.1:
+            continue
+        with veg.push(T(*P(x, g, z)), Rz(rng.uniform(0, 6.28))):
+            for b in range(rng.randint(3, 6)):
+                a = rng.uniform(0, 6.28); r = rng.uniform(0.02, 0.12); hh = rng.uniform(0.16, 0.38)
+                bx, by = math.cos(a) * r, math.sin(a) * r
+                veg.add([(bx - 0.035, by, 0), (bx + 0.035, by, 0), (bx + math.cos(a) * 0.1, by + math.sin(a) * 0.1, hh)],
+                        [(0, 1, 2), (2, 1, 0)], "grass" if rng.random() < 0.6 else "foliage_c", 1.0 + rng.uniform(-0.12, 0.1))
+            if rng.random() < 0.22:
+                with veg.push(T(rng.uniform(-0.08, 0.08), rng.uniform(-0.08, 0.08), 0.3)):
+                    veg.blob(0.045, 0.045, 0.04, rng.choice(["flower_a", "flower_b", "flower_c", "fabric_white"]), rng, sub=0, rough=0.1)
+        cnt["tufts"] += 1
+    # greenery spilling over the lips
+    for l in L["land"]:
+        if l["id"] in ("SP", "T1"):
+            continue
+        poly = l["poly"]
+        for i in range(len(poly)):
+            ax, az = poly[i]; bx, bz = poly[(i + 1) % len(poly)]
+            Ls = math.hypot(bx - ax, bz - az)
+            nx, nz = (bz - az) / Ls, -(bx - ax) / Ls
+            if pt_in_poly((ax + bx) / 2 + nx * 0.4, (az + bz) / 2 + nz * 0.4, poly):
+                nx, nz = -nx, -nz
+            s = rng.uniform(1, 4)
+            while s < Ls:
+                x, z = ax + (bx - ax) * s / Ls, az + (bz - az) * s / Ls
+                if not ter.is_keep(x + nx * 0.8, z + nz * 0.8) and ground_h(L, x + nx * 2.0, z + nz * 2.0) != l["h"]:
+                    k = rng.randint(2, 5)
+                    for q in range(k):
+                        with veg.push(T(*P(x + nx * rng.uniform(0.3, 1.3) + rng.uniform(-0.6, 0.6), l["h"] - 0.15 - q * rng.uniform(0.25, 0.5), z + nz * rng.uniform(0.3, 1.3) + rng.uniform(-0.6, 0.6)))):
+                            veg.blob(rng.uniform(0.3, 0.6), rng.uniform(0.3, 0.6), rng.uniform(0.2, 0.45), rng.choice(["foliage_a", "foliage_b", "foliage_c"]), rng, sub=0, rough=0.35)
+                    cnt["hanging"] += 1
+                s += rng.uniform(3.0, 7.5)
+    return cnt
+
+
+def beach_life(L, m, rng):
+    """The spit is a working beach: an upturned skiff, drying racks, driftwood, buoys."""
+    y = 0.8
+    with m.push(T(*P(1.5, y, 26.3)), Rz(0.5), Rx(math.pi)):
+        with m.push(T(0, 0, -0.75)):
+            boat(m, rng, "skiff", "boat_c")
+    for (x, z, a) in ((6.5, 25.6, 0.1), (9.3, 26.0, -0.2)):
+        with m.push(T(*P(x, y, z)), Rz(a)):
+            for px in (-0.9, 0.9):
+                m.beam((px, -0.3, 0), (px, 0, 1.25), 0.05, 0.05, "wood_mid"); m.beam((px, 0.3, 0), (px, 0, 1.25), 0.05, 0.05, "wood_mid")
+            m.beam((-1.05, 0, 1.25), (1.05, 0, 1.25), 0.04, 0.04, "wood_mid")
+            for i in range(9):
+                with m.push(T(-0.8 + i * 0.2, 0, 1.02), Ry(rng.uniform(-0.2, 0.2))):
+                    m.blob(0.035, 0.012, 0.16, rng.choice(["fish_a", "fish_b"]), rng, sub=0, rough=0.05)
+    for _ in range(7):
+        x, z = rng.uniform(-3.5, 12), rng.uniform(24.8, 27.2)
+        with m.push(T(*P(x, y + 0.04, z)), Rz(rng.uniform(0, 3.1))):
+            m.cbox(0, 0, 0.04, rng.uniform(0.6, 1.6), 0.09, 0.08, "wood_grey", rng=rng, vary=0.12, wob=0.02)
+    for _ in range(5):
+        with m.push(T(*P(rng.uniform(-3, 11), y + 0.1, rng.uniform(25, 27)))):
+            m.blob(0.11, 0.11, 0.14, rng.choice(["float_a", "float_b"]), rng, sub=0, rough=0.05)

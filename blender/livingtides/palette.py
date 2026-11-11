@@ -15,7 +15,7 @@ BIBLE = {
 
 ROLES = {
     # structure
-    "wall": "cream", "wall_in": "#E4D3B0", "trim": "blue", "frame": "white",
+    "wall": "cream", "wall_bare": "#B79872", "wall_in": "#E4D3B0", "trim": "blue", "frame": "white",
     "wood_dark": "wood_d", "wood_mid": "wood_m", "wood_light": "wood_l", "wood_grey": "#8E8478",
     "stone": "stone", "stone_b": "#8A8A99", "stone_light": "#BDBBC2", "plaster_in": "#E4D3B0",
     "plaster_main": "cream", "plaster_accent": "white",
@@ -34,10 +34,10 @@ ROLES = {
     # nature
     "foliage_a": "fol_m", "foliage_b": "fol_d", "foliage_c": "fol_l", "trunk": "#7A5A40",
     "flower_a": "coral", "flower_b": "ochre", "flower_c": "plum",
-    "rock_l": "rock_l", "rock_m": "rock_m", "rock_d": "rock_d", "rock_wet": "#7A4B2E",
-    "ground": "#CBAA74", "path": "#E8D6AC", "grass": "#8FB56A", "sand": "#E6D3A0", "seabed": "#5E8FA8",
+    "rock_l": "#D9A96C", "rock_m": "#C07F45", "rock_d": "#8E5230", "rock_wet": "#7A4B2E", "rock_cave": "#5A3522",
+    "ground": "#DCC79E", "path": "#EFE3C4", "grass": "#8FB56A", "sand": "#E6D3A0", "seabed": "#5E8FA8",
     "sea": "sea_m", "foam": "#EAF4F8",
-    "boat_a": "red", "boat_b": "blue", "boat_c": "turq", "boat_d": "ochre", "sail": "#EFE6CF",
+    "boat_hull": "#EFE6D2", "boat_a": "red", "boat_b": "blue", "boat_c": "turq", "boat_d": "ochre", "sail": "#EFE6CF",
     "skin": "#D9A27C", "debug": "#FF00FF",
 }
 

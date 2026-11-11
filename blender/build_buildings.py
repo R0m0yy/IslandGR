@@ -37,7 +37,7 @@ for b in L["buildings"]:
     ov = palette.building_overrides(b)
     coll = bl_io.collection("BLD_" + b["id"])
     origin, yaw = world.building_frame(b)
-    root = bl_io.empty("LT_BLD_" + b["id"], coll, world.to_blender(origin), math.radians(yaw), size=0.6, kind="PLAIN_AXES")
+    root = bl_io.empty("LT_BLD_" + b["id"], coll, world.to_blender(origin), math.radians(yaw + building.visual_yaw(b, L)), size=0.6, kind="PLAIN_AXES")
     root["lt_id"] = b["id"]; root["lt_kind"] = b["kind"]; root["lt_family"] = building.family_of(b)
     objs = [root]
     for name, m in out.meshes.items():

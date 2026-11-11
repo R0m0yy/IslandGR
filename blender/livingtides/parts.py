@@ -708,7 +708,7 @@ def clad(m, W, z0, z1, openings, rng, style="lap", role="wall", th=0.028, x0=0.0
                            (x + L - 0.004, 0.0, a), (x + 0.004, 0.0, a),
                            (x + 0.004, -th * 0.45, b + 0.02 + lean), (x + L - 0.004, -th * 0.45, b + 0.02 - lean),
                            (x + L - 0.004, 0.0, b + 0.02), (x + 0.004, 0.0, b + 0.02)]
-                    m.add(pts, Mesh._BOX_F, role, 1.0 + rng.uniform(-vary, vary))
+                    m.add(pts, Mesh._BOX_F, role if rng.random() < 0.95 else "wall_bare", 1.0 + rng.uniform(-vary, vary))
                     x += L
     else:
         x = x0

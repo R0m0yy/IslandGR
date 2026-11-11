@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://d1btlb5bcbi2e"
-path="res://.godot/imported/cliffs.glb-6be0c4a3034fd74209ecac930a0e53ba.scn"
+uid="uid://cdkj82dt2ceql"
+path="res://.godot/imported/island.glb-016be1dd54b9b521b4ce6005b70d898a.scn"
 
 [deps]
 
-source_file="res://assets/env/cliffs.glb"
-dest_files=["res://.godot/imported/cliffs.glb-6be0c4a3034fd74209ecac930a0e53ba.scn"]
+source_file="res://assets/env/island.glb"
+dest_files=["res://.godot/imported/island.glb-016be1dd54b9b521b4ce6005b70d898a.scn"]
 
 [params]
 

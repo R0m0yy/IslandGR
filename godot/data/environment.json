@@ -202,6 +202,11 @@
   "tree": 22,
   "shrub": 90
  },
+ "ground_cover": {
+  "tufts": 520,
+  "hanging": 88,
+  "beach": 0
+ },
  "boats": [
   {
    "id": "BOAT_01",

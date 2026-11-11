@@ -11,7 +11,19 @@
   19.2
  ],
  "yaw_deg": 0.0,
+ "layout_yaw_deg": 0.0,
  "storeys": 1,
+ "dressing": [
+  "door lantern",
+  "patch planks",
+  "crab pots + floats",
+  "roof load"
+ ],
+ "door_lantern": [
+  0.75,
+  1.8,
+  0.2
+ ],
  "frame": "Godot-local: +x right, +y up, +z out of the front door. Pivot = front-door threshold at terrace level.",
  "groups": [
   "BASE",
@@ -496,5 +508,5 @@
   "entry_matches": "door_H03"
  },
  "unplaced": [],
- "tris": 9032
+ "tris": 9288
 }

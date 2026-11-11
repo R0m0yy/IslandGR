@@ -151,7 +151,7 @@ def sky(scene, sun_elev_deg=42, sun_rot_deg=140, strength=1.0, night=False):
         nt.links.new(tex.outputs["Color"], mix.inputs["Color1"])
         nt.links.new(mix.outputs["Color"], bg.inputs["Color"])
     sun = bpy.data.lights.new("LT_sun", "SUN")
-    sun.energy = 0.25 if night else 4.2 * strength
+    sun.energy = 0.12 if night else 4.2 * strength
     sun.color = (0.55, 0.65, 1.0) if night else ((1.0, 0.93, 0.82) if sun_elev_deg > 20 else (1.0, 0.62, 0.36))
     sun.angle = math.radians(3.0)
     so = bpy.data.objects.new("LT_sun", sun); scene.collection.objects.link(so)
