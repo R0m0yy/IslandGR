@@ -132,7 +132,7 @@
    "detail": {
     "clock": "Day 6  06:00",
     "steps": 72000,
-    "wall_ms": 12835
+    "wall_ms": 12635
    },
    "passed": true,
    "test": "simulation ran 5 game days"
@@ -140,56 +140,56 @@
   {
    "detail": {
     "never_slept": 0,
-    "sleeps": 318
+    "sleeps": 320
    },
    "passed": true,
    "test": "villagers sleep (everyone at least once)"
   },
   {
-   "detail": 621,
+   "detail": 627,
    "passed": true,
    "test": "villagers cook"
   },
   {
    "detail": {
-    "meals_eaten": 640,
+    "meals_eaten": 646,
     "never_ate": 0
    },
    "passed": true,
    "test": "villagers eat (everyone at least once)"
   },
   {
-   "detail": 417,
+   "detail": 403,
    "passed": true,
    "test": "villagers fish and land a catch"
   },
   {
-   "detail": 484,
+   "detail": 482,
    "passed": true,
    "test": "villagers work"
   },
   {
-   "detail": 1472,
+   "detail": 1475,
    "passed": true,
    "test": "doors are opened by villagers"
   },
   {
-   "detail": 2511,
+   "detail": 2539,
    "passed": true,
    "test": "stairs are climbed"
   },
   {
    "detail": {
-    "max_stuck_s": 0
+    "max_stuck_s": 60
    },
    "passed": true,
    "test": "no villager is stuck while travelling"
   },
   {
    "detail": {
-    "expected": 235,
-    "have": 235,
-    "market": 64
+    "expected": 219,
+    "have": 219,
+    "market": 56
    },
    "passed": true,
    "test": "fish ledger balances (start + caught - cooked = pantries + market)"
@@ -227,39 +227,39 @@
    "test": "all activity states observed"
   }
  ],
- "sim_wall_ms": 12835,
+ "sim_wall_ms": 12635,
  "state_samples": {
-  "climb_ladder": 30,
-  "climb_stairs": 362,
-  "cook": 130,
-  "cross_bridge": 49,
-  "eat": 147,
-  "fish": 222,
-  "idle": 145,
-  "open_door": 43,
-  "shop": 5,
-  "sit": 7,
-  "sleep": 2221,
-  "walk": 1008,
-  "work": 671
+  "climb_ladder": 33,
+  "climb_stairs": 359,
+  "cook": 134,
+  "cross_bridge": 51,
+  "eat": 148,
+  "fish": 209,
+  "idle": 150,
+  "open_door": 47,
+  "shop": 4,
+  "sit": 5,
+  "sleep": 2213,
+  "walk": 1023,
+  "work": 664
  },
  "totals": {
-  "bridges_crossed": 178,
-  "doors_opened": 1555,
+  "bridges_crossed": 173,
+  "doors_opened": 1564,
   "failed_paths": 0,
   "failed_uses": 0,
-  "fish_bought": 124,
-  "fish_caught": 417,
-  "fish_sold": 184,
-  "ladders_climbed": 192,
-  "meals_cooked": 621,
-  "meals_eaten": 640,
-  "metres": 111654,
-  "plans": 2660,
-  "sleeps": 318,
-  "stairs_climbed": 2511,
+  "fish_bought": 126,
+  "fish_caught": 403,
+  "fish_sold": 178,
+  "ladders_climbed": 196,
+  "meals_cooked": 627,
+  "meals_eaten": 646,
+  "metres": 112508,
+  "plans": 2675,
+  "sleeps": 320,
+  "stairs_climbed": 2539,
   "starve_minutes": 0,
-  "work_blocks": 484
+  "work_blocks": 482
  },
  "villagers": 42
 }

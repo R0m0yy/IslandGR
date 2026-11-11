@@ -10,8 +10,10 @@ uniform vec3 foam : source_color = vec3(0.92, 0.96, 0.98);
 uniform float wave_height = 0.11;
 uniform float wave_scale = 0.22;
 uniform float wave_speed = 0.55;
-uniform float foam_width = 0.55;
-uniform sampler2D depth_tex : hint_depth_texture, filter_nearest, repeat_disable;
+uniform float foam_width = 0.6;
+uniform sampler2D height_tex : filter_linear, repeat_disable;   // terrain height, baked by the Blender pipeline
+uniform vec4 height_rect = vec4(-53.0, -41.0, 51.0, 37.0);      // x0, z0, x1, z1 covered by height_tex
+uniform vec2 height_range = vec2(-3.0, 1.0);
 
 varying vec3 wpos;
 
@@ -33,17 +35,18 @@ void fragment() {
 	// flat facets from screen-space derivatives
 	vec3 n = normalize(cross(dFdy(VERTEX), dFdx(VERTEX)));
 	NORMAL = n;
-	float d = texture(depth_tex, SCREEN_UV).r;
-	vec4 ndc = vec4(SCREEN_UV * 2.0 - 1.0, d, 1.0);
-	vec4 view = INV_PROJECTION_MATRIX * ndc;
-	view.xyz /= view.w;
-	float water_depth = clamp(VERTEX.z - view.z, 0.0, 20.0);
-	float k = smoothstep(0.0, 5.0, water_depth);
+	vec2 huv = (wpos.xz - height_rect.xy) / (height_rect.zw - height_rect.xy);
+	float ground = mix(height_range.x, height_range.y, texture(height_tex, huv).r);
+	if (huv.x < 0.0 || huv.x > 1.0 || huv.y < 0.0 || huv.y > 1.0) {
+		ground = height_range.x;
+	}
+	float water_depth = max(0.0, -ground);
+	float k = smoothstep(0.0, 2.6, water_depth);
 	vec3 col = mix(shallow, mid, smoothstep(0.0, 0.5, k));
 	col = mix(col, deep, smoothstep(0.4, 1.0, k));
 	float facet = dot(n, normalize(vec3(0.3, 1.0, 0.2)));
 	col *= 0.86 + 0.22 * facet;
-	float f = 1.0 - smoothstep(0.0, foam_width, water_depth + sin(TIME * 1.3 + wpos.x * 0.9 + wpos.z * 0.7) * 0.12);
+	float f = 1.0 - smoothstep(0.0, foam_width, water_depth + sin(TIME * 1.3 + wpos.x * 0.9 + wpos.z * 0.7) * 0.15);
 	col = mix(col, foam, f * 0.85);
 	ALBEDO = col;
 	ROUGHNESS = 0.18;

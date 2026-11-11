@@ -35,7 +35,7 @@ ROLES = {
     "foliage_a": "fol_m", "foliage_b": "fol_d", "foliage_c": "fol_l", "trunk": "#7A5A40",
     "flower_a": "coral", "flower_b": "ochre", "flower_c": "plum",
     "rock_l": "rock_l", "rock_m": "rock_m", "rock_d": "rock_d", "rock_wet": "#7A4B2E",
-    "ground": "#D9C08C", "path": "#EAD9B0", "grass": "#8FB56A", "sand": "#E6D3A0", "seabed": "#5E8FA8",
+    "ground": "#CBAA74", "path": "#E8D6AC", "grass": "#8FB56A", "sand": "#E6D3A0", "seabed": "#5E8FA8",
     "sea": "sea_m", "foam": "#EAF4F8",
     "boat_a": "red", "boat_b": "blue", "boat_c": "turq", "boat_d": "ochre", "sail": "#EFE6CF",
     "skin": "#D9A27C", "debug": "#FF00FF",

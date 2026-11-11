@@ -1,0 +1,139 @@
+{
+ "passed": 16,
+ "failed": 0,
+ "results": [
+  {
+   "test": "anchor stubs given a position",
+   "passed": true,
+   "detail": {
+    "stubs": 368,
+    "placed": 367,
+    "unplaced": {
+     "P06": [
+      "table"
+     ]
+    }
+   }
+  },
+  {
+   "test": "anchor types match the layout stub they fill",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "test": "every stand point lies inside its room",
+   "passed": true,
+   "detail": []
+  },
+  {
+   "test": "no two users would stand on the same spot",
+   "passed": true,
+   "detail": []
+  },
+  {
+   "test": "building geometry stays within 1.5 m of its footprint",
+   "passed": true,
+   "detail": []
+  },
+  {
+   "test": "storey height follows the art bible (eaves at 2.4 m per storey)",
+   "passed": true,
+   "detail": {
+    "P01": 3.85,
+    "P02": 3.59,
+    "P03": 3.6,
+    "P04": 6.17,
+    "P05": 7.02,
+    "P06": 4.66,
+    "P07": 3.56,
+    "P08": 8.04,
+    "P09": 6.13,
+    "P10": 3.87,
+    "H01": 4.71,
+    "H02": 7.39,
+    "H03": 4.27,
+    "H04": 4.27,
+    "H05": 4.27,
+    "H06": 4.78,
+    "H07": 7.31,
+    "H08": 4.6,
+    "H09": 4.56,
+    "H10": 4.96,
+    "H11": 7.46,
+    "H12": 4.92,
+    "H13": 4.85,
+    "H14": 7.47,
+    "H15": 4.59,
+    "H16": 4.88,
+    "H17": 4.82,
+    "H18": 4.93,
+    "H19": 4.73,
+    "H20": 4.96
+   }
+  },
+  {
+   "test": "wall groups, roof, base and hinged door present (BUILDING_CONTRACT)",
+   "passed": true,
+   "detail": []
+  },
+  {
+   "test": "every building breaks its box at least once beyond roof overhangs",
+   "passed": true,
+   "detail": {}
+  },
+  {
+   "test": "triangle budget per building under 25k",
+   "passed": true,
+   "detail": {
+    "max": 18038,
+    "total": 362218
+   }
+  },
+  {
+   "test": "interior graphs are connected and meet the layout's door nodes",
+   "passed": true,
+   "detail": []
+  },
+  {
+   "test": "two-storey buildings have an interior stair link",
+   "passed": true,
+   "detail": [
+    "P04",
+    "P05",
+    "P08",
+    "H02",
+    "H07",
+    "H11",
+    "H14"
+   ]
+  },
+  {
+   "test": "terrain equals the layout height at every ground walk node",
+   "passed": true,
+   "detail": []
+  },
+  {
+   "test": "no walk link is buried by rock",
+   "passed": true,
+   "detail": []
+  },
+  {
+   "test": "cliff lips are irregular (rock rises past the surveyed terrace edge)",
+   "passed": true,
+   "detail": {
+    "cells_raised": 981,
+    "cell_m": 0.5
+   }
+  },
+  {
+   "test": "30 GLB prefabs valid: header, ROOF node, vertex colours, IA_ empties, fresh sidecar",
+   "passed": true,
+   "detail": []
+  },
+  {
+   "test": "godot/data is an exact copy of data/",
+   "passed": true,
+   "detail": ""
+  }
+ ]
+}

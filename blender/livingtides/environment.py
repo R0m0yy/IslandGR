@@ -115,6 +115,16 @@ class Terrain:
             x0, x1, z0, z1 = dk["rect"]
             m = (X > x0 - 0.4) & (X < x1 + 0.4) & (Z > z0 - 0.4) & (Z < z1 + 0.4) & np.isnan(data)
             H = np.where(m, np.minimum(H, dk["y"] - 1.2), H)
+        # ---- ramps cut down through the quay edge to the decks and the spit
+        for e in L["nav"]["edges"]:
+            if e["type"] != "ramp":
+                continue
+            a, b = nodes[e["a"]], nodes[e["b"]]
+            vx, vz = b["x"] - a["x"], b["z"] - a["z"]
+            t = np.clip(((X - a["x"]) * vx + (Z - a["z"]) * vz) / max(vx * vx + vz * vz, 1e-9), 0, 1)
+            dist = np.hypot(X - (a["x"] + t * vx), Z - (a["z"] + t * vz))
+            line = a["y"] + (b["y"] - a["y"]) * t - 0.1 * np.sin(np.pi * t)
+            H = np.where(dist < 0.9, np.minimum(H, line), H)
         # ---- stairs and the ladder: clear a corridor so nothing buries them
         for e, a, b in self.span_edges:
             if e["type"] not in ("stair", "ladder"):

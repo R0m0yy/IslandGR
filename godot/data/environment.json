@@ -270,6 +270,21 @@
    "yaw_deg": 0.0
   }
  ],
+ "seabed_height": {
+  "file": "seabed_height.png",
+  "x": [
+   -53.0,
+   51.0
+  ],
+  "z": [
+   -41.0,
+   37.0
+  ],
+  "h": [
+   -3.0,
+   1.0
+  ]
+ },
  "schema": "living-tides.environment",
  "version": 1,
  "axes": "+x east, +y up, +z south (same as village_layout.json)"

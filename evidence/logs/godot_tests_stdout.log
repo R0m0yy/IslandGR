@@ -17,18 +17,18 @@ PASS  interior lighting follows building state
 PASS  cutaway hides roof + camera-facing walls  
 PASS  placeholder rig exposes all 11 animation clips  ["idle", "walk", "climb_stairs", "climb_ladder", "open_door", "cook", "eat", "sit", "sleep", "fish", "work"]
 PASS  animation state machine travels idle -> walk  walk
-SIM totals over 5.0 days, 42 villagers: { "sleeps": 318, "meals_cooked": 621, "meals_eaten": 640, "fish_caught": 417, "work_blocks": 484, "doors_opened": 1555, "stairs_climbed": 2511, "ladders_climbed": 192, "bridges_crossed": 178, "failed_paths": 0, "failed_uses": 0, "plans": 2660, "fish_bought": 124, "fish_sold": 184, "metres": 111654, "starve_minutes": 0 }
-SIM state samples: { "walk": 1008, "idle": 145, "work": 671, "eat": 147, "fish": 222, "open_door": 43, "climb_stairs": 362, "cook": 130, "climb_ladder": 30, "cross_bridge": 49, "sleep": 2221, "shop": 5, "sit": 7 }
-PASS  simulation ran 5 game days  { "clock": "Day 6  06:00", "steps": 72000, "wall_ms": 12835 }
-PASS  villagers sleep (everyone at least once)  { "sleeps": 318, "never_slept": 0 }
-PASS  villagers cook  621
-PASS  villagers eat (everyone at least once)  { "meals_eaten": 640, "never_ate": 0 }
-PASS  villagers fish and land a catch  417
-PASS  villagers work  484
-PASS  doors are opened by villagers  1472
-PASS  stairs are climbed  2511
-PASS  no villager is stuck while travelling  { "max_stuck_s": 0 }
-PASS  fish ledger balances (start + caught - cooked = pantries + market)  { "have": 235, "expected": 235, "market": 64 }
+SIM totals over 5.0 days, 42 villagers: { "sleeps": 320, "meals_cooked": 627, "meals_eaten": 646, "fish_caught": 403, "work_blocks": 482, "doors_opened": 1564, "stairs_climbed": 2539, "ladders_climbed": 196, "bridges_crossed": 173, "failed_paths": 0, "failed_uses": 0, "plans": 2675, "fish_bought": 126, "fish_sold": 178, "metres": 112508, "starve_minutes": 0 }
+SIM state samples: { "walk": 1023, "idle": 150, "work": 664, "eat": 148, "fish": 209, "open_door": 47, "climb_stairs": 359, "cook": 134, "climb_ladder": 33, "cross_bridge": 51, "sleep": 2213, "shop": 4, "sit": 5 }
+PASS  simulation ran 5 game days  { "clock": "Day 6  06:00", "steps": 72000, "wall_ms": 12635 }
+PASS  villagers sleep (everyone at least once)  { "sleeps": 320, "never_slept": 0 }
+PASS  villagers cook  627
+PASS  villagers eat (everyone at least once)  { "meals_eaten": 646, "never_ate": 0 }
+PASS  villagers fish and land a catch  403
+PASS  villagers work  482
+PASS  doors are opened by villagers  1475
+PASS  stairs are climbed  2539
+PASS  no villager is stuck while travelling  { "max_stuck_s": 60 }
+PASS  fish ledger balances (start + caught - cooked = pantries + market)  { "have": 219, "expected": 219, "market": 56 }
 PASS  no route failures  0
 PASS  nobody starves (no one at maximum hunger for over 60 game minutes)  { "cases": [], "total_minutes_at_max": 0 }
 PASS  all activity states observed  ["walk", "idle", "work", "eat", "fish", "open_door", "climb_stairs", "cook", "climb_ladder", "cross_bridge", "sleep", "shop", "sit"]

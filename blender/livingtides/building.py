@@ -285,6 +285,14 @@ def build(b, L):
             fm.box(x - 0.05, -0.86, -0.05, x + 0.05, -0.76, FLOOR_Z + DOOR_H + 0.28, "frame", wob=0.008, rng=rng)
             fm.beam((x, -0.81, FLOOR_Z + DOOR_H - 0.25), (x - math.copysign(0.4, x), -0.81, FLOOR_Z + DOOR_H + 0.2), 0.06, 0.06, "frame", up=(0, 1, 0))
         feats.append("door canopy")
+    if fam in ("long_shed", "civic") and not is_open_front:
+        # wide porch roof on posts across the entrance
+        pw = min(3.6, W - 0.8)
+        with fm.push(T(0, -0.5, FLOOR_Z + DOOR_H + 0.42), Rz(math.pi)):
+            parts.shed_roof(fm, pw, 1.05, 0.0, 12, rng, eave=0.06, verge=0.1, cover="tin")
+        for x in (-pw / 2 + 0.07, pw / 2 - 0.07):
+            fm.box(x - 0.06, -1.0, -0.05, x + 0.06, -0.88, FLOOR_Z + DOOR_H + 0.42, "frame", wob=0.008, rng=rng)
+        feats.append("entrance porch")
     if fam == "family_house":
         with fm.push(vol.side("front")):
             parts.balcony(fm, 0.12, W - 0.12, STOREY, 0.86, rng, style=rng.choice(["baluster", "slat", "cross"]), mat="trim",
@@ -445,7 +453,7 @@ def _furnish(out, b, vol, rng, stair, floor2, inter, roof, zr, fam, open_front):
                 if ho:
                     with m.push(M, T(0, 0.98, 0), Rz(math.pi / 2), T(0, -0.46, 0)):
                         fn(m, rng)
-                    use = _loc(M, 0, 0.95, 0.5); st = _loc(M, 0, 1.95 + F.STAND, 0)
+                    use = _loc(M, 0, 0.95, 0.5); st = _loc(M, -0.2, 1.95 + F.STAND * 0.8, 0)
                     face = _dir(M, 0, -1)
                 else:
                     with m.push(M):

@@ -6,15 +6,15 @@ var env: Environment
 var sky_mat: ProceduralSkyMaterial
 
 const KEYS := [   # hour, sun colour, sun energy, sky top, sky horizon, ambient energy
-	[0.0, Color(0.45, 0.55, 0.95), 0.10, Color(0.02, 0.03, 0.09), Color(0.05, 0.07, 0.16), 0.25],
-	[5.0, Color(0.45, 0.55, 0.95), 0.10, Color(0.03, 0.04, 0.12), Color(0.10, 0.10, 0.20), 0.25],
+	[0.0, Color(0.45, 0.55, 0.95), 0.10, Color(0.02, 0.03, 0.09), Color(0.05, 0.07, 0.16), 0.12],
+	[5.0, Color(0.45, 0.55, 0.95), 0.10, Color(0.03, 0.04, 0.12), Color(0.10, 0.10, 0.20), 0.14],
 	[6.5, Color(1.0, 0.72, 0.5), 0.9, Color(0.30, 0.45, 0.75), Color(0.98, 0.72, 0.55), 0.6],
-	[9.0, Color(1.0, 0.95, 0.86), 1.35, Color(0.25, 0.50, 0.88), Color(0.72, 0.86, 0.96), 0.9],
-	[13.0, Color(1.0, 0.97, 0.9), 1.5, Color(0.22, 0.48, 0.90), Color(0.70, 0.86, 0.98), 1.0],
-	[17.0, Color(1.0, 0.9, 0.75), 1.25, Color(0.26, 0.46, 0.82), Color(0.86, 0.82, 0.80), 0.85],
+	[9.0, Color(1.0, 0.95, 0.86), 1.0, Color(0.25, 0.50, 0.88), Color(0.72, 0.86, 0.96), 0.6],
+	[13.0, Color(1.0, 0.97, 0.9), 1.1, Color(0.22, 0.48, 0.90), Color(0.70, 0.86, 0.98), 0.65],
+	[17.0, Color(1.0, 0.9, 0.75), 0.95, Color(0.26, 0.46, 0.82), Color(0.86, 0.82, 0.80), 0.6],
 	[19.0, Color(1.0, 0.55, 0.28), 0.8, Color(0.28, 0.22, 0.48), Color(1.0, 0.55, 0.35), 0.55],
-	[20.5, Color(0.5, 0.55, 0.95), 0.12, Color(0.05, 0.05, 0.16), Color(0.22, 0.14, 0.28), 0.3],
-	[24.0, Color(0.45, 0.55, 0.95), 0.10, Color(0.02, 0.03, 0.09), Color(0.05, 0.07, 0.16), 0.25],
+	[20.5, Color(0.5, 0.55, 0.95), 0.12, Color(0.05, 0.05, 0.16), Color(0.22, 0.14, 0.28), 0.16],
+	[24.0, Color(0.45, 0.55, 0.95), 0.10, Color(0.02, 0.03, 0.09), Color(0.05, 0.07, 0.16), 0.12],
 ]
 
 func _ready() -> void:
@@ -39,8 +39,8 @@ func _ready() -> void:
 	env.glow_intensity = 0.5
 	env.glow_hdr_threshold = 1.3
 	env.fog_enabled = true
-	env.fog_density = 0.0016
-	env.fog_aerial_perspective = 0.6
+	env.fog_density = 0.00035
+	env.fog_aerial_perspective = 0.3
 	var we := WorldEnvironment.new()
 	we.name = "WorldEnvironment"
 	we.environment = env

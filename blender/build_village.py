@@ -53,9 +53,25 @@ for bi in boat_info:
 sea = bl_io.to_object(E.sea_preview(L), bl_io.collection("PREVIEW_ONLY"), name="LT_SEA_PREVIEW")
 
 if EXPORT:
+    # terrain height as a small texture: the Godot sea shader reads water depth
+    # from it (works in every renderer; no depth-buffer tricks needed)
+    import numpy as np
+    lo, hi = -3.0, 1.0
+    Hn = np.clip((ter.H - lo) / (hi - lo), 0, 1)[::-1]            # image rows bottom-up
+    # written with a tiny PNG encoder so no colour management touches the values
+    import zlib, struct
+    g8 = (Hn * 255.0 + 0.5).astype(np.uint8)[::-1]                # PNG rows run top-down: north first
+    raw = b"".join(b"\x00" + g8[r].tobytes() for r in range(g8.shape[0]))
+    def chunk(tag, data):
+        return struct.pack(">I", len(data)) + tag + data + struct.pack(">I", zlib.crc32(tag + data) & 0xFFFFFFFF)
+    with open(os.path.join(env_dir, "seabed_height.png"), "wb") as f:
+        f.write(b"\x89PNG\r\n\x1a\n" + chunk(b"IHDR", struct.pack(">IIBBBBB", g8.shape[1], g8.shape[0], 8, 0, 0, 0, 0))
+                + chunk(b"IDAT", zlib.compress(raw, 9)) + chunk(b"IEND", b""))
+    info_height = dict(file="seabed_height.png", x=[float(ter.xs[0]), float(ter.xs[-1])], z=[float(ter.zs[0]), float(ter.zs[-1])], h=[lo, hi])
     for name, objs in groups.items():
         bl_io.export_glb(os.path.join(env_dir, name + ".glb"), objs)
     info["boats"] = boat_info
+    info["seabed_height"] = info_height
     info["schema"] = "living-tides.environment"; info["version"] = 1
     info["axes"] = "+x east, +y up, +z south (same as village_layout.json)"
     with open(os.path.join(ROOT, "data/environment.json"), "w") as f:

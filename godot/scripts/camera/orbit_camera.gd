@@ -5,7 +5,7 @@ extends Node3D
 var village = null
 var cam: Camera3D
 var target := Vector3(-4, 6, 2)
-var yaw := deg_to_rad(-38.0)
+var yaw := deg_to_rad(40.0)             # default view from the south-east (WORLD_LAYOUT.md)
 var pitch := deg_to_rad(-32.0)
 var dist := 95.0
 var follow = null

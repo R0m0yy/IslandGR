@@ -62,6 +62,11 @@ func _build_environment() -> void:
 	sea.mesh = pm
 	var sm := ShaderMaterial.new()
 	sm.shader = OCEAN_SHADER
+	var hm: Dictionary = VillageDB.environment.get("seabed_height", {})
+	if not hm.is_empty() and ResourceLoader.exists("res://assets/env/" + hm["file"]):
+		sm.set_shader_parameter("height_tex", load("res://assets/env/" + hm["file"]))
+		sm.set_shader_parameter("height_rect", Vector4(hm["x"][0], hm["z"][0], hm["x"][1], hm["z"][1]))
+		sm.set_shader_parameter("height_range", Vector2(hm["h"][0], hm["h"][1]))
 	sea.material_override = sm
 	sea.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	env.add_child(sea)
@@ -183,12 +188,19 @@ func _build_presentation() -> void:
 	add_child(hud)
 	hud.village = self
 
+func cut_sides() -> Array:
+	## Wall groups that face the camera and should fade.
+	if camera_rig == null:
+		return ["S", "E"]
+	var d: Vector3 = camera_rig.cam.global_position - camera_rig.target
+	return ["S" if d.z > 0.0 else "N", "E" if d.x > 0.0 else "W"]
+
 func toggle_cutaway(id: String = "") -> void:
 	if id != "" and buildings.has(id):
-		buildings[id].set_cutaway(not buildings[id].cutaway)
+		buildings[id].set_cutaway(not buildings[id].cutaway, cut_sides())
 		return
 	var any := false
 	for k in buildings:
 		any = any or buildings[k].cutaway
 	for k in buildings:
-		buildings[k].set_cutaway(not any)
+		buildings[k].set_cutaway(not any, cut_sides())

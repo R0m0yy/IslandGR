@@ -1,0 +1,9 @@
+session 3 environment check (2026-11-10/11)
+python (bpy venv): Python 3.11.18
+bpy / Blender: 4.5.15 LTS | cycles: True
+godot: 4.3.stable.official.77dcf97d8
+install route: uv venv -p python3.11 + 'uv pip install "bpy>=4.2,<5"' (PyPI reachable); Godot from github.com/godotengine/godot releases (reachable); download.blender.org BLOCKED (403)
+cpu cores: 4  ram: 15 GB  gpu: none
+GL for captures: OpenGL API 4.5 (Core Profile) Mesa 25.2.8-0ubuntu0.24.04.4 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 20.1.2, 256 bits)
+standalone Blender application binary: NOT available (bpy module only)
+Vulkan / Forward+ renderer: NOT available (no GPU, no lavapipe)

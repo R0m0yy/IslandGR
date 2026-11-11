@@ -31,6 +31,7 @@
   "left": "W"
  },
  "features": [
+  "entrance porch",
   "bell-cot",
   "lean-to store (E)"
  ],
@@ -417,5 +418,5 @@
   "entry_matches": "door_P08"
  },
  "unplaced": [],
- "tris": 17418
+ "tris": 18038
 }

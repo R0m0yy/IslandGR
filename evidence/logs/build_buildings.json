@@ -1,6 +1,6 @@
 {
  "blender": "4.5.15 LTS",
- "seconds": 3.8,
+ "seconds": 4.0,
  "buildings": [
   {
    "id": "P01",
@@ -29,12 +29,13 @@
   {
    "id": "P03",
    "family": "long_shed",
-   "tris": 16338,
+   "tris": 17054,
    "anchors": 7,
    "stubs": 7,
    "unplaced": 0,
-   "glb_bytes": 1201220,
+   "glb_bytes": 1251904,
    "features": [
+    "entrance porch",
     "lean-to store (E)"
    ]
   },
@@ -57,7 +58,7 @@
    "anchors": 12,
    "stubs": 12,
    "unplaced": 0,
-   "glb_bytes": 1344076,
+   "glb_bytes": 1344072,
    "features": [
     "awning + sign",
     "lean-to store (N)"
@@ -78,22 +79,25 @@
   {
    "id": "P07",
    "family": "long_shed",
-   "tris": 9276,
+   "tris": 9896,
    "anchors": 7,
    "stubs": 7,
    "unplaced": 0,
-   "glb_bytes": 696600,
-   "features": []
+   "glb_bytes": 739512,
+   "features": [
+    "entrance porch"
+   ]
   },
   {
    "id": "P08",
    "family": "civic",
-   "tris": 17418,
+   "tris": 18038,
    "anchors": 10,
    "stubs": 10,
    "unplaced": 0,
-   "glb_bytes": 1306104,
+   "glb_bytes": 1349012,
    "features": [
+    "entrance porch",
     "bell-cot",
     "lean-to store (E)"
    ]
@@ -101,12 +105,13 @@
   {
    "id": "P09",
    "family": "civic",
-   "tris": 11362,
+   "tris": 12090,
    "anchors": 8,
    "stubs": 8,
    "unplaced": 0,
-   "glb_bytes": 852624,
+   "glb_bytes": 903240,
    "features": [
+    "entrance porch",
     "bell-cot",
     "lean-to store (E)"
    ]
@@ -209,7 +214,7 @@
    "anchors": 18,
    "stubs": 18,
    "unplaced": 0,
-   "glb_bytes": 1076764,
+   "glb_bytes": 1076760,
    "features": [
     "front balcony under the gable"
    ]
@@ -259,7 +264,7 @@
    "anchors": 18,
    "stubs": 18,
    "unplaced": 0,
-   "glb_bytes": 1234668,
+   "glb_bytes": 1234672,
    "features": [
     "front balcony under the gable"
    ]
@@ -380,7 +385,7 @@
    ]
   }
  ],
- "total_tris": 359534,
+ "total_tris": 362218,
  "anchors": 367,
  "stubs": 368,
  "unplaced": 1

@@ -29,7 +29,9 @@
   "back": "W",
   "left": "S"
  },
- "features": [],
+ "features": [
+  "entrance porch"
+ ],
  "door": {
   "node": "DOOR_main",
   "pivot": [
@@ -279,5 +281,5 @@
   "entry_matches": "door_P07"
  },
  "unplaced": [],
- "tris": 9276
+ "tris": 9896
 }

@@ -45,3 +45,48 @@
 2. Revise layout for owner feedback; break the terraces and rows; re-run tests.
 3. Model in Blender in this order: cliffs and The Gate → Harbour Stair and quay → hero buildings H02, P01, H11 with interiors → the rest by family.
 4. Godot spike: navmesh bake vs walk graph; placeholder character on stairs and through a door.
+
+
+## Session 3 (2026-11-10 / 11) — development continues in Claude
+**Owner decisions received:** keep developing here; preserve everything; Blender 4.x + Godot 4.x; five prototypes; one functional house; autonomous villagers with temporary characters; label unexecuted results UNVERIFIED; ZIP after each milestone.
+
+**Environment:** installs now work. Blender 4.5.15 LTS (`bpy` wheel, Python 3.11) and Godot 4.3-stable (headless; software OpenGL under Xvfb for captures) both run. So this session's Blender and Godot results are executed, with the limits listed in `PROOF_OF_WORK.md`.
+
+**Completed and executed**
+- Uploaded project imported verbatim as the first commit; layout JSON untouched; session-2 layout test still passes.
+- Blender pipeline (`blender/livingtides/`): geometry kit, parts (walls with real openings, plank cladding, corrugated tin and tile roofs, windows, shutters, doors, balconies, stairs, awnings, pergola…), furniture for all 28 anchor types, parametric building generator for five families, environment generators.
+- All 30 buildings built from their layout records → 30 GLB prefabs + anchor sidecars (`data/buildings/`). 367 of 368 anchor stubs placed.
+- Environment: terrain with irregular cliff lips and ledges over the surveyed terraces, The Gate, 8 stairs, ladder, rope bridge, decks, paving, 6 boats, 16 lamps, well, cistern, lookout, beacon, great tree, vegetation.
+- Cycles renders of the village (8 views) and the five prototypes (exterior + cutaway).
+- Godot 4 project: data autoloads, typed walk graph + A*, Building prefab wrapper, interactables (door, bed, stove, fishing spot, generic stations), villager (needs, utility brain, reusable state machine, placeholder animated rig), fixed-step simulation, day/night, sea shader, orbit camera, HUD, cutaway.
+- Tests: pipeline 16/16, Godot 31/31 (5 simulated days, 42 placeholder villagers), layout 0 failures. Failing first runs are recorded in `PROOF_OF_WORK.md`.
+- In-engine captures (software GL): 9 frames.
+- Documents: this file, PROOF_OF_WORK, README, BLENDER_PIPELINE, KNOWN_ISSUES, ASSET_MANIFEST (re-keyed to the 30 IDs), new ANIMATION_MATRIX, INTERACTION_MATRIX, `godot/README.md`.
+
+**Decisions taken without the owner (please confirm or reverse)**
+1. Simulation written in GDScript inside Godot rather than the TypeScript core in `ARCHITECTURE.md`. It keeps the rule that logic runs without graphics (the tests prove it), but it is not the two-program design.
+2. Buildings follow the art bible literally: painted planks, coloured tin roofs, vertex colour, no textures, nothing bevelled.
+3. Stilt houses got low gable roofs (the mono-pitch attempt was broken).
+4. Placeholder population: two adults per household, jobs dealt at random (`data/dev_population.json`). Not part of the layout.
+5. A minimal fish market (working fishers land every second fish at P01; households with an empty pantry buy) was added to stop starvation. It is a stand-in for the economy module.
+6. Anchor positions are stored in sidecars, not written back into `village_layout.json`.
+
+**Not done**
+- No hand modelling or sculpting; no caves or undercuts; terraces and building rows still follow the session-2 plan.
+- No collision, physics or navmesh; no boats under way; no weather, relationships, family, save/load, audio.
+- No GPU run, no interactive session, no export, no performance numbers.
+- ART_BIBLE §2 still describes the v0.1 crescent.
+
+**Blocked on the owner**
+1. Open `godot/project.godot` in Godot 4.3+ on a real machine and report what you see (first Forward+ run, input, frame rate).
+2. Review the five prototypes and the overall look (`evidence/renders_buildings/`, `evidence/renders_village_v03/`).
+3. Layout review carried over from session 2 (rows, terrace shapes, The Gate position, crown access).
+4. Confirm or reverse the six decisions above.
+
+**Exact next steps**
+1. Owner feedback on look → per-family art passes (silhouette variety, a sixth "civic" language, props at doors).
+2. Layout v0.3 in `village/layout.py`: rotate and stagger houses, uneven terrace heights; rebuild everything from data (one command each).
+3. Villager tests A-G from `VILLAGER_AI.md`; thirst/hygiene/social needs; shop hours; work output.
+4. Boats: boarding at `board` links, sea lanes, fishing grounds.
+5. Collision + navmesh spike in Godot; compare with the walk graph.
+6. Save/load of world state.
