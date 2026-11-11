@@ -1,0 +1,5752 @@
+{
+ "schema": "living-tides.layout",
+ "version": "0.2",
+ "units": "m",
+ "axes": "+x east, +y up, +z south",
+ "status": "TEMPORARY MASSING LAYOUT - awaiting owner approval",
+ "land": [
+  {
+   "id": "SP",
+   "name": "Breakwater spit",
+   "h": 0.8,
+   "poly": [
+    [
+     -5,
+     24
+    ],
+    [
+     13,
+     24.5
+    ],
+    [
+     15,
+     27
+    ],
+    [
+     -5,
+     28
+    ]
+   ]
+  },
+  {
+   "id": "T1",
+   "name": "Quay",
+   "h": 1.5,
+   "poly": [
+    [
+     -22,
+     28
+    ],
+    [
+     -5,
+     28
+    ],
+    [
+     -5,
+     5
+    ],
+    [
+     30,
+     5
+    ],
+    [
+     30,
+     -6
+    ],
+    [
+     -22,
+     -6
+    ]
+   ]
+  },
+  {
+   "id": "T2",
+   "name": "Plaza terrace",
+   "h": 5.5,
+   "poly": [
+    [
+     -30,
+     21
+    ],
+    [
+     -14,
+     21
+    ],
+    [
+     -14,
+     -5
+    ],
+    [
+     19,
+     -5
+    ],
+    [
+     19,
+     -13.5
+    ],
+    [
+     -30,
+     -13.5
+    ]
+   ]
+  },
+  {
+   "id": "HD",
+   "name": "Lookout headland",
+   "h": 9.0,
+   "poly": [
+    [
+     30,
+     -15
+    ],
+    [
+     40,
+     -13
+    ],
+    [
+     42,
+     0
+    ],
+    [
+     38,
+     4.5
+    ],
+    [
+     31,
+     3.5
+    ],
+    [
+     30,
+     -5
+    ]
+   ]
+  },
+  {
+   "id": "ST",
+   "name": "Beacon stack",
+   "h": 9.0,
+   "poly": [
+    [
+     31.5,
+     13.5
+    ],
+    [
+     38.5,
+     13
+    ],
+    [
+     39.5,
+     19
+    ],
+    [
+     35.5,
+     21.5
+    ],
+    [
+     31,
+     19.5
+    ]
+   ]
+  },
+  {
+   "id": "T3",
+   "name": "Upper homes",
+   "h": 10.0,
+   "poly": [
+    [
+     -36,
+     15
+    ],
+    [
+     -23,
+     15
+    ],
+    [
+     -23,
+     -12.5
+    ],
+    [
+     13,
+     -12.5
+    ],
+    [
+     13,
+     -21
+    ],
+    [
+     -36,
+     -21
+    ]
+   ]
+  },
+  {
+   "id": "T4",
+   "name": "Civic shelf",
+   "h": 14.5,
+   "poly": [
+    [
+     -40,
+     9
+    ],
+    [
+     -31,
+     9
+    ],
+    [
+     -31,
+     -19.5
+    ],
+    [
+     7,
+     -19.5
+    ],
+    [
+     7,
+     -28
+    ],
+    [
+     -40,
+     -28
+    ]
+   ]
+  },
+  {
+   "id": "T5",
+   "name": "Crown",
+   "h": 19.0,
+   "poly": [
+    [
+     -43,
+     -9
+    ],
+    [
+     -36,
+     -9
+    ],
+    [
+     -36,
+     -26.5
+    ],
+    [
+     -11,
+     -26.5
+    ],
+    [
+     -11,
+     -34
+    ],
+    [
+     -43,
+     -34
+    ]
+   ]
+  }
+ ],
+ "arch": {
+  "name": "The Gate (sea arch)",
+  "x0": 32,
+  "x1": 38,
+  "z0": 2.5,
+  "z1": 14.5,
+  "y0": 5.8,
+  "y1": 9.3
+ },
+ "decks": [
+  {
+   "id": "pier_A",
+   "y": 1.3,
+   "rect": [
+    4,
+    6.5,
+    5,
+    14
+   ]
+  },
+  {
+   "id": "pier_B",
+   "y": 1.3,
+   "rect": [
+    13,
+    15.5,
+    5,
+    13
+   ]
+  },
+  {
+   "id": "boardwalk",
+   "y": 1.5,
+   "rect": [
+    -5,
+    10,
+    19.3,
+    21.5
+   ]
+  },
+  {
+   "id": "stilt_deck",
+   "y": 1.5,
+   "rect": [
+    -4.4,
+    9.8,
+    14.9,
+    19.3
+   ]
+  },
+  {
+   "id": "slipway",
+   "y": 0.6,
+   "rect": [
+    -5,
+    0,
+    6.5,
+    10.5
+   ]
+  }
+ ],
+ "buildings": [
+  {
+   "id": "P01",
+   "name": "Fish market",
+   "kind": "market",
+   "level": "T1",
+   "cx": 9,
+   "cz": -1,
+   "front": 10,
+   "depth": 6,
+   "storeys": 1,
+   "facing": "S",
+   "wall": "cream",
+   "roof": "coral",
+   "y": 1.5,
+   "footprint": [
+    4.0,
+    14.0,
+    -4.0,
+    2.0
+   ],
+   "door": [
+    9,
+    1.5,
+    2.9
+   ],
+   "interior": {
+    "status": "NOT MODELLED",
+    "cutaway": "walls facing camera fade; roof lifts",
+    "rooms": [
+     "hall",
+     "cold_store"
+    ],
+    "anchors": [
+     {
+      "type": "stall",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "stall",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "stall",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "scales",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "ice_box",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "counter",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "lamp",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     }
+    ]
+   },
+   "household": null,
+   "business": {
+    "id": "BIZ_P01",
+    "owner": null,
+    "jobs": [
+     {
+      "role": "fishmonger",
+      "holder": null
+     },
+     {
+      "role": "fishmonger",
+      "holder": null
+     },
+     {
+      "role": "market_clerk",
+      "holder": null
+     }
+    ],
+    "hours": [
+     6,
+     18
+    ],
+    "inventory": {},
+    "till": 0
+   },
+   "state": {
+    "condition": 1.0,
+    "lights_on": false,
+    "door_open": false
+   },
+   "access_node": "q_n_mkt"
+  },
+  {
+   "id": "P02",
+   "name": "Boat yard",
+   "kind": "boatyard",
+   "level": "T1",
+   "cx": -10.5,
+   "cz": 8.5,
+   "front": 7,
+   "depth": 5,
+   "storeys": 1,
+   "facing": "E",
+   "wall": "dwoodl",
+   "roof": "rust",
+   "y": 1.5,
+   "footprint": [
+    -13.0,
+    -8.0,
+    5.0,
+    12.0
+   ],
+   "door": [
+    -7.1,
+    1.5,
+    8.5
+   ],
+   "interior": {
+    "status": "NOT MODELLED",
+    "cutaway": "walls facing camera fade; roof lifts",
+    "rooms": [
+     "workshop",
+     "slip"
+    ],
+    "anchors": [
+     {
+      "type": "door",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "workbench",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "saw_horse",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "tool_rack",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "timber_stack",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "slip_cradle",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "lamp",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     }
+    ]
+   },
+   "household": null,
+   "business": {
+    "id": "BIZ_P02",
+    "owner": null,
+    "jobs": [
+     {
+      "role": "boatwright",
+      "holder": null
+     },
+     {
+      "role": "apprentice",
+      "holder": null
+     }
+    ],
+    "hours": [
+     6,
+     18
+    ],
+    "inventory": {},
+    "till": 0
+   },
+   "state": {
+    "condition": 1.0,
+    "lights_on": false,
+    "door_open": false
+   },
+   "access_node": "q_w_yard"
+  },
+  {
+   "id": "P03",
+   "name": "Warehouse",
+   "kind": "warehouse",
+   "level": "T1",
+   "cx": 19.5,
+   "cz": -2,
+   "front": 7,
+   "depth": 5.5,
+   "storeys": 1,
+   "facing": "S",
+   "wall": "stonew",
+   "roof": "deep",
+   "y": 1.5,
+   "footprint": [
+    16.0,
+    23.0,
+    -4.75,
+    0.75
+   ],
+   "door": [
+    19.5,
+    1.5,
+    1.65
+   ],
+   "interior": {
+    "status": "NOT MODELLED",
+    "cutaway": "walls facing camera fade; roof lifts",
+    "rooms": [
+     "store_floor"
+    ],
+    "anchors": [
+     {
+      "type": "door",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "shelf",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "shelf",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "shelf",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "loading_point",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "ledger_desk",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "lamp",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     }
+    ]
+   },
+   "household": null,
+   "business": {
+    "id": "BIZ_P03",
+    "owner": null,
+    "jobs": [
+     {
+      "role": "storekeeper",
+      "holder": null
+     }
+    ],
+    "hours": [
+     6,
+     18
+    ],
+    "inventory": {},
+    "till": 0
+   },
+   "state": {
+    "condition": 1.0,
+    "lights_on": false,
+    "door_open": false
+   },
+   "access_node": "q_n_wh"
+  },
+  {
+   "id": "P04",
+   "name": "Net loft",
+   "kind": "netloft",
+   "level": "T1",
+   "cx": -10.5,
+   "cz": 17.5,
+   "front": 5,
+   "depth": 5,
+   "storeys": 2,
+   "facing": "E",
+   "wall": "turq",
+   "roof": "red",
+   "y": 1.5,
+   "footprint": [
+    -13.0,
+    -8.0,
+    15.0,
+    20.0
+   ],
+   "door": [
+    -7.1,
+    1.5,
+    17.5
+   ],
+   "interior": {
+    "status": "NOT MODELLED",
+    "cutaway": "walls facing camera fade; roof lifts",
+    "rooms": [
+     "workroom",
+     "loft"
+    ],
+    "anchors": [
+     {
+      "type": "door",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "net_frame",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "net_frame",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "storage",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "lamp",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     }
+    ]
+   },
+   "household": null,
+   "business": {
+    "id": "BIZ_P04",
+    "owner": null,
+    "jobs": [
+     {
+      "role": "net_maker",
+      "holder": null
+     }
+    ],
+    "hours": [
+     6,
+     18
+    ],
+    "inventory": {},
+    "till": 0
+   },
+   "state": {
+    "condition": 1.0,
+    "lights_on": false,
+    "door_open": false
+   },
+   "access_node": "q_w_loft"
+  },
+  {
+   "id": "P05",
+   "name": "General store",
+   "kind": "store",
+   "level": "T2",
+   "cx": -19.5,
+   "cz": 3,
+   "front": 5.5,
+   "depth": 5,
+   "storeys": 2,
+   "facing": "E",
+   "wall": "ochre",
+   "roof": "blue",
+   "y": 5.5,
+   "footprint": [
+    -22.0,
+    -17.0,
+    0.25,
+    5.75
+   ],
+   "door": [
+    -16.1,
+    5.5,
+    3
+   ],
+   "interior": {
+    "status": "NOT MODELLED",
+    "cutaway": "walls facing camera fade; roof lifts",
+    "rooms": [
+     "shop",
+     "stockroom",
+     "flat_above"
+    ],
+    "anchors": [
+     {
+      "type": "door",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "counter",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "shelf",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "shelf",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "storage",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "lamp",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "bed",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "bed",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "stove",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "table",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "chair",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "chair",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     }
+    ]
+   },
+   "household": {
+    "id": "HH_P05",
+    "capacity": 2,
+    "shared_money": 0,
+    "pantry": {},
+    "members": []
+   },
+   "business": {
+    "id": "BIZ_P05",
+    "owner": null,
+    "jobs": [
+     {
+      "role": "shopkeeper",
+      "holder": null
+     },
+     {
+      "role": "shop_hand",
+      "holder": null
+     }
+    ],
+    "hours": [
+     6,
+     18
+    ],
+    "inventory": {},
+    "till": 0
+   },
+   "state": {
+    "condition": 1.0,
+    "lights_on": false,
+    "door_open": false
+   },
+   "access_node": "p_w_store"
+  },
+  {
+   "id": "P06",
+   "name": "Eatery",
+   "kind": "eatery",
+   "level": "T2",
+   "cx": -19.5,
+   "cz": 10.3,
+   "front": 4.6,
+   "depth": 5,
+   "storeys": 1,
+   "facing": "E",
+   "wall": "coral",
+   "roof": "turq",
+   "y": 5.5,
+   "footprint": [
+    -22.0,
+    -17.0,
+    8.0,
+    12.600000000000001
+   ],
+   "door": [
+    -16.1,
+    5.5,
+    10.3
+   ],
+   "interior": {
+    "status": "NOT MODELLED",
+    "cutaway": "walls facing camera fade; roof lifts",
+    "rooms": [
+     "kitchen",
+     "dining_terrace"
+    ],
+    "anchors": [
+     {
+      "type": "door",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "stove",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "stove",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "sink",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "counter",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "table",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "table",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "table",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "chair",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "chair",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "chair",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "chair",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "chair",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "chair",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "lamp",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     }
+    ]
+   },
+   "household": null,
+   "business": {
+    "id": "BIZ_P06",
+    "owner": null,
+    "jobs": [
+     {
+      "role": "cook",
+      "holder": null
+     },
+     {
+      "role": "server",
+      "holder": null
+     }
+    ],
+    "hours": [
+     6,
+     18
+    ],
+    "inventory": {},
+    "till": 0
+   },
+   "state": {
+    "condition": 1.0,
+    "lights_on": false,
+    "door_open": false
+   },
+   "access_node": "p_w_eat"
+  },
+  {
+   "id": "P07",
+   "name": "Carpenter",
+   "kind": "carpenter",
+   "level": "T2",
+   "cx": -19.5,
+   "cz": 17,
+   "front": 5.5,
+   "depth": 5,
+   "storeys": 1,
+   "facing": "E",
+   "wall": "lwoodw",
+   "roof": "red",
+   "y": 5.5,
+   "footprint": [
+    -22.0,
+    -17.0,
+    14.25,
+    19.75
+   ],
+   "door": [
+    -16.1,
+    5.5,
+    17
+   ],
+   "interior": {
+    "status": "NOT MODELLED",
+    "cutaway": "walls facing camera fade; roof lifts",
+    "rooms": [
+     "workshop",
+     "timber_store"
+    ],
+    "anchors": [
+     {
+      "type": "door",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "workbench",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "workbench",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "saw_horse",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "tool_rack",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "timber_stack",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "lamp",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     }
+    ]
+   },
+   "household": null,
+   "business": {
+    "id": "BIZ_P07",
+    "owner": null,
+    "jobs": [
+     {
+      "role": "carpenter",
+      "holder": null
+     },
+     {
+      "role": "apprentice",
+      "holder": null
+     }
+    ],
+    "hours": [
+     6,
+     18
+    ],
+    "inventory": {},
+    "till": 0
+   },
+   "state": {
+    "condition": 1.0,
+    "lights_on": false,
+    "door_open": false
+   },
+   "access_node": "p_w_carp"
+  },
+  {
+   "id": "P08",
+   "name": "Community hall",
+   "kind": "hall",
+   "level": "T4",
+   "cx": -21,
+   "cz": -24,
+   "front": 8.5,
+   "depth": 4.5,
+   "storeys": 2,
+   "facing": "S",
+   "wall": "turq",
+   "roof": "cream",
+   "y": 14.5,
+   "footprint": [
+    -25.25,
+    -16.75,
+    -26.25,
+    -21.75
+   ],
+   "door": [
+    -21,
+    14.5,
+    -20.85
+   ],
+   "interior": {
+    "status": "NOT MODELLED",
+    "cutaway": "walls facing camera fade; roof lifts",
+    "rooms": [
+     "main_hall",
+     "kitchen"
+    ],
+    "anchors": [
+     {
+      "type": "door",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "bench",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "bench",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "bench",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "bench",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "stage",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "stove",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "table",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "lamp",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "lamp",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     }
+    ]
+   },
+   "household": null,
+   "business": {
+    "id": "BIZ_P08",
+    "owner": null,
+    "jobs": [
+     {
+      "role": "caretaker",
+      "holder": null
+     }
+    ],
+    "hours": [
+     6,
+     18
+    ],
+    "inventory": {},
+    "till": 0
+   },
+   "state": {
+    "condition": 1.0,
+    "lights_on": false,
+    "door_open": false
+   },
+   "access_node": "c_hall"
+  },
+  {
+   "id": "P09",
+   "name": "School",
+   "kind": "school",
+   "level": "T4",
+   "cx": -10,
+   "cz": -24,
+   "front": 6.5,
+   "depth": 4.5,
+   "storeys": 1,
+   "facing": "S",
+   "wall": "ochre",
+   "roof": "red",
+   "y": 14.5,
+   "footprint": [
+    -13.25,
+    -6.75,
+    -26.25,
+    -21.75
+   ],
+   "door": [
+    -10,
+    14.5,
+    -20.85
+   ],
+   "interior": {
+    "status": "NOT MODELLED",
+    "cutaway": "walls facing camera fade; roof lifts",
+    "rooms": [
+     "classroom"
+    ],
+    "anchors": [
+     {
+      "type": "door",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "desk",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "desk",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "desk",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "desk",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "teacher_desk",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "board",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "lamp",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     }
+    ]
+   },
+   "household": null,
+   "business": {
+    "id": "BIZ_P09",
+    "owner": null,
+    "jobs": [
+     {
+      "role": "teacher",
+      "holder": null
+     }
+    ],
+    "hours": [
+     6,
+     18
+    ],
+    "inventory": {},
+    "till": 0
+   },
+   "state": {
+    "condition": 1.0,
+    "lights_on": false,
+    "door_open": false
+   },
+   "access_node": "c_school"
+  },
+  {
+   "id": "P10",
+   "name": "First-aid house",
+   "kind": "clinic",
+   "level": "T4",
+   "cx": -1.5,
+   "cz": -24,
+   "front": 4.8,
+   "depth": 4.5,
+   "storeys": 1,
+   "facing": "S",
+   "wall": "white",
+   "roof": "red",
+   "y": 14.5,
+   "footprint": [
+    -3.9,
+    0.8999999999999999,
+    -26.25,
+    -21.75
+   ],
+   "door": [
+    -1.5,
+    14.5,
+    -20.85
+   ],
+   "interior": {
+    "status": "NOT MODELLED",
+    "cutaway": "walls facing camera fade; roof lifts",
+    "rooms": [
+     "treatment_room",
+     "ward"
+    ],
+    "anchors": [
+     {
+      "type": "door",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "bed",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "bed",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "cabinet",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "desk",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "chair",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "lamp",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     }
+    ]
+   },
+   "household": null,
+   "business": {
+    "id": "BIZ_P10",
+    "owner": null,
+    "jobs": [
+     {
+      "role": "healer",
+      "holder": null
+     }
+    ],
+    "hours": [
+     6,
+     18
+    ],
+    "inventory": {},
+    "till": 0
+   },
+   "state": {
+    "condition": 1.0,
+    "lights_on": false,
+    "door_open": false
+   },
+   "access_node": "c_clinic"
+  },
+  {
+   "id": "H01",
+   "name": "Quay cottage",
+   "kind": "home",
+   "level": "T1",
+   "cx": -10.5,
+   "cz": 24,
+   "front": 4.5,
+   "depth": 4.5,
+   "storeys": 1,
+   "facing": "E",
+   "wall": "blue",
+   "roof": "ochre",
+   "y": 1.5,
+   "footprint": [
+    -12.75,
+    -8.25,
+    21.75,
+    26.25
+   ],
+   "door": [
+    -7.35,
+    1.5,
+    24
+   ],
+   "interior": {
+    "status": "NOT MODELLED",
+    "cutaway": "walls facing camera fade; roof lifts",
+    "rooms": [
+     "living_kitchen",
+     "bedroom"
+    ],
+    "anchors": [
+     {
+      "type": "door",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "bed",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "bed",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "stove",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "sink",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "table",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "chair",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "chair",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "cabinet",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "storage",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "lamp",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "lamp",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "washstand",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     }
+    ]
+   },
+   "household": {
+    "id": "HH_H01",
+    "capacity": 3,
+    "shared_money": 0,
+    "pantry": {},
+    "members": []
+   },
+   "business": null,
+   "state": {
+    "condition": 1.0,
+    "lights_on": false,
+    "door_open": false
+   },
+   "access_node": "q_w_h01"
+  },
+  {
+   "id": "H02",
+   "name": "Harbour office house",
+   "kind": "home",
+   "level": "T1",
+   "cx": -0.5,
+   "cz": -2.2,
+   "front": 5,
+   "depth": 4.5,
+   "storeys": 2,
+   "facing": "S",
+   "wall": "white",
+   "roof": "deep",
+   "y": 1.5,
+   "footprint": [
+    -3.0,
+    2.0,
+    -4.45,
+    0.04999999999999982
+   ],
+   "door": [
+    -0.5,
+    1.5,
+    0.9499999999999998
+   ],
+   "interior": {
+    "status": "NOT MODELLED",
+    "cutaway": "walls facing camera fade; roof lifts",
+    "rooms": [
+     "living_kitchen",
+     "bedroom",
+     "bedroom_upper",
+     "balcony"
+    ],
+    "anchors": [
+     {
+      "type": "door",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "bed",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "bed",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "stove",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "sink",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "table",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "chair",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "chair",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "cabinet",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "storage",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "lamp",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "lamp",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "washstand",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "bed",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "bed",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "chair",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "lamp",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "stairs_interior",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     }
+    ]
+   },
+   "household": {
+    "id": "HH_H02",
+    "capacity": 5,
+    "shared_money": 0,
+    "pantry": {},
+    "members": []
+   },
+   "business": null,
+   "state": {
+    "condition": 1.0,
+    "lights_on": false,
+    "door_open": false
+   },
+   "access_node": "q_n_office"
+  },
+  {
+   "id": "H03",
+   "name": "Stilt house west",
+   "kind": "stilt_home",
+   "level": "DECK",
+   "cx": -2,
+   "cz": 17.2,
+   "front": 4,
+   "depth": 4,
+   "storeys": 1,
+   "facing": "S",
+   "wall": "coral",
+   "roof": "blue",
+   "y": 1.5,
+   "footprint": [
+    -4.0,
+    0.0,
+    15.2,
+    19.2
+   ],
+   "door": [
+    -2,
+    1.5,
+    20.099999999999998
+   ],
+   "interior": {
+    "status": "NOT MODELLED",
+    "cutaway": "walls facing camera fade; roof lifts",
+    "rooms": [
+     "living_kitchen",
+     "bedroom",
+     "net_porch"
+    ],
+    "anchors": [
+     {
+      "type": "door",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "bed",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "bed",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "stove",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "sink",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "table",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "chair",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "chair",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "cabinet",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "storage",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "lamp",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "lamp",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "washstand",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "net_rack",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     }
+    ]
+   },
+   "household": {
+    "id": "HH_H03",
+    "capacity": 3,
+    "shared_money": 0,
+    "pantry": {},
+    "members": []
+   },
+   "business": null,
+   "state": {
+    "condition": 1.0,
+    "lights_on": false,
+    "door_open": false
+   },
+   "access_node": "bw_1"
+  },
+  {
+   "id": "H04",
+   "name": "Stilt house middle",
+   "kind": "stilt_home",
+   "level": "DECK",
+   "cx": 2.7,
+   "cz": 17.2,
+   "front": 4,
+   "depth": 4,
+   "storeys": 1,
+   "facing": "S",
+   "wall": "ochre",
+   "roof": "turq",
+   "y": 1.5,
+   "footprint": [
+    0.7000000000000002,
+    4.7,
+    15.2,
+    19.2
+   ],
+   "door": [
+    2.7,
+    1.5,
+    20.099999999999998
+   ],
+   "interior": {
+    "status": "NOT MODELLED",
+    "cutaway": "walls facing camera fade; roof lifts",
+    "rooms": [
+     "living_kitchen",
+     "bedroom",
+     "net_porch"
+    ],
+    "anchors": [
+     {
+      "type": "door",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "bed",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "bed",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "stove",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "sink",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "table",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "chair",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "chair",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "cabinet",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "storage",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "lamp",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "lamp",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "washstand",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "net_rack",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     }
+    ]
+   },
+   "household": {
+    "id": "HH_H04",
+    "capacity": 3,
+    "shared_money": 0,
+    "pantry": {},
+    "members": []
+   },
+   "business": null,
+   "state": {
+    "condition": 1.0,
+    "lights_on": false,
+    "door_open": false
+   },
+   "access_node": "bw_2"
+  },
+  {
+   "id": "H05",
+   "name": "Stilt house east",
+   "kind": "stilt_home",
+   "level": "DECK",
+   "cx": 7.4,
+   "cz": 17.2,
+   "front": 4,
+   "depth": 4,
+   "storeys": 1,
+   "facing": "S",
+   "wall": "turq",
+   "roof": "red",
+   "y": 1.5,
+   "footprint": [
+    5.4,
+    9.4,
+    15.2,
+    19.2
+   ],
+   "door": [
+    7.4,
+    1.5,
+    20.099999999999998
+   ],
+   "interior": {
+    "status": "NOT MODELLED",
+    "cutaway": "walls facing camera fade; roof lifts",
+    "rooms": [
+     "living_kitchen",
+     "bedroom",
+     "net_porch"
+    ],
+    "anchors": [
+     {
+      "type": "door",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "bed",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "bed",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "stove",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "sink",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "table",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "chair",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "chair",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "cabinet",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "storage",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "lamp",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "lamp",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "washstand",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "net_rack",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     }
+    ]
+   },
+   "household": {
+    "id": "HH_H05",
+    "capacity": 3,
+    "shared_money": 0,
+    "pantry": {},
+    "members": []
+   },
+   "business": null,
+   "state": {
+    "condition": 1.0,
+    "lights_on": false,
+    "door_open": false
+   },
+   "access_node": "bw_3"
+  },
+  {
+   "id": "H06",
+   "name": "Terrace house 1",
+   "kind": "home",
+   "level": "T2",
+   "cx": -5.5,
+   "cz": -10.4,
+   "front": 4.6,
+   "depth": 4,
+   "storeys": 1,
+   "facing": "S",
+   "wall": "plum",
+   "roof": "ochre",
+   "y": 5.5,
+   "footprint": [
+    -7.8,
+    -3.2,
+    -12.4,
+    -8.4
+   ],
+   "door": [
+    -5.5,
+    5.5,
+    -7.5
+   ],
+   "interior": {
+    "status": "NOT MODELLED",
+    "cutaway": "walls facing camera fade; roof lifts",
+    "rooms": [
+     "living_kitchen",
+     "bedroom"
+    ],
+    "anchors": [
+     {
+      "type": "door",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "bed",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "bed",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "stove",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "sink",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "table",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "chair",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "chair",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "cabinet",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "storage",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "lamp",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "lamp",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "washstand",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     }
+    ]
+   },
+   "household": {
+    "id": "HH_H06",
+    "capacity": 3,
+    "shared_money": 0,
+    "pantry": {},
+    "members": []
+   },
+   "business": null,
+   "state": {
+    "condition": 1.0,
+    "lights_on": false,
+    "door_open": false
+   },
+   "access_node": "p_n_h06"
+  },
+  {
+   "id": "H07",
+   "name": "Terrace house 2",
+   "kind": "home",
+   "level": "T2",
+   "cx": 0.5,
+   "cz": -10.4,
+   "front": 4.2,
+   "depth": 4,
+   "storeys": 2,
+   "facing": "S",
+   "wall": "blue",
+   "roof": "coral",
+   "y": 5.5,
+   "footprint": [
+    -1.6,
+    2.6,
+    -12.4,
+    -8.4
+   ],
+   "door": [
+    0.5,
+    5.5,
+    -7.5
+   ],
+   "interior": {
+    "status": "NOT MODELLED",
+    "cutaway": "walls facing camera fade; roof lifts",
+    "rooms": [
+     "living_kitchen",
+     "bedroom",
+     "bedroom_upper",
+     "balcony"
+    ],
+    "anchors": [
+     {
+      "type": "door",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "bed",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "bed",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "stove",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "sink",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "table",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "chair",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "chair",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "cabinet",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "storage",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "lamp",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "lamp",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "washstand",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "bed",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "bed",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "chair",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "lamp",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "stairs_interior",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     }
+    ]
+   },
+   "household": {
+    "id": "HH_H07",
+    "capacity": 5,
+    "shared_money": 0,
+    "pantry": {},
+    "members": []
+   },
+   "business": null,
+   "state": {
+    "condition": 1.0,
+    "lights_on": false,
+    "door_open": false
+   },
+   "access_node": "p_n_h07"
+  },
+  {
+   "id": "H08",
+   "name": "Terrace house 3",
+   "kind": "home",
+   "level": "T2",
+   "cx": 6.5,
+   "cz": -10.4,
+   "front": 5,
+   "depth": 4,
+   "storeys": 1,
+   "facing": "S",
+   "wall": "ochre",
+   "roof": "deep",
+   "y": 5.5,
+   "footprint": [
+    4.0,
+    9.0,
+    -12.4,
+    -8.4
+   ],
+   "door": [
+    6.5,
+    5.5,
+    -7.5
+   ],
+   "interior": {
+    "status": "NOT MODELLED",
+    "cutaway": "walls facing camera fade; roof lifts",
+    "rooms": [
+     "living_kitchen",
+     "bedroom"
+    ],
+    "anchors": [
+     {
+      "type": "door",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "bed",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "bed",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "stove",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "sink",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "table",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "chair",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "chair",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "cabinet",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "storage",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "lamp",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "lamp",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "washstand",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     }
+    ]
+   },
+   "household": {
+    "id": "HH_H08",
+    "capacity": 3,
+    "shared_money": 0,
+    "pantry": {},
+    "members": []
+   },
+   "business": null,
+   "state": {
+    "condition": 1.0,
+    "lights_on": false,
+    "door_open": false
+   },
+   "access_node": "p_n_h08"
+  },
+  {
+   "id": "H09",
+   "name": "Terrace house 4",
+   "kind": "home",
+   "level": "T2",
+   "cx": 13,
+   "cz": -10.4,
+   "front": 4.6,
+   "depth": 4,
+   "storeys": 1,
+   "facing": "S",
+   "wall": "coral",
+   "roof": "turq",
+   "y": 5.5,
+   "footprint": [
+    10.7,
+    15.3,
+    -12.4,
+    -8.4
+   ],
+   "door": [
+    13,
+    5.5,
+    -7.5
+   ],
+   "interior": {
+    "status": "NOT MODELLED",
+    "cutaway": "walls facing camera fade; roof lifts",
+    "rooms": [
+     "living_kitchen",
+     "bedroom"
+    ],
+    "anchors": [
+     {
+      "type": "door",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "bed",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "bed",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "stove",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "sink",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "table",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "chair",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "chair",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "cabinet",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "storage",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "lamp",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "lamp",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "washstand",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     }
+    ]
+   },
+   "household": {
+    "id": "HH_H09",
+    "capacity": 3,
+    "shared_money": 0,
+    "pantry": {},
+    "members": []
+   },
+   "business": null,
+   "state": {
+    "condition": 1.0,
+    "lights_on": false,
+    "door_open": false
+   },
+   "access_node": "p_n_h09"
+  },
+  {
+   "id": "H10",
+   "name": "West lane house 1",
+   "kind": "home",
+   "level": "T3",
+   "cx": -27.5,
+   "cz": -3,
+   "front": 5,
+   "depth": 4.6,
+   "storeys": 1,
+   "facing": "E",
+   "wall": "turq",
+   "roof": "red",
+   "y": 10.0,
+   "footprint": [
+    -29.8,
+    -25.2,
+    -5.5,
+    -0.5
+   ],
+   "door": [
+    -24.3,
+    10.0,
+    -3
+   ],
+   "interior": {
+    "status": "NOT MODELLED",
+    "cutaway": "walls facing camera fade; roof lifts",
+    "rooms": [
+     "living_kitchen",
+     "bedroom"
+    ],
+    "anchors": [
+     {
+      "type": "door",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "bed",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "bed",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "stove",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "sink",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "table",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "chair",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "chair",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "cabinet",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "storage",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "lamp",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "lamp",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "washstand",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     }
+    ]
+   },
+   "household": {
+    "id": "HH_H10",
+    "capacity": 3,
+    "shared_money": 0,
+    "pantry": {},
+    "members": []
+   },
+   "business": null,
+   "state": {
+    "condition": 1.0,
+    "lights_on": false,
+    "door_open": false
+   },
+   "access_node": "r_w_h10"
+  },
+  {
+   "id": "H11",
+   "name": "West lane house 2",
+   "kind": "home",
+   "level": "T3",
+   "cx": -27.5,
+   "cz": 5.2,
+   "front": 4.4,
+   "depth": 4.6,
+   "storeys": 2,
+   "facing": "E",
+   "wall": "cream",
+   "roof": "blue",
+   "y": 10.0,
+   "footprint": [
+    -29.8,
+    -25.2,
+    3.0,
+    7.4
+   ],
+   "door": [
+    -24.3,
+    10.0,
+    5.2
+   ],
+   "interior": {
+    "status": "NOT MODELLED",
+    "cutaway": "walls facing camera fade; roof lifts",
+    "rooms": [
+     "living_kitchen",
+     "bedroom",
+     "bedroom_upper",
+     "balcony"
+    ],
+    "anchors": [
+     {
+      "type": "door",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "bed",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "bed",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "stove",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "sink",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "table",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "chair",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "chair",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "cabinet",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "storage",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "lamp",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "lamp",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "washstand",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "bed",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "bed",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "chair",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "lamp",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "stairs_interior",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     }
+    ]
+   },
+   "household": {
+    "id": "HH_H11",
+    "capacity": 5,
+    "shared_money": 0,
+    "pantry": {},
+    "members": []
+   },
+   "business": null,
+   "state": {
+    "condition": 1.0,
+    "lights_on": false,
+    "door_open": false
+   },
+   "access_node": "r_w_h11"
+  },
+  {
+   "id": "H12",
+   "name": "West lane house 3",
+   "kind": "home",
+   "level": "T3",
+   "cx": -27.5,
+   "cz": 11.5,
+   "front": 5,
+   "depth": 4.6,
+   "storeys": 1,
+   "facing": "E",
+   "wall": "red",
+   "roof": "ochre",
+   "y": 10.0,
+   "footprint": [
+    -29.8,
+    -25.2,
+    9.0,
+    14.0
+   ],
+   "door": [
+    -24.3,
+    10.0,
+    11.5
+   ],
+   "interior": {
+    "status": "NOT MODELLED",
+    "cutaway": "walls facing camera fade; roof lifts",
+    "rooms": [
+     "living_kitchen",
+     "bedroom"
+    ],
+    "anchors": [
+     {
+      "type": "door",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "bed",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "bed",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "stove",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "sink",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "table",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "chair",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "chair",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "cabinet",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "storage",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "lamp",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "lamp",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "washstand",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     }
+    ]
+   },
+   "household": {
+    "id": "HH_H12",
+    "capacity": 3,
+    "shared_money": 0,
+    "pantry": {},
+    "members": []
+   },
+   "business": null,
+   "state": {
+    "condition": 1.0,
+    "lights_on": false,
+    "door_open": false
+   },
+   "access_node": "r_w_h12"
+  },
+  {
+   "id": "H13",
+   "name": "High row house 1",
+   "kind": "home",
+   "level": "T3",
+   "cx": -17.5,
+   "cz": -17,
+   "front": 5,
+   "depth": 4,
+   "storeys": 1,
+   "facing": "S",
+   "wall": "ochre",
+   "roof": "plum",
+   "y": 10.0,
+   "footprint": [
+    -20.0,
+    -15.0,
+    -19.0,
+    -15.0
+   ],
+   "door": [
+    -17.5,
+    10.0,
+    -14.1
+   ],
+   "interior": {
+    "status": "NOT MODELLED",
+    "cutaway": "walls facing camera fade; roof lifts",
+    "rooms": [
+     "living_kitchen",
+     "bedroom"
+    ],
+    "anchors": [
+     {
+      "type": "door",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "bed",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "bed",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "stove",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "sink",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "table",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "chair",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "chair",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "cabinet",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "storage",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "lamp",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "lamp",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "washstand",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     }
+    ]
+   },
+   "household": {
+    "id": "HH_H13",
+    "capacity": 3,
+    "shared_money": 0,
+    "pantry": {},
+    "members": []
+   },
+   "business": null,
+   "state": {
+    "condition": 1.0,
+    "lights_on": false,
+    "door_open": false
+   },
+   "access_node": "r_n_h13"
+  },
+  {
+   "id": "H14",
+   "name": "High row house 2",
+   "kind": "home",
+   "level": "T3",
+   "cx": -11,
+   "cz": -17,
+   "front": 4.4,
+   "depth": 4,
+   "storeys": 2,
+   "facing": "S",
+   "wall": "coral",
+   "roof": "deep",
+   "y": 10.0,
+   "footprint": [
+    -13.2,
+    -8.8,
+    -19.0,
+    -15.0
+   ],
+   "door": [
+    -11,
+    10.0,
+    -14.1
+   ],
+   "interior": {
+    "status": "NOT MODELLED",
+    "cutaway": "walls facing camera fade; roof lifts",
+    "rooms": [
+     "living_kitchen",
+     "bedroom",
+     "bedroom_upper",
+     "balcony"
+    ],
+    "anchors": [
+     {
+      "type": "door",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "bed",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "bed",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "stove",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "sink",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "table",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "chair",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "chair",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "cabinet",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "storage",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "lamp",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "lamp",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "washstand",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "bed",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "bed",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "chair",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "lamp",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "stairs_interior",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     }
+    ]
+   },
+   "household": {
+    "id": "HH_H14",
+    "capacity": 5,
+    "shared_money": 0,
+    "pantry": {},
+    "members": []
+   },
+   "business": null,
+   "state": {
+    "condition": 1.0,
+    "lights_on": false,
+    "door_open": false
+   },
+   "access_node": "r_n_s2"
+  },
+  {
+   "id": "H15",
+   "name": "High row house 3",
+   "kind": "home",
+   "level": "T3",
+   "cx": -4.5,
+   "cz": -17,
+   "front": 5,
+   "depth": 4,
+   "storeys": 1,
+   "facing": "S",
+   "wall": "blue",
+   "roof": "red",
+   "y": 10.0,
+   "footprint": [
+    -7.0,
+    -2.0,
+    -19.0,
+    -15.0
+   ],
+   "door": [
+    -4.5,
+    10.0,
+    -14.1
+   ],
+   "interior": {
+    "status": "NOT MODELLED",
+    "cutaway": "walls facing camera fade; roof lifts",
+    "rooms": [
+     "living_kitchen",
+     "bedroom"
+    ],
+    "anchors": [
+     {
+      "type": "door",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "bed",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "bed",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "stove",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "sink",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "table",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "chair",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "chair",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "cabinet",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "storage",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "lamp",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "lamp",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "washstand",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     }
+    ]
+   },
+   "household": {
+    "id": "HH_H15",
+    "capacity": 3,
+    "shared_money": 0,
+    "pantry": {},
+    "members": []
+   },
+   "business": null,
+   "state": {
+    "condition": 1.0,
+    "lights_on": false,
+    "door_open": false
+   },
+   "access_node": "r_n_h15"
+  },
+  {
+   "id": "H16",
+   "name": "High row house 4",
+   "kind": "home",
+   "level": "T3",
+   "cx": 8.5,
+   "cz": -17,
+   "front": 4.6,
+   "depth": 4,
+   "storeys": 1,
+   "facing": "S",
+   "wall": "white",
+   "roof": "turq",
+   "y": 10.0,
+   "footprint": [
+    6.2,
+    10.8,
+    -19.0,
+    -15.0
+   ],
+   "door": [
+    8.5,
+    10.0,
+    -14.1
+   ],
+   "interior": {
+    "status": "NOT MODELLED",
+    "cutaway": "walls facing camera fade; roof lifts",
+    "rooms": [
+     "living_kitchen",
+     "bedroom"
+    ],
+    "anchors": [
+     {
+      "type": "door",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "bed",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "bed",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "stove",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "sink",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "table",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "chair",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "chair",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "cabinet",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "storage",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "lamp",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "lamp",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "washstand",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     }
+    ]
+   },
+   "household": {
+    "id": "HH_H16",
+    "capacity": 3,
+    "shared_money": 0,
+    "pantry": {},
+    "members": []
+   },
+   "business": null,
+   "state": {
+    "condition": 1.0,
+    "lights_on": false,
+    "door_open": false
+   },
+   "access_node": "r_n_h16"
+  },
+  {
+   "id": "H17",
+   "name": "Shelf house south",
+   "kind": "home",
+   "level": "T4",
+   "cx": -35.5,
+   "cz": 5,
+   "front": 4.2,
+   "depth": 4.5,
+   "storeys": 1,
+   "facing": "E",
+   "wall": "plum",
+   "roof": "coral",
+   "y": 14.5,
+   "footprint": [
+    -37.75,
+    -33.25,
+    2.9,
+    7.1
+   ],
+   "door": [
+    -32.35,
+    14.5,
+    5
+   ],
+   "interior": {
+    "status": "NOT MODELLED",
+    "cutaway": "walls facing camera fade; roof lifts",
+    "rooms": [
+     "living_kitchen",
+     "bedroom"
+    ],
+    "anchors": [
+     {
+      "type": "door",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "bed",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "bed",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "stove",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "sink",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "table",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "chair",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "chair",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "cabinet",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "storage",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "lamp",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "lamp",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "washstand",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     }
+    ]
+   },
+   "household": {
+    "id": "HH_H17",
+    "capacity": 3,
+    "shared_money": 0,
+    "pantry": {},
+    "members": []
+   },
+   "business": null,
+   "state": {
+    "condition": 1.0,
+    "lights_on": false,
+    "door_open": false
+   },
+   "access_node": "c_w_h17"
+  },
+  {
+   "id": "H18",
+   "name": "Shelf house north",
+   "kind": "home",
+   "level": "T4",
+   "cx": -35.5,
+   "cz": -4.5,
+   "front": 4.6,
+   "depth": 4.5,
+   "storeys": 1,
+   "facing": "E",
+   "wall": "ochre",
+   "roof": "blue",
+   "y": 14.5,
+   "footprint": [
+    -37.75,
+    -33.25,
+    -6.8,
+    -2.2
+   ],
+   "door": [
+    -32.35,
+    14.5,
+    -4.5
+   ],
+   "interior": {
+    "status": "NOT MODELLED",
+    "cutaway": "walls facing camera fade; roof lifts",
+    "rooms": [
+     "living_kitchen",
+     "bedroom"
+    ],
+    "anchors": [
+     {
+      "type": "door",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "bed",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "bed",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "stove",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "sink",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "table",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "chair",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "chair",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "cabinet",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "storage",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "lamp",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "lamp",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "washstand",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     }
+    ]
+   },
+   "household": {
+    "id": "HH_H18",
+    "capacity": 3,
+    "shared_money": 0,
+    "pantry": {},
+    "members": []
+   },
+   "business": null,
+   "state": {
+    "condition": 1.0,
+    "lights_on": false,
+    "door_open": false
+   },
+   "access_node": "c_w_h18"
+  },
+  {
+   "id": "H19",
+   "name": "Crown cottage",
+   "kind": "home",
+   "level": "T5",
+   "cx": -17,
+   "cz": -30.5,
+   "front": 4.2,
+   "depth": 4,
+   "storeys": 1,
+   "facing": "S",
+   "wall": "red",
+   "roof": "cream",
+   "y": 19.0,
+   "footprint": [
+    -19.1,
+    -14.9,
+    -32.5,
+    -28.5
+   ],
+   "door": [
+    -17,
+    19.0,
+    -27.6
+   ],
+   "interior": {
+    "status": "NOT MODELLED",
+    "cutaway": "walls facing camera fade; roof lifts",
+    "rooms": [
+     "living_kitchen",
+     "bedroom"
+    ],
+    "anchors": [
+     {
+      "type": "door",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "bed",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "bed",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "stove",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "sink",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "table",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "chair",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "chair",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "cabinet",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "storage",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "lamp",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "lamp",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "washstand",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     }
+    ]
+   },
+   "household": {
+    "id": "HH_H19",
+    "capacity": 3,
+    "shared_money": 0,
+    "pantry": {},
+    "members": []
+   },
+   "business": null,
+   "state": {
+    "condition": 1.0,
+    "lights_on": false,
+    "door_open": false
+   },
+   "access_node": "k_h19"
+  },
+  {
+   "id": "H20",
+   "name": "Keeper's house",
+   "kind": "home",
+   "level": "HD",
+   "cx": 35,
+   "cz": -8,
+   "front": 4.6,
+   "depth": 4.2,
+   "storeys": 1,
+   "facing": "S",
+   "wall": "white",
+   "roof": "red",
+   "y": 9.0,
+   "footprint": [
+    32.7,
+    37.3,
+    -10.1,
+    -5.9
+   ],
+   "door": [
+    35,
+    9.0,
+    -5.0
+   ],
+   "interior": {
+    "status": "NOT MODELLED",
+    "cutaway": "walls facing camera fade; roof lifts",
+    "rooms": [
+     "living_kitchen",
+     "bedroom"
+    ],
+    "anchors": [
+     {
+      "type": "door",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "bed",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "bed",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "stove",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "sink",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "table",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "chair",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "chair",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "cabinet",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "storage",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "lamp",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "lamp",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     },
+     {
+      "type": "washstand",
+      "pos": null,
+      "facing": null,
+      "state": "default"
+     }
+    ]
+   },
+   "household": {
+    "id": "HH_H20",
+    "capacity": 3,
+    "shared_money": 0,
+    "pantry": {},
+    "members": []
+   },
+   "business": null,
+   "state": {
+    "condition": 1.0,
+    "lights_on": false,
+    "door_open": false
+   },
+   "access_node": "hd_mid"
+  }
+ ],
+ "boats": [
+  {
+   "id": "BOAT_01",
+   "kind": "skiff",
+   "mooring": "moor_A1",
+   "owner_household": null,
+   "cargo": {},
+   "condition": 1.0,
+   "job": {
+    "role": "fisher",
+    "holder": null
+   },
+   "crew_slots": 1
+  },
+  {
+   "id": "BOAT_02",
+   "kind": "skiff",
+   "mooring": "moor_A2",
+   "owner_household": null,
+   "cargo": {},
+   "condition": 1.0,
+   "job": {
+    "role": "fisher",
+    "holder": null
+   },
+   "crew_slots": 1
+  },
+  {
+   "id": "BOAT_03",
+   "kind": "fishing_boat",
+   "mooring": "moor_A3",
+   "owner_household": null,
+   "cargo": {},
+   "condition": 1.0,
+   "job": {
+    "role": "fisher",
+    "holder": null
+   },
+   "crew_slots": 2
+  },
+  {
+   "id": "BOAT_04",
+   "kind": "skiff",
+   "mooring": "moor_B1",
+   "owner_household": null,
+   "cargo": {},
+   "condition": 1.0,
+   "job": {
+    "role": "fisher",
+    "holder": null
+   },
+   "crew_slots": 1
+  },
+  {
+   "id": "BOAT_05",
+   "kind": "fishing_boat",
+   "mooring": "moor_B2",
+   "owner_household": null,
+   "cargo": {},
+   "condition": 1.0,
+   "job": {
+    "role": "fisher",
+    "holder": null
+   },
+   "crew_slots": 2
+  },
+  {
+   "id": "BOAT_06",
+   "kind": "skiff",
+   "mooring": "moor_BW",
+   "owner_household": null,
+   "cargo": {},
+   "condition": 1.0,
+   "job": {
+    "role": "fisher",
+    "holder": null
+   },
+   "crew_slots": 1
+  }
+ ],
+ "fishing_grounds": [
+  {
+   "id": "FG_A",
+   "name": "Harbour mouth",
+   "pos": [
+    22,
+    22
+   ],
+   "methods": [
+    "shore",
+    "handline"
+   ]
+  },
+  {
+   "id": "FG_B",
+   "name": "Reef beyond The Gate",
+   "pos": [
+    44,
+    9
+   ],
+   "methods": [
+    "trap",
+    "rod"
+   ]
+  },
+  {
+   "id": "FG_C",
+   "name": "Open water south",
+   "pos": [
+    10,
+    34
+   ],
+   "methods": [
+    "net"
+   ]
+  }
+ ],
+ "sea_lanes": [
+  [
+   "moor_A3",
+   [
+    11,
+    13
+   ],
+   [
+    14.5,
+    17
+   ],
+   [
+    20,
+    20
+   ],
+   "FG_A"
+  ],
+  [
+   "FG_A",
+   [
+    28,
+    9
+   ],
+   [
+    35,
+    8.5
+   ],
+   "FG_B"
+  ],
+  [
+   "FG_A",
+   [
+    18,
+    30
+   ],
+   "FG_C"
+  ]
+ ],
+ "nav": {
+  "nodes": {
+   "q_w_s": {
+    "x": -6.5,
+    "y": 1.5,
+    "z": 26,
+    "kind": "ground"
+   },
+   "q_w_h01": {
+    "x": -6.5,
+    "y": 1.5,
+    "z": 24,
+    "kind": "ground"
+   },
+   "q_w_bw": {
+    "x": -6.5,
+    "y": 1.5,
+    "z": 20.4,
+    "kind": "ground"
+   },
+   "q_w_loft": {
+    "x": -6.5,
+    "y": 1.5,
+    "z": 17.5,
+    "kind": "ground"
+   },
+   "q_w_bs": {
+    "x": -6.5,
+    "y": 1.5,
+    "z": 13.5,
+    "kind": "ground"
+   },
+   "q_w_yard": {
+    "x": -6.5,
+    "y": 1.5,
+    "z": 8.5,
+    "kind": "ground"
+   },
+   "q_corner": {
+    "x": -6.5,
+    "y": 1.5,
+    "z": 3,
+    "kind": "ground"
+   },
+   "q_n_office": {
+    "x": -0.5,
+    "y": 1.5,
+    "z": 2.5,
+    "kind": "ground"
+   },
+   "q_n_lad": {
+    "x": 3,
+    "y": 1.5,
+    "z": 2.5,
+    "kind": "ground"
+   },
+   "q_n_pierA": {
+    "x": 5.25,
+    "y": 1.5,
+    "z": 3.5,
+    "kind": "ground"
+   },
+   "q_n_mkt": {
+    "x": 9,
+    "y": 1.5,
+    "z": 3.5,
+    "kind": "ground"
+   },
+   "q_n_pierB": {
+    "x": 14.25,
+    "y": 1.5,
+    "z": 3.5,
+    "kind": "ground"
+   },
+   "q_n_wh": {
+    "x": 19.5,
+    "y": 1.5,
+    "z": 2.5,
+    "kind": "ground"
+   },
+   "q_n_s8": {
+    "x": 22,
+    "y": 1.5,
+    "z": 2,
+    "kind": "ground"
+   },
+   "s1_bot": {
+    "x": -8.3,
+    "y": 1.5,
+    "z": -3.7,
+    "kind": "ground"
+   },
+   "s5_bot": {
+    "x": -8.3,
+    "y": 1.5,
+    "z": 13.5,
+    "kind": "ground"
+   },
+   "lad_bot": {
+    "x": 3,
+    "y": 1.5,
+    "z": -4.5,
+    "kind": "ground"
+   },
+   "s8_bot": {
+    "x": 22.5,
+    "y": 1.5,
+    "z": 2,
+    "kind": "ground"
+   },
+   "pierA_mid": {
+    "x": 5.25,
+    "y": 1.3,
+    "z": 9,
+    "kind": "deck"
+   },
+   "pierA_end": {
+    "x": 5.25,
+    "y": 1.3,
+    "z": 13.3,
+    "kind": "deck"
+   },
+   "pierB_end": {
+    "x": 14.25,
+    "y": 1.3,
+    "z": 12.3,
+    "kind": "deck"
+   },
+   "bw_1": {
+    "x": -2,
+    "y": 1.5,
+    "z": 20.4,
+    "kind": "deck"
+   },
+   "bw_2": {
+    "x": 2.7,
+    "y": 1.5,
+    "z": 20.4,
+    "kind": "deck"
+   },
+   "bw_3": {
+    "x": 7.4,
+    "y": 1.5,
+    "z": 20.4,
+    "kind": "deck"
+   },
+   "slip": {
+    "x": -2.5,
+    "y": 0.6,
+    "z": 8.5,
+    "kind": "deck"
+   },
+   "sp_1": {
+    "x": 4,
+    "y": 0.8,
+    "z": 26,
+    "kind": "ground"
+   },
+   "sp_2": {
+    "x": 12.5,
+    "y": 0.8,
+    "z": 25.8,
+    "kind": "ground"
+   },
+   "moor_A1": {
+    "x": 3.2,
+    "y": 0.4,
+    "z": 9,
+    "kind": "water"
+   },
+   "moor_A2": {
+    "x": 7.3,
+    "y": 0.4,
+    "z": 9,
+    "kind": "water"
+   },
+   "moor_A3": {
+    "x": 7.6,
+    "y": 0.4,
+    "z": 12.5,
+    "kind": "water"
+   },
+   "moor_B1": {
+    "x": 12.2,
+    "y": 0.4,
+    "z": 11,
+    "kind": "water"
+   },
+   "moor_B2": {
+    "x": 16.3,
+    "y": 0.4,
+    "z": 11,
+    "kind": "water"
+   },
+   "moor_BW": {
+    "x": 9.5,
+    "y": 0.4,
+    "z": 22.4,
+    "kind": "water"
+   },
+   "s1_top": {
+    "x": -14.5,
+    "y": 5.5,
+    "z": -3.7,
+    "kind": "ground"
+   },
+   "s5_top": {
+    "x": -14.5,
+    "y": 5.5,
+    "z": 13.5,
+    "kind": "ground"
+   },
+   "p_w_carp": {
+    "x": -15.5,
+    "y": 5.5,
+    "z": 17,
+    "kind": "ground"
+   },
+   "p_w_s5": {
+    "x": -15.5,
+    "y": 5.5,
+    "z": 13.5,
+    "kind": "ground"
+   },
+   "p_w_eat": {
+    "x": -15.5,
+    "y": 5.5,
+    "z": 10.3,
+    "kind": "ground"
+   },
+   "p_w_s4": {
+    "x": -15.5,
+    "y": 5.5,
+    "z": 6.9,
+    "kind": "ground"
+   },
+   "p_w_store": {
+    "x": -15.5,
+    "y": 5.5,
+    "z": 3,
+    "kind": "ground"
+   },
+   "p_s1": {
+    "x": -15.5,
+    "y": 5.5,
+    "z": -3.7,
+    "kind": "ground"
+   },
+   "plaza": {
+    "x": -17,
+    "y": 5.5,
+    "z": -8,
+    "kind": "ground"
+   },
+   "p_s2": {
+    "x": -11,
+    "y": 5.5,
+    "z": -6.8,
+    "kind": "ground"
+   },
+   "p_n_h06": {
+    "x": -5.5,
+    "y": 5.5,
+    "z": -7,
+    "kind": "ground"
+   },
+   "p_n_h07": {
+    "x": 0.5,
+    "y": 5.5,
+    "z": -7,
+    "kind": "ground"
+   },
+   "p_lad": {
+    "x": 3,
+    "y": 5.5,
+    "z": -6.5,
+    "kind": "ground"
+   },
+   "p_n_h08": {
+    "x": 6.5,
+    "y": 5.5,
+    "z": -7,
+    "kind": "ground"
+   },
+   "p_n_h09": {
+    "x": 13,
+    "y": 5.5,
+    "z": -7,
+    "kind": "ground"
+   },
+   "lad_top": {
+    "x": 3,
+    "y": 5.5,
+    "z": -5.5,
+    "kind": "ground"
+   },
+   "s4_bot": {
+    "x": -17.2,
+    "y": 5.5,
+    "z": 6.9,
+    "kind": "ground"
+   },
+   "s2_bot": {
+    "x": -11,
+    "y": 5.5,
+    "z": -7.2,
+    "kind": "ground"
+   },
+   "r_w_h12": {
+    "x": -24,
+    "y": 10.0,
+    "z": 11.5,
+    "kind": "ground"
+   },
+   "r_w_s4": {
+    "x": -24,
+    "y": 10.0,
+    "z": 6.9,
+    "kind": "ground"
+   },
+   "r_w_h11": {
+    "x": -24,
+    "y": 10.0,
+    "z": 5.2,
+    "kind": "ground"
+   },
+   "r_w_s6": {
+    "x": -24,
+    "y": 10.0,
+    "z": 1.25,
+    "kind": "ground"
+   },
+   "r_w_h10": {
+    "x": -24,
+    "y": 10.0,
+    "z": -3,
+    "kind": "ground"
+   },
+   "r_corner": {
+    "x": -24,
+    "y": 10.0,
+    "z": -13.7,
+    "kind": "ground"
+   },
+   "r_n_h13": {
+    "x": -17.5,
+    "y": 10.0,
+    "z": -13.7,
+    "kind": "ground"
+   },
+   "r_n_s2": {
+    "x": -11,
+    "y": 10.0,
+    "z": -13.7,
+    "kind": "ground"
+   },
+   "r_n_h15": {
+    "x": -4.5,
+    "y": 10.0,
+    "z": -13.7,
+    "kind": "ground"
+   },
+   "r_n_s3": {
+    "x": 2,
+    "y": 10.0,
+    "z": -13.7,
+    "kind": "ground"
+   },
+   "r_n_h16": {
+    "x": 8.5,
+    "y": 10.0,
+    "z": -13.7,
+    "kind": "ground"
+   },
+   "br_a": {
+    "x": 12.6,
+    "y": 10.0,
+    "z": -15,
+    "kind": "ground"
+   },
+   "s4_top": {
+    "x": -23.5,
+    "y": 10.0,
+    "z": 6.9,
+    "kind": "ground"
+   },
+   "s2_top": {
+    "x": -11,
+    "y": 10.0,
+    "z": -13,
+    "kind": "ground"
+   },
+   "s6_bot": {
+    "x": -25.3,
+    "y": 10.0,
+    "z": 1.25,
+    "kind": "ground"
+   },
+   "s3_bot": {
+    "x": 2,
+    "y": 10.0,
+    "z": -14.2,
+    "kind": "ground"
+   },
+   "c_w_h17": {
+    "x": -32,
+    "y": 14.5,
+    "z": 5,
+    "kind": "ground"
+   },
+   "c_w_s6": {
+    "x": -32,
+    "y": 14.5,
+    "z": 1.25,
+    "kind": "ground"
+   },
+   "c_w_h18": {
+    "x": -32,
+    "y": 14.5,
+    "z": -4.5,
+    "kind": "ground"
+   },
+   "c_corner": {
+    "x": -32,
+    "y": 14.5,
+    "z": -20.6,
+    "kind": "ground"
+   },
+   "c_s7": {
+    "x": -29.5,
+    "y": 14.5,
+    "z": -20.6,
+    "kind": "ground"
+   },
+   "c_hall": {
+    "x": -21,
+    "y": 14.5,
+    "z": -20.6,
+    "kind": "ground"
+   },
+   "c_school": {
+    "x": -10,
+    "y": 14.5,
+    "z": -20.6,
+    "kind": "ground"
+   },
+   "c_clinic": {
+    "x": -1.5,
+    "y": 14.5,
+    "z": -20.6,
+    "kind": "ground"
+   },
+   "c_s3": {
+    "x": 2,
+    "y": 14.5,
+    "z": -20.6,
+    "kind": "ground"
+   },
+   "s6_top": {
+    "x": -31.5,
+    "y": 14.5,
+    "z": 1.25,
+    "kind": "ground"
+   },
+   "s3_top": {
+    "x": 2,
+    "y": 14.5,
+    "z": -20,
+    "kind": "ground"
+   },
+   "s7_bot": {
+    "x": -29.5,
+    "y": 14.5,
+    "z": -21.2,
+    "kind": "ground"
+   },
+   "s7_top": {
+    "x": -29.5,
+    "y": 19.0,
+    "z": -27,
+    "kind": "ground"
+   },
+   "k_s7": {
+    "x": -29.5,
+    "y": 19.0,
+    "z": -27.6,
+    "kind": "ground"
+   },
+   "k_cistern": {
+    "x": -25,
+    "y": 19.0,
+    "z": -27.6,
+    "kind": "ground"
+   },
+   "k_h19": {
+    "x": -19.5,
+    "y": 19.0,
+    "z": -27.6,
+    "kind": "ground"
+   },
+   "k_west": {
+    "x": -38,
+    "y": 19.0,
+    "z": -27.6,
+    "kind": "ground"
+   },
+   "k_tree": {
+    "x": -39.5,
+    "y": 19.0,
+    "z": -15,
+    "kind": "ground"
+   },
+   "k_look": {
+    "x": -39.5,
+    "y": 19.0,
+    "z": -11,
+    "kind": "ground"
+   },
+   "s8_top": {
+    "x": 31.2,
+    "y": 9.0,
+    "z": 2,
+    "kind": "ground"
+   },
+   "hd_mid": {
+    "x": 33,
+    "y": 9.0,
+    "z": -2,
+    "kind": "ground"
+   },
+   "hd_br": {
+    "x": 30.6,
+    "y": 9.0,
+    "z": -11,
+    "kind": "ground"
+   },
+   "hd_arch": {
+    "x": 35,
+    "y": 9.0,
+    "z": 3,
+    "kind": "ground"
+   },
+   "st_beacon": {
+    "x": 35,
+    "y": 9.0,
+    "z": 16,
+    "kind": "ground"
+   },
+   "ar_mid": {
+    "x": 35,
+    "y": 9.3,
+    "z": 8.5,
+    "kind": "span"
+   },
+   "door_P01": {
+    "x": 9,
+    "y": 1.5,
+    "z": 2.9,
+    "kind": "ground",
+    "building": "P01"
+   },
+   "door_P02": {
+    "x": -7.1,
+    "y": 1.5,
+    "z": 8.5,
+    "kind": "ground",
+    "building": "P02"
+   },
+   "door_P03": {
+    "x": 19.5,
+    "y": 1.5,
+    "z": 1.65,
+    "kind": "ground",
+    "building": "P03"
+   },
+   "door_P04": {
+    "x": -7.1,
+    "y": 1.5,
+    "z": 17.5,
+    "kind": "ground",
+    "building": "P04"
+   },
+   "door_P05": {
+    "x": -16.1,
+    "y": 5.5,
+    "z": 3,
+    "kind": "ground",
+    "building": "P05"
+   },
+   "door_P06": {
+    "x": -16.1,
+    "y": 5.5,
+    "z": 10.3,
+    "kind": "ground",
+    "building": "P06"
+   },
+   "door_P07": {
+    "x": -16.1,
+    "y": 5.5,
+    "z": 17,
+    "kind": "ground",
+    "building": "P07"
+   },
+   "door_P08": {
+    "x": -21,
+    "y": 14.5,
+    "z": -20.85,
+    "kind": "ground",
+    "building": "P08"
+   },
+   "door_P09": {
+    "x": -10,
+    "y": 14.5,
+    "z": -20.85,
+    "kind": "ground",
+    "building": "P09"
+   },
+   "door_P10": {
+    "x": -1.5,
+    "y": 14.5,
+    "z": -20.85,
+    "kind": "ground",
+    "building": "P10"
+   },
+   "door_H01": {
+    "x": -7.35,
+    "y": 1.5,
+    "z": 24,
+    "kind": "ground",
+    "building": "H01"
+   },
+   "door_H02": {
+    "x": -0.5,
+    "y": 1.5,
+    "z": 0.9499999999999998,
+    "kind": "ground",
+    "building": "H02"
+   },
+   "door_H03": {
+    "x": -2,
+    "y": 1.5,
+    "z": 20.099999999999998,
+    "kind": "deck",
+    "building": "H03"
+   },
+   "door_H04": {
+    "x": 2.7,
+    "y": 1.5,
+    "z": 20.099999999999998,
+    "kind": "deck",
+    "building": "H04"
+   },
+   "door_H05": {
+    "x": 7.4,
+    "y": 1.5,
+    "z": 20.099999999999998,
+    "kind": "deck",
+    "building": "H05"
+   },
+   "door_H06": {
+    "x": -5.5,
+    "y": 5.5,
+    "z": -7.5,
+    "kind": "ground",
+    "building": "H06"
+   },
+   "door_H07": {
+    "x": 0.5,
+    "y": 5.5,
+    "z": -7.5,
+    "kind": "ground",
+    "building": "H07"
+   },
+   "door_H08": {
+    "x": 6.5,
+    "y": 5.5,
+    "z": -7.5,
+    "kind": "ground",
+    "building": "H08"
+   },
+   "door_H09": {
+    "x": 13,
+    "y": 5.5,
+    "z": -7.5,
+    "kind": "ground",
+    "building": "H09"
+   },
+   "door_H10": {
+    "x": -24.3,
+    "y": 10.0,
+    "z": -3,
+    "kind": "ground",
+    "building": "H10"
+   },
+   "door_H11": {
+    "x": -24.3,
+    "y": 10.0,
+    "z": 5.2,
+    "kind": "ground",
+    "building": "H11"
+   },
+   "door_H12": {
+    "x": -24.3,
+    "y": 10.0,
+    "z": 11.5,
+    "kind": "ground",
+    "building": "H12"
+   },
+   "door_H13": {
+    "x": -17.5,
+    "y": 10.0,
+    "z": -14.1,
+    "kind": "ground",
+    "building": "H13"
+   },
+   "door_H14": {
+    "x": -11,
+    "y": 10.0,
+    "z": -14.1,
+    "kind": "ground",
+    "building": "H14"
+   },
+   "door_H15": {
+    "x": -4.5,
+    "y": 10.0,
+    "z": -14.1,
+    "kind": "ground",
+    "building": "H15"
+   },
+   "door_H16": {
+    "x": 8.5,
+    "y": 10.0,
+    "z": -14.1,
+    "kind": "ground",
+    "building": "H16"
+   },
+   "door_H17": {
+    "x": -32.35,
+    "y": 14.5,
+    "z": 5,
+    "kind": "ground",
+    "building": "H17"
+   },
+   "door_H18": {
+    "x": -32.35,
+    "y": 14.5,
+    "z": -4.5,
+    "kind": "ground",
+    "building": "H18"
+   },
+   "door_H19": {
+    "x": -17,
+    "y": 19.0,
+    "z": -27.6,
+    "kind": "ground",
+    "building": "H19"
+   },
+   "door_H20": {
+    "x": 35,
+    "y": 9.0,
+    "z": -5.0,
+    "kind": "ground",
+    "building": "H20"
+   }
+  },
+  "edges": [
+   {
+    "a": "q_w_s",
+    "b": "q_w_h01",
+    "type": "walk"
+   },
+   {
+    "a": "q_w_h01",
+    "b": "q_w_bw",
+    "type": "walk"
+   },
+   {
+    "a": "q_w_bw",
+    "b": "q_w_loft",
+    "type": "walk"
+   },
+   {
+    "a": "q_w_loft",
+    "b": "q_w_bs",
+    "type": "walk"
+   },
+   {
+    "a": "q_w_bs",
+    "b": "q_w_yard",
+    "type": "walk"
+   },
+   {
+    "a": "q_w_yard",
+    "b": "q_corner",
+    "type": "walk"
+   },
+   {
+    "a": "q_corner",
+    "b": "q_n_office",
+    "type": "walk"
+   },
+   {
+    "a": "q_n_office",
+    "b": "q_n_lad",
+    "type": "walk"
+   },
+   {
+    "a": "q_n_lad",
+    "b": "q_n_pierA",
+    "type": "walk"
+   },
+   {
+    "a": "q_n_pierA",
+    "b": "q_n_mkt",
+    "type": "walk"
+   },
+   {
+    "a": "q_n_mkt",
+    "b": "q_n_pierB",
+    "type": "walk"
+   },
+   {
+    "a": "q_n_pierB",
+    "b": "q_n_wh",
+    "type": "walk"
+   },
+   {
+    "a": "q_n_wh",
+    "b": "q_n_s8",
+    "type": "walk"
+   },
+   {
+    "a": "q_n_s8",
+    "b": "s8_bot",
+    "type": "walk"
+   },
+   {
+    "a": "q_corner",
+    "b": "s1_bot",
+    "type": "walk"
+   },
+   {
+    "a": "q_w_bs",
+    "b": "s5_bot",
+    "type": "walk"
+   },
+   {
+    "a": "q_n_lad",
+    "b": "lad_bot",
+    "type": "walk"
+   },
+   {
+    "a": "q_n_pierA",
+    "b": "pierA_mid",
+    "type": "ramp"
+   },
+   {
+    "a": "pierA_mid",
+    "b": "pierA_end",
+    "type": "ramp"
+   },
+   {
+    "a": "q_n_pierB",
+    "b": "pierB_end",
+    "type": "ramp"
+   },
+   {
+    "a": "q_w_bw",
+    "b": "bw_1",
+    "type": "walk"
+   },
+   {
+    "a": "bw_1",
+    "b": "bw_2",
+    "type": "walk"
+   },
+   {
+    "a": "bw_2",
+    "b": "bw_3",
+    "type": "walk"
+   },
+   {
+    "a": "q_w_yard",
+    "b": "slip",
+    "type": "ramp"
+   },
+   {
+    "a": "q_w_s",
+    "b": "sp_1",
+    "type": "ramp"
+   },
+   {
+    "a": "sp_1",
+    "b": "sp_2",
+    "type": "walk"
+   },
+   {
+    "a": "pierA_mid",
+    "b": "moor_A1",
+    "type": "board"
+   },
+   {
+    "a": "pierA_mid",
+    "b": "moor_A2",
+    "type": "board"
+   },
+   {
+    "a": "pierA_end",
+    "b": "moor_A3",
+    "type": "board"
+   },
+   {
+    "a": "pierB_end",
+    "b": "moor_B1",
+    "type": "board"
+   },
+   {
+    "a": "pierB_end",
+    "b": "moor_B2",
+    "type": "board"
+   },
+   {
+    "a": "bw_3",
+    "b": "moor_BW",
+    "type": "board"
+   },
+   {
+    "a": "p_w_carp",
+    "b": "p_w_s5",
+    "type": "walk"
+   },
+   {
+    "a": "p_w_s5",
+    "b": "p_w_eat",
+    "type": "walk"
+   },
+   {
+    "a": "p_w_eat",
+    "b": "p_w_s4",
+    "type": "walk"
+   },
+   {
+    "a": "p_w_s4",
+    "b": "p_w_store",
+    "type": "walk"
+   },
+   {
+    "a": "p_w_store",
+    "b": "p_s1",
+    "type": "walk"
+   },
+   {
+    "a": "p_s1",
+    "b": "plaza",
+    "type": "walk"
+   },
+   {
+    "a": "plaza",
+    "b": "p_s2",
+    "type": "walk"
+   },
+   {
+    "a": "p_s2",
+    "b": "p_n_h06",
+    "type": "walk"
+   },
+   {
+    "a": "p_n_h06",
+    "b": "p_n_h07",
+    "type": "walk"
+   },
+   {
+    "a": "p_n_h07",
+    "b": "p_lad",
+    "type": "walk"
+   },
+   {
+    "a": "p_lad",
+    "b": "p_n_h08",
+    "type": "walk"
+   },
+   {
+    "a": "p_n_h08",
+    "b": "p_n_h09",
+    "type": "walk"
+   },
+   {
+    "a": "s1_top",
+    "b": "p_s1",
+    "type": "walk"
+   },
+   {
+    "a": "s5_top",
+    "b": "p_w_s5",
+    "type": "walk"
+   },
+   {
+    "a": "p_lad",
+    "b": "lad_top",
+    "type": "walk"
+   },
+   {
+    "a": "p_w_s4",
+    "b": "s4_bot",
+    "type": "walk"
+   },
+   {
+    "a": "p_s2",
+    "b": "s2_bot",
+    "type": "walk"
+   },
+   {
+    "a": "r_w_h12",
+    "b": "r_w_s4",
+    "type": "walk"
+   },
+   {
+    "a": "r_w_s4",
+    "b": "r_w_h11",
+    "type": "walk"
+   },
+   {
+    "a": "r_w_h11",
+    "b": "r_w_s6",
+    "type": "walk"
+   },
+   {
+    "a": "r_w_s6",
+    "b": "r_w_h10",
+    "type": "walk"
+   },
+   {
+    "a": "r_w_h10",
+    "b": "r_corner",
+    "type": "walk"
+   },
+   {
+    "a": "r_corner",
+    "b": "r_n_h13",
+    "type": "walk"
+   },
+   {
+    "a": "r_n_h13",
+    "b": "r_n_s2",
+    "type": "walk"
+   },
+   {
+    "a": "r_n_s2",
+    "b": "r_n_h15",
+    "type": "walk"
+   },
+   {
+    "a": "r_n_h15",
+    "b": "r_n_s3",
+    "type": "walk"
+   },
+   {
+    "a": "r_n_s3",
+    "b": "r_n_h16",
+    "type": "walk"
+   },
+   {
+    "a": "r_n_h16",
+    "b": "br_a",
+    "type": "walk"
+   },
+   {
+    "a": "s4_top",
+    "b": "r_w_s4",
+    "type": "walk"
+   },
+   {
+    "a": "s2_top",
+    "b": "r_n_s2",
+    "type": "walk"
+   },
+   {
+    "a": "r_w_s6",
+    "b": "s6_bot",
+    "type": "walk"
+   },
+   {
+    "a": "r_n_s3",
+    "b": "s3_bot",
+    "type": "walk"
+   },
+   {
+    "a": "c_w_h17",
+    "b": "c_w_s6",
+    "type": "walk"
+   },
+   {
+    "a": "c_w_s6",
+    "b": "c_w_h18",
+    "type": "walk"
+   },
+   {
+    "a": "c_w_h18",
+    "b": "c_corner",
+    "type": "walk"
+   },
+   {
+    "a": "c_corner",
+    "b": "c_s7",
+    "type": "walk"
+   },
+   {
+    "a": "c_s7",
+    "b": "c_hall",
+    "type": "walk"
+   },
+   {
+    "a": "c_hall",
+    "b": "c_school",
+    "type": "walk"
+   },
+   {
+    "a": "c_school",
+    "b": "c_clinic",
+    "type": "walk"
+   },
+   {
+    "a": "c_clinic",
+    "b": "c_s3",
+    "type": "walk"
+   },
+   {
+    "a": "s6_top",
+    "b": "c_w_s6",
+    "type": "walk"
+   },
+   {
+    "a": "s3_top",
+    "b": "c_s3",
+    "type": "walk"
+   },
+   {
+    "a": "c_s7",
+    "b": "s7_bot",
+    "type": "walk"
+   },
+   {
+    "a": "s7_top",
+    "b": "k_s7",
+    "type": "walk"
+   },
+   {
+    "a": "k_h19",
+    "b": "k_cistern",
+    "type": "walk"
+   },
+   {
+    "a": "k_cistern",
+    "b": "k_s7",
+    "type": "walk"
+   },
+   {
+    "a": "k_s7",
+    "b": "k_west",
+    "type": "walk"
+   },
+   {
+    "a": "k_west",
+    "b": "k_tree",
+    "type": "walk"
+   },
+   {
+    "a": "k_tree",
+    "b": "k_look",
+    "type": "walk"
+   },
+   {
+    "a": "s8_top",
+    "b": "hd_mid",
+    "type": "walk"
+   },
+   {
+    "a": "hd_mid",
+    "b": "hd_br",
+    "type": "walk"
+   },
+   {
+    "a": "hd_mid",
+    "b": "hd_arch",
+    "type": "walk"
+   },
+   {
+    "a": "hd_arch",
+    "b": "ar_mid",
+    "type": "archwalk"
+   },
+   {
+    "a": "ar_mid",
+    "b": "st_beacon",
+    "type": "archwalk"
+   },
+   {
+    "a": "s1_bot",
+    "b": "s1_top",
+    "type": "stair"
+   },
+   {
+    "a": "s2_bot",
+    "b": "s2_top",
+    "type": "stair"
+   },
+   {
+    "a": "s3_bot",
+    "b": "s3_top",
+    "type": "stair"
+   },
+   {
+    "a": "s4_bot",
+    "b": "s4_top",
+    "type": "stair"
+   },
+   {
+    "a": "s5_bot",
+    "b": "s5_top",
+    "type": "stair"
+   },
+   {
+    "a": "s6_bot",
+    "b": "s6_top",
+    "type": "stair"
+   },
+   {
+    "a": "s7_bot",
+    "b": "s7_top",
+    "type": "stair"
+   },
+   {
+    "a": "s8_bot",
+    "b": "s8_top",
+    "type": "stair"
+   },
+   {
+    "a": "lad_bot",
+    "b": "lad_top",
+    "type": "ladder"
+   },
+   {
+    "a": "br_a",
+    "b": "hd_br",
+    "type": "bridge"
+   },
+   {
+    "a": "door_P01",
+    "b": "q_n_mkt",
+    "type": "door"
+   },
+   {
+    "a": "door_P02",
+    "b": "q_w_yard",
+    "type": "door"
+   },
+   {
+    "a": "door_P03",
+    "b": "q_n_wh",
+    "type": "door"
+   },
+   {
+    "a": "door_P04",
+    "b": "q_w_loft",
+    "type": "door"
+   },
+   {
+    "a": "door_P05",
+    "b": "p_w_store",
+    "type": "door"
+   },
+   {
+    "a": "door_P06",
+    "b": "p_w_eat",
+    "type": "door"
+   },
+   {
+    "a": "door_P07",
+    "b": "p_w_carp",
+    "type": "door"
+   },
+   {
+    "a": "door_P08",
+    "b": "c_hall",
+    "type": "door"
+   },
+   {
+    "a": "door_P09",
+    "b": "c_school",
+    "type": "door"
+   },
+   {
+    "a": "door_P10",
+    "b": "c_clinic",
+    "type": "door"
+   },
+   {
+    "a": "door_H01",
+    "b": "q_w_h01",
+    "type": "door"
+   },
+   {
+    "a": "door_H02",
+    "b": "q_n_office",
+    "type": "door"
+   },
+   {
+    "a": "door_H03",
+    "b": "bw_1",
+    "type": "door"
+   },
+   {
+    "a": "door_H04",
+    "b": "bw_2",
+    "type": "door"
+   },
+   {
+    "a": "door_H05",
+    "b": "bw_3",
+    "type": "door"
+   },
+   {
+    "a": "door_H06",
+    "b": "p_n_h06",
+    "type": "door"
+   },
+   {
+    "a": "door_H07",
+    "b": "p_n_h07",
+    "type": "door"
+   },
+   {
+    "a": "door_H08",
+    "b": "p_n_h08",
+    "type": "door"
+   },
+   {
+    "a": "door_H09",
+    "b": "p_n_h09",
+    "type": "door"
+   },
+   {
+    "a": "door_H10",
+    "b": "r_w_h10",
+    "type": "door"
+   },
+   {
+    "a": "door_H11",
+    "b": "r_w_h11",
+    "type": "door"
+   },
+   {
+    "a": "door_H12",
+    "b": "r_w_h12",
+    "type": "door"
+   },
+   {
+    "a": "door_H13",
+    "b": "r_n_h13",
+    "type": "door"
+   },
+   {
+    "a": "door_H14",
+    "b": "r_n_s2",
+    "type": "door"
+   },
+   {
+    "a": "door_H15",
+    "b": "r_n_h15",
+    "type": "door"
+   },
+   {
+    "a": "door_H16",
+    "b": "r_n_h16",
+    "type": "door"
+   },
+   {
+    "a": "door_H17",
+    "b": "c_w_h17",
+    "type": "door"
+   },
+   {
+    "a": "door_H18",
+    "b": "c_w_h18",
+    "type": "door"
+   },
+   {
+    "a": "door_H19",
+    "b": "k_h19",
+    "type": "door"
+   },
+   {
+    "a": "door_H20",
+    "b": "hd_mid",
+    "type": "door"
+   }
+  ],
+  "stairs": {
+   "s1_bot": {
+    "name": "Harbour Stair",
+    "width": 2.6,
+    "stone": true
+   },
+   "s8_bot": {
+    "name": "Lookout Stair",
+    "width": 1.6
+   },
+   "s2_bot": {
+    "name": "Plaza Stair",
+    "width": 2.0
+   },
+   "s3_bot": {
+    "name": "Hall Stair",
+    "width": 1.8
+   },
+   "s4_bot": {
+    "name": "Store Steps",
+    "width": 1.6
+   },
+   "s5_bot": {
+    "name": "Back Stair",
+    "width": 1.6
+   },
+   "s6_bot": {
+    "name": "Shelf Steps",
+    "width": 1.6
+   },
+   "s7_bot": {
+    "name": "Crown Stair",
+    "width": 1.6
+   }
+  }
+ },
+ "lamps": [
+  "q_n_pierA",
+  "q_n_mkt",
+  "q_corner",
+  "q_w_loft",
+  "plaza",
+  "p_w_eat",
+  "p_n_h08",
+  "r_n_s2",
+  "r_w_h11",
+  "c_hall",
+  "c_school",
+  "k_s7",
+  "hd_mid",
+  "bw_2",
+  "pierB_end",
+  "st_beacon"
+ ]
+}

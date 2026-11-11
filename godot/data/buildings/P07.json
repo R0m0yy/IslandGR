@@ -1,0 +1,283 @@
+{
+ "schema": "living-tides.building",
+ "version": 1,
+ "id": "P07",
+ "name": "Carpenter",
+ "kind": "carpenter",
+ "family": "long_shed",
+ "origin": [
+  -17.0,
+  5.5,
+  17
+ ],
+ "yaw_deg": 90.0,
+ "storeys": 1,
+ "frame": "Godot-local: +x right, +y up, +z out of the front door. Pivot = front-door threshold at terrace level.",
+ "groups": [
+  "BASE",
+  "DOOR_main",
+  "INTERIOR",
+  "ROOF",
+  "WALL_E",
+  "WALL_N",
+  "WALL_S",
+  "WALL_W"
+ ],
+ "compass": {
+  "front": "E",
+  "right": "N",
+  "back": "W",
+  "left": "S"
+ },
+ "features": [],
+ "door": {
+  "node": "DOOR_main",
+  "pivot": [
+   -0.35,
+   0.205,
+   -0.04
+  ],
+  "open_deg": 100.0
+ },
+ "anchors": [
+  {
+   "id": "IA_workbench_0",
+   "type": "workbench",
+   "slot": 0,
+   "layout_index": 1,
+   "floor": 0,
+   "pose": "stand",
+   "pos": [
+    -1.56,
+    0.4,
+    -3.7
+   ],
+   "stand": [
+    -1.56,
+    0.4,
+    -3.7
+   ],
+   "facing": [
+    -1.0,
+    0.0
+   ]
+  },
+  {
+   "id": "IA_workbench_1",
+   "type": "workbench",
+   "slot": 1,
+   "layout_index": 2,
+   "floor": 0,
+   "pose": "stand",
+   "pos": [
+    -1.56,
+    0.4,
+    -1.92
+   ],
+   "stand": [
+    -1.56,
+    0.4,
+    -1.92
+   ],
+   "facing": [
+    -1.0,
+    0.0
+   ]
+  },
+  {
+   "id": "IA_saw_horse_0",
+   "type": "saw_horse",
+   "slot": 0,
+   "layout_index": 3,
+   "floor": 0,
+   "pose": "stand",
+   "pos": [
+    -1.075,
+    0.2,
+    -1.13
+   ],
+   "stand": [
+    -1.075,
+    0.2,
+    -1.13
+   ],
+   "facing": [
+    0.0,
+    -1.0
+   ]
+  },
+  {
+   "id": "IA_tool_rack_0",
+   "type": "tool_rack",
+   "slot": 0,
+   "layout_index": 4,
+   "floor": 0,
+   "pose": "stand",
+   "pos": [
+    1.525,
+    0.4,
+    -4.33
+   ],
+   "stand": [
+    1.525,
+    0.4,
+    -4.33
+   ],
+   "facing": [
+    0.0,
+    -1.0
+   ]
+  },
+  {
+   "id": "IA_timber_stack_0",
+   "type": "timber_stack",
+   "slot": 0,
+   "layout_index": 5,
+   "floor": 0,
+   "pose": "stand",
+   "pos": [
+    0.02,
+    0.4,
+    -3.81
+   ],
+   "stand": [
+    0.02,
+    0.4,
+    -3.81
+   ],
+   "facing": [
+    0.0,
+    -1.0
+   ]
+  },
+  {
+   "id": "IA_lamp_0",
+   "type": "lamp",
+   "slot": 0,
+   "layout_index": 6,
+   "floor": 0,
+   "pose": null,
+   "pos": [
+    0.0,
+    2.15,
+    -2.5
+   ],
+   "stand": null,
+   "facing": null
+  },
+  {
+   "id": "IA_door_0",
+   "type": "door",
+   "slot": 0,
+   "layout_index": 0,
+   "floor": 0,
+   "pose": "stand",
+   "pos": [
+    0,
+    0.2,
+    0
+   ],
+   "stand": [
+    0,
+    0,
+    0.9
+   ],
+   "facing": [
+    0,
+    -1
+   ],
+   "node": "DOOR_main",
+   "open_deg": 100.0,
+   "stand_in": [
+    0,
+    0.2,
+    -0.75
+   ]
+  }
+ ],
+ "nav": {
+  "nodes": {
+   "out": [
+    0,
+    0.0,
+    0.9
+   ],
+   "in": [
+    0,
+    0.2,
+    -0.75
+   ],
+   "hub0": [
+    0.0,
+    0.2,
+    -1.9
+   ],
+   "IA_workbench_0": [
+    -1.56,
+    0.4,
+    -3.7
+   ],
+   "IA_workbench_1": [
+    -1.56,
+    0.4,
+    -1.92
+   ],
+   "IA_saw_horse_0": [
+    -1.075,
+    0.2,
+    -1.13
+   ],
+   "IA_tool_rack_0": [
+    1.525,
+    0.4,
+    -4.33
+   ],
+   "IA_timber_stack_0": [
+    0.02,
+    0.4,
+    -3.81
+   ]
+  },
+  "edges": [
+   {
+    "a": "out",
+    "b": "in",
+    "type": "doorway"
+   },
+   {
+    "a": "in",
+    "b": "hub0",
+    "type": "interior"
+   },
+   {
+    "a": "hub0",
+    "b": "IA_workbench_0",
+    "type": "interior"
+   },
+   {
+    "a": "hub0",
+    "b": "IA_workbench_1",
+    "type": "interior"
+   },
+   {
+    "a": "hub0",
+    "b": "IA_saw_horse_0",
+    "type": "interior"
+   },
+   {
+    "a": "hub0",
+    "b": "IA_tool_rack_0",
+    "type": "interior"
+   },
+   {
+    "a": "hub0",
+    "b": "IA_timber_stack_0",
+    "type": "interior"
+   }
+  ],
+  "entry": "out",
+  "entry_matches": "door_P07"
+ },
+ "unplaced": [],
+ "tris": 9276
+}

@@ -1,0 +1,40 @@
+Godot Engine v4.3.stable.official.77dcf97d8 - https://godotengine.org
+PASS  layout has 30 buildings  30
+PASS  30 building prefabs instanced  30
+PASS  every prefab has ROOF, BASE, wall groups and a hinged door node  []
+PASS  environment GLBs loaded  
+PASS  interaction anchors placed (368 stubs in layout)  367
+PASS  all 435 door-to-door pairs routable  { "unreachable": 0, "longest_m": 119.3 }
+PASS  every interior anchor reachable from its front door  []
+PASS  every villager's bed connects to every fishing spot  0
+PASS  quay cottage -> crown cottage route uses stairs  ["door", "walk", "stair"]
+PASS  door cycles closed>opening>open>closing>closed  ["closed", "opening", "open", "closing", "closed"]
+PASS  door leaf node rotates ~100 deg about its hinge  100
+PASS  stove cold>lit>cooking>cold, fire light on while lit  ["cold", "lit", "cooking", "cold"]
+PASS  cooking moves stock: 1 raw fish -> 3 meals  { "raw_fish": 0, "meals": 3 }
+PASS  bed is reserved for its owner only  
+PASS  interior lighting follows building state  
+PASS  cutaway hides roof + camera-facing walls  
+PASS  placeholder rig exposes all 11 animation clips  ["idle", "walk", "climb_stairs", "climb_ladder", "open_door", "cook", "eat", "sit", "sleep", "fish", "work"]
+PASS  animation state machine travels idle -> walk  walk
+SIM totals over 5.0 days, 42 villagers: { "sleeps": 318, "meals_cooked": 621, "meals_eaten": 640, "fish_caught": 417, "work_blocks": 484, "doors_opened": 1555, "stairs_climbed": 2511, "ladders_climbed": 192, "bridges_crossed": 178, "failed_paths": 0, "failed_uses": 0, "plans": 2660, "fish_bought": 124, "fish_sold": 184, "metres": 111654, "starve_minutes": 0 }
+SIM state samples: { "walk": 1008, "idle": 145, "work": 671, "eat": 147, "fish": 222, "open_door": 43, "climb_stairs": 362, "cook": 130, "climb_ladder": 30, "cross_bridge": 49, "sleep": 2221, "shop": 5, "sit": 7 }
+PASS  simulation ran 5 game days  { "clock": "Day 6  06:00", "steps": 72000, "wall_ms": 12835 }
+PASS  villagers sleep (everyone at least once)  { "sleeps": 318, "never_slept": 0 }
+PASS  villagers cook  621
+PASS  villagers eat (everyone at least once)  { "meals_eaten": 640, "never_ate": 0 }
+PASS  villagers fish and land a catch  417
+PASS  villagers work  484
+PASS  doors are opened by villagers  1472
+PASS  stairs are climbed  2511
+PASS  no villager is stuck while travelling  { "max_stuck_s": 0 }
+PASS  fish ledger balances (start + caught - cooked = pantries + market)  { "have": 235, "expected": 235, "market": 64 }
+PASS  no route failures  0
+PASS  nobody starves (no one at maximum hunger for over 60 game minutes)  { "cases": [], "total_minutes_at_max": 0 }
+PASS  all activity states observed  ["walk", "idle", "work", "eat", "fish", "open_door", "climb_stairs", "cook", "climb_ladder", "cross_bridge", "sleep", "shop", "sit"]
+RESULT: PASSED (31 passed, 0 failed)
+WARNING: ObjectDB instances leaked at exit (run with --verbose for details).
+     at: cleanup (core/object/object.cpp:2284)
+ERROR: 6 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:604)
+EXIT 0

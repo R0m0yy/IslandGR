@@ -1,0 +1,265 @@
+{
+ "days": 5,
+ "engine": "4.3-stable (official)",
+ "failed": 0,
+ "nav_nodes": 496,
+ "passed": 31,
+ "results": [
+  {
+   "detail": 30,
+   "passed": true,
+   "test": "layout has 30 buildings"
+  },
+  {
+   "detail": 30,
+   "passed": true,
+   "test": "30 building prefabs instanced"
+  },
+  {
+   "detail": [],
+   "passed": true,
+   "test": "every prefab has ROOF, BASE, wall groups and a hinged door node"
+  },
+  {
+   "detail": "",
+   "passed": true,
+   "test": "environment GLBs loaded"
+  },
+  {
+   "detail": 367,
+   "passed": true,
+   "test": "interaction anchors placed (368 stubs in layout)"
+  },
+  {
+   "detail": {
+    "longest_m": 119.3,
+    "unreachable": 0
+   },
+   "passed": true,
+   "test": "all 435 door-to-door pairs routable"
+  },
+  {
+   "detail": [],
+   "passed": true,
+   "test": "every interior anchor reachable from its front door"
+  },
+  {
+   "detail": 0,
+   "passed": true,
+   "test": "every villager's bed connects to every fishing spot"
+  },
+  {
+   "detail": [
+    "door",
+    "walk",
+    "stair"
+   ],
+   "passed": true,
+   "test": "quay cottage -> crown cottage route uses stairs"
+  },
+  {
+   "detail": [
+    "closed",
+    "opening",
+    "open",
+    "closing",
+    "closed"
+   ],
+   "passed": true,
+   "test": "door cycles closed>opening>open>closing>closed"
+  },
+  {
+   "detail": 100,
+   "passed": true,
+   "test": "door leaf node rotates ~100 deg about its hinge"
+  },
+  {
+   "detail": [
+    "cold",
+    "lit",
+    "cooking",
+    "cold"
+   ],
+   "passed": true,
+   "test": "stove cold>lit>cooking>cold, fire light on while lit"
+  },
+  {
+   "detail": {
+    "meals": 3,
+    "raw_fish": 0
+   },
+   "passed": true,
+   "test": "cooking moves stock: 1 raw fish -> 3 meals"
+  },
+  {
+   "detail": "",
+   "passed": true,
+   "test": "bed is reserved for its owner only"
+  },
+  {
+   "detail": "",
+   "passed": true,
+   "test": "interior lighting follows building state"
+  },
+  {
+   "detail": "",
+   "passed": true,
+   "test": "cutaway hides roof + camera-facing walls"
+  },
+  {
+   "detail": [
+    "idle",
+    "walk",
+    "climb_stairs",
+    "climb_ladder",
+    "open_door",
+    "cook",
+    "eat",
+    "sit",
+    "sleep",
+    "fish",
+    "work"
+   ],
+   "passed": true,
+   "test": "placeholder rig exposes all 11 animation clips"
+  },
+  {
+   "detail": "walk",
+   "passed": true,
+   "test": "animation state machine travels idle -> walk"
+  },
+  {
+   "detail": {
+    "clock": "Day 6  06:00",
+    "steps": 72000,
+    "wall_ms": 12835
+   },
+   "passed": true,
+   "test": "simulation ran 5 game days"
+  },
+  {
+   "detail": {
+    "never_slept": 0,
+    "sleeps": 318
+   },
+   "passed": true,
+   "test": "villagers sleep (everyone at least once)"
+  },
+  {
+   "detail": 621,
+   "passed": true,
+   "test": "villagers cook"
+  },
+  {
+   "detail": {
+    "meals_eaten": 640,
+    "never_ate": 0
+   },
+   "passed": true,
+   "test": "villagers eat (everyone at least once)"
+  },
+  {
+   "detail": 417,
+   "passed": true,
+   "test": "villagers fish and land a catch"
+  },
+  {
+   "detail": 484,
+   "passed": true,
+   "test": "villagers work"
+  },
+  {
+   "detail": 1472,
+   "passed": true,
+   "test": "doors are opened by villagers"
+  },
+  {
+   "detail": 2511,
+   "passed": true,
+   "test": "stairs are climbed"
+  },
+  {
+   "detail": {
+    "max_stuck_s": 0
+   },
+   "passed": true,
+   "test": "no villager is stuck while travelling"
+  },
+  {
+   "detail": {
+    "expected": 235,
+    "have": 235,
+    "market": 64
+   },
+   "passed": true,
+   "test": "fish ledger balances (start + caught - cooked = pantries + market)"
+  },
+  {
+   "detail": 0,
+   "passed": true,
+   "test": "no route failures"
+  },
+  {
+   "detail": {
+    "cases": [],
+    "total_minutes_at_max": 0
+   },
+   "passed": true,
+   "test": "nobody starves (no one at maximum hunger for over 60 game minutes)"
+  },
+  {
+   "detail": [
+    "walk",
+    "idle",
+    "work",
+    "eat",
+    "fish",
+    "open_door",
+    "climb_stairs",
+    "cook",
+    "climb_ladder",
+    "cross_bridge",
+    "sleep",
+    "shop",
+    "sit"
+   ],
+   "passed": true,
+   "test": "all activity states observed"
+  }
+ ],
+ "sim_wall_ms": 12835,
+ "state_samples": {
+  "climb_ladder": 30,
+  "climb_stairs": 362,
+  "cook": 130,
+  "cross_bridge": 49,
+  "eat": 147,
+  "fish": 222,
+  "idle": 145,
+  "open_door": 43,
+  "shop": 5,
+  "sit": 7,
+  "sleep": 2221,
+  "walk": 1008,
+  "work": 671
+ },
+ "totals": {
+  "bridges_crossed": 178,
+  "doors_opened": 1555,
+  "failed_paths": 0,
+  "failed_uses": 0,
+  "fish_bought": 124,
+  "fish_caught": 417,
+  "fish_sold": 184,
+  "ladders_climbed": 192,
+  "meals_cooked": 621,
+  "meals_eaten": 640,
+  "metres": 111654,
+  "plans": 2660,
+  "sleeps": 318,
+  "stairs_climbed": 2511,
+  "starve_minutes": 0,
+  "work_blocks": 484
+ },
+ "villagers": 42
+}

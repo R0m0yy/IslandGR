@@ -1,0 +1,276 @@
+{
+ "lamps": [
+  {
+   "id": "LAMP_q_n_pierA",
+   "node": "q_n_pierA",
+   "pos": [
+    3.039,
+    3.86,
+    4.097
+   ]
+  },
+  {
+   "id": "LAMP_q_n_mkt",
+   "node": "q_n_mkt",
+   "pos": [
+    9.549,
+    3.86,
+    3.61
+   ]
+  },
+  {
+   "id": "LAMP_q_corner",
+   "node": "q_corner",
+   "pos": [
+    -7.745,
+    3.86,
+    3.336
+   ]
+  },
+  {
+   "id": "LAMP_q_w_loft",
+   "node": "q_w_loft",
+   "pos": [
+    -5.951,
+    3.86,
+    17.61
+   ]
+  },
+  {
+   "id": "LAMP_plaza",
+   "node": "plaza",
+   "pos": [
+    -17.911,
+    7.86,
+    -7.086
+   ]
+  },
+  {
+   "id": "LAMP_p_w_eat",
+   "node": "p_w_eat",
+   "pos": [
+    -14.951,
+    7.86,
+    10.41
+   ]
+  },
+  {
+   "id": "LAMP_p_n_h08",
+   "node": "p_n_h08",
+   "pos": [
+    6.836,
+    7.86,
+    -5.755
+   ]
+  },
+  {
+   "id": "LAMP_r_n_s2",
+   "node": "r_n_s2",
+   "pos": [
+    -10.451,
+    12.36,
+    -13.59
+   ]
+  },
+  {
+   "id": "LAMP_r_w_h11",
+   "node": "r_w_h11",
+   "pos": [
+    -23.451,
+    12.36,
+    5.31
+   ]
+  },
+  {
+   "id": "LAMP_c_hall",
+   "node": "c_hall",
+   "pos": [
+    -21.332,
+    16.86,
+    -19.353
+   ]
+  },
+  {
+   "id": "LAMP_c_school",
+   "node": "c_school",
+   "pos": [
+    -9.451,
+    16.86,
+    -20.49
+   ]
+  },
+  {
+   "id": "LAMP_k_s7",
+   "node": "k_s7",
+   "pos": [
+    -29.836,
+    21.36,
+    -28.845
+   ]
+  },
+  {
+   "id": "LAMP_hd_mid",
+   "node": "hd_mid",
+   "pos": [
+    31.753,
+    11.36,
+    -2.332
+   ]
+  },
+  {
+   "id": "LAMP_bw_2",
+   "node": "bw_2",
+   "pos": [
+    3.249,
+    3.86,
+    20.51
+   ]
+  },
+  {
+   "id": "LAMP_pierB_end",
+   "node": "pierB_end",
+   "pos": [
+    14.799,
+    3.66,
+    12.41
+   ]
+  },
+  {
+   "id": "LAMP_st_beacon",
+   "node": "st_beacon",
+   "pos": [
+    36.247,
+    11.36,
+    16.332
+   ]
+  }
+ ],
+ "landmarks": [
+  {
+   "id": "well",
+   "node": "plaza",
+   "pos": [
+    -18.835,
+    5.5,
+    -6.158
+   ]
+  },
+  {
+   "id": "cistern",
+   "node": "k_cistern",
+   "pos": [
+    -25.756,
+    19.0,
+    -30.4
+   ]
+  },
+  {
+   "id": "lookout",
+   "node": "k_look",
+   "pos": [
+    -37.5,
+    19.0,
+    -11
+   ]
+  },
+  {
+   "id": "great_tree",
+   "node": "k_tree",
+   "pos": [
+    -37.181,
+    19.0,
+    -14.383
+   ]
+  },
+  {
+   "id": "beacon",
+   "node": "st_beacon",
+   "pos": [
+    36.836,
+    9.0,
+    16.488
+   ],
+   "light": [
+    36.836,
+    13.7,
+    16.488
+   ]
+  }
+ ],
+ "vegetation": {
+  "palm": 16,
+  "tree": 22,
+  "shrub": 90
+ },
+ "boats": [
+  {
+   "id": "BOAT_01",
+   "kind": "skiff",
+   "mooring": "moor_A1",
+   "pos": [
+    3.2,
+    0.0,
+    9
+   ],
+   "yaw_deg": -90.0
+  },
+  {
+   "id": "BOAT_02",
+   "kind": "skiff",
+   "mooring": "moor_A2",
+   "pos": [
+    7.3,
+    0.0,
+    9
+   ],
+   "yaw_deg": -90.0
+  },
+  {
+   "id": "BOAT_03",
+   "kind": "fishing_boat",
+   "mooring": "moor_A3",
+   "pos": [
+    7.6,
+    0.0,
+    12.5
+   ],
+   "yaw_deg": -90.0
+  },
+  {
+   "id": "BOAT_04",
+   "kind": "skiff",
+   "mooring": "moor_B1",
+   "pos": [
+    12.2,
+    0.0,
+    11
+   ],
+   "yaw_deg": -90.0
+  },
+  {
+   "id": "BOAT_05",
+   "kind": "fishing_boat",
+   "mooring": "moor_B2",
+   "pos": [
+    16.3,
+    0.0,
+    11
+   ],
+   "yaw_deg": -90.0
+  },
+  {
+   "id": "BOAT_06",
+   "kind": "skiff",
+   "mooring": "moor_BW",
+   "pos": [
+    9.5,
+    0.0,
+    22.4
+   ],
+   "yaw_deg": 0.0
+  }
+ ],
+ "schema": "living-tides.environment",
+ "version": 1,
+ "axes": "+x east, +y up, +z south (same as village_layout.json)"
+}

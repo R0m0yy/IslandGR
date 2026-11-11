@@ -1,0 +1,592 @@
+{
+ "schema": "living-tides.dev_population",
+ "version": 1,
+ "note": "PLACEHOLDER villagers for simulation development. Final characters are undecided.",
+ "villagers": [
+  {
+   "id": "V01",
+   "name": "Cleo",
+   "household": "HH_P05",
+   "home": "P05",
+   "bed_slot": 0,
+   "job": {
+    "role": "fisher",
+    "place": "BOAT_02",
+    "hours": [
+     6,
+     15
+    ]
+   },
+   "placeholder": true
+  },
+  {
+   "id": "V02",
+   "name": "Gus",
+   "household": "HH_P05",
+   "home": "P05",
+   "bed_slot": 1,
+   "job": null,
+   "placeholder": true
+  },
+  {
+   "id": "V03",
+   "name": "Kit",
+   "household": "HH_H01",
+   "home": "H01",
+   "bed_slot": 0,
+   "job": null,
+   "placeholder": true
+  },
+  {
+   "id": "V04",
+   "name": "Ivo",
+   "household": "HH_H01",
+   "home": "H01",
+   "bed_slot": 1,
+   "job": {
+    "role": "apprentice",
+    "place": "P07",
+    "hours": [
+     6,
+     18
+    ]
+   },
+   "placeholder": true
+  },
+  {
+   "id": "V05",
+   "name": "Dov",
+   "household": "HH_H02",
+   "home": "H02",
+   "bed_slot": 0,
+   "job": null,
+   "placeholder": true
+  },
+  {
+   "id": "V06",
+   "name": "Quill",
+   "household": "HH_H02",
+   "home": "H02",
+   "bed_slot": 1,
+   "job": null,
+   "placeholder": true
+  },
+  {
+   "id": "V07",
+   "name": "Joss",
+   "household": "HH_H03",
+   "home": "H03",
+   "bed_slot": 0,
+   "job": null,
+   "placeholder": true
+  },
+  {
+   "id": "V08",
+   "name": "Nell",
+   "household": "HH_H03",
+   "home": "H03",
+   "bed_slot": 1,
+   "job": {
+    "role": "caretaker",
+    "place": "P08",
+    "hours": [
+     6,
+     18
+    ]
+   },
+   "placeholder": true
+  },
+  {
+   "id": "V09",
+   "name": "Ada",
+   "household": "HH_H04",
+   "home": "H04",
+   "bed_slot": 0,
+   "job": null,
+   "placeholder": true
+  },
+  {
+   "id": "V10",
+   "name": "Yara",
+   "household": "HH_H04",
+   "home": "H04",
+   "bed_slot": 1,
+   "job": null,
+   "placeholder": true
+  },
+  {
+   "id": "V11",
+   "name": "Cass",
+   "household": "HH_H05",
+   "home": "H05",
+   "bed_slot": 0,
+   "job": {
+    "role": "fisher",
+    "place": "BOAT_01",
+    "hours": [
+     6,
+     15
+    ]
+   },
+   "placeholder": true
+  },
+  {
+   "id": "V12",
+   "name": "Ansel",
+   "household": "HH_H05",
+   "home": "H05",
+   "bed_slot": 1,
+   "job": {
+    "role": "apprentice",
+    "place": "P02",
+    "hours": [
+     6,
+     18
+    ]
+   },
+   "placeholder": true
+  },
+  {
+   "id": "V13",
+   "name": "Bram",
+   "household": "HH_H06",
+   "home": "H06",
+   "bed_slot": 0,
+   "job": {
+    "role": "carpenter",
+    "place": "P07",
+    "hours": [
+     6,
+     18
+    ]
+   },
+   "placeholder": true
+  },
+  {
+   "id": "V14",
+   "name": "Milo",
+   "household": "HH_H06",
+   "home": "H06",
+   "bed_slot": 1,
+   "job": null,
+   "placeholder": true
+  },
+  {
+   "id": "V15",
+   "name": "Vera",
+   "household": "HH_H07",
+   "home": "H07",
+   "bed_slot": 0,
+   "job": {
+    "role": "teacher",
+    "place": "P09",
+    "hours": [
+     6,
+     18
+    ]
+   },
+   "placeholder": true
+  },
+  {
+   "id": "V16",
+   "name": "Teo",
+   "household": "HH_H07",
+   "home": "H07",
+   "bed_slot": 1,
+   "job": null,
+   "placeholder": true
+  },
+  {
+   "id": "V17",
+   "name": "Hett",
+   "household": "HH_H08",
+   "home": "H08",
+   "bed_slot": 0,
+   "job": {
+    "role": "server",
+    "place": "P06",
+    "hours": [
+     6,
+     18
+    ]
+   },
+   "placeholder": true
+  },
+  {
+   "id": "V18",
+   "name": "Edda",
+   "household": "HH_H08",
+   "home": "H08",
+   "bed_slot": 1,
+   "job": null,
+   "placeholder": true
+  },
+  {
+   "id": "V19",
+   "name": "Greta",
+   "household": "HH_H09",
+   "home": "H09",
+   "bed_slot": 0,
+   "job": {
+    "role": "fisher",
+    "place": "BOAT_04",
+    "hours": [
+     6,
+     15
+    ]
+   },
+   "placeholder": true
+  },
+  {
+   "id": "V20",
+   "name": "Rhea",
+   "household": "HH_H09",
+   "home": "H09",
+   "bed_slot": 1,
+   "job": {
+    "role": "fishmonger",
+    "place": "P01",
+    "hours": [
+     6,
+     18
+    ]
+   },
+   "placeholder": true
+  },
+  {
+   "id": "V21",
+   "name": "Pim",
+   "household": "HH_H10",
+   "home": "H10",
+   "bed_slot": 0,
+   "job": {
+    "role": "boatwright",
+    "place": "P02",
+    "hours": [
+     6,
+     18
+    ]
+   },
+   "placeholder": true
+  },
+  {
+   "id": "V22",
+   "name": "Vale",
+   "household": "HH_H10",
+   "home": "H10",
+   "bed_slot": 1,
+   "job": {
+    "role": "shop_hand",
+    "place": "P05",
+    "hours": [
+     6,
+     18
+    ]
+   },
+   "placeholder": true
+  },
+  {
+   "id": "V23",
+   "name": "Dara",
+   "household": "HH_H11",
+   "home": "H11",
+   "bed_slot": 0,
+   "job": null,
+   "placeholder": true
+  },
+  {
+   "id": "V24",
+   "name": "Finn",
+   "household": "HH_H11",
+   "home": "H11",
+   "bed_slot": 1,
+   "job": null,
+   "placeholder": true
+  },
+  {
+   "id": "V25",
+   "name": "Hale",
+   "household": "HH_H12",
+   "home": "H12",
+   "bed_slot": 0,
+   "job": {
+    "role": "fisher",
+    "place": "BOAT_03",
+    "hours": [
+     6,
+     15
+    ]
+   },
+   "placeholder": true
+  },
+  {
+   "id": "V26",
+   "name": "Bryn",
+   "household": "HH_H12",
+   "home": "H12",
+   "bed_slot": 1,
+   "job": null,
+   "placeholder": true
+  },
+  {
+   "id": "V27",
+   "name": "Moss",
+   "household": "HH_H13",
+   "home": "H13",
+   "bed_slot": 0,
+   "job": {
+    "role": "fishmonger",
+    "place": "P01",
+    "hours": [
+     6,
+     18
+    ]
+   },
+   "placeholder": true
+  },
+  {
+   "id": "V28",
+   "name": "Orin",
+   "household": "HH_H13",
+   "home": "H13",
+   "bed_slot": 1,
+   "job": null,
+   "placeholder": true
+  },
+  {
+   "id": "V29",
+   "name": "Lise",
+   "household": "HH_H14",
+   "home": "H14",
+   "bed_slot": 0,
+   "job": null,
+   "placeholder": true
+  },
+  {
+   "id": "V30",
+   "name": "Sol",
+   "household": "HH_H14",
+   "home": "H14",
+   "bed_slot": 1,
+   "job": null,
+   "placeholder": true
+  },
+  {
+   "id": "V31",
+   "name": "Faye",
+   "household": "HH_H15",
+   "home": "H15",
+   "bed_slot": 0,
+   "job": null,
+   "placeholder": true
+  },
+  {
+   "id": "V32",
+   "name": "Wren",
+   "household": "HH_H15",
+   "home": "H15",
+   "bed_slot": 1,
+   "job": {
+    "role": "shopkeeper",
+    "place": "P05",
+    "hours": [
+     6,
+     18
+    ]
+   },
+   "placeholder": true
+  },
+  {
+   "id": "V33",
+   "name": "Ines",
+   "household": "HH_H16",
+   "home": "H16",
+   "bed_slot": 0,
+   "job": {
+    "role": "healer",
+    "place": "P10",
+    "hours": [
+     6,
+     18
+    ]
+   },
+   "placeholder": true
+  },
+  {
+   "id": "V34",
+   "name": "Zed",
+   "household": "HH_H16",
+   "home": "H16",
+   "bed_slot": 1,
+   "job": {
+    "role": "storekeeper",
+    "place": "P03",
+    "hours": [
+     6,
+     18
+    ]
+   },
+   "placeholder": true
+  },
+  {
+   "id": "V35",
+   "name": "Rafe",
+   "household": "HH_H17",
+   "home": "H17",
+   "bed_slot": 0,
+   "job": null,
+   "placeholder": true
+  },
+  {
+   "id": "V36",
+   "name": "Odo",
+   "household": "HH_H17",
+   "home": "H17",
+   "bed_slot": 1,
+   "job": {
+    "role": "net_maker",
+    "place": "P04",
+    "hours": [
+     6,
+     18
+    ]
+   },
+   "placeholder": true
+  },
+  {
+   "id": "V37",
+   "name": "Nora",
+   "household": "HH_H18",
+   "home": "H18",
+   "bed_slot": 0,
+   "job": null,
+   "placeholder": true
+  },
+  {
+   "id": "V38",
+   "name": "June",
+   "household": "HH_H18",
+   "home": "H18",
+   "bed_slot": 1,
+   "job": {
+    "role": "market_clerk",
+    "place": "P01",
+    "hours": [
+     6,
+     18
+    ]
+   },
+   "placeholder": true
+  },
+  {
+   "id": "V39",
+   "name": "Suki",
+   "household": "HH_H19",
+   "home": "H19",
+   "bed_slot": 0,
+   "job": {
+    "role": "fisher",
+    "place": "BOAT_06",
+    "hours": [
+     6,
+     15
+    ]
+   },
+   "placeholder": true
+  },
+  {
+   "id": "V40",
+   "name": "Una",
+   "household": "HH_H19",
+   "home": "H19",
+   "bed_slot": 1,
+   "job": {
+    "role": "fisher",
+    "place": "BOAT_05",
+    "hours": [
+     6,
+     15
+    ]
+   },
+   "placeholder": true
+  },
+  {
+   "id": "V41",
+   "name": "Xan",
+   "household": "HH_H20",
+   "home": "H20",
+   "bed_slot": 0,
+   "job": {
+    "role": "cook",
+    "place": "P06",
+    "hours": [
+     6,
+     18
+    ]
+   },
+   "placeholder": true
+  },
+  {
+   "id": "V42",
+   "name": "Elio",
+   "household": "HH_H20",
+   "home": "H20",
+   "bed_slot": 1,
+   "job": null,
+   "placeholder": true
+  }
+ ],
+ "fishing_spots": [
+  {
+   "id": "FS_pierA",
+   "node": "pierA_end",
+   "facing": [
+    0,
+    1
+   ],
+   "slots": 2
+  },
+  {
+   "id": "FS_pierB",
+   "node": "pierB_end",
+   "facing": [
+    0,
+    1
+   ],
+   "slots": 2
+  },
+  {
+   "id": "FS_spit",
+   "node": "sp_2",
+   "facing": [
+    1,
+    0.3
+   ],
+   "slots": 2
+  },
+  {
+   "id": "FS_boardwalk",
+   "node": "bw_3",
+   "facing": [
+    0,
+    1
+   ],
+   "slots": 1
+  }
+ ],
+ "stroll_nodes": [
+  "plaza",
+  "k_look",
+  "k_tree",
+  "st_beacon",
+  "hd_mid",
+  "sp_1",
+  "q_n_mkt",
+  "c_hall",
+  "bw_2"
+ ],
+ "start_pantry": {
+  "raw_fish": 1,
+  "meals": 1
+ }
+}
