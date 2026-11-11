@@ -19,7 +19,7 @@ PASS  placeholder rig exposes all 11 animation clips  ["idle", "walk", "climb_st
 PASS  animation state machine travels idle -> walk  walk
 SIM totals over 5.0 days, 42 villagers: { "sleeps": 320, "meals_cooked": 627, "meals_eaten": 646, "fish_caught": 403, "work_blocks": 482, "doors_opened": 1564, "stairs_climbed": 2539, "ladders_climbed": 196, "bridges_crossed": 173, "failed_paths": 0, "failed_uses": 0, "plans": 2675, "fish_bought": 126, "fish_sold": 178, "metres": 112508, "starve_minutes": 0 }
 SIM state samples: { "walk": 1023, "idle": 150, "work": 664, "eat": 148, "fish": 209, "open_door": 47, "climb_stairs": 359, "cook": 134, "climb_ladder": 33, "cross_bridge": 51, "sleep": 2213, "shop": 4, "sit": 5 }
-PASS  simulation ran 5 game days  { "clock": "Day 6  06:00", "steps": 72000, "wall_ms": 12635 }
+PASS  simulation ran 5 game days  { "clock": "Day 6  06:00", "steps": 72000, "wall_ms": 13565 }
 PASS  villagers sleep (everyone at least once)  { "sleeps": 320, "never_slept": 0 }
 PASS  villagers cook  627
 PASS  villagers eat (everyone at least once)  { "meals_eaten": 646, "never_ate": 0 }

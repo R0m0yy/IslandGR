@@ -132,7 +132,7 @@
    "detail": {
     "clock": "Day 6  06:00",
     "steps": 72000,
-    "wall_ms": 12635
+    "wall_ms": 13565
    },
    "passed": true,
    "test": "simulation ran 5 game days"
@@ -227,7 +227,7 @@
    "test": "all activity states observed"
   }
  ],
- "sim_wall_ms": 12635,
+ "sim_wall_ms": 13565,
  "state_samples": {
   "climb_ladder": 33,
   "climb_stairs": 359,
