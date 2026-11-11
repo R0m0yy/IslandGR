@@ -12,6 +12,7 @@ extends Node
 
 var out_dir := "user://"
 var E_DAYS := 24.0
+var Y_DAYS := 28.0
 var results: Array = []
 var failures := 0
 var current := ""
@@ -68,6 +69,8 @@ func _ready() -> void:
 			out_dir = a.substr(6)
 		if a.begins_with("--only="):
 			only = a.substr(7)
+		if a.begins_with("--y-days="):
+			Y_DAYS = float(a.substr(9))
 		if a.begins_with("--e-days="):
 			E_DAYS = float(a.substr(9))
 	for sc in only.split(","):
@@ -410,6 +413,7 @@ func scenario_Y() -> void:
 	var v := make_village(28.0)
 	report["Y"]["setup"] = "default pacing (28 game days = 1 year of life), natural weather, no intervention"
 	var market_empty_hours := [0]
+	var trading_hours := [0]
 	var pops := []
 	var boat_out_long := [0]
 	var out_since := {}
@@ -419,8 +423,11 @@ func scenario_Y() -> void:
 	var watch := func():
 		if int(GameClock.total_minutes) % 60 == 0:
 			hours[0] += 1
-			if v.ledger.qty(Economy.MARKET, "fish") == 0:
-				market_empty_hours[0] += 1
+			var hr := GameClock.hour()
+			if hr >= 6.0 and hr < 20.0:
+				trading_hours[0] += 1
+				if v.ledger.qty(Economy.MARKET, "fish") == 0:
+					market_empty_hours[0] += 1
 			for b in v.boats.values():
 				if b.boat_state != "moored":
 					out_since[b] = out_since.get(b, GameClock.total_minutes)
@@ -431,7 +438,7 @@ func scenario_Y() -> void:
 			if int(GameClock.total_minutes) % 1440 == 0:
 				pops.append(v.villagers.size())
 		return false
-	run(v, 28 * 1440.0, "", watch)
+	run(v, Y_DAYS * 1440.0, "", watch)
 	var tot := {}
 	for x in v.villagers:
 		for k in x.stats:
@@ -441,18 +448,21 @@ func scenario_Y() -> void:
 	var median: int = w[w.size() / 2]
 	report["Y"]["totals"] = tot
 	report["Y"]["economy"] = v.economy.stats.duplicate()
+	report["Y"]["owed_to_fishers"] = v.economy.owed_to_fishers()
+	report["Y"]["tills"] = {"market": v.ledger.money(Economy.MARKET), "council": v.ledger.money(Economy.COUNCIL), "eatery": v.ledger.money(Economy.EATERY), "store": v.ledger.money(Economy.STORE)}
+	report["Y"]["starving"] = v.villagers.filter(func(x): return x.stats["starve_minutes"] > 60.0).map(func(x): return {"id": x.villager_id, "age": int(x.age), "job": x.job, "hh": x.hh, "min": int(x.stats["starve_minutes"]), "money": v.ledger.money(x.hh)})
 	report["Y"]["ecosystem"] = v.ecosystem.stats.duplicate(true)
 	report["Y"]["society"] = v.society.counts.duplicate()
 	report["Y"]["population_by_day"] = pops
 	report["Y"]["wealth"] = {"min": w[0], "median": median, "max": w[-1]}
 	report["Y"]["journal_counts"] = v.journal.counts
 	report["Y"]["weather_hours"] = v.weather.hours_in
-	check("a full year ran (28 game days)", GameClock.day() >= 28, GameClock.text())
+	check("the run completed (%d game days; 28 = one year)" % int(Y_DAYS), GameClock.day() >= int(Y_DAYS), GameClock.text())
 	check("no route failures or failed object uses", tot.get("failed_paths", 0) == 0 and tot.get("failed_uses", 0) == 0, {"failed_paths": tot.get("failed_paths", 0), "failed_uses": tot.get("failed_uses", 0)})
 	check("nobody starves", tot.get("starve_minutes", 0.0) < 60.0, tot.get("starve_minutes", 0.0))
 	check("books balance, nothing negative", v.ledger.audit().is_empty(), v.ledger.audit())
 	check("no boat stays out more than 10 hours", boat_out_long[0] == 0, boat_out_long[0])
-	check("the market is rarely empty (supplied)", market_empty_hours[0] < hours[0] * 0.15, {"empty_hours": market_empty_hours[0], "of": hours[0]})
+	check("the market has fish during trading hours (06-20) at least 85% of the time", market_empty_hours[0] < trading_hours[0] * 0.15, {"empty_trading_hours": market_empty_hours[0], "of": trading_hours[0]})
 	check("no runaway wealth: richest household below 12x the median", w[-1] <= maxi(12 * maxi(median, 10), 200), report["Y"]["wealth"])
 	check("every kind of event was recorded", ["fishing", "wildlife", "weather", "community"].all(func(k): return v.journal.counts.has(k)), v.journal.counts)
 	check("residents remember things that happened to them", v.villagers.filter(func(x): return x.memories.size() > 0).size() > v.villagers.size() * 0.8)

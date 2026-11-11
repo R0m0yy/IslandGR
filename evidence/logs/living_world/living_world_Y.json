@@ -1,0 +1,210 @@
+{
+ "engine": "4.3-stable (official)",
+ "failed": 3,
+ "passed": 6,
+ "report": {
+  "Y": {
+   "economy": {
+    "bait_cut": 26,
+    "bait_made": 444,
+    "bait_sold": 151,
+    "credit_repaid": 0,
+    "credit_sales": 0,
+    "fish_bought": 82,
+    "fish_kept": 2016,
+    "fish_sold_to_market": 130,
+    "gift_items": 113,
+    "gifts": 52,
+    "house_repairs": 51,
+    "house_repairs_unpaid": 10,
+    "levy_missed": 149,
+    "levy_paid": 460,
+    "meals_sold": 21,
+    "repairs": 18,
+    "repairs_unaffordable": 64,
+    "rotted": 1429,
+    "spoiled_home": 1633,
+    "spoiled_market": 2,
+    "successions": 0,
+    "wages_paid": 925,
+    "wages_unpaid": 840
+   },
+   "ecosystem": {
+    "bird_catches": 266,
+    "bird_dives": 601,
+    "caught_by_boats": {
+     "mackerel": 472,
+     "scad": 1503,
+     "snapper": 172
+    },
+    "crab_bolts": 463,
+    "dolphin_feeds": 75,
+    "predator_kills": 357,
+    "robbed_in_air": 50,
+    "scavenged": 162,
+    "school_flights": 466,
+    "theft_attempts": 74,
+    "thefts": 46
+   },
+   "journal_counts": {
+    "birth": 3,
+    "community": 62,
+    "damage": 58,
+    "economy": 3,
+    "fishing": 185,
+    "illness": 7,
+    "recovery": 7,
+    "repair": 41,
+    "weather": 99,
+    "wildlife": 96
+   },
+   "population_by_day": [
+    42,
+    44,
+    44,
+    44,
+    44,
+    44,
+    44,
+    44,
+    44,
+    44
+   ],
+   "setup": "default pacing (28 game days = 1 year of life), natural weather, no intervention",
+   "society": {
+    "births": 3,
+    "came_of_age": 0,
+    "deaths": 0,
+    "estates": 0,
+    "greetings": 619,
+    "illnesses": 7,
+    "moves": 0,
+    "newcomers": 0,
+    "partnerships": 0,
+    "retired": 0
+   },
+   "totals": {
+    "boat_trips": 240,
+    "bridges_crossed": 750,
+    "doors_opened": 9197,
+    "drinks": 1961,
+    "empty_trips": 32,
+    "failed_paths": 0,
+    "failed_uses": 0,
+    "fish_bought": 0,
+    "fish_caught": 2857,
+    "fish_sold": 0,
+    "gifts_given": 113,
+    "gifts_received": 265,
+    "income": 499,
+    "ladders_climbed": 934,
+    "max_hunger": 3901.04000000005,
+    "meals_cooked": 3327,
+    "meals_eaten": 3346,
+    "metres": 575149.979998972,
+    "nets_mended": 0,
+    "plans": 81993,
+    "repairs_done": 51,
+    "sheltered": 499,
+    "sleeps": 1869,
+    "stairs_climbed": 13199,
+    "starve_minutes": 15852.4000000099,
+    "stayed_ashore": 16,
+    "thefts_suffered": 10,
+    "wages": 3700,
+    "washes": 679,
+    "work_blocks": 1765
+   },
+   "wall_ms": 145550,
+   "wealth": {
+    "max": 427,
+    "median": 32,
+    "min": 0
+   },
+   "weather_hours": {
+    "clear": 295,
+    "cloudy": 140,
+    "heavy_rain": 90,
+    "light_rain": 117,
+    "storm": 30
+   }
+  }
+ },
+ "results": [
+  {
+   "detail": "Day 29  05:59",
+   "passed": true,
+   "scenario": "Y",
+   "test": "a full year ran (28 game days)"
+  },
+  {
+   "detail": {
+    "failed_paths": 0,
+    "failed_uses": 0
+   },
+   "passed": true,
+   "scenario": "Y",
+   "test": "no route failures or failed object uses"
+  },
+  {
+   "detail": 15852.4000000099,
+   "passed": false,
+   "scenario": "Y",
+   "test": "nobody starves"
+  },
+  {
+   "detail": [],
+   "passed": true,
+   "scenario": "Y",
+   "test": "books balance, nothing negative"
+  },
+  {
+   "detail": 0,
+   "passed": true,
+   "scenario": "Y",
+   "test": "no boat stays out more than 10 hours"
+  },
+  {
+   "detail": {
+    "empty_hours": 221,
+    "of": 254
+   },
+   "passed": false,
+   "scenario": "Y",
+   "test": "the market is rarely empty (supplied)"
+  },
+  {
+   "detail": {
+    "max": 427,
+    "median": 32,
+    "min": 0
+   },
+   "passed": false,
+   "scenario": "Y",
+   "test": "no runaway wealth: richest household below 12x the median"
+  },
+  {
+   "detail": {
+    "birth": 3,
+    "community": 62,
+    "damage": 58,
+    "economy": 3,
+    "fishing": 185,
+    "illness": 7,
+    "recovery": 7,
+    "repair": 41,
+    "weather": 99,
+    "wildlife": 96
+   },
+   "passed": true,
+   "scenario": "Y",
+   "test": "every kind of event was recorded"
+  },
+  {
+   "detail": "",
+   "passed": true,
+   "scenario": "Y",
+   "test": "residents remember things that happened to them"
+  }
+ ]
+}

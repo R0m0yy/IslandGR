@@ -25,3 +25,5 @@ func _process(dt: float) -> void:
 	t += dt
 	village.camera_rig.goal_yaw = deg_to_rad(28.0 + t * 2.2)
 	village.camera_rig.goal_dist = 46.0 - t * 0.9
+	village.hud.hidden_ui = t < 6.0
+	village.hud.journal_mode = 2 if t >= 6.0 else 0

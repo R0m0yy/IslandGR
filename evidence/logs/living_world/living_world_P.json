@@ -1,0 +1,207 @@
+{
+ "engine": "4.3-stable (official)",
+ "failed": 1,
+ "passed": 4,
+ "report": {
+  "P": {
+   "birth_blocked_couple_years": {
+    "age": 868,
+    "apart": 0,
+    "gap": 19,
+    "money": 95,
+    "no_room": 209
+   },
+   "counts": {
+    "births": 19,
+    "came_of_age": 19,
+    "deaths": 59,
+    "estates": 26,
+    "illnesses": 23,
+    "moves": 23,
+    "newcomers": 28,
+    "partnerships": 7,
+    "retired": 66
+   },
+   "series": [
+    {
+     "births": 6,
+     "children": 6,
+     "deaths": 0,
+     "elders": 0,
+     "empty_houses": 0,
+     "mean_age": 39.1,
+     "newcomers": 0,
+     "pop": 48,
+     "year": 5
+    },
+    {
+     "births": 6,
+     "children": 6,
+     "deaths": 0,
+     "elders": 1,
+     "empty_houses": 0,
+     "mean_age": 44.1,
+     "newcomers": 0,
+     "pop": 48,
+     "year": 10
+    },
+    {
+     "births": 19,
+     "children": 10,
+     "deaths": 42,
+     "elders": 0,
+     "empty_houses": 1,
+     "mean_age": 31.1,
+     "newcomers": 26,
+     "pop": 45,
+     "year": 55
+    },
+    {
+     "births": 19,
+     "children": 7,
+     "deaths": 42,
+     "elders": 0,
+     "empty_houses": 0,
+     "mean_age": 36.1,
+     "newcomers": 26,
+     "pop": 45,
+     "year": 60
+    },
+    {
+     "births": 19,
+     "children": 4,
+     "deaths": 42,
+     "elders": 5,
+     "empty_houses": 0,
+     "mean_age": 41.1,
+     "newcomers": 26,
+     "pop": 45,
+     "year": 65
+    },
+    {
+     "births": 19,
+     "children": 0,
+     "deaths": 43,
+     "elders": 6,
+     "empty_houses": 0,
+     "mean_age": 45.6,
+     "newcomers": 26,
+     "pop": 44,
+     "year": 70
+    },
+    {
+     "births": 19,
+     "children": 0,
+     "deaths": 49,
+     "elders": 1,
+     "empty_houses": 0,
+     "mean_age": 46.8,
+     "newcomers": 26,
+     "pop": 38,
+     "year": 75
+    },
+    {
+     "births": 19,
+     "children": 0,
+     "deaths": 50,
+     "elders": 5,
+     "empty_houses": 0,
+     "mean_age": 51.3,
+     "newcomers": 26,
+     "pop": 37,
+     "year": 80
+    },
+    {
+     "births": 19,
+     "children": 0,
+     "deaths": 54,
+     "elders": 7,
+     "empty_houses": 0,
+     "mean_age": 54.2,
+     "newcomers": 26,
+     "pop": 33,
+     "year": 85
+    },
+    {
+     "births": 19,
+     "children": 0,
+     "deaths": 59,
+     "elders": 12,
+     "empty_houses": 1,
+     "mean_age": 54.6,
+     "newcomers": 28,
+     "pop": 30,
+     "year": 90
+    }
+   ],
+   "settings": {
+    "birth_gap_years": 2,
+    "births_per_fertile_year": 0.55,
+    "fertile_max": 45,
+    "fertile_min": 18,
+    "illness_per_day": 0.006,
+    "immigration": true,
+    "old_age": 70,
+    "pair_bond": 28,
+    "vacancy_years": 1.5
+   },
+   "setup": "accelerated calendar (1 game day = 1 year); 90 years; immigration to empty houses ON (configurable)",
+   "wall_ms": 445060
+  }
+ },
+ "results": [
+  {
+   "detail": {
+    "final": 30,
+    "max": 48,
+    "min": 30,
+    "start": 42
+   },
+   "passed": true,
+   "scenario": "P",
+   "test": "population does not collapse over 90 years"
+  },
+  {
+   "detail": {
+    "births": 19,
+    "deaths": 59,
+    "final": 30,
+    "newcomers": 28
+   },
+   "passed": true,
+   "scenario": "P",
+   "test": "population changes are explained by recorded births, deaths and arrivals"
+  },
+  {
+   "detail": {
+    "births": 19,
+    "came_of_age": 19,
+    "deaths": 59,
+    "estates": 26,
+    "illnesses": 23,
+    "moves": 23,
+    "newcomers": 28,
+    "partnerships": 7,
+    "retired": 66
+   },
+   "passed": false,
+   "scenario": "P",
+   "test": "several generations: grandchildren of the founders exist"
+  },
+  {
+   "detail": {
+    "audit": [],
+    "dangling": 0
+   },
+   "passed": true,
+   "scenario": "P",
+   "test": "family links stay consistent"
+  },
+  {
+   "detail": 16,
+   "passed": true,
+   "scenario": "P",
+   "test": "businesses changed hands when owners left"
+  }
+ ]
+}

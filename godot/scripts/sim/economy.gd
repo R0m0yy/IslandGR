@@ -28,8 +28,16 @@ var ledger: Ledger
 var village = null
 var stats := {"wages_paid": 0, "wages_unpaid": 0, "levy_paid": 0, "levy_missed": 0, "fish_sold_to_market": 0,
 	"fish_kept": 0, "fish_bought": 0, "meals_sold": 0, "repairs": 0, "repairs_unaffordable": 0, "bait_made": 0, "bait_sold": 0, "credit_sales": 0, "credit_repaid": 0,
-	"gifts": 0, "gift_items": 0, "spoiled_home": 0, "spoiled_market": 0, "rotted": 0, "bait_cut": 0, "house_repairs": 0, "house_repairs_unpaid": 0, "successions": 0}
+	"gifts": 0, "gift_items": 0, "spoiled_home": 0, "spoiled_market": 0, "rotted": 0, "bait_cut": 0, "house_repairs": 0, "house_repairs_unpaid": 0, "successions": 0,
+	"consigned": 0, "payables_settled": 0, "stall_rent": 0, "stall_rent_missed": 0,
+	"levy_waived_days": 0, "subsidised_wages": 0}
+const COUNCIL_RESERVE := 250          # above this the council waives levy and rent and props up wages
+var _waiving := false
+const STALL_RENT := {"BIZ_P01": 8, "BIZ_P06": 4, "BIZ_P05": 4}
+const MARKET_ROOM := 35             # fish the market will take in (ice box + the day's slab)
 var debts: Dictionary = {}            # household -> money owed to the market
+var payables: Dictionary = {}         # fisher household -> money the market owes for fish taken on consignment
+var _payable_order: Array = []        # oldest first
 var favours: Dictionary = {}          # "giver_hh|receiver_hh" -> items given (remembered kindness)
 var owners: Dictionary = {}           # business id -> villager id
 var lean_days: Dictionary = {}        # business id -> consecutive days it could not pay a wage
@@ -74,8 +82,14 @@ func daily(day: int) -> void:
 	if day == _day:
 		return
 	_day = day
+	var waive: bool = ledger.money(COUNCIL) > COUNCIL_RESERVE
+	if waive != _waiving:
+		_waiving = waive
+		village.journal.add("economy", [], "The council %s the household levy and stall rents (reserve %d)." % ["waived" if waive else "restored", ledger.money(COUNCIL)], "council reserve %s %d" % [">" if waive else "<=", COUNCIL_RESERVE])
+	if waive:
+		stats["levy_waived_days"] += 1
 	for hh in village.households:
-		if village.households[hh].get("members", 0) <= 0:
+		if village.households[hh].get("members", 0) <= 0 or waive:
 			continue
 		if ledger.pay(hh, COUNCIL, LEVY, "levy"):
 			stats["levy_paid"] += 1
@@ -85,9 +99,17 @@ func daily(day: int) -> void:
 		var owed: int = int(debts.get(hh, 0))
 		if owed > 0 and ledger.money(hh) >= owed + 12 and ledger.pay(hh, MARKET, owed, "credit_repaid"):
 			debts.erase(hh)
+			settle_payables()
 			stats["credit_repaid"] += owed
 			village.journal.add("economy", [], "%s settled a debt of %d at the fish market." % [village.household_name(hh), owed], "money to spare")
 	_spoilage()
+	for biz in STALL_RENT:
+		if waive:
+			break
+		if ledger.pay(biz, COUNCIL, STALL_RENT[biz], "stall_rent"):
+			stats["stall_rent"] += STALL_RENT[biz]
+		else:
+			stats["stall_rent_missed"] += 1
 	for biz in [MARKET, EATERY, STORE]:
 		if ledger.money(biz) < WAGE:
 			lean_days[biz] = int(lean_days.get(biz, 0)) + 1
@@ -100,9 +122,37 @@ func daily(day: int) -> void:
 
 func employer_account(v) -> String:
 	var biz := "BIZ_" + String(v.job["place"])
-	if biz in [MARKET, EATERY, BOATYARD, STORE] and ledger.money(biz) >= WAGE:
-		return biz
+	if biz == MARKET:
+		# the market pays the fishermen it owes before it pays its own staff
+		return MARKET if ledger.money(MARKET) - owed_to_fishers() >= WAGE else ""
+	if biz in [EATERY, BOATYARD, STORE, NETLOFT, CARPENTER]:
+		return biz if ledger.money(biz) >= WAGE else ""
 	return COUNCIL
+
+func owed_to_fishers() -> int:
+	var t := 0
+	for k in payables:
+		t += int(payables[k])
+	return t
+
+func settle_payables() -> void:
+	## Money that comes into the market goes first to the fishermen it owes.
+	while not _payable_order.is_empty():
+		var hh: String = _payable_order[0]
+		var owed: int = int(payables.get(hh, 0))
+		var can: int = mini(owed, ledger.money(MARKET))
+		if can <= 0:
+			if owed <= 0:
+				_payable_order.pop_front()
+				payables.erase(hh)
+				continue
+			return
+		ledger.pay(MARKET, hh, can, "consignment_paid")
+		stats["payables_settled"] += can
+		payables[hh] = owed - can
+		if int(payables[hh]) <= 0:
+			payables.erase(hh)
+			_payable_order.pop_front()
 
 func work_done(v, obj) -> void:
 	## Called when a work block ends: production first, then the wage.
@@ -114,6 +164,7 @@ func work_done(v, obj) -> void:
 				var p := fish_sell_price()
 				if ledger.money(EATERY) >= p and ledger.move(MARKET, EATERY, "fish", 1, "eatery_supply"):
 					ledger.pay(EATERY, MARKET, p, "eatery_supply")
+					settle_payables()
 			if ledger.qty(EATERY, "meal") < 12 and ledger.consume(EATERY, "fish", 1, "eatery_cook"):
 				ledger.mint(EATERY, "meal", MEALS_PER_FISH, "eatery_cook")
 	if biz == NETLOFT:
@@ -126,7 +177,11 @@ func work_done(v, obj) -> void:
 				ledger.pay(STORE, NETLOFT, 1, "store_supply")
 	var main_skill: String = {"fisher": "fishing", "cook": "cooking", "carpenter": "carpentry", "apprentice": "carpentry", "boatwright": "carpentry"}.get(v.job["role"], "trade")
 	v.skills[main_skill] = minf(1.0, v.skills[main_skill] + 0.004)
-	if ledger.pay(employer_account(v), v.hh, WAGE, "wage"):
+	var payer := employer_account(v)
+	if payer == "" and ledger.money(COUNCIL) > COUNCIL_RESERVE:
+		payer = COUNCIL                                   # the village keeps its shops staffed when trade is thin
+		stats["subsidised_wages"] += 1
+	if payer != "" and ledger.pay(payer, v.hh, WAGE, "wage"):
 		stats["wages_paid"] += 1
 		v.stats["wages"] += WAGE
 	else:
@@ -135,16 +190,33 @@ func work_done(v, obj) -> void:
 func land_catch(v, boat: Boat) -> void:
 	## Unload a boat: sell to the market while it can pay and has room; the rest goes home.
 	var n := ledger.qty(boat.object_id, "fish")
+	var consigned := 0
+	var home_need: int = maxi(0, 2 * village.households[v.hh]["members"] - ledger.qty(v.hh, "fish"))
 	for i in n:
 		var p := fish_buy_price()
-		if ledger.qty(MARKET, "fish") < 60 and ledger.money(MARKET) >= p:
+		if home_need > 0:
+			# a fisherman keeps enough for his own table first
+			ledger.move(boat.object_id, v.hh, "fish", 1, "landing_home")
+			stats["fish_kept"] += 1
+			home_need -= 1
+		elif ledger.qty(MARKET, "fish") < MARKET_ROOM and ledger.money(MARKET) - owed_to_fishers() >= p:
 			ledger.move(boat.object_id, MARKET, "fish", 1, "landing_sale")
 			ledger.pay(MARKET, v.hh, p, "landing_sale")
 			stats["fish_sold_to_market"] += 1
 			v.stats["income"] += p
+		elif ledger.qty(MARKET, "fish") < MARKET_ROOM:
+			# the till is short: the market takes the fish on account and pays as it sells
+			ledger.move(boat.object_id, MARKET, "fish", 1, "landing_consigned")
+			if not payables.has(v.hh):
+				_payable_order.append(v.hh)
+			payables[v.hh] = int(payables.get(v.hh, 0)) + p
+			stats["consigned"] += 1
+			consigned += 1
 		else:
 			ledger.move(boat.object_id, v.hh, "fish", 1, "landing_home")
 			stats["fish_kept"] += 1
+	if consigned > 0:
+		village.journal.add("economy", [v.villager_id], "The market took %d of %s's fish on account - its till was short." % [consigned, v.display_name], "market owes fishermen %d" % owed_to_fishers())
 	boat.landed += n
 	if boat.condition < Boat.REPAIR_BELOW:
 		if ledger.pay(v.hh, BOATYARD, Boat.REPAIR_COST, "boat_repair"):
@@ -200,6 +272,8 @@ func buy_fish(v) -> int:
 			v.remember("credit", "the market let us have fish on credit", 3.0)
 			village.journal.add("community", [v.villager_id], "The fish market let %s take a fish on credit (%d owed)." % [v.display_name, debts[v.hh]], "empty purse, trusted household")
 	stats["fish_bought"] += got
+	if got > 0:
+		settle_payables()
 	return got
 
 func buy_meal(v) -> bool:
@@ -312,7 +386,7 @@ func wealth() -> Array:
 	return w
 
 func extra_state() -> Dictionary:
-	return {"debts": debts, "favours": favours, "owners": owners, "lean_days": lean_days}
+	return {"debts": debts, "favours": favours, "owners": owners, "lean_days": lean_days, "payables": payables, "payable_order": _payable_order, "waiving": _waiving}
 
 func load_extra(d: Dictionary) -> void:
 	debts = {}; favours = {}; lean_days = {}
@@ -323,3 +397,8 @@ func load_extra(d: Dictionary) -> void:
 	for k in d.get("lean_days", {}):
 		lean_days[k] = int(d["lean_days"][k])
 	owners = d.get("owners", {}).duplicate()
+	payables = {}
+	for k in d.get("payables", {}):
+		payables[k] = int(d["payables"][k])
+	_payable_order = d.get("payable_order", []).duplicate()
+	_waiving = bool(d.get("waiving", false))

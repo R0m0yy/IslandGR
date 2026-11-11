@@ -30,7 +30,8 @@ func bond(a: String, b: String) -> float:
 	return bonds.get(key(a, b), 0.0)
 
 var settings := {"fertile_min": 18.0, "fertile_max": 45.0, "births_per_fertile_year": 0.55, "birth_gap_years": 2.0, "pair_bond": 28.0,
-	"immigration": true, "vacancy_years": 1.5, "old_age": 70.0, "illness_per_day": 0.006}
+	"immigration": true, "vacancy_years": 1.5, "old_age": 70.0, "illness_per_day": 0.006,
+	"max_household": 6, "acquaintance_per_year": 10.0}
 var birth_blocked := {"age": 0, "no_room": 0, "money": 0, "gap": 0, "apart": 0}     # why couples did not have a child (couple-days)
 
 const TEXT := {"birth": "A child, %s, was born %s.", "death": "%s died (%s).", "partnership": "%s and %s became a couple.",
@@ -142,6 +143,7 @@ func _new_day() -> void:
 			record("illness", [v.villager_id], "", "chance%s" % (", poor hygiene" if v.needs["hygiene"] < 25.0 else ""))
 		if v.age >= settings["old_age"] and rng.randf() < 0.035 * (v.age - settings["old_age"] + 1.0) * years * 4.0:
 			_death(v)
+	_acquaint(years)
 	_partnerships()
 	_births(years)
 	if settings["immigration"]:
@@ -172,6 +174,20 @@ func _partnerships() -> void:
 						counts["moves"] += 1
 				break
 
+func _acquaint(years: float) -> void:
+	## A small village: young single people come to know one another over the
+	## years (church, market, the quay), faster the more sociable they are.
+	## This is on top of the minute-by-minute bonding when they share a place.
+	var singles: Array = village.villagers.filter(func(v): return v.partner == "" and v.age >= 17.0 and v.age < 60.0)
+	for i in singles.size():
+		for j in range(i + 1, singles.size()):
+			var a = singles[i]
+			var b = singles[j]
+			if a.hh == b.hh or a.parents.has(b.villager_id) or b.parents.has(a.villager_id) or _siblings(a, b):
+				continue
+			var k: String = key(a.villager_id, b.villager_id)
+			bonds[k] = minf(100.0, bonds.get(k, 0.0) + settings["acquaintance_per_year"] * years * 0.5 * (a.sociability + b.sociability))
+
 func _siblings(a, b) -> bool:
 	for p in a.parents:
 		if b.parents.has(p):
@@ -198,7 +214,8 @@ func _births(years: float) -> void:
 		# room for a child: a spare bed, or a place in a parent's bed while the household is under capacity
 		var spare := village.free_bed(v.home) != null
 		var share: String = ""
-		if not spare and hh["members"] < int(hh.get("capacity", 3)):
+		# small children share a parent's bed: room is limited by beds and a household-size cap, not the layout's adult capacity
+		if not spare and hh["members"] < int(settings["max_household"]):
 			for par in [v, p]:
 				if par.bed and par.bed.co_sleepers.size() < 2:
 					share = par.villager_id

@@ -252,7 +252,9 @@ func exposed_fish() -> Array:
 	for b in village.boats.values():
 		if b.boat_state == "unloading" and l.qty(b.object_id, "fish") > 0:
 			out.append({"account": b.object_id, "pos": b.pos + Vector3(0, 0.6, 0), "guarded": true, "who": b.users[0] if not b.users.is_empty() else null})
-	if l.qty(Economy.MARKET, "fish") > 0 and village.buildings.has("P01"):
+	var hr := GameClock.hour()
+	# out of trading hours the market's fish is shut in the ice box
+	if l.qty(Economy.MARKET, "fish") > 0 and village.buildings.has("P01") and hr >= 6.0 and hr < 20.0:
 		var mp: Vector3 = village.buildings["P01"].global_position + Vector3(0, 1.0, 0)
 		var staff = null
 		for v in village.villagers:
