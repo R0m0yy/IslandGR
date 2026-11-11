@@ -15,7 +15,7 @@
 **Honest comparison with the benchmark (session 4)**
 | Aspect | Benchmark (from the written analysis) | Living Tides now | Verdict |
 |---|---|---|---|
-| Rock | Carved mass, undercut base, cave mouths | Carved island with undercut, 10 caves, strata; ledges read stripy in hard light | Approaching |
+| Rock | Carved mass, undercut base, cave mouths | Carved island with undercut, 10 caves, broad uneven strata | Approaching |
 | Silhouette | Leaning heap, roofs breaking the outline everywhere | Regular stepped hill, roofs mostly below the next terrace | **Below** |
 | Layering | Houses overlap so almost no wall is seen whole; platforms past the rock edge | Houses stand apart in rows; only the stilt row is over water | **Below** |
 | Architecture | One simple shack type, varied by rotation, height, colour and attachments | Five families, more formal; attachments now present | Approaching, different character |

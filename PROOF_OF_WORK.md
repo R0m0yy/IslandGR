@@ -17,7 +17,7 @@ Last update: 2026-11-11, session 4. Earlier session records are preserved unchan
 |---|---|---|---|
 | Blender render (Cycles, CPU) | `evidence/renders_village_v04/` (V*, D* day; `_golden`, `_night`), `evidence/renders_buildings/` | The generated geometry, colour and lighting as Blender sees them. No characters | How the game looks in engine |
 | Godot frame (software OpenGL) | `evidence/renders_godot_v04/` E* (environment, no figures, no UI), T* (figures + UI) | The project loads, draws, lights, runs the sea shader, shows inspectors | Forward+ quality, frame rate |
-| Godot recording | `evidence/renders_godot_v04/harbour_morning.mp4` (if present) | A dozen seconds of the running simulation, software-rendered | Smoothness |
+| Godot recording | `evidence/renders_godot_v04/harbour_morning.mp4` | Nine seconds (216 frames, 960x540) of the running simulation at x30 speed, software-rendered, neutral figures visible | Smoothness |
 | Godot runtime test | `evidence/logs/godot_tests.json`, `godot_tests_stdout.log` | Logic: navigation, objects, AI, economy, boats, weather, save/load, generations | Anything visual |
 | Source check | `evidence/logs/pipeline_test.json`, `build_village.json` (island verification), `build_buildings.json` | Generated data and geometry obey the layout and the building contract | Looks |
 | Concept art / AI images | none exist | — | — |

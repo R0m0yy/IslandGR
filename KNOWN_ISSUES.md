@@ -47,7 +47,7 @@
 | 11 | Layout | Rows remain; only a ≤5° turn per building was added | High (design) |
 | 23 | Sim | Still open: residents pass through each other; no queues | Medium |
 | 25 | Assets | Island is now 38k tris / 4.6 MB (was 100k / 12 MB for terrain + cliffs). Buildings grew to 390k tris with dressing; still no LODs or instancing | Medium |
-| 30 | Visual | Rock strata read as hard stripes under Godot's direct light (see `T01_boat_at_sea.png`) | Medium |
+| 30 | Visual | Rock strata first read as a regular "layer cake" in Godot; beds were made thicker and uneven and ledge grass cut back (see `E06_cliffs_west.png`). Still blocky in places; needs an art pass | Low-Medium |
 | 31 | Visual | 16k of the island's 38k triangles are under water | Low |
 | 32 | Visual | Sea under the stilt deck shows a dashed pattern (depth-map sampling against jittered facets) | Low |
 | 33 | Visual | Homes still share one roof family; no overlap or cantilever like the benchmark | High (art) |

@@ -32,7 +32,7 @@ Evidence types are kept apart: *Blender render* (Cycles, CPU), *Godot runtime* (
 ## 3. Ranked visual weaknesses (worst first) and what was done
 | # | Weakness | Action this session | Status now |
 |---|---|---|---|
-| 1 | Cliffs were a stepped height field: no carved feel, no caves, no undercut | Island rebuilt with voxel fusion, boolean caves (10), strata ledges, overhanging lips, eroded base; walkable tops snapped to survey and verified by ray casting | Improved. Strata read as hard stripes under Godot's direct light. **Awaiting approval** |
+| 1 | Cliffs were a stepped height field: no carved feel, no caves, no undercut | Island rebuilt with voxel fusion, boolean caves (10), strata ledges, overhanging lips, eroded base; walkable tops snapped to survey and verified by ray casting | Improved; a first version read as a striped layer cake in engine and was softened. **Awaiting approval** |
 | 2 | Buildings were clean boxes with roofs: no story | Gutters + rain barrels, door lanterns, patch planks, laundry, crab pots, crates, kitchen gardens, creepers, roof loads, bare boards, small rotations | Improved. **Awaiting approval** |
 | 3 | Rows and right angles | Each building rotated up to 5° about its door (walk graph unaffected) | Minor gain. Real fix needs a layout revision |
 | 4 | Terrace edges bare | Rope-and-post railings, plants spilling over lips, grass tufts and flowers | Improved |
