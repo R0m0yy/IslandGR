@@ -1,0 +1,17 @@
+Godot Engine v4.3.stable.official.77dcf97d8 - https://godotengine.org
+PASS  [Y] the run completed (28 game days; 28 = one year)  Day 29  05:59
+PASS  [Y] no route failures or failed object uses  { "failed_paths": 0, "failed_uses": 0 }
+PASS  [Y] nobody starves  0
+PASS  [Y] books balance, nothing negative  []
+PASS  [Y] no boat stays out more than 10 hours  0
+PASS  [Y] the market has fish during trading hours (06-20) at least 85% of the time  { "empty_trading_hours": 13, "of": 154 }
+PASS  [Y] no runaway wealth: richest household below 12x the median  { "min": 30, "median": 51, "max": 251 }
+PASS  [Y] every kind of event was recorded  { "economy": 48, "wildlife": 220, "fishing": 94, "weather": 99, "damage": 65, "repair": 53, "illness": 7, "recovery": 7, "community": 25, "birth": 4 }
+PASS  [Y] residents remember things that happened to them  
+== scenario Y done in 142666 ms
+RESULT: PASSED (9 passed, 0 failed)
+WARNING: ObjectDB instances leaked at exit (run with --verbose for details).
+     at: cleanup (core/object/object.cpp:2284)
+ERROR: 6 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:604)
+EXIT 0

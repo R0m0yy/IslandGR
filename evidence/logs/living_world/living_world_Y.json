@@ -1,163 +1,260 @@
 {
  "engine": "4.3-stable (official)",
- "failed": 2,
- "passed": 7,
+ "failed": 0,
+ "passed": 9,
  "report": {
   "Y": {
    "economy": {
     "bait_cut": 0,
-    "bait_made": 444,
-    "bait_sold": 171,
-    "consigned": 413,
-    "credit_repaid": 12,
-    "credit_sales": 22,
-    "fish_bought": 406,
-    "fish_kept": 1044,
-    "fish_sold_to_market": 175,
-    "gift_items": 56,
-    "gifts": 26,
-    "house_repairs": 50,
-    "house_repairs_unpaid": 12,
-    "levy_missed": 128,
-    "levy_paid": 397,
-    "levy_waived_days": 4,
-    "meals_sold": 73,
-    "payables_settled": 1173,
-    "repairs": 14,
+    "bait_made": 428,
+    "bait_sold": 99,
+    "consigned": 232,
+    "credit_repaid": 0,
+    "credit_sales": 0,
+    "fish_bought": 387,
+    "fish_kept": 579,
+    "fish_sold_to_market": 71,
+    "gift_items": 55,
+    "gifts": 24,
+    "handline_sold": 350,
+    "house_repairs": 54,
+    "house_repairs_unpaid": 1,
+    "levy_missed": 0,
+    "levy_paid": 567,
+    "levy_waived_days": 2,
+    "meals_sold": 75,
+    "payables_settled": 1431,
+    "repairs": 1,
     "repairs_unaffordable": 0,
-    "rotted": 599,
-    "spoiled_home": 714,
-    "spoiled_market": 63,
-    "stall_rent": 88,
-    "stall_rent_missed": 58,
-    "subsidised_wages": 102,
+    "rotted": 614,
+    "spoiled_home": 704,
+    "spoiled_market": 68,
+    "stall_rent": 60,
+    "stall_rent_missed": 68,
+    "subsidised_wages": 69,
     "successions": 0,
-    "wages_paid": 871,
-    "wages_unpaid": 957
+    "wages_paid": 859,
+    "wages_unpaid": 1221
    },
    "ecosystem": {
-    "bird_catches": 266,
-    "bird_dives": 627,
+    "bird_catches": 267,
+    "bird_dives": 576,
     "caught_by_boats": {
-     "mackerel": 376,
-     "scad": 1092,
-     "snapper": 170
+     "mackerel": 187,
+     "scad": 630,
+     "snapper": 81
     },
-    "crab_bolts": 380,
-    "dolphin_feeds": 75,
-    "predator_kills": 360,
-    "robbed_in_air": 56,
-    "scavenged": 150,
-    "school_flights": 432,
-    "theft_attempts": 156,
-    "thefts": 102
+    "crab_bolts": 403,
+    "dolphin_feeds": 74,
+    "predator_kills": 357,
+    "robbed_in_air": 61,
+    "scavenged": 129,
+    "school_flights": 391,
+    "theft_attempts": 328,
+    "thefts": 159
    },
+   "household_profiles": [
+    {
+     "hh": "HH_H08",
+     "income": {
+      "wage": 556
+     },
+     "members": [
+      "Hett 28 -",
+      "Edda 25 teacher",
+      "Dee 0 -"
+     ],
+     "money": 251,
+     "spending": {
+      "eatery_sale": 8,
+      "levy": 178,
+      "market_sale": 163,
+      "storm_repair": 16
+     }
+    },
+    {
+     "hh": "HH_H07",
+     "income": {
+      "wage": 456
+     },
+     "members": [
+      "Vera 33 healer",
+      "Teo 51 -"
+     ],
+     "money": 239,
+     "spending": {
+      "eatery_sale": 4,
+      "levy": 172,
+      "market_sale": 101
+     }
+    },
+    {
+     "hh": "HH_H20",
+     "income": {
+      "consignment_paid": 15,
+      "wage": 524
+     },
+     "members": [
+      "Xan 45 -",
+      "Elio 42 storekeeper",
+      "Ari 0 -"
+     ],
+     "money": 238,
+     "spending": {
+      "eatery_sale": 48,
+      "levy": 169,
+      "market_sale": 136,
+      "storm_repair": 8
+     }
+    },
+    {
+     "hh": "HH_H02",
+     "income": {
+      "consignment_paid": 63,
+      "handline_sale": 16,
+      "wage": 104
+     },
+     "members": [
+      "Dov 29 fishmonger",
+      "Quill 32 -",
+      "Bea 0 -"
+     ],
+     "money": 33,
+     "spending": {
+      "eatery_sale": 16,
+      "levy": 81,
+      "market_sale": 97,
+      "storm_repair": 16
+     }
+    },
+    {
+     "hh": "HH_H06",
+     "income": {
+      "consignment_paid": 68,
+      "wage": 100
+     },
+     "members": [
+      "Bram 34 cook",
+      "Milo 26 -"
+     ],
+     "money": 31,
+     "spending": {
+      "eatery_sale": 8,
+      "levy": 81,
+      "market_sale": 76,
+      "storm_repair": 32
+     }
+    },
+    {
+     "hh": "HH_H19",
+     "income": {
+      "consignment_paid": 79,
+      "landing_sale": 56
+     },
+     "members": [
+      "Suki 54 fisher",
+      "Una 22 -"
+     ],
+     "money": 30,
+     "spending": {
+      "eatery_sale": 16,
+      "levy": 84,
+      "market_sale": 31,
+      "store_sale": 18,
+      "storm_repair": 16
+     }
+    }
+   ],
    "journal_counts": {
-    "birth": 2,
-    "community": 60,
-    "damage": 59,
-    "economy": 107,
-    "fishing": 146,
-    "illness": 5,
-    "recovery": 5,
-    "repair": 38,
+    "birth": 4,
+    "community": 25,
+    "damage": 65,
+    "economy": 48,
+    "fishing": 94,
+    "illness": 7,
+    "recovery": 7,
+    "repair": 53,
     "weather": 99,
-    "wildlife": 158
+    "wildlife": 220
    },
-   "owed_to_fishers": 0,
+   "owed_to_fishers": 75,
    "population_by_day": [
+    42,
+    42,
+    42,
+    42,
+    42,
     42,
     43,
     43,
-    44,
-    44,
-    44,
-    44,
-    44,
-    44,
-    44
+    43,
+    43
    ],
    "setup": "default pacing (28 game days = 1 year of life), natural weather, no intervention",
    "society": {
-    "births": 2,
+    "births": 4,
     "came_of_age": 0,
     "deaths": 0,
     "estates": 0,
-    "greetings": 649,
-    "illnesses": 5,
+    "greetings": 661,
+    "illnesses": 7,
     "moves": 0,
     "newcomers": 0,
     "partnerships": 0,
     "retired": 0
    },
-   "starving": [
-    {
-     "age": 35,
-     "hh": "HH_H15",
-     "id": "V31",
-     "job": null,
-     "min": 523,
-     "money": 2
-    },
-    {
-     "age": 24,
-     "hh": "HH_H15",
-     "id": "V32",
-     "job": {
-      "hours": [
-       6,
-       18
-      ],
-      "place": "P05",
-      "role": "shopkeeper"
-     },
-     "min": 308,
-     "money": 2
-    }
-   ],
+   "starving": [],
    "tills": {
-    "council": 268,
-    "eatery": 6,
-    "market": 22,
+    "council": 289,
+    "eatery": 5,
+    "market": 0,
     "store": 3
    },
    "totals": {
-    "boat_trips": 183,
-    "bridges_crossed": 755,
-    "doors_opened": 8985,
-    "drinks": 1932,
-    "empty_trips": 22,
+    "boat_trips": 97,
+    "bridges_crossed": 623,
+    "doors_opened": 8753,
+    "drinks": 1927,
+    "empty_trips": 14,
     "failed_paths": 0,
     "failed_uses": 0,
     "fish_bought": 0,
-    "fish_caught": 2053,
+    "fish_caught": 2163,
     "fish_sold": 0,
-    "gifts_given": 56,
-    "gifts_received": 122,
-    "income": 792,
-    "ladders_climbed": 1028,
-    "max_hunger": 3349.38074840642,
-    "meals_cooked": 3336,
-    "meals_eaten": 3406,
-    "metres": 582954.504998997,
-    "nets_mended": 36,
-    "plans": 21473,
-    "repairs_done": 50,
-    "sheltered": 276,
-    "sleeps": 1897,
-    "stairs_climbed": 13505,
-    "starve_minutes": 841.600000000052,
-    "stayed_ashore": 17,
-    "thefts_suffered": 17,
-    "wages": 3484,
-    "washes": 657,
-    "work_blocks": 1828
+    "gifts_given": 55,
+    "gifts_received": 138,
+    "income": 1128,
+    "ladders_climbed": 936,
+    "max_hunger": 3322.5871569268,
+    "meals_cooked": 3330,
+    "meals_eaten": 3409,
+    "metres": 529225.594999119,
+    "nets_mended": 107,
+    "plans": 20079,
+    "repairs_done": 54,
+    "sheltered": 201,
+    "sleeps": 1839,
+    "stairs_climbed": 11566,
+    "starve_minutes": 0,
+    "stayed_ashore": 22,
+    "thefts_suffered": 74,
+    "wages": 3436,
+    "washes": 665,
+    "work_blocks": 2080
    },
-   "wall_ms": 140511,
+   "unpaid_by_workplace": {
+    "P01": 351,
+    "P02": 249,
+    "P04": 71,
+    "P05": 237,
+    "P06": 224,
+    "P07": 89
+   },
+   "wall_ms": 142666,
    "wealth": {
-    "max": 589,
-    "median": 1,
-    "min": -15
+    "max": 251,
+    "median": 51,
+    "min": 30
    },
    "weather_hours": {
     "clear": 295,
@@ -185,8 +282,8 @@
    "test": "no route failures or failed object uses"
   },
   {
-   "detail": 841.600000000052,
-   "passed": false,
+   "detail": 0,
+   "passed": true,
    "scenario": "Y",
    "test": "nobody starves"
   },
@@ -204,7 +301,7 @@
   },
   {
    "detail": {
-    "empty_trading_hours": 12,
+    "empty_trading_hours": 13,
     "of": 154
    },
    "passed": true,
@@ -213,26 +310,26 @@
   },
   {
    "detail": {
-    "max": 589,
-    "median": 1,
-    "min": -15
+    "max": 251,
+    "median": 51,
+    "min": 30
    },
-   "passed": false,
+   "passed": true,
    "scenario": "Y",
    "test": "no runaway wealth: richest household below 12x the median"
   },
   {
    "detail": {
-    "birth": 2,
-    "community": 60,
-    "damage": 59,
-    "economy": 107,
-    "fishing": 146,
-    "illness": 5,
-    "recovery": 5,
-    "repair": 38,
+    "birth": 4,
+    "community": 25,
+    "damage": 65,
+    "economy": 48,
+    "fishing": 94,
+    "illness": 7,
+    "recovery": 7,
+    "repair": 53,
     "weather": 99,
-    "wildlife": 158
+    "wildlife": 220
    },
    "passed": true,
    "scenario": "Y",

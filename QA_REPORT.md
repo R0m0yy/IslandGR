@@ -103,3 +103,71 @@ Seven-day unattended run, 45 residents, 5130 plans: 476 sleeps, 843 meals cooked
 
 ## 7. Open defects
 See `KNOWN_ISSUES.md` (session 4 table).
+
+---
+# QA REPORT — session 5: the living world (2026-11-12)
+
+Everything below was **executed** in Godot 4.3 headless on the final build (logs in `evidence/logs/living_world/` and `evidence/logs/godot_tests*.{json,log}`). In-engine frames were rendered with software OpenGL (`evidence/renders_godot_v05/`). No GPU, no interactive session.
+The village layout was not changed (owner-approved). Characters remain frozen: neutral temporary figures only.
+
+## Required scenarios (directive §16) — `godot/tests/living_world_test.gd`
+| # | Scenario | Result |
+|---|---|---|
+| A | Fisherman's complete day | **PASSED** 7/7 |
+| B | A struggling neighbour | **PASSED** 7/7 |
+| C | Animal steals fish | **PASSED** 6/6 |
+| D | Storm interrupts the day | **PASSED** 8/8 |
+| E | Household evolves (and survives save/load) | **PASSED** 5/5 |
+| F | Economy changes (poor season) | **PASSED** 5/5 |
+| G | Living ocean ecosystem | **PASSED** 9/9 |
+
+Details that matter:
+- **A** Ada (BOAT_02, Reef beyond The Gate): boarded, caught **20** fish taken from the sea's schools, landed them ({'caught': 20, 'kept_for_home': 7, 'sold': 13, 'stolen_by_gulls_while_unloading': 0}), sold to the market ({'fish_sold': 13, 'paid': 56}), bought supplies (['store_sale 2 at Day 1 14:32', 'store_sale 2 at Day 1 14:32', 'store_sale 2 at Day 1 14:32']), came home; ledger audit clean.
+- **B** {'giver': 'Milo', 'transaction': [447.1, 'gift', 'HH_H06', 'HH_H07', 'fish', 3]}; recipients remembered it; the bond rose {'after': 9, 'before': 0}; the favour is recorded for reciprocity. *Setup bends the world on purpose (food spoiled, savings lost); every setup line is in the ledger as `scenario_setup_*`.*
+- **C** No setup: {'attempts': 7, 'thefts': 3}; every theft removed a fish from the right ledger account and is journalled with its cause.
+- **D** Storm forced at 11:00: {'at_sea_when_it_broke': 4, 'departures': 0, 'moored_now': 6}; {'ran_for_shelter': 4, 'still_strolling_or_shore_fishing': 0}; sea roughness 0.99; wildlife sheltered {'birds_roosting': 14, 'crabs_hidden': 7}; damage ['P03', 'P09', 'H15', 'H19']; afterwards boats sailed again (3) and carpenters repaired everything ({'damaged': 4, 'journal': ['Kit mended the storm damage at Warehouse.', 'Finn mended the storm damage at School.', 'Finn mended the storm damage at High row house 3.', 'Kit mended the storm damage at Crown cottage.'], 'repaired': 4}).
+- **E** 24 accelerated years, then save, rebuild, load: partners, children, households, jobs, memories identical; the journal survives; the world keeps living.
+- **F** Poor season (fish regrowth ×0.15, schools thinned to 30 %): {'normal': 215, 'poor': 50}; price {'normal': 4.51, 'poor': 4.74}; behaviour {'bought_fish': [44, 46], 'handline_fish': [40, 96], 'households_ever_without_food': [15, 15], 'on_credit': [0, 0]}. The price rise is modest because people turned to shore fishing and sold the surplus.
+- **G** In one day: 490 m of school travel, 20 flights, barracuda kills 15, dolphins {'breach_samples': 4, 'feeds': 3}, turtle surfacings 17, bird dives {'catches': 13, 'dives': 25}, crabs active 125, sea surface range {'max': 0.48, 'min': -0.44}, boat catch by species {'mackerel': 14, 'scad': 63, 'snapper': 10}.
+
+## Long-duration runs
+| Run | Result | Key numbers |
+|---|---|---|
+| Regression suite, 7-day soak + 45 accelerated years (`test_runner.gd`) | **FAILED 56 / 57** | Failure: in the 45-year run one resident spent over 3 h in total at maximum hunger. The 7-day soak is clean. Cause not yet traced |
+| One year at default pace (28 game days) | **PASSED 9 / 9** | starvation 0 min; market stocked {'empty_trading_hours': 13, 'of': 154}; wealth {'max': 251, 'median': 51, 'min': 30}; 0 route failures; books balance |
+| 90 accelerated years (demography) | **PASSED 5 / 5** | population {'final': 91, 'max': 91, 'min': 34, 'start': 42}; {'births': 93, 'deaths': 64, 'final': 91, 'newcomers': 20}; 26 successions; no dangling family links |
+
+### One year in numbers (default pace)
+Boat trips 97 · fish caught 2163 (by boats: {'mackerel': 187, 'scad': 630, 'snapper': 81}) · sold to market 71 + 232 on account · shore catch sold 350 · bought by households 387 · eatery meals sold 75 · spoiled at home 704 · gull thefts 159 (attempts 328) · scrap heap scavenged 129 · gifts 24 · market credit 0 · storm repairs 54 (1 free) · boat repairs 1 · wages paid 859, **unpaid 1221** (by workplace {'P01': 351, 'P02': 249, 'P04': 71, 'P05': 237, 'P06': 224, 'P07': 89}) · residents sheltered from rain 201 times · stayed ashore after reading the sky 22 · nets mended 107.
+
+## Problems the long runs found — and the causes fixed (not numbers tuned)
+| Found by | Symptom | Cause (traced in the ledger) | Fix |
+|---|---|---|---|
+| 90-year run | population 42 → 30, propped up by newcomers | layout capacity 3 capped a cottage family at one child; singles had to stand together for hours to pair | household cap 6 with bed sharing; yearly acquaintance between singles (`Society.settings`) |
+| One-year run | 15,852 min starvation; market empty 87 % of hours | market paid wages from its till, could not buy the catch; 2,016 fish went home and 1,633 spoiled | consignment; payables before wages; stall rent; council circulates its surplus |
+| One-year run | richest 673, median −2 | money pooled in fisher households; flat levy could not fund public wages | levy by means; eating out when there is money to spare |
+| 10-day profile | three households with zero income | placeholder jobs dealt to individuals at random | one job per household first; jobless sell shore catch; vacancies go to households without an earner |
+| Scenario F | fish got cheaper in a poor season | price followed slab stock only | price by stock × 24-hour supply/demand flow |
+| Scenario D | a boat left in a "held" storm | a fisherman decided before the storm and nothing re-checked at the mooring | last look at the sky before casting off |
+| Scenario A | "missing" fish | a gull stole it while unloading (correct behaviour) | test now counts thefts |
+| Night frames | daylight-bright sea, strong moonlight | moon key at 40 % of daylight; sea shader not dimmed | moon ≈ 10 %; sea darkens with scene light |
+
+## Status by directive section
+| § | Requirement | Status |
+|---|---|---|
+| 1 | Cause → decision → action → state change → consequence | PASSED (ledger audit clean in every run; journal entries carry causes) |
+| 2 | Autonomous residents with traits, skills, memories, ambitions | PASSED (first version). Long-term goals are an "ambition" leaning, not plans |
+| 3 | Fisherman's full life | PASSED: weather reading, bait, boarding, lanes, ecosystem catch, theft risk, sale, repair, skills, succession. Gear is not visibly carried |
+| 4 | Real economy, ledger, shortages, struggling businesses | PASSED with open issue: commercial wages often unpaid |
+| 5 | Kindness and hardship | PASSED: gifts, credit, free repairs, reciprocity memory. Not implemented: caring for the sick, community collections after storms |
+| 6 | Families and generations | PASSED: 90 years, grandchildren, inheritance, succession. Not implemented: education, rivalry, ceremonies |
+| 7 | Ocean | PASSED (logic): one wave model shared with the shader; boats ride and pitch to it; wakes; tide; storm seas. Breaking waves, reflections: software-rendered only, **UNVERIFIED** |
+| 8 | Marine ecosystem | PASSED (logic): schools, barracuda, dolphins, turtles, crabs; habitat reasoning in WILDLIFE_BEHAVIOR.md |
+| 9 | Birds incl. fish theft | PASSED (logic): gulls, pelicans, terns, frigatebird, sandpipers; theft from boats and market through the ledger |
+| 10 | Weather and reactions | PASSED: five states, uncertain forecasts by skill, shelter, boats return, damage and repair, wildlife shelter. Not implemented: shutters, temperature |
+| 11 | Day/night, moon, stars | Implemented; frames software-rendered (**UNVERIFIED** on a GPU) |
+| 12 | Microdetails | Partly: greetings, sunset walks, children watching boats, family meals, net mending, gull commotion. Not: carrying baskets, sweeping, laundry in wind |
+| 13 | Observer mode | Implemented; exercised by capture scripts only (**UNVERIFIED** interactively) |
+| 14 | Preserve layout and systems | PASSED (layout untouched; all earlier suites still run) |
+| 15 | Modular architecture | PASSED: separate Ledger, Economy, Weather, Ocean, Ecosystem, Society, Journal, SaveGame |
+| 17 | Long-duration testing | Done: day, 7 days, a year, 45 and 90 accelerated years |

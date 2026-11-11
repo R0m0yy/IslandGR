@@ -71,9 +71,31 @@ func setup(v, l: Ledger) -> void:
 	ledger.mint(MARKET, "fish", 6, "start_stock")
 	ledger.mint(STORE, "bait", 12, "start_stock")
 
+var _flow := {"in": [], "out": []}        # [hour, n] buckets of fish into and out of the market
+
+func _flow_add(kind: String, n: int) -> void:
+	var h := int(GameClock.total_minutes / 60.0)
+	var b: Array = _flow[kind]
+	if b.is_empty() or b[-1][0] != h:
+		b.append([h, 0])
+	b[-1][1] += n
+	while not b.is_empty() and b[0][0] < h - 24:
+		b.pop_front()
+
+func flow24(kind: String) -> int:
+	var h := int(GameClock.total_minutes / 60.0)
+	var t := 0
+	for e in _flow[kind]:
+		if e[0] >= h - 24:
+			t += int(e[1])
+	return t
+
 func fish_sell_price() -> int:
-	## Scarcity pricing: the emptier the stalls, the dearer the fish.
-	return clampi(int(round(9.0 - ledger.qty(MARKET, "fish") / 7.0)), 3, 9)
+	## Supply and demand: what is on the slab sets the base, and the last day's
+	## flow moves it - selling faster than fish comes in pushes the price up.
+	var base := 9.0 - ledger.qty(MARKET, "fish") / 7.0
+	var scarcity := clampf((flow24("out") + 6.0) / (flow24("in") + 6.0), 0.7, 1.7)
+	return clampi(int(round(base * scarcity)), 3, 10)
 
 func fish_buy_price() -> int:
 	## What the market pays a fisher: always below its selling price.
@@ -166,6 +188,7 @@ func work_done(v, obj) -> void:
 			if ledger.qty(EATERY, "fish") < 1 and ledger.qty(MARKET, "fish") > 0:
 				var p := fish_sell_price()
 				if ledger.money(EATERY) >= p and ledger.move(MARKET, EATERY, "fish", 1, "eatery_supply"):
+					_flow_add("out", 1)
 					ledger.pay(EATERY, MARKET, p, "eatery_supply")
 					settle_payables()
 			if ledger.qty(EATERY, "meal") < 12 and ledger.consume(EATERY, "fish", 1, "eatery_cook"):
@@ -205,12 +228,14 @@ func land_catch(v, boat: Boat) -> void:
 			home_need -= 1
 		elif ledger.qty(MARKET, "fish") < MARKET_ROOM and ledger.money(MARKET) - owed_to_fishers() >= p:
 			ledger.move(boat.object_id, MARKET, "fish", 1, "landing_sale")
+			_flow_add("in", 1)
 			ledger.pay(MARKET, v.hh, p, "landing_sale")
 			stats["fish_sold_to_market"] += 1
 			v.stats["income"] += p
 		elif ledger.qty(MARKET, "fish") < MARKET_ROOM:
 			# the till is short: the market takes the fish on account and pays as it sells
 			ledger.move(boat.object_id, MARKET, "fish", 1, "landing_consigned")
+			_flow_add("in", 1)
 			if not payables.has(v.hh):
 				_payable_order.append(v.hh)
 			payables[v.hh] = int(payables.get(v.hh, 0)) + p
@@ -267,8 +292,10 @@ func buy_fish(v) -> int:
 		var p := fish_sell_price()
 		if ledger.money(v.hh) >= p and ledger.move(MARKET, v.hh, "fish", 1, "market_sale"):
 			ledger.pay(v.hh, MARKET, p, "market_sale")
+			_flow_add("out", 1)
 			got += 1
 		elif ledger.money(v.hh) < p and credit_ok(v.hh) and ledger.move(MARKET, v.hh, "fish", 1, "market_credit"):
+			_flow_add("out", 1)
 			# on the slate: the fish changes hands now, the money is owed
 			debts[v.hh] = int(debts.get(v.hh, 0)) + p
 			stats["credit_sales"] += 1
@@ -390,7 +417,7 @@ func wealth() -> Array:
 	return w
 
 func extra_state() -> Dictionary:
-	return {"debts": debts, "favours": favours, "owners": owners, "lean_days": lean_days, "payables": payables, "payable_order": _payable_order, "waiving": _waiving}
+	return {"debts": debts, "favours": favours, "owners": owners, "lean_days": lean_days, "payables": payables, "payable_order": _payable_order, "waiving": _waiving, "flow": _flow}
 
 func load_extra(d: Dictionary) -> void:
 	debts = {}; favours = {}; lean_days = {}
@@ -406,6 +433,10 @@ func load_extra(d: Dictionary) -> void:
 		payables[k] = int(d["payables"][k])
 	_payable_order = d.get("payable_order", []).duplicate()
 	_waiving = bool(d.get("waiving", false))
+	_flow = {"in": [], "out": []}
+	for k in ["in", "out"]:
+		for e in d.get("flow", {}).get(k, []):
+			_flow[k].append([int(e[0]), int(e[1])])
 
 func sell_handline(v) -> void:
 	## Someone without a job sells what the household cannot eat to the market,
@@ -417,9 +448,11 @@ func sell_handline(v) -> void:
 	var p := fish_buy_price()
 	if ledger.money(MARKET) - owed_to_fishers() >= p:
 		ledger.move(v.hh, MARKET, "fish", 1, "handline_sale")
+		_flow_add("in", 1)
 		ledger.pay(MARKET, v.hh, p, "handline_sale")
 	else:
 		ledger.move(v.hh, MARKET, "fish", 1, "handline_consigned")
+		_flow_add("in", 1)
 		if not payables.has(v.hh):
 			_payable_order.append(v.hh)
 		payables[v.hh] = int(payables.get(v.hh, 0)) + p

@@ -1,0 +1,61 @@
+Godot Engine v4.3.stable.official.77dcf97d8 - https://godotengine.org
+PASS  [A] left home and boarded the assigned boat  { "trips": 2 }
+PASS  [A] caught fish from the sea (minted into the boat by the catch rule)  20
+PASS  [A] returned, moored and unloaded: every fish caught is accounted for  { "caught": 20, "sold": 13, "kept_for_home": 7, "stolen_by_gulls_while_unloading": 0 }
+PASS  [A] sold to the market: market stock and household money moved by the same sale  { "fish_sold": 13, "paid": 56 }
+PASS  [A] bought household supplies with money  ["store_sale 2 at Day 1 14:32", "store_sale 2 at Day 1 14:32", "store_sale 2 at Day 1 14:32"]
+PASS  [A] came home after the trip  
+PASS  [A] money and stock reconcile (ledger audit)  []
+== scenario A done in 2510 ms
+PASS  [B] a neighbour noticed and brought food (within 30 game minutes)  { "giver": "Milo", "transaction": [447.1, "gift", "HH_H06", "HH_H07", "fish", 3] }
+PASS  [B] the goods really moved: recipient pantry gained what the giver lost  
+PASS  [B] recipients remember the kindness  ["Milo brought us 3 fish when we had nothing", "Milo brought us 3 fish when we had nothing"]
+PASS  [B] the relationship changed  { "before": 0, "after": 9 }
+PASS  [B] the help made a difference: recipients ate  { "recipients": 2, "now_below_60_hunger": 2 }
+PASS  [B] the favour is remembered for reciprocity  { "HH_H06|HH_H07": 3 }
+PASS  [B] ledger audit clean  []
+== scenario B done in 1780 ms
+PASS  [C] gulls stole fish on their own (in 100 game minutes)  { "thefts": 3, "attempts": 7 }
+PASS  [C] every theft removed a fish from the right account in the ledger  ["BIZ_P01", "BIZ_P01", "BIZ_P01"]
+PASS  [C] every theft is in the journal with its cause  
+PASS  [C] when someone was there, they noticed and reacted (memory)  ["Faye: [\"a gull stole a fish from the market stalls\"]"]
+PASS  [C] not every attempt succeeds (guarded fish, failed raids)  
+PASS  [C] ledger audit clean  []
+== scenario C done in 817 ms
+PASS  [D] boats at sea came home and none left during the storm  { "at_sea_when_it_broke": 4, "moored_now": 6, "departures": 0 }
+PASS  [D] people outdoors sought shelter  { "ran_for_shelter": 4, "still_strolling_or_shore_fishing": 0 }
+PASS  [D] the sea rose with the wind (wave model)  0.99
+PASS  [D] wildlife took shelter (birds at roost, crabs in holes)  { "birds_roosting": 14, "crabs_hidden": 7 }
+PASS  [D] the storm did real damage  ["P03", "P09", "H15", "H19"]
+PASS  [D] life resumed: boats went out again after the storm  3
+PASS  [D] carpenters repaired the damage  { "damaged": 4, "repaired": 4, "journal": ["Kit mended the storm damage at Warehouse.", "Finn mended the storm damage at School.", "Finn mended the storm damage at High row house 3.", "Kit mended the storm damage at Crown cottage."] }
+PASS  [D] ledger audit clean  []
+== scenario D done in 6145 ms
+PASS  [E] life events happened: partnerships, births, new jobs  { "births": 24, "partnerships": 11, "hired": 11, "moves": 8 }
+PASS  [E] a child born here grew up and took a job  [{ "id": "V1000", "name": "Ari", "age": 24, "job": { "role": "storekeeper", "place": "P03", "hours": [6, 18] }, "home": "H04", "parents": ["V01", "V02"] }, { "id": "V1001", "name": "Bea", "age": 24, "job": <null>, "home": "H02", "parents": ["V05", "V06"] }, { "id": "V1002", "name": "Cai", "age": 24, "job": { "role": "market_clerk", "place": "P01", "hours": [6, 18] }, "home": "H19", "parents": ["V1
+PASS  [E] after save and reload: households, partners, children, jobs and memories identical  []
+PASS  [E] the journal (world history) survives the reload  { "before": 746, "after": 746 }
+PASS  [E] the reloaded world keeps living (another year)  
+== scenario E done in 158253 ms
+PASS  [F] supply fell: less fish landed  { "normal": 215, "poor": 50 }
+PASS  [F] the market responded: fish got dearer  { "normal": 4.51, "poor": 4.74 }
+PASS  [F] households changed behaviour: bought less, fished for themselves, or took credit  { "bought_fish": [44, 46], "handline_fish": [40, 96], "on_credit": [0, 0], "households_ever_without_food": [15, 15] }
+PASS  [F] consequences differ between households  { "poorest": [32, "HH_H01"], "richest": [179, "HH_H13"] }
+PASS  [F] ledger audit clean  []
+== scenario F done in 33391 ms
+PASS  [G] fish schools travel  490
+PASS  [G] schools bolt from predators and boats  20
+PASS  [G] barracuda hunt and eat fish  15
+PASS  [G] the dolphin pod feeds and breaches  { "feeds": 3, "breach_samples": 4 }
+PASS  [G] turtles surface to breathe  17
+PASS  [G] pelicans and terns dive on schools  { "dives": 25, "catches": 13 }
+PASS  [G] crabs come out on the spit around dusk and dawn  125
+PASS  [G] the sea surface moves (shared wave model, tide included)  { "min": -0.44, "max": 0.48 }
+PASS  [G] wildlife numbers feed fishing: boats' catch is taken from the schools  { "scad": 63, "snapper": 10, "mackerel": 14 }
+== scenario G done in 5627 ms
+RESULT: PASSED (47 passed, 0 failed)
+WARNING: ObjectDB instances leaked at exit (run with --verbose for details).
+     at: cleanup (core/object/object.cpp:2284)
+ERROR: 7 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:604)
+EXIT 0

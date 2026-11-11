@@ -124,3 +124,32 @@
 5. Character concepts: say when you want options to compare.
 
 **Next steps:** `DEVELOPMENT_ROADMAP.md`.
+
+
+## Session 5 (2026-11-11 / 12) — the living world
+**Owner decisions received:** layout approved — stop redesigning geography; priority is a deeply simulated, autonomous world; characters still frozen.
+
+**Completed and executed**
+- New systems (each its own module): `Journal` (world history), `Ocean` (one wave model shared with the shader, tide, roughness), `Ecosystem` (13 species: three fish schools, barracuda, dolphins, turtles, ghost crabs, gulls, pelicans, terns, frigatebird, sandpipers), extended `Weather` (five states, per-resident forecasts, storm damage), extended `Economy` (bait supply chain, spoilage + scrap heap, consignment, credit, gifts, free repairs, stall rent, means-based levy, wage subsidy, supply/demand pricing, succession), extended `Society` (illness, job choice following a parent's trade, newcomers to empty houses, yearly acquaintance, configurable demography), people registry, save format v3 with migrations.
+- Residents gained skills, traits (generosity, boldness), an ambition, memories, illness, reactions, shelter-seeking, sunset walks, greetings, family meals, cut bait, net mending.
+- Observer mode: resident inspector (schedule, needs, finances, skills, family, memories), timeline, family tree across generations, household / business and village inspectors, journal panel, household-follow, wildlife-follow, cinematic auto-focus on notable events, hide-UI.
+- Presentation: every animal drawn from simulation state; boats ride and pitch on the shared wave surface with wakes; moon phases, moonlight, stars; sea darkens at night.
+- Tests: new `living_world_test.gd` (scenarios A–G, one year, 90 years). Final build: A–G 47/47, year 9/9, 90 years 5/5, regression 56/57.
+- Documents: WORLD_SIMULATION, ECONOMY_LEDGER_SPEC, WILDLIFE_BEHAVIOR, LIVING_WORLD_EVENTS (new); QA_REPORT, PROOF_OF_WORK, KNOWN_ISSUES, ANIMATION_MATRIX, DEVELOPMENT_ROADMAP (updated).
+
+**Decisions taken without the owner (confirm or reverse)**
+1. Placeholder population: jobs are now dealt one per household first (data change in `tools/gen_population.py`, not the layout).
+2. Council behaviour: levy by means, waived above a reserve of 250, wage subsidy for thin-trading businesses.
+3. Immigration: a young couple settles in a house empty for 1.5 years (setting, on by default).
+4. Accelerated demography for tests runs 1 game day = 1 year; the game default is 28 game days = 1 year.
+5. Animals are placeholder shapes; I treated them as outside the character-art freeze (they are not residents). Say if you want them frozen too.
+
+**Failed or open**
+- Regression: one resident >3 h at maximum hunger across 45 accelerated years (cause not yet traced).
+- Commercial staff unpaid on many work blocks (businesses over-staffed for their trade).
+- One unexplained save/load mismatch on an older build (not reproduced since; diagnostics in place).
+- 90-year population grows to 91: demography is now growth-biased; it is configurable (`Society.settings`).
+- Not implemented: visible carrying, collision avoidance, rivalry and ceremonies, education, temperature, shutters, wind-blown laundry, licensed audio.
+- Unverified: everything that needs a GPU, a person or ears.
+
+**Next:** see `DEVELOPMENT_ROADMAP.md` (session 5 list).

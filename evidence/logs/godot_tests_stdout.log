@@ -16,52 +16,52 @@ PASS  ledger refuses to go negative  2
 PASS  bed is reserved for its owner only  
 PASS  interior lighting follows building state  
 PASS  cutaway hides roof + camera-facing walls  
-PASS  placeholder rig exposes all 11 animation clips  ["idle", "walk", "climb_stairs", "climb_ladder", "open_door", "cook", "eat", "sit", "sleep", "fish", "work"]
+PASS  placeholder rig exposes all 12 animation clips  ["idle", "walk", "climb_stairs", "climb_ladder", "open_door", "cook", "eat", "sit", "sleep", "fish", "work", "wave"]
 PASS  animation state machine travels idle -> walk  walk
-SIM totals over 7.0 days, 45 villagers: { "sleeps": 476, "meals_cooked": 843, "meals_eaten": 854, "fish_caught": 1207, "work_blocks": 468, "doors_opened": 2312, "stairs_climbed": 3531, "ladders_climbed": 309, "bridges_crossed": 230, "failed_paths": 0, "failed_uses": 0, "boat_trips": 96, "wages": 1668, "income": 592, "drinks": 499, "washes": 162, "plans": 5130, "fish_bought": 0, "fish_sold": 0, "metres": 156966, "starve_minutes": 0 }
-SIM state samples: { "climb_stairs": 535, "walk": 1357, "work": 704, "eat": 267, "climb_ladder": 50, "fish_trip": 249, "idle": 340, "cross_bridge": 67, "cook": 130, "sleep": 3294, "open_door": 80, "drink": 33, "fish": 33, "sit": 277, "wash": 26, "shop": 5 }
-PASS  simulation ran 7 game days  { "clock": "Day 8  06:00", "steps": 100800, "wall_ms": 32744 }
-PASS  villagers sleep (everyone at least once)  { "sleeps": 476, "never_slept": 0 }
-PASS  villagers cook  843
-PASS  villagers eat (everyone at least once)  { "meals_eaten": 854, "never_ate": 0 }
-PASS  villagers fish and land a catch  1207
-PASS  villagers work  468
-PASS  doors are opened by villagers  2232
-PASS  stairs are climbed  3531
+SIM totals over 7.0 days, 42 villagers: { "sleeps": 461, "meals_cooked": 813, "meals_eaten": 827, "fish_caught": 396, "work_blocks": 510, "doors_opened": 2147, "stairs_climbed": 2988, "ladders_climbed": 228, "bridges_crossed": 164, "failed_paths": 0, "failed_uses": 0, "boat_trips": 30, "thefts_suffered": 54, "nets_mended": 10, "gifts_given": 0, "gifts_received": 0, "sheltered": 46, "stayed_ashore": 9, "empty_trips": 5, "repairs_done": 13, "wages": 1124, "income": 347, "drinks": 442, "washes": 154, "plans": 4749, "fish_bought": 0, "fish_sold": 0, "metres": 137261, "starve_minutes": 0 }
+SIM state samples: { "open_door": 76, "walk": 1190, "idle": 313, "climb_stairs": 439, "work": 778, "fish_trip": 90, "eat": 266, "climb_ladder": 31, "cook": 117, "sit": 474, "sleep": 3088, "cross_bridge": 47, "shop": 9, "mend_nets": 14, "fish": 72, "drink": 29, "wash": 23 }
+PASS  simulation ran 7 game days  { "clock": "Day 8  06:00", "steps": 100800, "wall_ms": 35902 }
+PASS  villagers sleep (everyone at least once)  { "sleeps": 461, "never_slept": 0 }
+PASS  villagers cook  813
+PASS  villagers eat (everyone at least once)  { "meals_eaten": 827, "never_ate": 0 }
+PASS  villagers fish and land a catch  396
+PASS  villagers work  510
+PASS  doors are opened by villagers  2079
+PASS  stairs are climbed  2988
 PASS  no villager is stuck while travelling  { "max_stuck_s": 60 }
-PASS  ledger balances: money constant, goods = minted - consumed, nothing negative  { "problems": [], "money": 2040, "minted": { "fish": 1234, "meal": 888 }, "consumed": { "meal": 862, "fish": 289 } }
+PASS  ledger balances: money constant, goods = minted - consumed, nothing negative  { "problems": [], "money": 2100, "minted": { "fish": 423, "meal": 864, "bait": 124 }, "consumed": { "fish": 391, "meal": 834, "bait": 30 } }
 PASS  no route failures  0
 PASS  nobody starves (no one at maximum hunger for over 60 game minutes)  { "cases": [], "total_minutes_at_max": 0 }
-PASS  boats: crews board, sail, fish and land a catch  { "trips": 96, "fish_landed": 1130, "aborted_by_weather": 1 }
-PASS  landed fish is sold to the market for money  { "sold": 187, "kept_for_home": 943, "paid": { "n": 374, "money": 592, "qty": 187 } }
+PASS  boats: crews board, sail, fish and land a catch  { "trips": 30, "fish_landed": 245, "aborted_by_weather": 1 }
+PASS  landed fish is sold to the market for money  { "sold": 69, "kept_for_home": 84, "paid": { "n": 138, "money": 280, "qty": 69 } }
 PASS  cargo never exceeds a boat's capacity  
-PASS  households buy fish and meals with money  { "fish_bought": 148, "meals_sold_by_eatery": 14 }
-PASS  wages are paid; levy funds the council  { "wages_paid": 417, "unpaid": 51, "levy_paid": 152, "levy_missed": 16, "council": 204 }
-PASS  market price responds to stock  { "stock": 36, "buy": 3, "sell": 5 }
-PASS  boat wear leads to paid repairs  { "repairs": 9, "unaffordable": 0, "worst_condition": 0.65 }
-PASS  villagers drink and wash  { "drinks": 499, "washes": 162 }
-PASS  weather changed during the run  { "clear": 107, "cloudy": 35, "rain": 20, "storm": 7 }
-PASS  friendships form from time spent together  { "pairs": 660, "strong": 24 }
-PASS  no household has negative money  { "poorest": 0, "richest": 337 }
-PASS  storm interrupts a trip: boat returns and moors, crew moves on  { "boat": "BOAT_02", "crew_then": "rest_home" }
+PASS  households buy fish and meals with money  { "fish_bought": 115, "meals_sold_by_eatery": 18 }
+PASS  wages are paid; levy funds the council  { "wages_paid": 281, "unpaid": 229, "levy_paid": 126, "levy_missed": 0, "council": 286 }
+PASS  market price responds to stock  { "stock": 0, "buy": 8, "sell": 10 }
+PASS  boat wear leads to paid repairs  { "repairs": 0, "unaffordable": 0, "worst_condition": 0.6 }
+PASS  villagers drink and wash  { "drinks": 442, "washes": 154 }
+PASS  weather changed during the run  { "clear": 95, "cloudy": 25, "light_rain": 17, "heavy_rain": 24, "storm": 8 }
+PASS  friendships form from time spent together  { "pairs": 675, "strong": 24 }
+PASS  no household has negative money  { "poorest": 39, "richest": 190 }
+PASS  storm interrupts a trip: boat returns and moors, crew moves on  { "boat": "BOAT_06", "crew_then": "rest_home" }
 PASS  no boat puts to sea during a storm  
-PASS  save written while 45 villagers were mid-activity  
-PASS  load restores clock, residents, households, money, weather  { "villagers": 45, "audit": [] }
-PASS  simulation continues for a day after loading  { "clock": "Day 10  04:08" }
+PASS  save written while 42 villagers were mid-activity  
+PASS  load restores clock, residents, households, money, weather  { "villagers": 42, "audit": [] }
+PASS  simulation continues for a day after loading  { "clock": "Day 10  03:34" }
 PASS  version-1 save migrates to the current schema  
 PASS  a damaged save is rejected, not half-applied  
-GEN 45 days: { "births": 7, "deaths": 34, "partnerships": 1, "came_of_age": 7, "retired": 37, "moves": 5, "estates": 12 } population 42 -> 15 events 125 wall_ms 199981
-PASS  generations: births happen  { "births": 7, "deaths": 34, "partnerships": 1, "came_of_age": 7, "retired": 37, "moves": 5, "estates": 12 }
-PASS  generations: residents age, retire and die  { "deaths": 34, "retired": 37 }
-PASS  generations: children come of age  7
-PASS  generations: estates settle and the books still balance  { "estates": 12, "audit": [] }
+GEN 45 days: { "births": 29, "deaths": 37, "partnerships": 16, "came_of_age": 25, "retired": 31, "moves": 17, "estates": 7, "illnesses": 16, "newcomers": 0, "greetings": 2217 } population 42 -> 34 events 224 wall_ms 264888
+PASS  generations: births happen  { "births": 29, "deaths": 37, "partnerships": 16, "came_of_age": 25, "retired": 31, "moves": 17, "estates": 7, "illnesses": 16, "newcomers": 0, "greetings": 2217 }
+PASS  generations: residents age, retire and die  { "deaths": 37, "retired": 31 }
+PASS  generations: children come of age  25
+PASS  generations: estates settle and the books still balance  { "estates": 7, "audit": [] }
 PASS  generations: no dangling partners, homes, beds or member counts  { "dangling": 0, "bad_house": 0, "no_bed": 0 }
-PASS  generations: life events are recorded as history  [{ "day": 44, "type": "retired", "who": ["V22"], "detail": "shop_hand" }, { "day": 45, "type": "death", "who": ["V05"], "detail": "Dov, aged 74" }, { "day": 45, "type": "estate", "who": ["V05"], "detail": "household HH_H02 closed, estate to HH_H20" }]
-PASS  generations: village still fed after 45 days  { "starved": 0, "population": 15 }
-PASS  all activity states observed  ["climb_stairs", "walk", "work", "eat", "climb_ladder", "fish_trip", "idle", "cross_bridge", "cook", "sleep", "open_door", "drink", "fish", "sit", "wash", "shop"]
-RESULT: PASSED (57 passed, 0 failed)
+PASS  generations: life events are recorded as history  [{ "day": 44, "type": "birth", "who": ["V1028", "V1009", "V1022"], "detail": "to Jem and Cai" }, { "day": 45, "type": "death", "who": ["V14", "V1002", "V1009", "V1014", "V1018"], "detail": "Milo died, aged 71" }, { "day": 45, "type": "recovery", "who": ["V18"], "detail": "" }]
+FAIL  generations: village still fed after 45 days  { "starved": 1, "population": 34 }
+PASS  all activity states observed  ["open_door", "walk", "idle", "climb_stairs", "work", "fish_trip", "eat", "climb_ladder", "cook", "sit", "sleep", "cross_bridge", "shop", "mend_nets", "fish", "drink", "wash"]
+RESULT: FAILED (56 passed, 1 failed)
 WARNING: ObjectDB instances leaked at exit (run with --verbose for details).
      at: cleanup (core/object/object.cpp:2284)
 ERROR: 6 resources still in use at exit (run with --verbose for details).
    at: clear (core/io/resource.cpp:604)
-EXIT 0
+EXIT 1

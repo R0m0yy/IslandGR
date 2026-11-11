@@ -65,3 +65,24 @@
 | 45 | Wildlife | Only gulls on fixed circuits | Low |
 | 46 | Tooling | Git tags cannot be pushed to the remote; baseline is commit `df08c5c` | Low |
 | 47 | Reference | Benchmark pages blocked this session; comparison relies on the session-1 written analysis | Medium |
+
+## Session 5 updates (living-world directive)
+| # | Area | Issue | Severity |
+|---|---|---|---|
+| 34 | Sim | **Resolved:** population no longer collapses. Root causes found and fixed: cottage capacity capped families at one child; courting required hours of co-location, so singles almost never paired | — |
+| 35 | Sim | **Resolved:** fish glut. Fresh fish now spoils to a scrap heap that gulls scavenge; fishermen with a full larder and a glutted market mend nets | — |
+| 36 | Sim | Still open: commercial staff (market, store, eatery, boat yard, carpenter) go unpaid on many work blocks. The businesses have more staff than their trade supports. Unpaid blocks are counted per workplace in the year report | Medium |
+| 48 | Sim | One-year run first found starvation (15,852 minutes) from a market liquidity trap: the market paid wages from its till and could not buy the catch. Fixed with consignment, payables before wages, stall rent, council surplus circulation | — (fixed) |
+| 49 | Sim | Placeholder population dealt jobs to individuals at random, leaving whole households with no income. Fixed in `tools/gen_population.py` (one job per household first); vacancies now go first to households with no earner | — (fixed) |
+| 50 | Sim | Prices first followed only stock on the slab, so fish got cheaper in a poor season. Now stock × 24-hour supply/demand flow. The rise in a poor season is modest because shore fishermen sell into the market and partly replace the boats | Low |
+| 51 | Sim | A save/load identity check failed once (5 founders differed) on an older build and has not recurred. The check now names the differing field. Root cause not found | Medium (unexplained) |
+| 52 | Sim | Gift-giving needs a hungry household with an empty larder that the giver knows. In normal years gifts are few (tens per year) | Low |
+| 53 | Sim | Immigration fills houses empty for 1.5 years; it is a setting (`Society.settings.immigration`). With it off, the 90-year population has not been measured | Low |
+| 54 | Sim | Weather has no temperature. Shutters do not close. Laundry does not move in the wind (it is baked into building meshes) | Low |
+| 55 | Sim | Residents still pass through each other; boats pass through each other and through rock if a lane crosses it | Medium |
+| 56 | Sim | No skill-based job change in mid-life; no rivalry or conflict; no marriage ceremony or celebration events | Medium |
+| 57 | Wildlife | Animals are simple placeholder shapes. Fish schools are visible only as dark silhouettes near the surface. No sharks, rays or octopus | Low |
+| 58 | Visual | First night captures showed a daylight-bright sea and over-strong moonlight; fixed (moon is a soft key, sea darkens with the scene light) | — (fixed) |
+| 59 | Visual | The cinematic camera and the wildlife camera have only been exercised by scripts, never by a person | Medium (unverified) |
+| 60 | Tests | Scenario B and the capture's gift scene bend the world on purpose (food spoiled, savings lost); every such step is labelled `scenario_setup_*` in the ledger | — |
+| 61 | Tests | The capture's neighbour-help shot timed out (no gift happened in the 10-hour window on that build) | Low |

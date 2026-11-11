@@ -1,7 +1,38 @@
 # PROOF OF WORK — live scorecard
 
 Statuses: **PASSED** (executed, evidence on disk) · **FAILED** (tested, defect found) · **UNVERIFIED** · **NOT IMPLEMENTED**.
-Last update: 2026-11-11, session 4. Earlier session records are preserved unchanged below.
+Last update: 2026-11-12, session 5. Earlier session records are preserved unchanged below.
+
+## Session 5 — the living world
+
+### Headline
+- The village layout is untouched (owner-approved). The work this session is simulation: an ecosystem, a shared ocean model, weather consequences, a closed economy, community help, families over generations, a world journal, and the observer mode.
+- **Everything claimed PASSED below was executed** in Godot 4.3 headless on the final build. Frames are software OpenGL. Nothing was run on a GPU or by a person.
+- **Characters remain frozen.** Residents are one neutral grey mannequin. Animals are simple placeholder shapes, not final art.
+- The long runs found real failures (starvation from a market liquidity trap, a collapsing population, fish getting cheaper in a poor season). Each was traced through the ledger to a cause and fixed at the cause. `QA_REPORT.md` (session 5) lists them.
+
+### Evidence, by kind
+| Kind | Where | Proves |
+|---|---|---|
+| Godot runtime, scenario tests | `evidence/logs/living_world/living_world_ABCDEFG.json` (+ `ag_stdout.log`) | Scenarios A–G of the directive: **47 / 47** |
+| Godot runtime, one year | `evidence/logs/living_world/living_world_Y.json` | 28 game days at default pace: **9 / 9**, 0 starvation, books balance |
+| Godot runtime, 90 years | `evidence/logs/living_world/living_world_P.json` | Demography: **5 / 5**, population 42 → 91, grandchildren, succession |
+| Godot runtime, regression | `evidence/logs/godot_tests.json`, `godot_tests_stdout.log` | **56 / 57** (one resident >3 h at maximum hunger across 45 accelerated years) |
+| Godot frames (software GL) | `evidence/renders_godot_v05/L01–L16`, `capture_living_log.txt`, `capture_living_night_log.txt` | Each frame was taken when the situation really occurred in the simulation; setups are labelled in the log |
+| Godot recording | `evidence/renders_godot_v05/harbour_living_world.mp4` | 12 s of the running world (software GL) |
+
+### Demonstrations requested (§19)
+| Demonstration | Evidence | Status |
+|---|---|---|
+| A resident's daily life | `L01_fisherman_morning_inspector.png` (schedule, needs, purse), `L11_watching_the_sunset.png` (decision log "went to watch the sunset"), scenario A trace in `living_world_ABCDEFG.json` | PASSED |
+| Fish moving through the economy | scenario A ledger trail; `L03_boat_unloading.png`, `L04_fish_market_inspector_journal.png` | PASSED |
+| A boat reacting to waves | `L02_boat_riding_waves_rough.png` (wind forced for the frame, labelled); shared wave model `sim/ocean.gd` ↔ `shaders/ocean.gdshader` | Logic PASSED; motion **UNVERIFIED** (stills only) |
+| A bird interacting with a catch | scenario C (ledger + journal); `L05_gull_raid.png`, `L06_gull_raid_outcome.png` | PASSED (logic); bird is small in frame |
+| Residents responding to bad weather | scenario D; `L09_storm_harbour.png` | PASSED |
+| A neighbour helping another household | scenario B (ledger, memories, bond); `L15_family_tree_after_24_years.png` shows a real gift in a household's history | PASSED (logic); the capture's dedicated gift shot timed out |
+| A changing family or household | scenario E; `L15_family_tree_after_24_years.png`, `L16_resident_timeline.png` | PASSED |
+| Sunset and night | `L10_golden_hour_overview.png`, `L12_night_moonlight.png`, `L13_night_sky_moon_stars.png` | Rendered (software GL); look **awaiting owner** |
+| The journal showing real history | `L04`, `L06`, `L14_village_inspector_journal.png` | PASSED |
 
 ## Session 4 — master directive: audit, visual rebuild (district), simulation systems
 

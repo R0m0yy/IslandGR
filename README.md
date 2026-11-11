@@ -4,7 +4,10 @@ Autonomous coastal-village life simulation. Working title. New production projec
 
 **Read `PROOF_OF_WORK.md` first.** It separates what exists and was executed from what is only planned.
 
-## Status at a glance (session 4)
+## Status at a glance (session 5)
+The village layout is approved and unchanged. Session 5 made the world simulate life: ecosystem, ocean, weather consequences, closed economy, community help, generations, journal and observer mode. Tests: `godot/tests/living_world_test.gd` (scenarios A–G, a year, 90 years). Read `QA_REPORT.md` (session 5) and `WORLD_SIMULATION.md`.
+
+### Session 4 summary
 See `QA_REPORT.md` for the audit and `PROOF_OF_WORK.md` for evidence. The environment is **not approved**; characters are **frozen** (neutral mannequins).
 
 ### Session 3 summary

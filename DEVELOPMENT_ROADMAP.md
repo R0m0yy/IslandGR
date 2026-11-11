@@ -11,8 +11,8 @@ Phases follow the owner's directive (Part 22). Status is what has been executed,
 | E | Resident simulation | First version done (5 needs, traits, routines, interruption by storm) | — |
 | F | Fishing and transport | Logic done; presentation and gear missing | — |
 | G | Economy | First closed loop done; needs tuning and more goods | — |
-| H | Social and generational | First version done; population not self-sustaining (**FAILED** test) | — |
-| I | Environmental life: weather, wildlife, foliage, ocean, audio | Started; all presentation **UNVERIFIED** on real hardware | Needs a GPU session |
+| H | Social and generational | Done to a tested first standard: relationships, couples, births, ageing, illness, death, estates, succession, newcomers; 90-year population sustained (session 5) | — |
+| I | Environmental life: weather, wildlife, foliage, ocean, audio | Simulated ecosystem (13 species), shared wave model, five-state weather with forecasts and damage, moon phases and stars (session 5). Presentation still software-rendered only | Needs a GPU session |
 | J | Integration, optimisation, playable build | Tests in place; no GPU profiling, no export | Needs a GPU + export templates |
 | K | Final character art | **BLOCKED until the owner approves character designs** | Owner |
 
@@ -29,3 +29,12 @@ Phases follow the owner's directive (Part 22). Status is what has been executed,
 10. GPU session: Forward+ look, lighting, sea, performance budget, input test, short captured play session.
 11. Export templates → desktop build.
 12. Character concepts for the owner to compare (only when asked).
+
+## Session 5 (living world) - next, in order
+1. Owner: open the project on a GPU machine and watch it for an hour in cinematic mode (K). Report what feels dead, repetitive or wrong.
+2. Commercial staffing: let businesses hire and let go with trade (stop unpaid wage blocks at the root).
+3. Visible carrying: baskets, crates, nets attached to hands when the ledger moves goods.
+4. Collision avoidance for residents and boats.
+5. Social depth: rivalry, celebrations (births, partnerships), festivals on rest days, children's schooling at P09.
+6. Temperature, shutters, wind-driven laundry; species seasons.
+7. Licensed or recorded audio, event sounds (doors, gulls, market).

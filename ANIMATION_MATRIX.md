@@ -34,3 +34,11 @@ Blending: `AnimationTree` → `AnimationNodeStateMachine`, one node per clip, cr
 | market stall, exchange goods, repair boat, construction | **no** (generic `work`) | — |
 
 Objects do not yet attach to hands, so nothing is shown being carried - the simulation moves goods through the ledger without a visible prop. That mismatch is a known gap, not a claim.
+
+
+## Session 5 update
+- New clip `wave` (greeting): played when two friends (bond ≥ 30) meet, once per pair per day, from `Society._mingle`. That is a real event with a cause, not a random idle.
+- `shoo` reuses `work`: played by whoever is at the stall or the boat when a gull raids.
+- Boat crews now stand on the boat as it rides the shared wave surface (`Ocean.height`). Boats pitch and roll to the wave slope in `atmosphere.gd`.
+- Animals are animated from simulation state (wing beats by species, folded wings when perched or diving, a dolphin breach arc, turtle surfacing, crab burrow retreat). They are placeholders, not final art.
+- Still missing: carrying (nothing is visibly carried even though the ledger moves goods), boarding / disembarking, net handling, unloading crates, run, turn, stop.

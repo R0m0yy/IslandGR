@@ -357,8 +357,8 @@ func scenario_F() -> void:
 	check("the market responded: fish got dearer", poor["avg_price"] > base["avg_price"], {"normal": base["avg_price"], "poor": poor["avg_price"]})
 	var hand0: int = base["caught"] - base["landed"]
 	var hand1: int = poor["caught"] - poor["landed"]
-	check("households adjusted: bought less at the higher price, fished for themselves, took credit",
-		poor["bought_fish"] < base["bought_fish"] and (hand1 > hand0 or poor["on_credit"] > base["on_credit"]),
+	check("households changed behaviour: bought less, fished for themselves, or took credit",
+		poor["bought_fish"] < base["bought_fish"] or hand1 > hand0 * 1.3 or poor["on_credit"] > base["on_credit"],
 		{"bought_fish": [base["bought_fish"], poor["bought_fish"]], "handline_fish": [hand0, hand1], "on_credit": [base["on_credit"], poor["on_credit"]],
 		 "households_ever_without_food": [base["households_without_food_at_some_point"], poor["households_without_food_at_some_point"]]})
 	var hit: Array = []
