@@ -4,7 +4,10 @@ Autonomous coastal-village life simulation. Working title. New production projec
 
 **Read `PROOF_OF_WORK.md` first.** It separates what exists and was executed from what is only planned.
 
-## Status at a glance (session 3)
+## Status at a glance (session 4)
+See `QA_REPORT.md` for the audit and `PROOF_OF_WORK.md` for evidence. The environment is **not approved**; characters are **frozen** (neutral mannequins).
+
+### Session 3 summary
 A Blender 4.x asset pipeline and a Godot 4 project now exist and **have been executed** (Blender 4.5.15 LTS via `bpy`, Godot 4.3 headless + software-GL captures). The whole 30-building village is generated from `data/village_layout.json`, loads in Godot, and 42 placeholder villagers live in it autonomously in the headless tests. Never run: a GPU, the Forward+ renderer, an interactive session. See `PROOF_OF_WORK.md`.
 
 ## Layout

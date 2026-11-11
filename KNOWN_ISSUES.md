@@ -39,3 +39,29 @@
 | 27 | Assets | Vegetation placement ignores canopy size; a tree can crowd a house | Low |
 | 28 | Assets | No caves, undercuts or boat shed under rock (layout weakness 5) | Medium |
 | 29 | Architecture | Sim core is GDScript, not the TypeScript core specified in ARCHITECTURE.md - decision pending | Medium |
+
+## Session 4 updates
+| # | Area | Issue | Severity |
+|---|---|---|---|
+| 10, 28 | Terrain | Addressed: sculpted island with undercut, overhangs and 10 caves. Terrace *plan* still L-shaped | Medium (design) |
+| 11 | Layout | Rows remain; only a ≤5° turn per building was added | High (design) |
+| 23 | Sim | Still open: residents pass through each other; no queues | Medium |
+| 25 | Assets | Island is now 38k tris / 4.6 MB (was 100k / 12 MB for terrain + cliffs). Buildings grew to 390k tris with dressing; still no LODs or instancing | Medium |
+| 30 | Visual | Rock strata read as hard stripes under Godot's direct light (see `T01_boat_at_sea.png`) | Medium |
+| 31 | Visual | 16k of the island's 38k triangles are under water | Low |
+| 32 | Visual | Sea under the stilt deck shows a dashed pattern (depth-map sampling against jittered facets) | Low |
+| 33 | Visual | Homes still share one roof family; no overlap or cantilever like the benchmark | High (art) |
+| 34 | Sim | Population is not self-sustaining over generations (42 → 15 in 45 years) - **FAILED test** | High |
+| 35 | Sim | Fish supply far exceeds demand (about 1,200 caught vs 270 cooked per week); market caps at 60 and the rest piles up in pantries | Medium |
+| 36 | Sim | 51 of 468 wages unpaid in the 7-day run: council income still short | Medium |
+| 37 | Sim | After a load, activities restart from the last walk node; a boat at sea is returned to its mooring | Low (documented behaviour) |
+| 38 | Sim | Friendship grows from proximity only; no rivalry, conflict, ceremonies or shared-activity bonding | Medium |
+| 39 | Sim | No skills, preferences, memories or personal goals yet | Medium |
+| 40 | Sim | Children share a parent's bed and "play" at the door; no schooling, no parenting tasks | Medium |
+| 41 | Sim | The 45-year test takes ~200 s; `Society._mingle` is the likely cost | Low |
+| 42 | Boats | No fuel, gear pickup, docking manoeuvre, wake or collision between boats; the crew stands on the hull placeholder-style | Medium |
+| 43 | UI | Inspectors, selection, camera easing, save/load keys never operated by a person | High (unverified) |
+| 44 | Audio | Ambience is generated noise, never heard; no event sounds | High (unverified) |
+| 45 | Wildlife | Only gulls on fixed circuits | Low |
+| 46 | Tooling | Git tags cannot be pushed to the remote; baseline is commit `df08c5c` | Low |
+| 47 | Reference | Benchmark pages blocked this session; comparison relies on the session-1 written analysis | Medium |

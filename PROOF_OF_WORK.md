@@ -1,7 +1,72 @@
 # PROOF OF WORK — live scorecard
 
 Statuses: **PASSED** (executed, evidence on disk) · **FAILED** (tested, defect found) · **UNVERIFIED** · **NOT IMPLEMENTED**.
-Last update: 2026-11-11, session 3. Session 1 and 2 records are preserved unchanged below.
+Last update: 2026-11-11, session 4. Earlier session records are preserved unchanged below.
+
+## Session 4 — master directive: audit, visual rebuild (district), simulation systems
+
+### Headline
+- Blender (bpy 4.5.15 LTS) and Godot 4.3 (headless + software-OpenGL frames) both ran again. **Still never run:** a GPU, the Forward+ renderer, an interactive session, an exported build.
+- **Nothing visual is claimed as approved or as meeting the benchmark.** A representative district was built to a higher standard and is offered for review. `ART_BIBLE.md` §0 rates it honestly against the benchmark: below on silhouette, layering and overall craft.
+- **Characters are frozen.** Residents are one plain grey mannequin, hidden in every presentation frame (E-series). T-series frames show them only to prove movement and interaction.
+- The benchmark pages were **blocked** this session; no new study of the reference images was possible.
+- Baseline before changes: commit `df08c5c`. Full audit and ranked weaknesses: `QA_REPORT.md`.
+
+### Evidence, by kind
+| Kind | Where | What it proves | What it does not |
+|---|---|---|---|
+| Blender render (Cycles, CPU) | `evidence/renders_village_v04/` (V*, D* day; `_golden`, `_night`), `evidence/renders_buildings/` | The generated geometry, colour and lighting as Blender sees them. No characters | How the game looks in engine |
+| Godot frame (software OpenGL) | `evidence/renders_godot_v04/` E* (environment, no figures, no UI), T* (figures + UI) | The project loads, draws, lights, runs the sea shader, shows inspectors | Forward+ quality, frame rate |
+| Godot recording | `evidence/renders_godot_v04/harbour_morning.mp4` (if present) | A dozen seconds of the running simulation, software-rendered | Smoothness |
+| Godot runtime test | `evidence/logs/godot_tests.json`, `godot_tests_stdout.log` | Logic: navigation, objects, AI, economy, boats, weather, save/load, generations | Anything visual |
+| Source check | `evidence/logs/pipeline_test.json`, `build_village.json` (island verification), `build_buildings.json` | Generated data and geometry obey the layout and the building contract | Looks |
+| Concept art / AI images | none exist | — | — |
+
+### Scorecard
+| Requirement (directive part) | Status | Evidence | Limits |
+|---|---|---|---|
+| Audit + baseline (4, 19) | PASSED | `QA_REPORT.md`; commit `df08c5c` | Tag could not be pushed |
+| Tools verified (5) | PASSED | `QA_REPORT.md` §1 | bpy module, software GL only |
+| Coastal terrain: irregular silhouette, strata, ledges, overhangs, recesses, caves, beach (6.1) | PASSED (built) / **approval pending** | `sculpt.py`; island 38,321 tris, 10 caves; ray-cast verification: 0 nodes off height, 0 links buried; renders V03, D01, D03, E05, E06 | Strata harsh in engine light; plan still stepped |
+| Village composition: varied footprints, overlap, rotations, courtyards (6.2) | **FAILED / not addressed** except ≤5° rotations | — | Needs layout v0.3 |
+| Five architectural families + details (6.3) | PASSED (built) / approval pending | cottage, stilt, family house, stacked shop-house, long shed, civic; `evidence/renders_buildings/` | "Larger hillside residence" family missing; one roof language; no collision proxies per building |
+| Storytelling details (6.3) | PASSED (first pass) | `dressing.py`; D02, D04, E03 | Hanging laundry, barrels, lanterns, patches, pots, crates, gardens, creepers, roof loads. No drainage channels, outdoor furniture limited to benches |
+| Modular production standards (6.4) | PASSED partial | Kit modules, naming, origins, manifest | `.blend` files are generated; no LODs; island has a collision mesh, buildings do not |
+| Representative district (21) | **Built - awaiting approval** | Blender D01-D05 (+ golden, night); Godot E03, E04, E07 | See `ART_BIBLE.md` §0 comparison |
+| Interiors + interactive furnishings (7) | PASSED partial | 367/368 anchors; doors, beds, chairs, tables, stoves, sinks, washstands drive state | Cabinets, storage, lamps not usable; walls hide rather than fade |
+| Interior camera (7) | UNVERIFIED interactively | T03, T06 | Driven by script only |
+| Resident data + AI (8) | PASSED partial | 5 needs, health, derived mood, traits, age, household, job, partner, parents, children, log | No skills, preferences, memories, goals |
+| No idle-forever / loops / deadlocks / negative stock / spontaneous money (8) | PASSED | 7-day soak; `Ledger.audit()` clean | Walking through walls is prevented only by the walk graph; residents overlap |
+| Daily life loops (9) | PASSED partial | Soak totals in `QA_REPORT.md` | No clean-up, no leisure variety, rest day is every 7th day for everyone |
+| Fishing + boats (10) | PASSED (logic) | 96 trips, cargo limits, landing sales, repairs; T01 | No fuel, gear, docking manoeuvre |
+| Economy (11) | PASSED (first version) | Ledger totals in `godot_tests.json` | Three-step prices; supply glut; some wages unpaid |
+| Relationships, families, generations (12) | PASSED mechanics / **FAILED sustainability** | 45-year run: 7 births, 34 deaths, 7 came of age, 12 estates, books balance, no dangling links | Population 42 → 15. No rivalry, marriage, conflict |
+| Animation architecture independent of character art (13) | PASSED | 11 clip names on a neutral rig; `ANIMATION_MATRIX.md` | Run, turn, carry, board, net, unload clips missing |
+| Ocean, vegetation, wildlife, day/night, weather (14) | Logic PASSED; presentation UNVERIFIED on a GPU | E02, E08 (storm), E09 (golden), E10 (night) | Gulls only; no wakes, reflections, fish |
+| Sound (15) | UNVERIFIED | Generated surf / wind / rain | No licensed assets reachable; never heard |
+| Camera + inspectors (16) | UNVERIFIED interactively | T02-T05 | — |
+| Save / load (17) | PASSED | 4 tests incl. migration and rejection of a damaged file | In-process reload |
+| Performance (18) | UNVERIFIED | Headless step rate only | No frame-rate numbers exist |
+| Integration tests (20) | PASSED 57 / 57 | `godot_tests.json` | — |
+| Standalone build (26) | NOT IMPLEMENTED | — | No export templates |
+| Final characters (3, K) | BLOCKED by owner | — | — |
+
+### Required visual deliverables (25)
+| # | Deliverable | File(s) | Kind |
+|---|---|---|---|
+| 1 | Village overview | `renders_village_v04/V01_overview.png`; `renders_godot_v04/E01_overview_morning.png` | Blender; Godot |
+| 2-3 | Harbour overview / close-up | `V02_harbour.png`; `E02_harbour_midday.png`, `E03_district_boardwalk.png` | Blender; Godot |
+| 4 | Cliffside neighbourhood | `V03_hill_west.png`, `D03_district_backstair.png` | Blender |
+| 5 | Five prototypes | `renders_buildings/H01, H02, H04, P05, P01 _exterior.png` | Blender |
+| 6 | Household exterior | `D04_district_cottage.png` | Blender |
+| 7 | Functional interior | `renders_buildings/H01_cutaway.png`; `T03_building_cutaway_H01.png` | Blender; Godot |
+| 8 | Sea arch | `V08_gate_through.png`; `E05_sea_arch.png` | Blender; Godot |
+| 9 | Waterfront | `D02_district_boardwalk.png`, `D05_district_beach.png`; `E07_shoreline_beach.png` | Blender; Godot |
+| 10-12 | Day / golden hour / night | `V01`, `V01_overview_golden.png`, `D02_…_golden.png`, `V02_harbour_night.png`, `D01_…_night.png`; `E09_golden_hour.png`, `E10_harbour_night.png` | Blender; Godot |
+| 13 | Ocean + shoreline | `E07`, `D05` | Godot; Blender |
+| 14 | Vegetation / effects | `D04`, `E04`, `E08_storm_harbour.png` | Blender; Godot |
+| 15 | Navigation + interaction testing | `T01_boat_at_sea.png`, `T02_resident_inspector_stairs.png`, `T04`, `T05` | Godot |
+A file listed here exists only if it is in the folder; renders that failed to complete are named in `PROGRESS.md`.
 
 ## Session 3 — Blender pipeline + Godot project (executed)
 

@@ -15,3 +15,16 @@ Status: **implemented in Godot and exercised by headless tests** (`godot/scripts
 | `sink`, `cabinet`, `storage`, `washstand`, `net_rack`, `bench` | `Interactable` | free / in_use | — | none yet | — | modelled and anchored, no behaviour | — |
 
 Failure handling implemented: object taken → reservation refused → plan not formed → next-best activity; failed use → release reservations, 30-minute cooldown on that activity, idle. **Not implemented:** waiting in a queue, interruption by weather, save/load mid-activity, tool/ingredient sub-goals beyond fish.
+
+
+## Session 4 additions
+| Object | Class | Villager state | Effect (through the Ledger or needs) | Tested |
+|---|---|---|---|---|
+| Boat (6) | `Boat` | `fish_trip` | sail lane → fish (stock-limited, capacity-limited) → return → unload: each fish sold to the market at the buy price while it has money and room, the rest to the pantry; wear, paid repair at the boat yard | trips, cargo cap, sales, repairs, storm abort |
+| `sink` / plaza well | `Interactable` | `drink` | thirst → 0 | counted in soak |
+| `washstand` | `Interactable` | `wash` | hygiene → 100 | counted in soak |
+| Eatery chair / table (P06) | `Interactable` | `eat` (out) | pay 4 to the eatery, one eatery meal consumed, hunger down | meals sold > 0 |
+| Market counter (P01) | `Interactable` | `shop` | up to 2 fish market → pantry at the sell price | fish bought > 0 |
+| Work stations | `Interactable` | `work` | wage from employer or council; eatery cooks turn bought fish into meals | wages paid |
+| `bed` | `Bed` | `sleep` | young children may share the owner's bed | generational run |
+Not yet usable: cabinets, storage (no inventory per object), lamps (automatic), benches, net racks.

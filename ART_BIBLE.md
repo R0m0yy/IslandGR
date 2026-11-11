@@ -1,4 +1,38 @@
-# ART BIBLE — v0.1 (awaiting approval)
+# ART BIBLE — v0.2 (awaiting approval)
+
+## 0. Session 4 addendum - read this first
+**Benchmark.** "Fishing Village - Low Poly 3D" by Ângelo Fernandes is the quality bar. It is studied, never copied: no geometry, texture or composition is taken from it. The reference pages could not be opened in session 4 (blocked), so the comparison below uses the written analysis of the image in `REFERENCE_RESEARCH.md` §4.
+
+**Layout in force.** "Saltcrown" v0.2 (`WORLD_LAYOUT.md`): a stepped hill round a harbour, The Gate sea arch on the east, beacon stack, rope bridge. Section 2 below still describes the abandoned v0.1 crescent - ignore it.
+
+**What "handcrafted" means here** (rules the generators now follow)
+1. Rock is carved, not extruded: undercut at the waterline, overhanging lips, strata ledges, cave mouths, cap stones.
+2. Every building carries signs of use tied to its household or trade: rain barrel under a downpipe, lantern by the door, patch planks, washing, pots and floats for fishers, crates for traders, a kitchen plot where there is ground.
+3. Nothing is ruled: boards lean, a few are bare, each house is turned a few degrees, roofs carry a basin or a weighted sheet.
+4. Edges people walk along get rope-and-post rails; lips spill greenery.
+5. Colour: one wall hue and one contrasting roof hue per home (from the layout), terracotta rock as the unifying middle value, pale paths, greens only in foliage.
+
+**Honest comparison with the benchmark (session 4)**
+| Aspect | Benchmark (from the written analysis) | Living Tides now | Verdict |
+|---|---|---|---|
+| Rock | Carved mass, undercut base, cave mouths | Carved island with undercut, 10 caves, strata; ledges read stripy in hard light | Approaching |
+| Silhouette | Leaning heap, roofs breaking the outline everywhere | Regular stepped hill, roofs mostly below the next terrace | **Below** |
+| Layering | Houses overlap so almost no wall is seen whole; platforms past the rock edge | Houses stand apart in rows; only the stilt row is over water | **Below** |
+| Architecture | One simple shack type, varied by rotation, height, colour and attachments | Five families, more formal; attachments now present | Approaching, different character |
+| Props / storytelling | Dense, every roof carries something | First pass: ~8 prop types per house | Approaching |
+| Circulation | Ladders everywhere | Real stairs, one ladder, a bridge - walkable by design | Different by intent |
+| Colour | Tight complementary pairs on warm rock | Same principle, palette from §4 | Comparable |
+| Vegetation | Palms and trees as the crown | Palms, trees, shrubs, tufts, creepers, lip plants | Approaching |
+| Water | Faceted, calm, pale cove | Faceted, depth-tinted, foam at shore | Approaching (software-rendered only) |
+| Lighting | Soft studio key + fill | Sun + sky in Cycles; Godot lighting untuned | Approaching in Blender, **unverified** in engine |
+| Overall craft | Exhibition piece | Systematic and consistent, not yet charming | **Below** |
+
+Nothing here is claimed to meet the benchmark. **The environment is not approved until the owner says so.**
+
+**Character freeze.** No character design exists or is implied. Residents are drawn as one plain grey mannequin (`villager_animator.gd`), hidden in every presentation frame. Final character art is blocked until the owner approves a direction.
+
+---
+# ART BIBLE — v0.1 text (kept)
 
 ## 1. One-line target
 A hand-built miniature you could pick up: warm rock, painted timber, tin roofs, calm paper-cut sea, lit like a studio model by day and from within by night.
