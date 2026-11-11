@@ -1,15 +1,15 @@
 {
  "island": {
-  "tris": 38321,
+  "tris": 38323,
   "paint": {
-   "rock_wet": 15966,
-   "rock_cave": 306,
-   "rock_m": 6227,
-   "rock_d": 9653,
-   "rock_l": 3537,
-   "sand": 244,
-   "grass": 1937,
-   "ground": 454
+   "rock_wet": 17081,
+   "rock_cave": 258,
+   "rock_m": 8496,
+   "rock_d": 4652,
+   "rock_l": 6876,
+   "sand": 243,
+   "grass": 238,
+   "ground": 482
   },
   "caves": 10,
   "ground_nodes_off_height": [],
@@ -18,7 +18,7 @@
  "blender": "4.5.15 LTS",
  "seconds": 22.5,
  "tris": {
-  "LT_ISLAND": 38321,
+  "LT_ISLAND": 38323,
   "LT_SEABED": 3900,
   "LT_STRUCTURES": 45708,
   "LT_PROPS": 8486,
@@ -31,10 +31,10 @@
   "BOAT_06": 1388,
   "buildings_total": 389974
  },
- "total_tris": 534741,
+ "total_tris": 534743,
  "glb_bytes": {
   "boats.glb": 686128,
-  "island.glb": 4599708,
+  "island.glb": 4599948,
   "props.glb": 646496,
   "seabed.glb": 445780,
   "structures.glb": 3829004,

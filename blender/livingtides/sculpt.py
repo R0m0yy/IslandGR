@@ -160,8 +160,10 @@ def build_island(L, ter, log=None):
     face = (~flat) & (no[:, 2] < 0.75)
     # strata: ledges step in and out with height, the bedding dips gently
     bed = z + 0.10 * x * 0.12 + 0.35 * E.n2(x * 0.35, zl * 0.35, 4.0)
-    ph = (bed / 1.25) % 1.0
-    step = np.where(ph < 0.62, 0.16, -0.20) + 0.10 * np.sin(bed * 9.0)
+    # beds of uneven thickness (about 1.6 - 3 m): a few strong ledges, not a comb
+    bedw = bed / 2.3 + 0.35 * np.sin(bed * 0.55 + 1.3)
+    ph = bedw % 1.0
+    step = np.where(ph < 0.72, 0.07, -0.16) + 0.04 * np.sin(bed * 5.0)
     big = 0.45 * E.n2(x * 0.55 + z * 0.4, zl * 0.55 - z * 0.3, 12.0) + 0.22 * E.n2(x * 1.9, zl * 1.9 + z * 1.4, 17.0)
     # vertical chimneys / joints
     joint = -0.55 * np.clip(np.sin((x * 0.9 + zl * 0.7) + 2.0 * E.n2(x * 0.2, zl * 0.2, 21.0)) - 0.86, 0, 1) / 0.14
@@ -213,11 +215,12 @@ def build_island(L, ter, log=None):
                 gn = float(E.n2(lx * 0.9, lz * 0.9, 11.0)) + (0.3 if c.z > 9 else -0.1)
                 role = "grass" if (gn > 0.25 and not ter.is_keep(lx, lz)) else "ground"
             else:
-                role = "grass" if float(E.n2(lx * 1.1, lz * 1.1, 5.0)) > -0.1 else "rock_l"      # ledges grow green
+                role = "grass" if float(E.n2(lx * 0.8, lz * 0.8 + c.z * 0.6, 5.0)) > 0.42 else "rock_l"    # only the odd ledge is green
         else:
             bedc = c.z + 0.012 * lx + 0.35 * float(E.n2(lx * 0.35, lz * 0.35, 4.0))
-            band = int(math.floor(bedc / 1.25)) % 5
-            role = ("rock_m", "rock_l", "rock_m", "rock_d", "rock_m")[band]
+            band = int(math.floor(bedc / 2.3 + 0.35 * math.sin(bedc * 0.55 + 1.3))) % 4
+            role = ("rock_m", "rock_l", "rock_m", "rock_m")[band]
+            if n.z > 0.35 and float(E.n2(lx * 1.7, lz * 1.7, 8.0)) > 0.3: role = "rock_l"      # sun-bleached shoulders
             if n.z < -0.3: role = "rock_d"
             if c.z < 0.35: role = "rock_wet"
         for (cx, cy, cz, r, yaw) in CAVES:

@@ -54,8 +54,8 @@ func _ready() -> void:
 		rig.goal_target = s[2]
 		if mode == "storm":
 			village.weather.force("storm")
-			for i in 30:
-				village.sim.advance(10.0)
+			for i in 40:                              # 40 game minutes for the sky and sea to turn
+				village.sim.advance(1.0)
 				village.weather.state = "storm"
 		elif mode == "boat":
 			for i in 900:

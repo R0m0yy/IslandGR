@@ -110,7 +110,7 @@ if RENDER:
     if "--quick" in argv:
         bl_io.setup_render(scene, 960, 600, 14)
     else:
-        bl_io.setup_render(scene, 1600, 1000, 48)
+        bl_io.setup_render(scene, 1600, 1000, 36)
     TIME = "day"
     for i, a_ in enumerate(argv):
         if a_ == "--time":
