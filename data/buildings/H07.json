@@ -1,0 +1,652 @@
+{
+ "schema": "living-tides.building",
+ "version": 1,
+ "id": "H07",
+ "name": "Terrace house 2",
+ "kind": "home",
+ "family": "family_house",
+ "origin": [
+  0.5,
+  5.5,
+  -8.4
+ ],
+ "yaw_deg": 0.0,
+ "storeys": 2,
+ "frame": "Godot-local: +x right, +y up, +z out of the front door. Pivot = front-door threshold at terrace level.",
+ "groups": [
+  "BASE",
+  "DOOR_main",
+  "FLOOR2",
+  "INTERIOR",
+  "ROOF",
+  "WALL_E",
+  "WALL_N",
+  "WALL_S",
+  "WALL_W"
+ ],
+ "compass": {
+  "front": "S",
+  "right": "E",
+  "back": "N",
+  "left": "W"
+ },
+ "features": [
+  "front balcony under the gable"
+ ],
+ "door": {
+  "node": "DOOR_main",
+  "pivot": [
+   -0.35,
+   0.205,
+   -0.04
+  ],
+  "open_deg": 100.0
+ },
+ "anchors": [
+  {
+   "id": "IA_bed_0",
+   "type": "bed",
+   "slot": 0,
+   "layout_index": 1,
+   "floor": 1,
+   "pose": "lie",
+   "pos": [
+    -1.0,
+    3.3,
+    -3.255
+   ],
+   "stand": [
+    0.42,
+    2.8,
+    -3.255
+   ],
+   "facing": [
+    -1.0,
+    0.0
+   ]
+  },
+  {
+   "id": "IA_bed_1",
+   "type": "bed",
+   "slot": 1,
+   "layout_index": 2,
+   "floor": 1,
+   "pose": "lie",
+   "pos": [
+    -1.0,
+    3.3,
+    -2.225
+   ],
+   "stand": [
+    0.42,
+    2.8,
+    -2.225
+   ],
+   "facing": [
+    -1.0,
+    0.0
+   ]
+  },
+  {
+   "id": "IA_stove_0",
+   "type": "stove",
+   "slot": 0,
+   "layout_index": 3,
+   "floor": 0,
+   "pose": "stand",
+   "pos": [
+    -0.98,
+    0.4,
+    -3.105
+   ],
+   "stand": [
+    -0.98,
+    0.4,
+    -3.105
+   ],
+   "facing": [
+    -1.0,
+    0.0
+   ],
+   "light": [
+    -1.25,
+    0.85,
+    -3.105
+   ]
+  },
+  {
+   "id": "IA_sink_0",
+   "type": "sink",
+   "slot": 0,
+   "layout_index": 4,
+   "floor": 0,
+   "pose": "stand",
+   "pos": [
+    -1.03,
+    0.4,
+    -2.025
+   ],
+   "stand": [
+    -1.03,
+    0.4,
+    -2.025
+   ],
+   "facing": [
+    -1.0,
+    0.0
+   ]
+  },
+  {
+   "id": "IA_table_0",
+   "type": "table",
+   "slot": 0,
+   "layout_index": 5,
+   "floor": 0,
+   "pose": "stand",
+   "pos": [
+    -0.15,
+    0.2,
+    -1.13
+   ],
+   "stand": [
+    -0.15,
+    0.2,
+    -1.13
+   ],
+   "facing": [
+    0.0,
+    -1.0
+   ]
+  },
+  {
+   "id": "IA_cabinet_0",
+   "type": "cabinet",
+   "slot": 0,
+   "layout_index": 8,
+   "floor": 0,
+   "pose": "stand",
+   "pos": [
+    -1.13,
+    0.4,
+    -1.145
+   ],
+   "stand": [
+    -1.13,
+    0.4,
+    -1.145
+   ],
+   "facing": [
+    -1.0,
+    0.0
+   ]
+  },
+  {
+   "id": "IA_storage_0",
+   "type": "storage",
+   "slot": 0,
+   "layout_index": 9,
+   "floor": 0,
+   "pose": "stand",
+   "pos": [
+    1.07,
+    0.4,
+    -1.08
+   ],
+   "stand": [
+    1.07,
+    0.4,
+    -1.08
+   ],
+   "facing": [
+    1.0,
+    0.0
+   ]
+  },
+  {
+   "id": "IA_washstand_0",
+   "type": "washstand",
+   "slot": 0,
+   "layout_index": 12,
+   "floor": 0,
+   "pose": "stand",
+   "pos": [
+    1.13,
+    0.4,
+    -1.89
+   ],
+   "stand": [
+    1.13,
+    0.4,
+    -1.89
+   ],
+   "facing": [
+    1.0,
+    0.0
+   ]
+  },
+  {
+   "id": "IA_bed_2",
+   "type": "bed",
+   "slot": 2,
+   "layout_index": 13,
+   "floor": 1,
+   "pose": "lie",
+   "pos": [
+    -1.0,
+    3.3,
+    -1.195
+   ],
+   "stand": [
+    0.42,
+    2.8,
+    -1.195
+   ],
+   "facing": [
+    -1.0,
+    0.0
+   ]
+  },
+  {
+   "id": "IA_bed_3",
+   "type": "bed",
+   "slot": 3,
+   "layout_index": 14,
+   "floor": 1,
+   "pose": "lie",
+   "pos": [
+    1.49,
+    3.3,
+    -1.245
+   ],
+   "stand": [
+    0.61,
+    2.8,
+    -1.245
+   ],
+   "facing": [
+    -0.0,
+    1.0
+   ]
+  },
+  {
+   "id": "IA_chair_0",
+   "type": "chair",
+   "slot": 0,
+   "layout_index": 6,
+   "floor": 0,
+   "pose": "sit",
+   "pos": [
+    0.845,
+    0.66,
+    -1.91
+   ],
+   "stand": [
+    0.845,
+    0.2,
+    -1.91
+   ],
+   "facing": [
+    -1.0,
+    -0.0
+   ],
+   "table": true
+  },
+  {
+   "id": "IA_chair_1",
+   "type": "chair",
+   "slot": 1,
+   "layout_index": 7,
+   "floor": 0,
+   "pose": "sit",
+   "pos": [
+    -1.145,
+    0.66,
+    -1.91
+   ],
+   "stand": [
+    -1.145,
+    0.2,
+    -1.91
+   ],
+   "facing": [
+    1.0,
+    0.0
+   ],
+   "table": true
+  },
+  {
+   "id": "IA_chair_2",
+   "type": "chair",
+   "slot": 2,
+   "layout_index": 15,
+   "floor": 1,
+   "pose": "sit",
+   "pos": [
+    0.45,
+    3.06,
+    -0.36
+   ],
+   "stand": [
+    0.45,
+    2.6,
+    -0.36
+   ],
+   "facing": [
+    0,
+    -1
+   ]
+  },
+  {
+   "id": "IA_lamp_0",
+   "type": "lamp",
+   "slot": 0,
+   "layout_index": 10,
+   "floor": 0,
+   "pose": null,
+   "pos": [
+    0.0,
+    2.04,
+    -1.7
+   ],
+   "stand": null,
+   "facing": null
+  },
+  {
+   "id": "IA_lamp_1",
+   "type": "lamp",
+   "slot": 1,
+   "layout_index": 11,
+   "floor": 1,
+   "pose": null,
+   "pos": [
+    0.0,
+    4.55,
+    -1.7
+   ],
+   "stand": null,
+   "facing": null
+  },
+  {
+   "id": "IA_lamp_2",
+   "type": "lamp",
+   "slot": 2,
+   "layout_index": 16,
+   "floor": 0,
+   "pose": null,
+   "pos": [
+    1.05,
+    2.04,
+    -2.3
+   ],
+   "stand": null,
+   "facing": null
+  },
+  {
+   "id": "IA_door_0",
+   "type": "door",
+   "slot": 0,
+   "layout_index": 0,
+   "floor": 0,
+   "pose": "stand",
+   "pos": [
+    0,
+    0.2,
+    0
+   ],
+   "stand": [
+    0,
+    0,
+    0.9
+   ],
+   "facing": [
+    0,
+    -1
+   ],
+   "node": "DOOR_main",
+   "open_deg": 100.0,
+   "stand_in": [
+    0,
+    0.2,
+    -0.75
+   ]
+  },
+  {
+   "id": "IA_stairs_interior_0",
+   "type": "stairs_interior",
+   "slot": 0,
+   "layout_index": 17,
+   "floor": 0,
+   "pose": null,
+   "pos": [
+    -0.95,
+    0.2,
+    -3.42
+   ],
+   "stand": null,
+   "facing": [
+    1,
+    0
+   ],
+   "top": [
+    1.8,
+    2.6,
+    -3.42
+   ]
+  }
+ ],
+ "nav": {
+  "nodes": {
+   "out": [
+    0,
+    0.0,
+    0.9
+   ],
+   "in": [
+    0,
+    0.2,
+    -0.75
+   ],
+   "hub0": [
+    0.0,
+    0.2,
+    -1.68
+   ],
+   "stair_bot": [
+    -0.95,
+    0.2,
+    -3.42
+   ],
+   "stair_top": [
+    1.8,
+    2.6,
+    -3.42
+   ],
+   "land2": [
+    1.4,
+    2.6,
+    -2.58
+   ],
+   "hub1": [
+    0.9,
+    2.6,
+    -1.59
+   ],
+   "pre_stair": [
+    -1.0,
+    0.2,
+    -2.53
+   ],
+   "IA_bed_0": [
+    0.42,
+    2.8,
+    -3.255
+   ],
+   "IA_bed_1": [
+    0.42,
+    2.8,
+    -2.225
+   ],
+   "IA_stove_0": [
+    -0.98,
+    0.4,
+    -3.105
+   ],
+   "IA_sink_0": [
+    -1.03,
+    0.4,
+    -2.025
+   ],
+   "IA_table_0": [
+    -0.15,
+    0.2,
+    -1.13
+   ],
+   "IA_cabinet_0": [
+    -1.13,
+    0.4,
+    -1.145
+   ],
+   "IA_storage_0": [
+    1.07,
+    0.4,
+    -1.08
+   ],
+   "IA_washstand_0": [
+    1.13,
+    0.4,
+    -1.89
+   ],
+   "IA_bed_2": [
+    0.42,
+    2.8,
+    -1.195
+   ],
+   "IA_bed_3": [
+    0.61,
+    2.8,
+    -1.245
+   ],
+   "IA_chair_0": [
+    0.845,
+    0.2,
+    -1.91
+   ],
+   "IA_chair_1": [
+    -1.145,
+    0.2,
+    -1.91
+   ],
+   "IA_chair_2": [
+    0.45,
+    2.6,
+    -0.36
+   ]
+  },
+  "edges": [
+   {
+    "a": "out",
+    "b": "in",
+    "type": "doorway"
+   },
+   {
+    "a": "in",
+    "b": "hub0",
+    "type": "interior"
+   },
+   {
+    "a": "hub0",
+    "b": "pre_stair",
+    "type": "interior"
+   },
+   {
+    "a": "pre_stair",
+    "b": "stair_bot",
+    "type": "interior"
+   },
+   {
+    "a": "stair_bot",
+    "b": "stair_top",
+    "type": "stair"
+   },
+   {
+    "a": "stair_top",
+    "b": "land2",
+    "type": "interior"
+   },
+   {
+    "a": "land2",
+    "b": "hub1",
+    "type": "interior"
+   },
+   {
+    "a": "hub1",
+    "b": "IA_bed_0",
+    "type": "interior"
+   },
+   {
+    "a": "hub1",
+    "b": "IA_bed_1",
+    "type": "interior"
+   },
+   {
+    "a": "hub0",
+    "b": "IA_stove_0",
+    "type": "interior"
+   },
+   {
+    "a": "hub0",
+    "b": "IA_sink_0",
+    "type": "interior"
+   },
+   {
+    "a": "hub0",
+    "b": "IA_table_0",
+    "type": "interior"
+   },
+   {
+    "a": "hub0",
+    "b": "IA_cabinet_0",
+    "type": "interior"
+   },
+   {
+    "a": "hub0",
+    "b": "IA_storage_0",
+    "type": "interior"
+   },
+   {
+    "a": "hub0",
+    "b": "IA_washstand_0",
+    "type": "interior"
+   },
+   {
+    "a": "hub1",
+    "b": "IA_bed_2",
+    "type": "interior"
+   },
+   {
+    "a": "hub1",
+    "b": "IA_bed_3",
+    "type": "interior"
+   },
+   {
+    "a": "hub0",
+    "b": "IA_chair_0",
+    "type": "interior"
+   },
+   {
+    "a": "hub0",
+    "b": "IA_chair_1",
+    "type": "interior"
+   },
+   {
+    "a": "hub1",
+    "b": "IA_chair_2",
+    "type": "interior"
+   }
+  ],
+  "entry": "out",
+  "entry_matches": "door_H07"
+ },
+ "unplaced": [],
+ "tris": 13984
+}

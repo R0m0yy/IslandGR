@@ -1,0 +1,387 @@
+{
+ "blender": "4.5.15 LTS",
+ "seconds": 3.8,
+ "buildings": [
+  {
+   "id": "P01",
+   "family": "long_shed",
+   "tris": 14292,
+   "anchors": 7,
+   "stubs": 7,
+   "unplaced": 0,
+   "glb_bytes": 1037080,
+   "features": [
+    "open front + awning"
+   ]
+  },
+  {
+   "id": "P02",
+   "family": "long_shed",
+   "tris": 9180,
+   "anchors": 7,
+   "stubs": 7,
+   "unplaced": 0,
+   "glb_bytes": 677788,
+   "features": [
+    "open front + awning"
+   ]
+  },
+  {
+   "id": "P03",
+   "family": "long_shed",
+   "tris": 16338,
+   "anchors": 7,
+   "stubs": 7,
+   "unplaced": 0,
+   "glb_bytes": 1201220,
+   "features": [
+    "lean-to store (E)"
+   ]
+  },
+  {
+   "id": "P04",
+   "family": "stacked",
+   "tris": 14368,
+   "anchors": 5,
+   "stubs": 5,
+   "unplaced": 0,
+   "glb_bytes": 1090036,
+   "features": [
+    "awning + sign"
+   ]
+  },
+  {
+   "id": "P05",
+   "family": "stacked",
+   "tris": 17746,
+   "anchors": 12,
+   "stubs": 12,
+   "unplaced": 0,
+   "glb_bytes": 1344076,
+   "features": [
+    "awning + sign",
+    "lean-to store (N)"
+   ]
+  },
+  {
+   "id": "P06",
+   "family": "stacked",
+   "tris": 10956,
+   "anchors": 14,
+   "stubs": 15,
+   "unplaced": 1,
+   "glb_bytes": 820928,
+   "features": [
+    "awning + sign"
+   ]
+  },
+  {
+   "id": "P07",
+   "family": "long_shed",
+   "tris": 9276,
+   "anchors": 7,
+   "stubs": 7,
+   "unplaced": 0,
+   "glb_bytes": 696600,
+   "features": []
+  },
+  {
+   "id": "P08",
+   "family": "civic",
+   "tris": 17418,
+   "anchors": 10,
+   "stubs": 10,
+   "unplaced": 0,
+   "glb_bytes": 1306104,
+   "features": [
+    "bell-cot",
+    "lean-to store (E)"
+   ]
+  },
+  {
+   "id": "P09",
+   "family": "civic",
+   "tris": 11362,
+   "anchors": 8,
+   "stubs": 8,
+   "unplaced": 0,
+   "glb_bytes": 852624,
+   "features": [
+    "bell-cot",
+    "lean-to store (E)"
+   ]
+  },
+  {
+   "id": "P10",
+   "family": "cottage",
+   "tris": 9902,
+   "anchors": 7,
+   "stubs": 7,
+   "unplaced": 0,
+   "glb_bytes": 753160,
+   "features": [
+    "door canopy",
+    "lean-to store (E)"
+   ]
+  },
+  {
+   "id": "H01",
+   "family": "cottage",
+   "tris": 10998,
+   "anchors": 13,
+   "stubs": 13,
+   "unplaced": 0,
+   "glb_bytes": 846448,
+   "features": [
+    "door canopy",
+    "lean-to store (S)"
+   ]
+  },
+  {
+   "id": "H02",
+   "family": "family_house",
+   "tris": 17146,
+   "anchors": 18,
+   "stubs": 18,
+   "unplaced": 0,
+   "glb_bytes": 1294940,
+   "features": [
+    "front balcony under the gable",
+    "lean-to store (W)"
+   ]
+  },
+  {
+   "id": "H03",
+   "family": "stilt",
+   "tris": 9032,
+   "anchors": 14,
+   "stubs": 14,
+   "unplaced": 0,
+   "glb_bytes": 697360,
+   "features": [
+    "door canopy",
+    "net rack"
+   ]
+  },
+  {
+   "id": "H04",
+   "family": "stilt",
+   "tris": 9212,
+   "anchors": 14,
+   "stubs": 14,
+   "unplaced": 0,
+   "glb_bytes": 713564,
+   "features": [
+    "door canopy",
+    "net rack"
+   ]
+  },
+  {
+   "id": "H05",
+   "family": "stilt",
+   "tris": 8932,
+   "anchors": 14,
+   "stubs": 14,
+   "unplaced": 0,
+   "glb_bytes": 690288,
+   "features": [
+    "door canopy",
+    "net rack"
+   ]
+  },
+  {
+   "id": "H06",
+   "family": "cottage",
+   "tris": 10198,
+   "anchors": 13,
+   "stubs": 13,
+   "unplaced": 0,
+   "glb_bytes": 771024,
+   "features": [
+    "door canopy",
+    "lean-to store (W)"
+   ]
+  },
+  {
+   "id": "H07",
+   "family": "family_house",
+   "tris": 13984,
+   "anchors": 18,
+   "stubs": 18,
+   "unplaced": 0,
+   "glb_bytes": 1076764,
+   "features": [
+    "front balcony under the gable"
+   ]
+  },
+  {
+   "id": "H08",
+   "family": "cottage",
+   "tris": 9560,
+   "anchors": 13,
+   "stubs": 13,
+   "unplaced": 0,
+   "glb_bytes": 721556,
+   "features": [
+    "door canopy"
+   ]
+  },
+  {
+   "id": "H09",
+   "family": "cottage",
+   "tris": 10086,
+   "anchors": 13,
+   "stubs": 13,
+   "unplaced": 0,
+   "glb_bytes": 763296,
+   "features": [
+    "door canopy",
+    "lean-to store (E)"
+   ]
+  },
+  {
+   "id": "H10",
+   "family": "cottage",
+   "tris": 12278,
+   "anchors": 13,
+   "stubs": 13,
+   "unplaced": 0,
+   "glb_bytes": 925124,
+   "features": [
+    "door canopy",
+    "lean-to store (N)"
+   ]
+  },
+  {
+   "id": "H11",
+   "family": "family_house",
+   "tris": 16260,
+   "anchors": 18,
+   "stubs": 18,
+   "unplaced": 0,
+   "glb_bytes": 1234668,
+   "features": [
+    "front balcony under the gable"
+   ]
+  },
+  {
+   "id": "H12",
+   "family": "cottage",
+   "tris": 10644,
+   "anchors": 13,
+   "stubs": 13,
+   "unplaced": 0,
+   "glb_bytes": 794512,
+   "features": [
+    "door canopy"
+   ]
+  },
+  {
+   "id": "H13",
+   "family": "cottage",
+   "tris": 11014,
+   "anchors": 13,
+   "stubs": 13,
+   "unplaced": 0,
+   "glb_bytes": 823592,
+   "features": [
+    "door canopy",
+    "lean-to store (W)"
+   ]
+  },
+  {
+   "id": "H14",
+   "family": "family_house",
+   "tris": 14704,
+   "anchors": 18,
+   "stubs": 18,
+   "unplaced": 0,
+   "glb_bytes": 1116060,
+   "features": [
+    "front balcony under the gable"
+   ]
+  },
+  {
+   "id": "H15",
+   "family": "cottage",
+   "tris": 10282,
+   "anchors": 13,
+   "stubs": 13,
+   "unplaced": 0,
+   "glb_bytes": 768640,
+   "features": [
+    "door canopy",
+    "lean-to store (E)"
+   ]
+  },
+  {
+   "id": "H16",
+   "family": "cottage",
+   "tris": 10942,
+   "anchors": 13,
+   "stubs": 13,
+   "unplaced": 0,
+   "glb_bytes": 823440,
+   "features": [
+    "door canopy",
+    "lean-to store (W)"
+   ]
+  },
+  {
+   "id": "H17",
+   "family": "cottage",
+   "tris": 10194,
+   "anchors": 13,
+   "stubs": 13,
+   "unplaced": 0,
+   "glb_bytes": 767340,
+   "features": [
+    "door canopy",
+    "lean-to store (N)"
+   ]
+  },
+  {
+   "id": "H18",
+   "family": "cottage",
+   "tris": 11922,
+   "anchors": 13,
+   "stubs": 13,
+   "unplaced": 0,
+   "glb_bytes": 885400,
+   "features": [
+    "door canopy",
+    "lean-to store (N)"
+   ]
+  },
+  {
+   "id": "H19",
+   "family": "cottage",
+   "tris": 9954,
+   "anchors": 13,
+   "stubs": 13,
+   "unplaced": 0,
+   "glb_bytes": 749720,
+   "features": [
+    "door canopy",
+    "lean-to store (E)"
+   ]
+  },
+  {
+   "id": "H20",
+   "family": "cottage",
+   "tris": 11354,
+   "anchors": 13,
+   "stubs": 13,
+   "unplaced": 0,
+   "glb_bytes": 854876,
+   "features": [
+    "door canopy",
+    "lean-to store (E)"
+   ]
+  }
+ ],
+ "total_tris": 359534,
+ "anchors": 367,
+ "stubs": 368,
+ "unplaced": 1
+}

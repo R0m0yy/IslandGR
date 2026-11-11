@@ -1,0 +1,29 @@
+{
+ "blender": "4.5.15 LTS",
+ "seconds": 4.3,
+ "tris": {
+  "LT_TERRAIN": 64896,
+  "LT_CLIFFS": 34000,
+  "LT_GATE": 976,
+  "LT_STRUCTURES": 27972,
+  "LT_PROPS": 6434,
+  "LT_VEG": 26664,
+  "BOAT_01": 1388,
+  "BOAT_02": 1388,
+  "BOAT_03": 1516,
+  "BOAT_04": 1388,
+  "BOAT_05": 1516,
+  "BOAT_06": 1388,
+  "buildings_total": 359534
+ },
+ "total_tris": 529060,
+ "glb_bytes": {
+  "boats.glb": 686128,
+  "cliffs.glb": 4080828,
+  "gate.glb": 110844,
+  "props.glb": 469148,
+  "structures.glb": 2171344,
+  "terrain.glb": 7788696,
+  "vegetation.glb": 2384792
+ }
+}

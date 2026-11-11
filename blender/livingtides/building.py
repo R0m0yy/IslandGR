@@ -235,35 +235,16 @@ def build(b, L):
 
     # ---------------- roof
     ztop = FLOOR_Z + H
-    pitch = {"cottage": rng.uniform(27, 34), "family_house": rng.uniform(30, 36), "stilt": 16.0,
+    pitch = {"cottage": rng.uniform(27, 34), "family_house": rng.uniform(30, 36), "stilt": 21.0,
              "stacked": rng.uniform(24, 30), "long_shed": rng.uniform(17, 22), "civic": rng.uniform(26, 30)}[fam]
     ridge_x = True
     if fam == "family_house" or (fam == "cottage" and rng.random() < 0.4) or (fam == "civic" and b["kind"] == "school"):
         ridge_x = False                        # gable faces the street
     eave = 0.36
-    if fam == "stilt":
-        with roof.push(T(0, D / 2, 0)):
-            zhi = parts.shed_roof(roof, W, D, ztop + 0.45, pitch, rng, eave=0.42, verge=0.3, cover="tin")
-        # wedge walls under the mono-pitch: front is the high side here (rotate)
-        out.meta["roof"] = "shed"
-        rise = D * math.tan(math.radians(pitch))
-        for s in ("left", "right"):
-            m = wm[s]
-            with m.push(vol.side(s)):
-                apex = 1.0 if s == "left" else 0.0     # high edge at the back (+y)
-                parts.gable_wall(m, D, rise + 0.45, t, "wood_mid", "wall_in", z0=H, apex=apex)
-                parts.clad_gable(m, D, H, rise + 0.45, rng, apex=apex)
-        with wm["back"].push(vol.side("back")):
-            parts.wall(wm["back"], W, rise + 0.45, t, [], "wood_mid", "wall_in", z0=H)
-            parts.clad(wm["back"], W, H, H + rise + 0.45, [], rng, style=lap)
-        with wm["front"].push(vol.side("front")):
-            parts.wall(wm["front"], W, 0.45, t, [], "wood_mid", "wall_in", z0=H)
-            parts.clad(wm["front"], W, H, H + 0.45, [], rng, style=lap)
-        zr = zhi
-    else:
+    if True:
         if ridge_x:
             with roof.push(T(0, D / 2, 0)):
-                zr = parts.gable_roof(roof, W, D, ztop, pitch, rng, eave=eave, verge=0.3, sag=0.035, cover="tin", barge_mat="frame")
+                zr = parts.gable_roof(roof, W, D, ztop, pitch, rng, eave=eave, verge=0.2 if fam == "stilt" else 0.3, sag=0.035, cover="tin", barge_mat="frame")
             gs, gw = ("left", "right"), D
         else:
             over = 0.95 if fam == "family_house" else 0.3

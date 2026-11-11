@@ -1,0 +1,318 @@
+{
+ "schema": "living-tides.building",
+ "version": 1,
+ "id": "P09",
+ "name": "School",
+ "kind": "school",
+ "family": "civic",
+ "origin": [
+  -10,
+  14.5,
+  -21.75
+ ],
+ "yaw_deg": 0.0,
+ "storeys": 1,
+ "frame": "Godot-local: +x right, +y up, +z out of the front door. Pivot = front-door threshold at terrace level.",
+ "groups": [
+  "BASE",
+  "DOOR_main",
+  "INTERIOR",
+  "ROOF",
+  "WALL_E",
+  "WALL_N",
+  "WALL_S",
+  "WALL_W"
+ ],
+ "compass": {
+  "front": "S",
+  "right": "E",
+  "back": "N",
+  "left": "W"
+ },
+ "features": [
+  "bell-cot",
+  "lean-to store (E)"
+ ],
+ "door": {
+  "node": "DOOR_main",
+  "pivot": [
+   -0.35,
+   0.205,
+   -0.04
+  ],
+  "open_deg": 100.0
+ },
+ "anchors": [
+  {
+   "id": "IA_desk_0",
+   "type": "desk",
+   "slot": 0,
+   "layout_index": 1,
+   "floor": 0,
+   "pose": "sit",
+   "pos": [
+    -1.7,
+    0.2,
+    -1.25
+   ],
+   "stand": [
+    -1.7,
+    0.2,
+    -1.13
+   ],
+   "facing": [
+    0.0,
+    -1.0
+   ]
+  },
+  {
+   "id": "IA_desk_1",
+   "type": "desk",
+   "slot": 1,
+   "layout_index": 2,
+   "floor": 0,
+   "pose": "sit",
+   "pos": [
+    -0.4,
+    0.2,
+    -1.25
+   ],
+   "stand": [
+    -0.4,
+    0.2,
+    -1.13
+   ],
+   "facing": [
+    0.0,
+    -1.0
+   ]
+  },
+  {
+   "id": "IA_desk_2",
+   "type": "desk",
+   "slot": 2,
+   "layout_index": 3,
+   "floor": 0,
+   "pose": "sit",
+   "pos": [
+    0.9,
+    0.2,
+    -1.25
+   ],
+   "stand": [
+    0.9,
+    0.2,
+    -1.13
+   ],
+   "facing": [
+    0.0,
+    -1.0
+   ]
+  },
+  {
+   "id": "IA_desk_3",
+   "type": "desk",
+   "slot": 3,
+   "layout_index": 4,
+   "floor": 0,
+   "pose": "sit",
+   "pos": [
+    -1.7,
+    0.2,
+    -2.31
+   ],
+   "stand": [
+    -1.7,
+    0.2,
+    -2.19
+   ],
+   "facing": [
+    0.0,
+    -1.0
+   ]
+  },
+  {
+   "id": "IA_teacher_desk_0",
+   "type": "teacher_desk",
+   "slot": 0,
+   "layout_index": 5,
+   "floor": 0,
+   "pose": "sit",
+   "pos": [
+    -2.24,
+    0.4,
+    -3.525
+   ],
+   "stand": [
+    -2.12,
+    0.4,
+    -3.525
+   ],
+   "facing": [
+    -1.0,
+    0.0
+   ]
+  },
+  {
+   "id": "IA_board_0",
+   "type": "board",
+   "slot": 0,
+   "layout_index": 6,
+   "floor": 0,
+   "pose": "stand",
+   "pos": [
+    -2.58,
+    0.4,
+    -2.12
+   ],
+   "stand": [
+    -2.58,
+    0.4,
+    -2.12
+   ],
+   "facing": [
+    -1.0,
+    0.0
+   ]
+  },
+  {
+   "id": "IA_lamp_0",
+   "type": "lamp",
+   "slot": 0,
+   "layout_index": 7,
+   "floor": 0,
+   "pose": null,
+   "pos": [
+    0.0,
+    2.15,
+    -2.25
+   ],
+   "stand": null,
+   "facing": null
+  },
+  {
+   "id": "IA_door_0",
+   "type": "door",
+   "slot": 0,
+   "layout_index": 0,
+   "floor": 0,
+   "pose": "stand",
+   "pos": [
+    0,
+    0.2,
+    0
+   ],
+   "stand": [
+    0,
+    0,
+    0.9
+   ],
+   "facing": [
+    0,
+    -1
+   ],
+   "node": "DOOR_main",
+   "open_deg": 100.0,
+   "stand_in": [
+    0,
+    0.2,
+    -0.75
+   ]
+  }
+ ],
+ "nav": {
+  "nodes": {
+   "out": [
+    0,
+    0.0,
+    0.9
+   ],
+   "in": [
+    0,
+    0.2,
+    -0.75
+   ],
+   "hub0": [
+    0.0,
+    0.2,
+    -1.89
+   ],
+   "IA_desk_0": [
+    -1.7,
+    0.2,
+    -1.13
+   ],
+   "IA_desk_1": [
+    -0.4,
+    0.2,
+    -1.13
+   ],
+   "IA_desk_2": [
+    0.9,
+    0.2,
+    -1.13
+   ],
+   "IA_desk_3": [
+    -1.7,
+    0.2,
+    -2.19
+   ],
+   "IA_teacher_desk_0": [
+    -2.12,
+    0.4,
+    -3.525
+   ],
+   "IA_board_0": [
+    -2.58,
+    0.4,
+    -2.12
+   ]
+  },
+  "edges": [
+   {
+    "a": "out",
+    "b": "in",
+    "type": "doorway"
+   },
+   {
+    "a": "in",
+    "b": "hub0",
+    "type": "interior"
+   },
+   {
+    "a": "hub0",
+    "b": "IA_desk_0",
+    "type": "interior"
+   },
+   {
+    "a": "hub0",
+    "b": "IA_desk_1",
+    "type": "interior"
+   },
+   {
+    "a": "hub0",
+    "b": "IA_desk_2",
+    "type": "interior"
+   },
+   {
+    "a": "hub0",
+    "b": "IA_desk_3",
+    "type": "interior"
+   },
+   {
+    "a": "hub0",
+    "b": "IA_teacher_desk_0",
+    "type": "interior"
+   },
+   {
+    "a": "hub0",
+    "b": "IA_board_0",
+    "type": "interior"
+   }
+  ],
+  "entry": "out",
+  "entry_matches": "door_P09"
+ },
+ "unplaced": [],
+ "tris": 11362
+}

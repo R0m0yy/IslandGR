@@ -1,0 +1,528 @@
+{
+ "schema": "living-tides.building",
+ "version": 1,
+ "id": "P06",
+ "name": "Eatery",
+ "kind": "eatery",
+ "family": "stacked",
+ "origin": [
+  -17.0,
+  5.5,
+  10.3
+ ],
+ "yaw_deg": 90.0,
+ "storeys": 1,
+ "frame": "Godot-local: +x right, +y up, +z out of the front door. Pivot = front-door threshold at terrace level.",
+ "groups": [
+  "BASE",
+  "DOOR_main",
+  "INTERIOR",
+  "ROOF",
+  "WALL_E",
+  "WALL_N",
+  "WALL_S",
+  "WALL_W"
+ ],
+ "compass": {
+  "front": "E",
+  "right": "N",
+  "back": "W",
+  "left": "S"
+ },
+ "features": [
+  "awning + sign"
+ ],
+ "door": {
+  "node": "DOOR_main",
+  "pivot": [
+   -0.35,
+   0.205,
+   -0.04
+  ],
+  "open_deg": 100.0
+ },
+ "anchors": [
+  {
+   "id": "IA_stove_0",
+   "type": "stove",
+   "slot": 0,
+   "layout_index": 1,
+   "floor": 0,
+   "pose": "stand",
+   "pos": [
+    -1.18,
+    0.4,
+    -3.925
+   ],
+   "stand": [
+    -1.18,
+    0.4,
+    -3.925
+   ],
+   "facing": [
+    -1.0,
+    0.0
+   ],
+   "light": [
+    -1.45,
+    0.85,
+    -3.925
+   ]
+  },
+  {
+   "id": "IA_stove_1",
+   "type": "stove",
+   "slot": 1,
+   "layout_index": 2,
+   "floor": 0,
+   "pose": "stand",
+   "pos": [
+    -1.18,
+    0.4,
+    -2.595
+   ],
+   "stand": [
+    -1.18,
+    0.4,
+    -2.595
+   ],
+   "facing": [
+    -1.0,
+    0.0
+   ],
+   "light": [
+    -1.45,
+    0.85,
+    -2.595
+   ]
+  },
+  {
+   "id": "IA_sink_0",
+   "type": "sink",
+   "slot": 0,
+   "layout_index": 3,
+   "floor": 0,
+   "pose": "stand",
+   "pos": [
+    -1.23,
+    0.4,
+    -1.515
+   ],
+   "stand": [
+    -1.23,
+    0.4,
+    -1.515
+   ],
+   "facing": [
+    -1.0,
+    0.0
+   ]
+  },
+  {
+   "id": "IA_counter_0",
+   "type": "counter",
+   "slot": 0,
+   "layout_index": 4,
+   "floor": 0,
+   "pose": "stand",
+   "pos": [
+    0.75,
+    0.4,
+    -3.87
+   ],
+   "stand": [
+    0.75,
+    0.4,
+    -3.87
+   ],
+   "facing": [
+    0.0,
+    -1.0
+   ]
+  },
+  {
+   "id": "IA_table_0",
+   "type": "table",
+   "slot": 0,
+   "layout_index": 5,
+   "floor": 0,
+   "pose": "stand",
+   "pos": [
+    -0.35,
+    0.2,
+    -1.13
+   ],
+   "stand": [
+    -0.35,
+    0.2,
+    -1.13
+   ],
+   "facing": [
+    0.0,
+    -1.0
+   ]
+  },
+  {
+   "id": "IA_table_1",
+   "type": "table",
+   "slot": 1,
+   "layout_index": 6,
+   "floor": 0,
+   "pose": "stand",
+   "pos": [
+    -0.35,
+    0.2,
+    -2.35
+   ],
+   "stand": [
+    -0.35,
+    0.2,
+    -2.35
+   ],
+   "facing": [
+    0.0,
+    -1.0
+   ]
+  },
+  {
+   "id": "IA_chair_0",
+   "type": "chair",
+   "slot": 0,
+   "layout_index": 8,
+   "floor": 0,
+   "pose": "sit",
+   "pos": [
+    0.645,
+    0.66,
+    -1.91
+   ],
+   "stand": [
+    0.645,
+    0.2,
+    -1.91
+   ],
+   "facing": [
+    -1.0,
+    -0.0
+   ],
+   "table": true
+  },
+  {
+   "id": "IA_chair_1",
+   "type": "chair",
+   "slot": 1,
+   "layout_index": 9,
+   "floor": 0,
+   "pose": "sit",
+   "pos": [
+    -1.345,
+    0.66,
+    -1.91
+   ],
+   "stand": [
+    -1.345,
+    0.2,
+    -1.91
+   ],
+   "facing": [
+    1.0,
+    0.0
+   ],
+   "table": true
+  },
+  {
+   "id": "IA_chair_2",
+   "type": "chair",
+   "slot": 2,
+   "layout_index": 10,
+   "floor": 0,
+   "pose": "sit",
+   "pos": [
+    0.645,
+    0.66,
+    -3.13
+   ],
+   "stand": [
+    0.645,
+    0.2,
+    -3.13
+   ],
+   "facing": [
+    -1.0,
+    -0.0
+   ],
+   "table": true
+  },
+  {
+   "id": "IA_chair_3",
+   "type": "chair",
+   "slot": 3,
+   "layout_index": 11,
+   "floor": 0,
+   "pose": "sit",
+   "pos": [
+    -1.345,
+    0.66,
+    -3.13
+   ],
+   "stand": [
+    -1.345,
+    0.2,
+    -3.13
+   ],
+   "facing": [
+    1.0,
+    0.0
+   ],
+   "table": true
+  },
+  {
+   "id": "IA_chair_4",
+   "type": "chair",
+   "slot": 4,
+   "layout_index": 12,
+   "floor": 0,
+   "pose": "sit",
+   "pos": [
+    1.15,
+    0.66,
+    -0.36
+   ],
+   "stand": [
+    1.15,
+    0.2,
+    -0.36
+   ],
+   "facing": [
+    0,
+    -1
+   ]
+  },
+  {
+   "id": "IA_chair_5",
+   "type": "chair",
+   "slot": 5,
+   "layout_index": 13,
+   "floor": 0,
+   "pose": "sit",
+   "pos": [
+    0.65,
+    0.66,
+    -0.36
+   ],
+   "stand": [
+    0.65,
+    0.2,
+    -0.36
+   ],
+   "facing": [
+    0,
+    -1
+   ]
+  },
+  {
+   "id": "IA_lamp_0",
+   "type": "lamp",
+   "slot": 0,
+   "layout_index": 14,
+   "floor": 0,
+   "pose": null,
+   "pos": [
+    0.0,
+    2.15,
+    -2.5
+   ],
+   "stand": null,
+   "facing": null
+  },
+  {
+   "id": "IA_door_0",
+   "type": "door",
+   "slot": 0,
+   "layout_index": 0,
+   "floor": 0,
+   "pose": "stand",
+   "pos": [
+    0,
+    0.2,
+    0
+   ],
+   "stand": [
+    0,
+    0,
+    0.9
+   ],
+   "facing": [
+    0,
+    -1
+   ],
+   "node": "DOOR_main",
+   "open_deg": 100.0,
+   "stand_in": [
+    0,
+    0.2,
+    -0.75
+   ]
+  }
+ ],
+ "nav": {
+  "nodes": {
+   "out": [
+    0,
+    0.0,
+    0.9
+   ],
+   "in": [
+    0,
+    0.2,
+    -0.75
+   ],
+   "hub0": [
+    0.0,
+    0.2,
+    -1.9
+   ],
+   "IA_stove_0": [
+    -1.18,
+    0.4,
+    -3.925
+   ],
+   "IA_stove_1": [
+    -1.18,
+    0.4,
+    -2.595
+   ],
+   "IA_sink_0": [
+    -1.23,
+    0.4,
+    -1.515
+   ],
+   "IA_counter_0": [
+    0.75,
+    0.4,
+    -3.87
+   ],
+   "IA_table_0": [
+    -0.35,
+    0.2,
+    -1.13
+   ],
+   "IA_table_1": [
+    -0.35,
+    0.2,
+    -2.35
+   ],
+   "IA_chair_0": [
+    0.645,
+    0.2,
+    -1.91
+   ],
+   "IA_chair_1": [
+    -1.345,
+    0.2,
+    -1.91
+   ],
+   "IA_chair_2": [
+    0.645,
+    0.2,
+    -3.13
+   ],
+   "IA_chair_3": [
+    -1.345,
+    0.2,
+    -3.13
+   ],
+   "IA_chair_4": [
+    1.15,
+    0.2,
+    -0.36
+   ],
+   "IA_chair_5": [
+    0.65,
+    0.2,
+    -0.36
+   ]
+  },
+  "edges": [
+   {
+    "a": "out",
+    "b": "in",
+    "type": "doorway"
+   },
+   {
+    "a": "in",
+    "b": "hub0",
+    "type": "interior"
+   },
+   {
+    "a": "hub0",
+    "b": "IA_stove_0",
+    "type": "interior"
+   },
+   {
+    "a": "hub0",
+    "b": "IA_stove_1",
+    "type": "interior"
+   },
+   {
+    "a": "hub0",
+    "b": "IA_sink_0",
+    "type": "interior"
+   },
+   {
+    "a": "hub0",
+    "b": "IA_counter_0",
+    "type": "interior"
+   },
+   {
+    "a": "hub0",
+    "b": "IA_table_0",
+    "type": "interior"
+   },
+   {
+    "a": "hub0",
+    "b": "IA_table_1",
+    "type": "interior"
+   },
+   {
+    "a": "hub0",
+    "b": "IA_chair_0",
+    "type": "interior"
+   },
+   {
+    "a": "hub0",
+    "b": "IA_chair_1",
+    "type": "interior"
+   },
+   {
+    "a": "hub0",
+    "b": "IA_chair_2",
+    "type": "interior"
+   },
+   {
+    "a": "hub0",
+    "b": "IA_chair_3",
+    "type": "interior"
+   },
+   {
+    "a": "hub0",
+    "b": "IA_chair_4",
+    "type": "interior"
+   },
+   {
+    "a": "hub0",
+    "b": "IA_chair_5",
+    "type": "interior"
+   }
+  ],
+  "entry": "out",
+  "entry_matches": "door_P06"
+ },
+ "unplaced": [
+  {
+   "layout_index": 7,
+   "type": "table"
+  }
+ ],
+ "tris": 10956
+}

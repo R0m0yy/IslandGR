@@ -144,7 +144,12 @@ def sky(scene, sun_elev_deg=42, sun_rot_deg=140, strength=1.0, night=False):
             bg.inputs["Strength"].default_value = 0.22 * strength
         except Exception:
             bg.inputs["Strength"].default_value = 1.0
-        nt.links.new(tex.outputs["Color"], bg.inputs["Color"])
+        # camera sees a calm flat sky; lighting still comes from the sky model
+        mix = nt.nodes.new("ShaderNodeMixRGB"); lp = nt.nodes.new("ShaderNodeLightPath")
+        mix.inputs["Color2"].default_value = (2.6, 3.6, 4.6, 1.0)
+        nt.links.new(lp.outputs["Is Camera Ray"], mix.inputs["Fac"])
+        nt.links.new(tex.outputs["Color"], mix.inputs["Color1"])
+        nt.links.new(mix.outputs["Color"], bg.inputs["Color"])
     sun = bpy.data.lights.new("LT_sun", "SUN")
     sun.energy = 0.25 if night else 4.2 * strength
     sun.color = (0.55, 0.65, 1.0) if night else ((1.0, 0.93, 0.82) if sun_elev_deg > 20 else (1.0, 0.62, 0.36))
