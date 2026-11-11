@@ -33,7 +33,8 @@ func step(dt: float) -> void:
 	village.weather.tick(minutes)
 	village.economy.daily(GameClock.day())
 	village.society.tick(minutes)
-	village.ocean.advance(dt, village.weather.wind)
+	# waves run on real seconds (not sped up with the simulation); the tide follows game time
+	village.ocean.advance(dt / maxf(1.0, time_scale) if auto else dt, village.weather.wind)
 	village.ecosystem.tick(dt, minutes)
 	for o in village.interactables:
 		o.tick(minutes)

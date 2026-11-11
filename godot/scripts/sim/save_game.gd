@@ -29,7 +29,7 @@ static func snapshot(village) -> Dictionary:
 		"weather": village.weather.to_dict(), "ledger": village.ledger.to_dict(), "economy": village.economy.stats.duplicate(),
 		"economy_day": village.economy._day, "society": village.society.to_dict(), "households": village.households.duplicate(true),
 		"open_jobs": village.open_jobs.duplicate(true), "journal": village.journal.to_dict(), "ecosystem": village.ecosystem.to_dict(),
-		"economy_extra": village.economy.extra_state(), "ocean_time": village.ocean.time, "villagers": vs, "buildings": bs, "boats": boats, "grounds": grounds}
+		"economy_extra": village.economy.extra_state(), "ocean_time": village.ocean.time, "people": village.people.duplicate(true), "villagers": vs, "buildings": bs, "boats": boats, "grounds": grounds}
 
 static func save(village, path: String) -> bool:
 	var f := FileAccess.open(path, FileAccess.WRITE)
@@ -99,6 +99,7 @@ static func apply(village, d: Dictionary) -> bool:
 	village.ecosystem.from_dict(d.get("ecosystem", {}))
 	village.economy.load_extra(d.get("economy_extra", {}))
 	village.ocean.time = float(d.get("ocean_time", 0.0))
+	village.people = d.get("people", {}).duplicate(true)
 	for hh in d["households"]:
 		village.households[hh] = d["households"][hh].duplicate()
 		village.households[hh]["members"] = 0

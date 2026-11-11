@@ -15,6 +15,11 @@ var goal_yaw := deg_to_rad(40.0)
 var goal_pitch := deg_to_rad(-32.0)
 var follow = null                        # Villager or Boat
 var selected_building: Building = null
+var family_hh: String = ""              # follow a whole household
+var cinematic: bool = false
+var _wi := -1
+var _cine_t := 0.0
+var _cine_label := ""
 var _fi := -1
 var _bi := -1
 var _saved_dist := 95.0
@@ -30,6 +35,7 @@ func _ready() -> void:
 
 func focus_villager(v) -> void:
 	_clear_building()
+	family_hh = ""
 	follow = v
 	goal_dist = minf(goal_dist, 20.0)
 
@@ -128,8 +134,28 @@ func _unhandled_input(ev: InputEvent) -> void:
 					focus_boat(bs[_bi])
 			KEY_ESCAPE:
 				release()
+				family_hh = ""
+				cinematic = false
 			KEY_C:
 				village.toggle_cutaway(follow.inside_building() if follow is Villager else "")
+			KEY_G:
+				if follow is Villager:
+					family_hh = follow.hh
+					follow = null
+					goal_dist = 24.0
+			KEY_N:
+				var ws: Array = village.atmosphere.watchables if village.atmosphere else []
+				if not ws.is_empty():
+					_wi = (_wi + 1) % ws.size()
+					_clear_building()
+					family_hh = ""
+					follow = ws[_wi][1]
+					_cine_label = ws[_wi][0]
+					goal_dist = 14.0
+					goal_pitch = deg_to_rad(-22.0)
+			KEY_K:
+				cinematic = not cinematic
+				_cine_t = 0.0
 			KEY_Q: goal_yaw += deg_to_rad(45.0)
 			KEY_E: goal_yaw -= deg_to_rad(45.0)
 
@@ -142,14 +168,72 @@ func _process(dt: float) -> void:
 	if mv != Vector3.ZERO:
 		follow = null
 		goal_target += Basis(Vector3.UP, yaw) * mv.normalized() * dist * 0.6 * dt
+	if cinematic:
+		_cinema(dt)
 	if follow and is_instance_valid(follow):
 		goal_target = (follow.pos if follow is Boat else follow.global_position) + Vector3(0, 1.2, 0)
+	elif family_hh != "":
+		var c := Vector3.ZERO
+		var n := 0
+		for v in village.villagers:
+			if v.hh == family_hh:
+				c += v.global_position
+				n += 1
+		if n > 0:
+			goal_target = c / n + Vector3(0, 1.2, 0)
 	var k := 1.0 - exp(-dt * 6.0)
 	target = target.lerp(goal_target, k)
 	dist = lerpf(dist, goal_dist, k)
 	yaw = lerp_angle(yaw, goal_yaw, k)
 	pitch = lerpf(pitch, goal_pitch, k)
 	_apply()
+
+func _cinema(dt: float) -> void:
+	## Cinematic observer: a slow drift round the subject; every half minute it
+	## cuts to the newest notable event in the journal, else to someone at random.
+	goal_yaw += dt * 0.06
+	_cine_t -= dt
+	if _cine_t > 0.0:
+		return
+	_cine_t = 30.0
+	_clear_building()
+	family_hh = ""
+	var q: Array = village.journal.notable_queue
+	if not q.is_empty():
+		var e: Dictionary = q.pop_back()
+		for id in e["actors"]:
+			var v = village.villager_by_id(id)
+			if v:
+				follow = v
+				goal_dist = 16.0
+				_cine_label = e["text"]
+				return
+		if e.has("where"):
+			follow = null
+			goal_target = Vector3(e["where"][0], e["where"][1], e["where"][2])
+			goal_dist = 22.0
+			_cine_label = e["text"]
+			return
+	if randf() < 0.5 and village.atmosphere and not village.atmosphere.watchables.is_empty():
+		var w: Array = village.atmosphere.watchables[randi() % village.atmosphere.watchables.size()]
+		follow = w[1]
+		_cine_label = w[0]
+		goal_dist = 14.0
+	elif not village.villagers.is_empty():
+		follow = village.villagers[randi() % village.villagers.size()]
+		_cine_label = follow.display_name
+		goal_dist = 18.0
+
+func mode_text() -> String:
+	if cinematic:
+		return "cinematic: " + _cine_label.left(70)
+	if family_hh != "":
+		return "following " + village.household_name(family_hh)
+	if follow is Boat:
+		return "following " + follow.object_id
+	if follow and not (follow is Villager) and _cine_label != "":
+		return "watching " + _cine_label
+	return ""
 
 func snap() -> void:
 	target = goal_target; dist = goal_dist; yaw = goal_yaw; pitch = goal_pitch

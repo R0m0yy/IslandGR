@@ -11,6 +11,7 @@ extends Node
 ## G ecosystem · Y one year · P generations (demography)
 
 var out_dir := "user://"
+var E_DAYS := 24.0
 var results: Array = []
 var failures := 0
 var current := ""
@@ -67,6 +68,8 @@ func _ready() -> void:
 			out_dir = a.substr(6)
 		if a.begins_with("--only="):
 			only = a.substr(7)
+		if a.begins_with("--e-days="):
+			E_DAYS = float(a.substr(9))
 	for sc in only.split(","):
 		current = sc
 		var t0 := Time.get_ticks_msec()
@@ -272,7 +275,7 @@ func scenario_D() -> void:
 func scenario_E() -> void:
 	var v := make_village(1.0)
 	report["E"]["setup"] = "accelerated calendar: 1 game day = 1 year of life; 24 days"
-	run(v, 24 * 1440.0)
+	run(v, E_DAYS * 1440.0)
 	var sc: Dictionary = v.society.counts
 	var kinds := {}
 	for e in v.journal.entries:
@@ -294,9 +297,18 @@ func scenario_E() -> void:
 	var diffs := []
 	for r in snap["villagers"]:
 		var x = v2.villager_by_id(r["id"])
-		if x == null or x.partner != r["partner"] or x.children != r["children"] or x.hh != r["household"] or str(x.job) != str(r["job"]) or x.memories.size() != r["memories"].size():
+		var why := []
+		if x == null:
+			why.append("missing")
+		else:
+			if x.partner != r["partner"]: why.append("partner %s/%s" % [x.partner, r["partner"]])
+			if x.children != r["children"]: why.append("children %s/%s" % [x.children, r["children"]])
+			if x.hh != r["household"]: why.append("hh %s/%s" % [x.hh, r["household"]])
+			if JSON.stringify(x.job) != JSON.stringify(JSON.parse_string(JSON.stringify(r["job"]))): why.append("job %s/%s" % [x.job, r["job"]])
+			if x.memories.size() != r["memories"].size(): why.append("memories %d/%d" % [x.memories.size(), r["memories"].size()])
+		if not why.is_empty():
 			same = false
-			diffs.append(r["id"])
+			diffs.append([r["id"], why])
 	check("after save and reload: households, partners, children, jobs and memories identical", ok and same, diffs.slice(0, 5))
 	check("the journal (world history) survives the reload", v2.journal.entries.size() == n_journal, {"before": n_journal, "after": v2.journal.entries.size()})
 	run(v2, 1440.0)

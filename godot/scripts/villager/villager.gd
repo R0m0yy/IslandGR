@@ -176,7 +176,7 @@ func react(clip: String, seconds: float) -> void:
 	## A brief visible reaction (shooing a gull, waving) that does not change the plan.
 	_react_t = seconds
 	if animator:
-		animator.play("work" if clip == "shoo" else clip)
+		animator.play({"shoo": "work"}.get(clip, clip))
 
 func seek_shelter() -> void:
 	## Heavy rain: drop what you were doing outdoors and get home.
@@ -247,7 +247,7 @@ func _run_step() -> void:
 		world.economy.repair_building(self, st["repair"])
 		fsm.change("idle", {"seconds": 40.0, "anim": "work"})
 	elif st.has("idle"):
-		fsm.change("idle", {"seconds": st["idle"]})
+		fsm.change("idle", {"seconds": st["idle"], "anim": st.get("anim", "idle")})
 
 # ------------------------------------------------------------------ travel
 func next_segment() -> void:

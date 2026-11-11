@@ -5,6 +5,10 @@ var sun: DirectionalLight3D
 var env: Environment
 var sky_mat: ProceduralSkyMaterial
 var village = null
+var moon: DirectionalLight3D
+var moon_disc: MeshInstance3D
+var stars: MultiMeshInstance3D
+const MOON_DAYS := 29.5
 
 const KEYS := [   # hour, sun colour, sun energy, sky top, sky horizon, ambient energy
 	[0.0, Color(0.45, 0.55, 0.95), 0.10, Color(0.02, 0.03, 0.09), Color(0.05, 0.07, 0.16), 0.12],
@@ -46,7 +50,65 @@ func _ready() -> void:
 	we.name = "WorldEnvironment"
 	we.environment = env
 	add_child(we)
+	moon = DirectionalLight3D.new()
+	moon.name = "Moon"
+	moon.light_color = Color(0.62, 0.72, 1.0)
+	moon.shadow_enabled = true
+	moon.sky_mode = DirectionalLight3D.SKY_MODE_LIGHT_ONLY
+	add_child(moon)
+	moon_disc = MeshInstance3D.new()
+	moon_disc.name = "MoonDisc"
+	var q := QuadMesh.new()
+	q.size = Vector2(46, 46)
+	moon_disc.mesh = q
+	var mm := ShaderMaterial.new()
+	mm.shader = load("res://shaders/moon.gdshader")
+	moon_disc.material_override = mm
+	moon_disc.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	add_child(moon_disc)
+	stars = MultiMeshInstance3D.new()
+	stars.name = "Stars"
+	var multi := MultiMesh.new()
+	multi.transform_format = MultiMesh.TRANSFORM_3D
+	multi.use_colors = true
+	multi.instance_count = 700
+	var sq := QuadMesh.new()
+	sq.size = Vector2(2.2, 2.2)
+	multi.mesh = sq
+	var rng := RandomNumberGenerator.new()
+	rng.seed = 99
+	for i in multi.instance_count:
+		var az := rng.randf() * TAU
+		var el := asin(rng.randf_range(0.05, 1.0))
+		var d := Vector3(cos(el) * cos(az), sin(el), cos(el) * sin(az)) * 780.0
+		var tr := Transform3D(Basis.looking_at(-d, Vector3.UP), d).scaled_local(Vector3.ONE * rng.randf_range(0.5, 1.6))
+		multi.set_instance_transform(i, tr)
+		multi.set_instance_color(i, Color(rng.randf_range(0.35, 1.0), 0, 0))
+	stars.multimesh = multi
+	var sm := ShaderMaterial.new()
+	sm.shader = load("res://shaders/stars.gdshader")
+	stars.material_override = sm
+	stars.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	add_child(stars)
 	apply(GameClock.hour())
+
+func moon_phase() -> float:
+	## 0 new .. 0.5 full .. 1 new, from the calendar.
+	return fposmod(GameClock.total_minutes / 1440.0 / MOON_DAYS + 0.42, 1.0)
+
+func moon_illumination() -> float:
+	return 0.5 * (1.0 - cos(moon_phase() * TAU))
+
+func phase_name() -> String:
+	var p := moon_phase()
+	if p < 0.04 or p > 0.96: return "new moon"
+	if p < 0.21: return "waxing crescent"
+	if p < 0.29: return "first quarter"
+	if p < 0.46: return "waxing gibbous"
+	if p < 0.54: return "full moon"
+	if p < 0.71: return "waning gibbous"
+	if p < 0.79: return "last quarter"
+	return "waning crescent"
 
 func _process(_dt: float) -> void:
 	apply(GameClock.hour())
@@ -86,3 +148,28 @@ func apply(h: float) -> void:
 	var azim := lerpf(deg_to_rad(-80.0), deg_to_rad(80.0), t)
 	var dir := Vector3(-sin(azim) * cos(elev), sin(elev), cos(azim) * cos(elev))     # toward the light
 	sun.look_at_from_position(dir * 100.0, Vector3.ZERO, Vector3.UP)
+	if moon == null:
+		return
+	# the moon runs ~phase x 24 h behind the sun: full moon rises at sunset
+	var mh := fposmod(h - moon_phase() * 24.0, 24.0)
+	var mt := (mh - 5.5) / 14.0
+	var m_up := mt > 0.0 and mt < 1.0
+	var m_el := sin(clampf(mt, 0.0, 1.0) * PI) * deg_to_rad(58.0) + deg_to_rad(6.0)
+	var m_az := lerpf(deg_to_rad(-80.0), deg_to_rad(80.0), clampf(mt, 0.0, 1.0))
+	var mdir := Vector3(-sin(m_az) * cos(m_el), sin(m_el), cos(m_az) * cos(m_el))
+	moon.look_at_from_position(mdir * 100.0, Vector3.ZERO, Vector3.UP)
+	var night_k := clampf(1.0 - sun.light_energy / 0.5, 0.0, 1.0)
+	var cloud: float = village.weather.cloud if village else 0.0
+	moon.light_energy = (0.42 * moon_illumination() * night_k * (1.0 - 0.8 * cloud)) if m_up else 0.0
+	moon.visible = moon.light_energy > 0.01
+	var cam: Camera3D = get_viewport().get_camera_3d() if is_inside_tree() else null
+	var c: Vector3 = cam.global_position if cam != null else Vector3.ZERO
+	moon_disc.visible = m_up and moon_illumination() > 0.03
+	moon_disc.global_position = c + mdir * 640.0
+	moon_disc.look_at(c, Vector3.UP)
+	var mmat: ShaderMaterial = moon_disc.material_override
+	mmat.set_shader_parameter("phase", moon_phase())
+	mmat.set_shader_parameter("brightness", lerpf(0.55, 1.6, night_k) * (1.0 - 0.7 * cloud))
+	stars.global_position = c
+	(stars.material_override as ShaderMaterial).set_shader_parameter("visibility", night_k * (1.0 - cloud) * 1.4)
+	env.ambient_light_energy += 0.12 * moon.light_energy

@@ -10,7 +10,7 @@ extends Node3D
 ## AnimationNodeStateMachine over them. A real character replaces the rig and
 ## the clips; nothing else in the game refers to bones or meshes.
 
-const CLIPS := ["idle", "walk", "climb_stairs", "climb_ladder", "open_door", "cook", "eat", "sit", "sleep", "fish", "work"]
+const CLIPS := ["idle", "walk", "climb_stairs", "climb_ladder", "open_door", "cook", "eat", "sit", "sleep", "fish", "work", "wave"]
 
 var player: AnimationPlayer
 var tree: AnimationTree
@@ -166,6 +166,9 @@ func _clip(n: String) -> Animation:
 			T = {"Rig/ArmL:rotation": [[0, Vector3(-1.15, 0, 0.1)], [1.5, Vector3(-1.25, 0, 0.1)], [3, Vector3(-1.15, 0, 0.1)]],
 				"Rig/ArmR:rotation": [[0, Vector3(-1.15, 0, -0.1)], [1.5, Vector3(-1.25, 0, -0.1)], [3, Vector3(-1.15, 0, -0.1)]],
 				"Rig/Rod:visible": [[0, true], [3, true]]}
+		"wave":
+			L = 0.8
+			T = {"Rig/ArmR:rotation": [[0, Vector3(0, 0, -2.6)], [0.2, Vector3(0, 0, -2.2)], [0.4, Vector3(0, 0, -2.7)], [0.6, Vector3(0, 0, -2.2)], [0.8, Vector3(0, 0, -2.6)]]}
 		"work":
 			L = 0.9
 			T = {"Rig/ArmR:rotation": [[0, Vector3(-2.1, 0, 0)], [0.3, Vector3(-0.9, 0, 0)], [0.9, Vector3(-2.1, 0, 0)]],

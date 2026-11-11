@@ -14,7 +14,8 @@ var events: Array = []                # {"day", "type", "who", "detail"}
 var next_id: int = 1000
 var _day: int = -1
 var _acc: float = 0.0
-var counts := {"births": 0, "deaths": 0, "partnerships": 0, "came_of_age": 0, "retired": 0, "moves": 0, "estates": 0, "illnesses": 0, "newcomers": 0}
+var _greeted: Dictionary = {}
+var counts := {"births": 0, "deaths": 0, "partnerships": 0, "came_of_age": 0, "retired": 0, "moves": 0, "estates": 0, "illnesses": 0, "newcomers": 0, "greetings": 0}
 
 const CHILD_NAMES := ["Ari", "Bea", "Cai", "Dee", "Eli", "Fen", "Gil", "Hana", "Isa", "Jem", "Kel", "Lio", "Mae", "Nico", "Oli", "Paz", "Rui", "Sia", "Tai", "Uli"]
 
@@ -81,6 +82,11 @@ func _mingle() -> void:
 			g[i].needs["social"] = minf(100.0, g[i].needs["social"] + 2.5)
 			for j in range(i + 1, g.size()):
 				var k: String = key(g[i].villager_id, g[j].villager_id)
+				if bonds.get(k, 0.0) >= 30.0 and _greeted.get(k, -1) != GameClock.day():
+					_greeted[k] = GameClock.day()               # friends who meet wave to each other, once a day
+					g[i].react("wave", 2.0)
+					g[j].react("wave", 2.0)
+					counts["greetings"] += 1
 				var courting: bool = g[i].partner == "" and g[j].partner == "" and g[i].age >= 17.0 and g[j].age >= 17.0 and g[i].hh != g[j].hh
 				bonds[k] = minf(100.0, bonds.get(k, 0.0) + (0.6 if g[i].hh == g[j].hh else (2.2 if courting else 0.9)))
 

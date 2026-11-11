@@ -28,12 +28,14 @@ var ecosystem := Ecosystem.new()
 var ocean := Ocean.new()
 var boats: Dictionary = {}           # id -> Boat
 var grounds: Dictionary = {}         # fishing ground id -> {pos, stock, cap, richness}
-var open_jobs: Array = []            # vacated job records
+var open_jobs: Array = []
+var people: Dictionary = {}         # everyone who ever lived here: id -> {name, parents, partner, children, born, died, household, job}            # vacated job records
 var well: Interactable = null
 var villager_root: Node3D = null
 var sim: Simulation
 var day_night = null
 var camera_rig = null
+var atmosphere = null
 var hud = null
 var _lamps_on := false
 
@@ -308,11 +310,22 @@ func add_villager(rec: Dictionary):
 		return null
 	villagers.append(v)
 	households[v.hh]["members"] += 1
+	if not people.has(v.villager_id):
+		people[v.villager_id] = {"name": v.display_name, "parents": v.parents.duplicate(), "born_day": GameClock.day() - int(v.age * society.days_per_year),
+			"age_at_arrival": v.age, "arrived_day": GameClock.day(), "died_day": -1, "native": not rec.has("age") or float(rec.get("age", 30.0)) < 0.5}
 	if v.animator:
 		v.animator.visible = figures_visible
 	return v
 
 func remove_villager(v) -> void:
+	if people.has(v.villager_id):
+		var pe: Dictionary = people[v.villager_id]
+		pe["died_day"] = GameClock.day()
+		pe["age_at_death"] = v.age
+		pe["partner"] = v.partner
+		pe["children"] = v.children.duplicate()
+		pe["household"] = v.hh
+		pe["last_job"] = v.job["role"] if v.job != null else ""
 	v.shutdown()
 	release_job(v)
 	households[v.hh]["members"] -= 1
@@ -411,6 +424,7 @@ func _build_presentation() -> void:
 	var atmo = load("res://scripts/world/atmosphere.gd").new()
 	atmo.name = "Atmosphere"
 	atmo.village = self
+	atmosphere = atmo
 	camera_rig = load("res://scripts/camera/orbit_camera.gd").new()
 	camera_rig.name = "CameraRig"
 	add_child(camera_rig)
@@ -419,6 +433,7 @@ func _build_presentation() -> void:
 	hud.name = "HUD"
 	add_child(hud)
 	hud.village = self
+	hud.attach()
 	add_child(atmo)
 
 func set_figures_visible(on: bool) -> void:
@@ -444,3 +459,24 @@ func toggle_cutaway(id: String = "") -> void:
 		any = any or buildings[k].cutaway
 	for k in buildings:
 		buildings[k].set_cutaway(not any, cut_sides())
+
+func person_name(id: String) -> String:
+	var v = villager_by_id(id)
+	if v:
+		return v.display_name
+	return people[id]["name"] if people.has(id) else id
+
+func is_alive(id: String) -> bool:
+	return villager_by_id(id) != null
+
+func children_of(id: String) -> Array:
+	var v = villager_by_id(id)
+	if v:
+		return v.children
+	return people[id].get("children", []) if people.has(id) else []
+
+func parents_of(id: String) -> Array:
+	var v = villager_by_id(id)
+	if v:
+		return v.parents
+	return people[id].get("parents", []) if people.has(id) else []

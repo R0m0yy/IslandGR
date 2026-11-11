@@ -151,7 +151,7 @@ func _ready() -> void:
 	var clips_ok := true
 	for c in VillagerAnimator.CLIPS:
 		clips_ok = clips_ok and va.player.has_animation(c)
-	check("placeholder rig exposes all 11 animation clips", clips_ok, VillagerAnimator.CLIPS)
+	check("placeholder rig exposes all %d animation clips" % VillagerAnimator.CLIPS.size(), clips_ok, VillagerAnimator.CLIPS)
 	va.play("walk")
 	for i in 30:
 		await get_tree().process_frame

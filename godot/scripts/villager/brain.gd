@@ -94,6 +94,8 @@ func decide() -> Dictionary:
 	if v.sick_days > 0:
 		s["rest_home"] = 60.0
 	s["stroll"] = (14.0 + (100.0 - v.needs["social"]) * 0.2 * v.sociability) * out_f if not night else 0.0
+	if h >= 17.8 and h < 19.4 and adult:
+		s["stroll"] += 10.0 * v.sociability * out_f            # evening walks to see the sunset
 	s["rest_home"] = maxf(s.get("rest_home", 0.0), (9.0 if not night else 22.0) + (16.0 if out_f < 0.5 else 0.0) + (8.0 if v.ambition == "family" else 0.0))
 	for k in s.keys():
 		if cooldown.get(k, -1.0) > GameClock.total_minutes:
@@ -191,8 +193,17 @@ func _plan(act: String) -> Array:
 			if nodes.is_empty():
 				return []
 			var n: String = nodes[v.rng.randi() % nodes.size()]
+			var h2 := GameClock.hour()
+			var leaving: bool = w.boats.values().any(func(b): return b.boat_state == "outbound")
 			if v.age < 16.0:
-				n = "door_" + home.building_id          # children play near home
+				# children play near home - but when the boats are putting out they run down to watch
+				n = "q_n_pierA" if (leaving and h2 < 10.0 and v.age >= 5.0) else "door_" + home.building_id
+				if n == "q_n_pierA":
+					v.note("ran down to watch the boats go out")
+			elif h2 >= 17.8 and h2 < 19.4 and w.weather.state in ["clear", "cloudy"]:
+				n = "k_look" if v.rng.randf() < 0.5 else "sp_1"     # out to watch the sun go down
+				v.note("went to watch the sunset")
+				return [{"go": n}, {"idle": 40.0 + v.rng.randf() * 30.0, "anim": "idle"}]
 			return [{"go": n}, {"idle": 6.0 + v.rng.randf() * 14.0}]
 		"rest_home":
 			var seat2 = home.find("chair", v)
