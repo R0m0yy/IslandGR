@@ -21,6 +21,7 @@ var ground: Dictionary = {}        # fishing ground record (shared, has "stock")
 var trips: int = 0
 var landed: int = 0
 var aborted: int = 0
+var wear_extra: float = 0.0
 var pos: Vector3
 var _targets: Array = []
 var _passed: int = 0
@@ -77,5 +78,6 @@ func moor() -> void:
 	if visual:
 		visual.global_position = Vector3(home_pos.x, visual.global_position.y, home_pos.z)
 		visual.rotation.y = home_yaw
-	condition = maxf(0.0, condition - TRIP_WEAR)
+	condition = maxf(0.0, condition - TRIP_WEAR - wear_extra)
+	wear_extra = 0.0
 	state_changed.emit(self, boat_state)

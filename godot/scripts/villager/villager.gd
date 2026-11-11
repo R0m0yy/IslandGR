@@ -28,6 +28,14 @@ var shares_bed_of: String = ""
 var diligence: float = 1.0          # personal traits: small, persistent differences
 var sociability: float = 1.0
 var wake_offset: float = 0.0
+var generosity: float = 0.5
+var boldness: float = 0.5
+var ambition: String = "provide"    # provide | family | wealth | sea : a long-term leaning that tilts daily choices
+var skills := {"fishing": 0.2, "cooking": 0.2, "trade": 0.2, "carpentry": 0.2}
+var memories: Array = []            # {"day", "type", "text", "valence"} - significant events only, capped
+var sick_days: int = 0
+var _react_t: float = 0.0
+var _shelter_t: float = 0.0
 var health: float = 100.0
 var needs := {"hunger": 25.0, "energy": 85.0, "thirst": 20.0, "hygiene": 80.0, "social": 60.0}
 var rng := RandomNumberGenerator.new()
@@ -45,7 +53,7 @@ var plan: Array = []
 var activity: String = ""
 var stuck_time: float = 0.0
 var stats := {"sleeps": 0, "meals_cooked": 0, "meals_eaten": 0, "fish_caught": 0, "work_blocks": 0, "doors_opened": 0,
-	"stairs_climbed": 0, "ladders_climbed": 0, "bridges_crossed": 0, "failed_paths": 0, "failed_uses": 0, "boat_trips": 0, "wages": 0, "income": 0, "drinks": 0, "washes": 0,
+	"stairs_climbed": 0, "ladders_climbed": 0, "bridges_crossed": 0, "failed_paths": 0, "failed_uses": 0, "boat_trips": 0, "thefts_suffered": 0, "nets_mended": 0, "gifts_given": 0, "gifts_received": 0, "sheltered": 0, "stayed_ashore": 0, "empty_trips": 0, "repairs_done": 0, "wages": 0, "income": 0, "drinks": 0, "washes": 0,
 	"plans": 0, "fish_bought": 0, "fish_sold": 0, "metres": 0.0, "max_hunger": 0.0, "starve_minutes": 0.0}
 var log: Array = []
 
@@ -66,6 +74,20 @@ func setup(rec: Dictionary, village) -> void:
 	diligence = 0.8 + rng.randf() * 0.4
 	sociability = 0.6 + rng.randf() * 0.8
 	wake_offset = rng.randf_range(-0.6, 0.9)
+	generosity = rng.randf()
+	boldness = rng.randf()
+	ambition = ["provide", "family", "wealth", "sea"][rng.randi() % 4]
+	for k in skills:
+		skills[k] = rng.randf_range(0.1, 0.35)
+	if job != null:
+		var main: String = {"fisher": "fishing", "cook": "cooking", "carpenter": "carpentry", "apprentice": "carpentry", "boatwright": "carpentry"}.get(job["role"], "trade")
+		skills[main] = rng.randf_range(0.35, 0.7)
+	for k in rec.get("skills", {}):
+		skills[k] = float(rec["skills"][k])
+	memories = rec.get("memories", []).duplicate(true)
+	sick_days = int(rec.get("sick_days", 0))
+	if rec.has("ambition"):
+		ambition = rec["ambition"]
 	var beds := home.all_of("bed")
 	if rec.get("shares_bed_of", "") != "":
 		bed = null
@@ -107,6 +129,7 @@ func setup(rec: Dictionary, village) -> void:
 	fsm.add("fish_trip", Activities.FishTripState.new(self))
 	fsm.add("drink", Activities.DrinkState.new(self))
 	fsm.add("wash", Activities.WashState.new(self))
+	fsm.add("mend_nets", Activities.MendNetsState.new(self))
 	at_node = rec.get("at_node", bed.nav_node if bed else home.node_id("hub0"))
 	if not graph.pos.has(at_node):
 		at_node = home.node_id("hub0")
@@ -133,7 +156,42 @@ func tick(dt: float, minutes: float) -> void:
 	var deprived: bool = needs["hunger"] >= 99.9 or needs["thirst"] >= 99.9
 	health = clampf(health + (-5.0 if deprived else 1.0) * hrs, 0.0, 100.0)
 	stats["max_hunger"] = maxf(stats["max_hunger"], needs["hunger"])
+	if _react_t > 0.0:
+		_react_t -= dt
+		if _react_t <= 0.0 and fsm.current:
+			play(fsm.current.anim)
+	_shelter_t -= dt
+	if _shelter_t <= 0.0:
+		_shelter_t = 4.0
+		if world.weather.shelter_needed() and not at_sea and inside_building() == "" and activity in ["stroll", "fish", "give_food"]:
+			seek_shelter()
 	fsm.tick(dt, minutes)
+
+func remember(type: String, text: String, valence: float = 0.0) -> void:
+	memories.append({"day": GameClock.day(), "type": type, "text": text, "valence": valence})
+	if memories.size() > 30:
+		memories.pop_front()
+
+func react(clip: String, seconds: float) -> void:
+	## A brief visible reaction (shooing a gull, waving) that does not change the plan.
+	_react_t = seconds
+	if animator:
+		animator.play("work" if clip == "shoo" else clip)
+
+func seek_shelter() -> void:
+	## Heavy rain: drop what you were doing outdoors and get home.
+	stats["sheltered"] += 1
+	_note("caught in %s: heading home" % world.weather.state)
+	remember("weather", "ran home through the %s" % world.weather.state.replace("_", " "), -1.0)
+	for st in plan:
+		if st.has("use"):
+			st["use"].release(self)
+	if fsm.current is UseObjectState:
+		fsm.change("idle", {"seconds": 0.1})
+	activity = "shelter"
+	plan = [{"go": home.node_id("hub0")}, {"idle": 30.0}]
+	path = []
+	_run_step()
 
 func play(clip: String) -> void:
 	if animator:
@@ -178,6 +236,16 @@ func _run_step() -> void:
 		next_segment()
 	elif st.has("use"):
 		fsm.change(st["state"], st.merged({"obj": st["use"]}))
+	elif st.has("gift"):
+		world.economy.give(self, st["gift"], st["item"], st["n"])
+		fsm.change("idle", {"seconds": 6.0})
+	elif st.has("cut_bait"):
+		if world.economy.cut_bait(self):
+			_note("cut bait from a fish")
+		fsm.change("idle", {"seconds": 12.0, "anim": "work"})
+	elif st.has("repair"):
+		world.economy.repair_building(self, st["repair"])
+		fsm.change("idle", {"seconds": 40.0, "anim": "work"})
 	elif st.has("idle"):
 		fsm.change("idle", {"seconds": st["idle"]})
 
@@ -265,7 +333,9 @@ func info() -> Dictionary:
 	return {"id": villager_id, "name": display_name, "age": int(age), "household": hh, "home": home.building_id,
 		"job": (job["role"] + " @ " + String(job["place"])) if job != null else ("child" if age < 16.0 else ("retired" if age >= 65.0 else "none")),
 		"activity": activity, "state": fsm.current_name, "going_to": path[-1] if not path.is_empty() else "",
-		"needs": needs.duplicate(), "mood": int(mood()), "health": int(health),
+		"needs": needs.duplicate(), "mood": int(mood()), "health": int(health), "sick": sick_days > 0,
+		"skills": skills.duplicate(), "ambition": ambition, "traits": {"diligence": diligence, "sociability": sociability, "generosity": generosity, "boldness": boldness},
+		"memories": memories.slice(-5), "parents": parents, "kids": children,
 		"household_money": world.ledger.money(hh), "pantry": world.ledger.acc[hh]["items"].duplicate(),
 		"partner": partner, "children": children.size(), "friends": friends.slice(0, 4), "recent": log.slice(-5)}
 
@@ -288,8 +358,8 @@ func to_record() -> Dictionary:
 	if bed and shares_bed_of == "":
 		slot = home.all_of("bed").find(bed)
 	return {"id": villager_id, "name": display_name, "household": hh, "home": home.building_id, "bed_slot": slot, "job": job,
-		"shares_bed_of": shares_bed_of, "age": age, "partner": partner, "parents": parents, "children": children, "needs": needs.duplicate(), "health": health,
-		"at_node": at_node,
+		"shares_bed_of": shares_bed_of, "age": age, "partner": partner, "parents": parents, "children": children, "needs": needs.duplicate(), "health": health, "skills": skills.duplicate(), "memories": memories.duplicate(true),
+		"sick_days": sick_days, "ambition": ambition, "at_node": at_node,
 		"stats": stats.duplicate(), "activity": activity, "state": fsm.current_name}
 
 func shutdown() -> void:

@@ -10,6 +10,8 @@ uniform vec3 foam : source_color = vec3(0.92, 0.96, 0.98);
 uniform float wave_height = 0.11;
 uniform float wave_scale = 0.22;
 uniform float wave_speed = 0.55;
+uniform float sim_time = 0.0;      // wave clock shared with scripts/sim/ocean.gd
+uniform float tide = 0.0;
 uniform float foam_width = 0.6;
 uniform float storm = 0.0;        // 0 clear .. 1 overcast: greys the water
 uniform sampler2D height_tex : filter_linear, repeat_disable;   // terrain height, baked by the Blender pipeline
@@ -27,9 +29,10 @@ void vertex() {
 	wpos = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
 	// jitter the grid so facets are irregular triangles, not squares
 	vec2 j = vec2(sin(wpos.z * 1.7 + wpos.x * 0.3), cos(wpos.x * 1.3 - wpos.z * 0.2)) * 0.8;
+	// height from the un-jittered position: identical to Ocean.wave() in GDScript
+	VERTEX.y += h(wpos.xz, sim_time * wave_speed) * wave_height + tide;
 	VERTEX.xz += j;
 	wpos.xz += j;
-	VERTEX.y += h(wpos.xz, TIME * wave_speed) * wave_height;
 }
 
 void fragment() {
@@ -41,7 +44,7 @@ void fragment() {
 	if (huv.x < 0.0 || huv.x > 1.0 || huv.y < 0.0 || huv.y > 1.0) {
 		ground = height_range.x;
 	}
-	float water_depth = max(0.0, -ground);
+	float water_depth = max(0.0, tide - ground);
 	float k = smoothstep(0.0, 2.6, water_depth);
 	vec3 col = mix(shallow, mid, smoothstep(0.0, 0.5, k));
 	col = mix(col, deep, smoothstep(0.4, 1.0, k));

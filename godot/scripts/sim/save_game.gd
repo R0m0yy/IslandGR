@@ -6,7 +6,7 @@ extends RefCounted
 ## stands at their last walk node with reservations cleared and decides again;
 ## a boat that was at sea is back at its mooring with its cargo still aboard.
 
-const VERSION := 2
+const VERSION := 3
 const MIGRATIONS := {   # from version -> function name
 	1: "_migrate_1_to_2",
 }
@@ -28,7 +28,8 @@ static func snapshot(village) -> Dictionary:
 	return {"schema": "living-tides.save", "version": VERSION, "clock": GameClock.total_minutes,
 		"weather": village.weather.to_dict(), "ledger": village.ledger.to_dict(), "economy": village.economy.stats.duplicate(),
 		"economy_day": village.economy._day, "society": village.society.to_dict(), "households": village.households.duplicate(true),
-		"open_jobs": village.open_jobs.duplicate(true), "villagers": vs, "buildings": bs, "boats": boats, "grounds": grounds}
+		"open_jobs": village.open_jobs.duplicate(true), "journal": village.journal.to_dict(), "ecosystem": village.ecosystem.to_dict(),
+		"economy_extra": village.economy.extra_state(), "ocean_time": village.ocean.time, "villagers": vs, "buildings": bs, "boats": boats, "grounds": grounds}
 
 static func save(village, path: String) -> bool:
 	var f := FileAccess.open(path, FileAccess.WRITE)
@@ -50,6 +51,8 @@ static func load_file(path: String) -> Dictionary:
 	while ver < VERSION:
 		if ver == 1:
 			d = _migrate_1_to_2(d)
+		elif ver == 2:
+			d = _migrate_2_to_3(d)
 		ver += 1
 		d["version"] = ver
 	for k in ["clock", "weather", "ledger", "society", "households", "villagers", "buildings", "boats", "grounds"]:
@@ -69,6 +72,15 @@ static func _migrate_1_to_2(d: Dictionary) -> Dictionary:
 		d["open_jobs"] = []
 	return d
 
+static func _migrate_2_to_3(d: Dictionary) -> Dictionary:
+	## v2 saves predate the journal, the ecosystem, debts and the five-state weather.
+	if d["weather"].get("state") == "rain":
+		d["weather"]["state"] = "light_rain"
+	for k in ["journal", "ecosystem", "economy_extra"]:
+		if not d.has(k):
+			d[k] = {}
+	return d
+
 static func apply(village, d: Dictionary) -> bool:
 	## Never partially applied: validate first (load_file), then replace state.
 	if d.has("error"):
@@ -83,10 +95,14 @@ static func apply(village, d: Dictionary) -> bool:
 		village.economy.stats[k] = int(d["economy"][k])
 	village.economy._day = int(d.get("economy_day", -1))
 	village.society.from_dict(d["society"])
+	village.journal.from_dict(d.get("journal", {}))
+	village.ecosystem.from_dict(d.get("ecosystem", {}))
+	village.economy.load_extra(d.get("economy_extra", {}))
+	village.ocean.time = float(d.get("ocean_time", 0.0))
 	for hh in d["households"]:
 		village.households[hh] = d["households"][hh].duplicate()
 		village.households[hh]["members"] = 0
-		for k in ["capacity", "last_birth"]:
+		for k in ["capacity", "last_birth", "vacant_day"]:
 			if village.households[hh].has(k):
 				village.households[hh][k] = int(village.households[hh][k])
 	for id in d["buildings"]:

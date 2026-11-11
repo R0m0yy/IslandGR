@@ -1,0 +1,1734 @@
+{
+ "engine": "4.3-stable (official)",
+ "failed": 2,
+ "passed": 18,
+ "report": {
+  "A": {
+   "fisher": {
+    "boat": "BOAT_02",
+    "game_minutes": 2880,
+    "ground": "Reef beyond The Gate",
+    "id": "V01",
+    "ledger": [
+     [
+      360,
+      "start_stock",
+      "",
+      "HH_P05",
+      "fish",
+      1
+     ],
+     [
+      360,
+      "start_stock",
+      "",
+      "HH_P05",
+      "meal",
+      1
+     ],
+     [
+      360,
+      "start_stock",
+      "",
+      "HH_P05",
+      "bait",
+      2
+     ],
+     [
+      360.1,
+      "levy",
+      "HH_P05",
+      "council",
+      "money",
+      6
+     ],
+     [
+      362.7,
+      "eaten",
+      "HH_P05",
+      "",
+      "meal",
+      1
+     ],
+     [
+      396.6,
+      "cooked",
+      "HH_P05",
+      "",
+      "fish",
+      1
+     ],
+     [
+      396.6,
+      "cooked",
+      "",
+      "HH_P05",
+      "meal",
+      3
+     ],
+     [
+      439.6,
+      "used_at_sea",
+      "HH_P05",
+      "",
+      "bait",
+      1
+     ],
+     [
+      515.8,
+      "boat_catch",
+      "",
+      "BOAT_02",
+      "fish",
+      1
+     ],
+     [
+      525.8,
+      "boat_catch",
+      "",
+      "BOAT_02",
+      "fish",
+      1
+     ],
+     [
+      535.8,
+      "boat_catch",
+      "",
+      "BOAT_02",
+      "fish",
+      2
+     ],
+     [
+      545.8,
+      "boat_catch",
+      "",
+      "BOAT_02",
+      "fish",
+      1
+     ],
+     [
+      555.8,
+      "boat_catch",
+      "",
+      "BOAT_02",
+      "fish",
+      1
+     ],
+     [
+      605.8,
+      "boat_catch",
+      "",
+      "BOAT_02",
+      "fish",
+      2
+     ],
+     [
+      657.1,
+      "landing_sale",
+      "BOAT_02",
+      "BIZ_P01",
+      "fish",
+      1
+     ],
+     [
+      657.1,
+      "landing_sale",
+      "BIZ_P01",
+      "HH_P05",
+      "money",
+      3
+     ],
+     [
+      657.1,
+      "landing_sale",
+      "BOAT_02",
+      "BIZ_P01",
+      "fish",
+      1
+     ],
+     [
+      657.1,
+      "landing_sale",
+      "BIZ_P01",
+      "HH_P05",
+      "money",
+      3
+     ],
+     [
+      657.1,
+      "landing_sale",
+      "BOAT_02",
+      "BIZ_P01",
+      "fish",
+      1
+     ],
+     [
+      657.1,
+      "landing_sale",
+      "BIZ_P01",
+      "HH_P05",
+      "money",
+      3
+     ],
+     [
+      657.1,
+      "landing_sale",
+      "BOAT_02",
+      "BIZ_P01",
+      "fish",
+      1
+     ],
+     [
+      657.1,
+      "landing_sale",
+      "BIZ_P01",
+      "HH_P05",
+      "money",
+      2
+     ],
+     [
+      657.1,
+      "landing_sale",
+      "BOAT_02",
+      "BIZ_P01",
+      "fish",
+      1
+     ],
+     [
+      657.1,
+      "landing_sale",
+      "BIZ_P01",
+      "HH_P05",
+      "money",
+      2
+     ],
+     [
+      657.1,
+      "landing_sale",
+      "BOAT_02",
+      "BIZ_P01",
+      "fish",
+      1
+     ],
+     [
+      657.1,
+      "landing_sale",
+      "BIZ_P01",
+      "HH_P05",
+      "money",
+      2
+     ],
+     [
+      657.1,
+      "landing_sale",
+      "BOAT_02",
+      "BIZ_P01",
+      "fish",
+      1
+     ],
+     [
+      657.1,
+      "landing_sale",
+      "BIZ_P01",
+      "HH_P05",
+      "money",
+      2
+     ],
+     [
+      657.1,
+      "landing_sale",
+      "BOAT_02",
+      "BIZ_P01",
+      "fish",
+      1
+     ],
+     [
+      657.1,
+      "landing_sale",
+      "BIZ_P01",
+      "HH_P05",
+      "money",
+      2
+     ],
+     [
+      662.9,
+      "eaten",
+      "HH_P05",
+      "",
+      "meal",
+      1
+     ],
+     [
+      699.9,
+      "eaten",
+      "HH_P05",
+      "",
+      "meal",
+      1
+     ],
+     [
+      762.7,
+      "used_at_sea",
+      "HH_P05",
+      "",
+      "bait",
+      1
+     ],
+     [
+      838.9,
+      "boat_catch",
+      "",
+      "BOAT_02",
+      "fish",
+      2
+     ],
+     [
+      848.9,
+      "boat_catch",
+      "",
+      "BOAT_02",
+      "fish",
+      2
+     ],
+     [
+      888.9,
+      "boat_catch",
+      "",
+      "BOAT_02",
+      "fish",
+      2
+     ],
+     [
+      898.9,
+      "boat_catch",
+      "",
+      "BOAT_02",
+      "fish",
+      2
+     ],
+     [
+      908.9,
+      "boat_catch",
+      "",
+      "BOAT_02",
+      "fish",
+      1
+     ],
+     [
+      948.9,
+      "boat_catch",
+      "",
+      "BOAT_02",
+      "fish",
+      1
+     ],
+     [
+      970.6,
+      "stolen_by_gull",
+      "BOAT_02",
+      "",
+      "fish",
+      1
+     ],
+     [
+      980.2,
+      "landing_sale",
+      "BOAT_02",
+      "BIZ_P01",
+      "fish",
+      1
+     ],
+     [
+      980.2,
+      "landing_sale",
+      "BIZ_P01",
+      "HH_P05",
+      "money",
+      2
+     ],
+     [
+      980.2,
+      "landing_home",
+      "BOAT_02",
+      "HH_P05",
+      "fish",
+      1
+     ],
+     [
+      980.2,
+      "landing_home",
+      "BOAT_02",
+      "HH_P05",
+      "fish",
+      1
+     ],
+     [
+      980.2,
+      "landing_home",
+      "BOAT_02",
+      "HH_P05",
+      "fish",
+      1
+     ],
+     [
+      980.2,
+      "landing_home",
+      "BOAT_02",
+      "HH_P05",
+      "fish",
+      1
+     ],
+     [
+      980.2,
+      "landing_home",
+      "BOAT_02",
+      "HH_P05",
+      "fish",
+      1
+     ],
+     [
+      980.2,
+      "landing_home",
+      "BOAT_02",
+      "HH_P05",
+      "fish",
+      1
+     ],
+     [
+      980.2,
+      "landing_home",
+      "BOAT_02",
+      "HH_P05",
+      "fish",
+      1
+     ],
+     [
+      980.2,
+      "landing_home",
+      "BOAT_02",
+      "HH_P05",
+      "fish",
+      1
+     ],
+     [
+      1158.7,
+      "eaten",
+      "HH_P05",
+      "",
+      "meal",
+      1
+     ],
+     [
+      1211.3,
+      "cooked",
+      "HH_P05",
+      "",
+      "fish",
+      1
+     ],
+     [
+      1211.3,
+      "cooked",
+      "",
+      "HH_P05",
+      "meal",
+      3
+     ],
+     [
+      1440.1,
+      "levy",
+      "HH_P05",
+      "council",
+      "money",
+      6
+     ],
+     [
+      1799.6,
+      "eaten",
+      "HH_P05",
+      "",
+      "meal",
+      1
+     ],
+     [
+      1800.6,
+      "eaten",
+      "HH_P05",
+      "",
+      "meal",
+      1
+     ],
+     [
+      2031,
+      "eaten",
+      "HH_P05",
+      "",
+      "meal",
+      1
+     ],
+     [
+      2222.7,
+      "cooked",
+      "HH_P05",
+      "",
+      "fish",
+      1
+     ],
+     [
+      2222.7,
+      "cooked",
+      "",
+      "HH_P05",
+      "meal",
+      3
+     ],
+     [
+      2306.4,
+      "eaten",
+      "HH_P05",
+      "",
+      "meal",
+      1
+     ]
+    ],
+    "money_after": 63,
+    "money_before": 60,
+    "name": "Cleo",
+    "trace": [
+     [
+      "Day 1  06:00",
+      "walk",
+      "eat",
+      "P05:IA_bed_0"
+     ],
+     [
+      "Day 1  06:03",
+      "eat",
+      "eat",
+      "P05:IA_chair_1"
+     ],
+     [
+      "Day 1  06:03",
+      "walk",
+      "cook",
+      "P05:IA_chair_1"
+     ],
+     [
+      "Day 1  06:06",
+      "cook",
+      "cook",
+      "P05:IA_stove_0"
+     ],
+     [
+      "Day 1  06:36",
+      "walk",
+      "boat_trip",
+      "P05:IA_stove_0"
+     ],
+     [
+      "Day 1  06:40",
+      "climb_stairs",
+      "boat_trip",
+      "P05:stair_top"
+     ],
+     [
+      "Day 1  06:44",
+      "walk",
+      "boat_trip",
+      "P05:stair_bot"
+     ],
+     [
+      "Day 1  06:47",
+      "open_door",
+      "boat_trip",
+      "P05:in"
+     ],
+     [
+      "Day 1  06:48",
+      "walk",
+      "boat_trip",
+      "door_P05"
+     ],
+     [
+      "Day 1  06:54",
+      "climb_stairs",
+      "boat_trip",
+      "s1_top"
+     ],
+     [
+      "Day 1  07:03",
+      "walk",
+      "boat_trip",
+      "s1_bot"
+     ],
+     [
+      "Day 1  07:19",
+      "fish_trip",
+      "boat_trip",
+      "pierA_mid"
+     ],
+     [
+      "Day 1  10:57",
+      "walk",
+      "eat",
+      "pierA_mid"
+     ],
+     [
+      "Day 1  11:13",
+      "climb_stairs",
+      "eat",
+      "s1_bot"
+     ],
+     [
+      "Day 1  11:22",
+      "walk",
+      "eat",
+      "s1_top"
+     ],
+     [
+      "Day 1  11:28",
+      "open_door",
+      "eat",
+      "door_P05"
+     ],
+     [
+      "Day 1  11:30",
+      "walk",
+      "eat",
+      "P05:in"
+     ],
+     [
+      "Day 1  11:32",
+      "climb_stairs",
+      "eat",
+      "P05:stair_bot"
+     ],
+     [
+      "Day 1  11:36",
+      "walk",
+      "eat",
+      "P05:stair_top"
+     ],
+     [
+      "Day 1  11:39",
+      "eat",
+      "eat",
+      "P05:IA_chair_1"
+     ],
+     [
+      "Day 1  11:59",
+      "walk",
+      "boat_trip",
+      "P05:IA_chair_1"
+     ],
+     [
+      "Day 1  12:02",
+      "climb_stairs",
+      "boat_trip",
+      "P05:stair_top"
+     ],
+     [
+      "Day 1  12:07",
+      "walk",
+      "boat_trip",
+      "P05:stair_bot"
+     ],
+     [
+      "Day 1  12:09",
+      "open_door",
+      "boat_trip",
+      "P05:in"
+     ],
+     [
+      "Day 1  12:11",
+      "walk",
+      "boat_trip",
+      "door_P05"
+     ],
+     [
+      "Day 1  12:17",
+      "climb_stairs",
+      "boat_trip",
+      "s1_top"
+     ],
+     [
+      "Day 1  12:26",
+      "walk",
+      "boat_trip",
+      "s1_bot"
+     ],
+     [
+      "Day 1  12:42",
+      "fish_trip",
+      "boat_trip",
+      "pierA_mid"
+     ],
+     [
+      "Day 1  16:20",
+      "walk",
+      "drink",
+      "pierA_mid"
+     ],
+     [
+      "Day 1  16:36",
+      "climb_stairs",
+      "drink",
+      "s1_bot"
+     ],
+     [
+      "Day 1  16:45",
+      "walk",
+      "drink",
+      "s1_top"
+     ],
+     [
+      "Day 1  16:49",
+      "drink",
+      "drink",
+      "plaza"
+     ],
+     [
+      "Day 1  16:52",
+      "walk",
+      "sleep",
+      "plaza"
+     ],
+     [
+      "Day 1  17:00",
+      "open_door",
+      "sleep",
+      "door_P05"
+     ],
+     [
+      "Day 1  17:02",
+      "walk",
+      "sleep",
+      "P05:in"
+     ],
+     [
+      "Day 1  17:04",
+      "climb_stairs",
+      "sleep",
+      "P05:stair_bot"
+     ],
+     [
+      "Day 1  17:09",
+      "walk",
+      "sleep",
+      "P05:stair_top"
+     ],
+     [
+      "Day 1  17:13",
+      "sleep",
+      "sleep",
+      "P05:IA_bed_0"
+     ],
+     [
+      "Day 2  05:57",
+      "walk",
+      "eat",
+      "P05:IA_bed_0"
+     ],
+     [
+      "Day 2  06:00",
+      "eat",
+      "eat",
+      "P05:IA_chair_1"
+     ],
+     [
+      "Day 2  06:20",
+      "walk",
+      "stroll",
+      "P05:IA_chair_1"
+     ],
+     [
+      "Day 2  06:23",
+      "climb_stairs",
+      "stroll",
+      "P05:stair_top"
+     ],
+     [
+      "Day 2  06:27",
+      "walk",
+      "stroll",
+      "P05:stair_bot"
+     ],
+     [
+      "Day 2  06:30",
+      "open_door",
+      "stroll",
+      "P05:in"
+     ],
+     [
+      "Day 2  06:31",
+      "walk",
+      "stroll",
+      "door_P05"
+     ],
+     [
+      "Day 2  06:36",
+      "climb_stairs",
+      "stroll",
+      "s4_bot"
+     ],
+     [
+      "Day 2  06:45",
+      "walk",
+      "stroll",
+      "s4_top"
+     ],
+     [
+      "Day 2  06:50",
+      "climb_stairs",
+      "stroll",
+      "s6_bot"
+     ],
+     [
+      "Day 2  06:59",
+      "walk",
+      "stroll",
+      "s6_top"
+     ],
+     [
+      "Day 2  07:17",
+      "climb_stairs",
+      "stroll",
+      "s7_bot"
+     ],
+     [
+      "Day 2  07:25",
+      "walk",
+      "stroll",
+      "s7_top"
+     ],
+     [
+      "Day 2  07:40",
+      "idle",
+      "stroll",
+      "k_tree"
+     ],
+     [
+      "Day 2  07:52",
+      "walk",
+      "stroll",
+      "k_tree"
+     ],
+     [
+      "Day 2  08:07",
+      "climb_stairs",
+      "stroll",
+      "s7_top"
+     ],
+     [
+      "Day 2  08:15",
+      "walk",
+      "stroll",
+      "s7_bot"
+     ],
+     [
+      "Day 2  08:33",
+      "climb_stairs",
+      "stroll",
+      "s6_top"
+     ],
+     [
+      "Day 2  08:42",
+      "walk",
+      "stroll",
+      "s6_bot"
+     ],
+     [
+      "Day 2  08:47",
+      "climb_stairs",
+      "stroll",
+      "s4_top"
+     ],
+     [
+      "Day 2  08:56",
+      "walk",
+      "stroll",
+      "s4_bot"
+     ],
+     [
+      "Day 2  09:03",
+      "climb_stairs",
+      "stroll",
+      "s5_top"
+     ],
+     [
+      "Day 2  09:11",
+      "walk",
+      "stroll",
+      "s5_bot"
+     ],
+     [
+      "Day 2  09:23",
+      "idle",
+      "stroll",
+      "bw_2"
+     ],
+     [
+      "Day 2  09:34",
+      "walk",
+      "eat",
+      "bw_2"
+     ],
+     [
+      "Day 2  09:46",
+      "climb_stairs",
+      "eat",
+      "s5_bot"
+     ],
+     [
+      "Day 2  09:55",
+      "walk",
+      "eat",
+      "s5_top"
+     ],
+     [
+      "Day 2  10:03",
+      "open_door",
+      "eat",
+      "door_P05"
+     ],
+     [
+      "Day 2  10:05",
+      "walk",
+      "eat",
+      "P05:in"
+     ],
+     [
+      "Day 2  10:08",
+      "climb_stairs",
+      "eat",
+      "P05:stair_bot"
+     ],
+     [
+      "Day 2  10:12",
+      "walk",
+      "eat",
+      "P05:stair_top"
+     ],
+     [
+      "Day 2  10:15",
+      "eat",
+      "eat",
+      "P05:IA_chair_1"
+     ],
+     [
+      "Day 2  10:15",
+      "walk",
+      "stroll",
+      "P05:IA_chair_1"
+     ],
+     [
+      "Day 2  10:18",
+      "climb_stairs",
+      "stroll",
+      "P05:stair_top"
+     ],
+     [
+      "Day 2  10:22",
+      "walk",
+      "stroll",
+      "P05:stair_bot"
+     ],
+     [
+      "Day 2  10:25",
+      "open_door",
+      "stroll",
+      "P05:in"
+     ],
+     [
+      "Day 2  10:27",
+      "walk",
+      "stroll",
+      "door_P05"
+     ],
+     [
+      "Day 2  10:31",
+      "climb_stairs",
+      "stroll",
+      "s4_bot"
+     ],
+     [
+      "Day 2  10:40",
+      "walk",
+      "stroll",
+      "s4_top"
+     ],
+     [
+      "Day 2  10:46",
+      "climb_stairs",
+      "stroll",
+      "s6_bot"
+     ],
+     [
+      "Day 2  10:55",
+      "walk",
+      "stroll",
+      "s6_top"
+     ],
+     [
+      "Day 2  11:17",
+      "idle",
+      "stroll",
+      "c_hall"
+     ],
+     [
+      "Day 2  11:32",
+      "walk",
+      "drink",
+      "c_hall"
+     ],
+     [
+      "Day 2  11:48",
+      "climb_stairs",
+      "drink",
+      "s3_top"
+     ],
+     [
+      "Day 2  11:56",
+      "walk",
+      "drink",
+      "s3_bot"
+     ],
+     [
+      "Day 2  12:06",
+      "climb_stairs",
+      "drink",
+      "s2_top"
+     ],
+     [
+      "Day 2  12:15",
+      "walk",
+      "drink",
+      "s2_bot"
+     ],
+     [
+      "Day 2  12:19",
+      "drink",
+      "drink",
+      "plaza"
+     ],
+     [
+      "Day 2  12:22",
+      "walk",
+      "stroll",
+      "plaza"
+     ],
+     [
+      "Day 2  12:27",
+      "climb_stairs",
+      "stroll",
+      "s2_bot"
+     ],
+     [
+      "Day 2  12:35",
+      "walk",
+      "stroll",
+      "s2_top"
+     ],
+     [
+      "Day 2  12:45",
+      "climb_stairs",
+      "stroll",
+      "s3_bot"
+     ],
+     [
+      "Day 2  12:54",
+      "walk",
+      "stroll",
+      "s3_top"
+     ],
+     [
+      "Day 2  13:10",
+      "idle",
+      "stroll",
+      "c_hall"
+     ],
+     [
+      "Day 2  13:24",
+      "walk",
+      "eat",
+      "c_hall"
+     ],
+     [
+      "Day 2  13:46",
+      "climb_stairs",
+      "eat",
+      "s6_top"
+     ],
+     [
+      "Day 2  13:55",
+      "walk",
+      "eat",
+      "s6_bot"
+     ],
+     [
+      "Day 2  14:01",
+      "climb_stairs",
+      "eat",
+      "s4_top"
+     ],
+     [
+      "Day 2  14:10",
+      "walk",
+      "eat",
+      "s4_bot"
+     ],
+     [
+      "Day 2  14:14",
+      "open_door",
+      "eat",
+      "door_P05"
+     ],
+     [
+      "Day 2  14:16",
+      "walk",
+      "eat",
+      "P05:in"
+     ],
+     [
+      "Day 2  14:19",
+      "climb_stairs",
+      "eat",
+      "P05:stair_bot"
+     ],
+     [
+      "Day 2  14:23",
+      "walk",
+      "eat",
+      "P05:stair_top"
+     ],
+     [
+      "Day 2  14:26",
+      "eat",
+      "eat",
+      "P05:IA_chair_0"
+     ],
+     [
+      "Day 2  14:46",
+      "walk",
+      "sleep",
+      "P05:IA_chair_0"
+     ],
+     [
+      "Day 2  14:48",
+      "sleep",
+      "sleep",
+      "P05:IA_bed_0"
+     ],
+     [
+      "Day 2  18:15",
+      "walk",
+      "stroll",
+      "P05:IA_bed_0"
+     ],
+     [
+      "Day 2  18:19",
+      "climb_stairs",
+      "stroll",
+      "P05:stair_top"
+     ],
+     [
+      "Day 2  18:23",
+      "walk",
+      "stroll",
+      "P05:stair_bot"
+     ],
+     [
+      "Day 2  18:25",
+      "open_door",
+      "stroll",
+      "P05:in"
+     ],
+     [
+      "Day 2  18:27",
+      "walk",
+      "stroll",
+      "door_P05"
+     ],
+     [
+      "Day 2  18:32",
+      "climb_stairs",
+      "stroll",
+      "s4_bot"
+     ],
+     [
+      "Day 2  18:41",
+      "walk",
+      "stroll",
+      "s4_top"
+     ],
+     [
+      "Day 2  18:46",
+      "climb_stairs",
+      "stroll",
+      "s6_bot"
+     ],
+     [
+      "Day 2  18:55",
+      "walk",
+      "stroll",
+      "s6_top"
+     ],
+     [
+      "Day 2  19:18",
+      "idle",
+      "stroll",
+      "c_hall"
+     ],
+     [
+      "Day 2  19:27",
+      "walk",
+      "eat",
+      "c_hall"
+     ],
+     [
+      "Day 2  19:50",
+      "climb_stairs",
+      "eat",
+      "s6_top"
+     ],
+     [
+      "Day 2  19:59",
+      "walk",
+      "eat",
+      "s6_bot"
+     ],
+     [
+      "Day 2  20:04",
+      "climb_stairs",
+      "eat",
+      "s4_top"
+     ],
+     [
+      "Day 2  20:13",
+      "walk",
+      "eat",
+      "s4_bot"
+     ],
+     [
+      "Day 2  20:18",
+      "open_door",
+      "eat",
+      "door_P05"
+     ],
+     [
+      "Day 2  20:20",
+      "walk",
+      "eat",
+      "P05:in"
+     ],
+     [
+      "Day 2  20:22",
+      "climb_stairs",
+      "eat",
+      "P05:stair_bot"
+     ],
+     [
+      "Day 2  20:27",
+      "walk",
+      "eat",
+      "P05:stair_top"
+     ],
+     [
+      "Day 2  20:29",
+      "eat",
+      "eat",
+      "P05:IA_chair_0"
+     ],
+     [
+      "Day 2  20:30",
+      "walk",
+      "stroll",
+      "P05:IA_chair_0"
+     ],
+     [
+      "Day 2  20:32",
+      "climb_stairs",
+      "stroll",
+      "P05:stair_top"
+     ],
+     [
+      "Day 2  20:37",
+      "walk",
+      "stroll",
+      "P05:stair_bot"
+     ],
+     [
+      "Day 2  20:39",
+      "open_door",
+      "stroll",
+      "P05:in"
+     ],
+     [
+      "Day 2  20:41",
+      "walk",
+      "stroll",
+      "door_P05"
+     ],
+     [
+      "Day 2  20:46",
+      "climb_stairs",
+      "stroll",
+      "s4_bot"
+     ],
+     [
+      "Day 2  20:55",
+      "walk",
+      "stroll",
+      "s4_top"
+     ],
+     [
+      "Day 2  21:00",
+      "climb_stairs",
+      "stroll",
+      "s6_bot"
+     ],
+     [
+      "Day 2  21:09",
+      "walk",
+      "stroll",
+      "s6_top"
+     ],
+     [
+      "Day 2  21:26",
+      "climb_stairs",
+      "stroll",
+      "s7_bot"
+     ],
+     [
+      "Day 2  21:35",
+      "walk",
+      "stroll",
+      "s7_top"
+     ],
+     [
+      "Day 2  21:52",
+      "idle",
+      "stroll",
+      "k_look"
+     ],
+     [
+      "Day 2  22:10",
+      "walk",
+      "sleep",
+      "k_look"
+     ],
+     [
+      "Day 2  22:27",
+      "climb_stairs",
+      "sleep",
+      "s7_top"
+     ],
+     [
+      "Day 2  22:36",
+      "walk",
+      "sleep",
+      "s7_bot"
+     ],
+     [
+      "Day 2  22:53",
+      "climb_stairs",
+      "sleep",
+      "s6_top"
+     ],
+     [
+      "Day 2  23:02",
+      "walk",
+      "sleep",
+      "s6_bot"
+     ],
+     [
+      "Day 2  23:08",
+      "climb_stairs",
+      "sleep",
+      "s4_top"
+     ],
+     [
+      "Day 2  23:17",
+      "walk",
+      "sleep",
+      "s4_bot"
+     ],
+     [
+      "Day 2  23:21",
+      "open_door",
+      "sleep",
+      "door_P05"
+     ],
+     [
+      "Day 2  23:23",
+      "walk",
+      "sleep",
+      "P05:in"
+     ],
+     [
+      "Day 2  23:26",
+      "climb_stairs",
+      "sleep",
+      "P05:stair_bot"
+     ],
+     [
+      "Day 2  23:30",
+      "walk",
+      "sleep",
+      "P05:stair_top"
+     ],
+     [
+      "Day 2  23:34",
+      "sleep",
+      "sleep",
+      "P05:IA_bed_0"
+     ],
+     [
+      "Day 3  05:57",
+      "walk",
+      "eat",
+      "P05:IA_bed_0"
+     ]
+    ]
+   },
+   "setup": "clear weather held for the day; nothing else changed",
+   "wall_ms": 11833
+  },
+  "B": {
+   "gift": [
+    447.1,
+    "gift",
+    "HH_H06",
+    "HH_H07",
+    "fish",
+    3
+   ],
+   "journal": [
+    {
+     "actors": [
+      "V14",
+      "V15",
+      "V16"
+     ],
+     "cause": "neighbour in need; Milo had 8 to spare",
+     "day": 0,
+     "minute": 447.1,
+     "n": 2,
+     "notable": true,
+     "text": "Milo brought 3 fish to the household at Terrace house 2, who had run out of food.",
+     "type": "community",
+     "where": [
+      0.5,
+      5.5,
+      -7.5
+     ]
+    }
+   ],
+   "setup": [
+    "household HH_H07: food spoiled (fish+meals), savings lost (54), credit exhausted, members hungry 80",
+    "Milo's household had a good catch: +8 fish"
+   ],
+   "wall_ms": 1906
+  },
+  "C": {
+   "setup": "none: gulls get hungry on their own; clear weather held",
+   "stats": {
+    "bird_catches": 7,
+    "bird_dives": 11,
+    "caught_by_boats": {
+     "mackerel": 11,
+     "scad": 53,
+     "snapper": 13
+    },
+    "crab_bolts": 0,
+    "dolphin_feeds": 1,
+    "predator_kills": 6,
+    "robbed_in_air": 0,
+    "school_flights": 12,
+    "theft_attempts": 17,
+    "thefts": 5
+   },
+   "stolen_ledger": [
+    [
+     361.3,
+     "stolen_by_gull",
+     "BIZ_P01",
+     "",
+     "fish",
+     1
+    ],
+    [
+     363.6,
+     "stolen_by_gull",
+     "BIZ_P01",
+     "",
+     "fish",
+     1
+    ],
+    [
+     748,
+     "stolen_by_gull",
+     "BIZ_P01",
+     "",
+     "fish",
+     1
+    ],
+    [
+     749.1,
+     "stolen_by_gull",
+     "BIZ_P01",
+     "",
+     "fish",
+     1
+    ],
+    [
+     749.9,
+     "stolen_by_gull",
+     "BIZ_P01",
+     "",
+     "fish",
+     1
+    ]
+   ],
+   "thefts": [
+    {
+     "actors": [],
+     "cause": "hungry gull (70), unattended fish in the open",
+     "day": 0,
+     "minute": 361.3,
+     "n": 0,
+     "notable": true,
+     "text": "A gull snatched a fish from the market stalls.",
+     "type": "wildlife",
+     "where": [
+      9,
+      2.5,
+      2
+     ]
+    },
+    {
+     "actors": [],
+     "cause": "hungry gull (76), unattended fish in the open",
+     "day": 0,
+     "minute": 363.6,
+     "n": 1,
+     "notable": true,
+     "text": "A gull snatched a fish from the market stalls.",
+     "type": "wildlife",
+     "where": [
+      9,
+      2.5,
+      2
+     ]
+    },
+    {
+     "actors": [],
+     "cause": "hungry gull (93), unattended fish in the open",
+     "day": 0,
+     "minute": 748,
+     "n": 6,
+     "notable": true,
+     "text": "A gull snatched a fish from the market stalls.",
+     "type": "wildlife",
+     "where": [
+      9,
+      2.5,
+      2
+     ]
+    },
+    {
+     "actors": [],
+     "cause": "hungry gull (99), unattended fish in the open",
+     "day": 0,
+     "minute": 749.1,
+     "n": 7,
+     "notable": true,
+     "text": "A gull snatched a fish from the market stalls.",
+     "type": "wildlife",
+     "where": [
+      9,
+      2.5,
+      2
+     ]
+    },
+    {
+     "actors": [],
+     "cause": "hungry gull (61), unattended fish in the open",
+     "day": 0,
+     "minute": 749.9,
+     "n": 8,
+     "notable": true,
+     "text": "A gull snatched a fish from the market stalls.",
+     "type": "wildlife",
+     "where": [
+      9,
+      2.5,
+      2
+     ]
+    }
+   ],
+   "wall_ms": 1969
+  }
+ },
+ "results": [
+  {
+   "detail": {
+    "trips": 2
+   },
+   "passed": true,
+   "scenario": "A",
+   "test": "left home and boarded the assigned boat"
+  },
+  {
+   "detail": 18,
+   "passed": true,
+   "scenario": "A",
+   "test": "caught fish from the sea (minted into the boat by the catch rule)"
+  },
+  {
+   "detail": {
+    "caught": 18,
+    "kept_for_home": 8,
+    "sold": 9
+   },
+   "passed": false,
+   "scenario": "A",
+   "test": "returned, moored and unloaded: everything caught left the boat"
+  },
+  {
+   "detail": {
+    "fish_sold": 9,
+    "paid": 21
+   },
+   "passed": true,
+   "scenario": "A",
+   "test": "sold to the market: market stock and household money moved by the same sale"
+  },
+  {
+   "detail": [],
+   "passed": false,
+   "scenario": "A",
+   "test": "bought household supplies with money"
+  },
+  {
+   "detail": "",
+   "passed": true,
+   "scenario": "A",
+   "test": "came home after the trip"
+  },
+  {
+   "detail": [],
+   "passed": true,
+   "scenario": "A",
+   "test": "money and stock reconcile (ledger audit)"
+  },
+  {
+   "detail": {
+    "giver": "Milo",
+    "transaction": [
+     447.1,
+     "gift",
+     "HH_H06",
+     "HH_H07",
+     "fish",
+     3
+    ]
+   },
+   "passed": true,
+   "scenario": "B",
+   "test": "a neighbour noticed and brought food (within 30 game minutes)"
+  },
+  {
+   "detail": "",
+   "passed": true,
+   "scenario": "B",
+   "test": "the goods really moved: recipient pantry gained what the giver lost"
+  },
+  {
+   "detail": [
+    "Milo brought us 3 fish when we had nothing",
+    "Milo brought us 3 fish when we had nothing"
+   ],
+   "passed": true,
+   "scenario": "B",
+   "test": "recipients remember the kindness"
+  },
+  {
+   "detail": {
+    "after": 9,
+    "before": 0
+   },
+   "passed": true,
+   "scenario": "B",
+   "test": "the relationship changed"
+  },
+  {
+   "detail": {
+    "now_below_60_hunger": 2,
+    "recipients": 2
+   },
+   "passed": true,
+   "scenario": "B",
+   "test": "the help made a difference: recipients ate"
+  },
+  {
+   "detail": {
+    "HH_H06|HH_H07": 3
+   },
+   "passed": true,
+   "scenario": "B",
+   "test": "the favour is remembered for reciprocity"
+  },
+  {
+   "detail": [],
+   "passed": true,
+   "scenario": "B",
+   "test": "ledger audit clean"
+  },
+  {
+   "detail": {
+    "attempts": 17,
+    "thefts": 5
+   },
+   "passed": true,
+   "scenario": "C",
+   "test": "gulls stole fish on their own (in 390 game minutes)"
+  },
+  {
+   "detail": [
+    "BIZ_P01",
+    "BIZ_P01",
+    "BIZ_P01",
+    "BIZ_P01",
+    "BIZ_P01"
+   ],
+   "passed": true,
+   "scenario": "C",
+   "test": "every theft removed a fish from the right account in the ledger"
+  },
+  {
+   "detail": "",
+   "passed": true,
+   "scenario": "C",
+   "test": "every theft is in the journal with its cause"
+  },
+  {
+   "detail": [],
+   "passed": true,
+   "scenario": "C",
+   "test": "when someone was there, they noticed and reacted (memory)"
+  },
+  {
+   "detail": "",
+   "passed": true,
+   "scenario": "C",
+   "test": "not every attempt succeeds (guarded fish, failed raids)"
+  },
+  {
+   "detail": [],
+   "passed": true,
+   "scenario": "C",
+   "test": "ledger audit clean"
+  }
+ ]
+}

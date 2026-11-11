@@ -12,6 +12,7 @@ var consumed: Dictionary = {}       # item -> qty
 var totals: Dictionary = {}         # reason -> {"n": int, "money": int, "qty": int}
 var log: Array = []                 # recent transactions
 var refused: int = 0
+var keep_all: bool = false          # tests: keep the whole transaction history
 
 func open(id: String, money_: int = 0) -> void:
 	if not acc.has(id):
@@ -66,7 +67,7 @@ func _rec(reason: String, from: String, to: String, what: String, n: int) -> voi
 	else:
 		totals[reason]["qty"] += n
 	log.append([snappedf(GameClock.total_minutes, 0.1), reason, from, to, what, n])
-	if log.size() > 300:
+	if log.size() > 300 and not keep_all:
 		log.pop_front()
 
 func audit() -> Array:

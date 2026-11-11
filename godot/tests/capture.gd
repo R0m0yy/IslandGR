@@ -44,7 +44,7 @@ func _ready() -> void:
 		var mode: String = s[6]
 		while GameClock.total_minutes < s[1] * 60.0:
 			village.sim.advance(10.0)
-			if mode != "storm" and village.weather.state in ["rain", "storm"]:
+			if mode != "storm" and village.weather.state in ["light_rain", "heavy_rain", "storm"]:
 				village.weather.force("cloudy")
 		var env_shot: bool = String(s[0]).begins_with("E")
 		village.set_figures_visible(not env_shot)

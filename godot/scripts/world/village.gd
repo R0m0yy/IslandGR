@@ -23,6 +23,9 @@ var ledger := Ledger.new()
 var economy := Economy.new()
 var weather := Weather.new()
 var society := Society.new()
+var journal := Journal.new()
+var ecosystem := Ecosystem.new()
+var ocean := Ocean.new()
 var boats: Dictionary = {}           # id -> Boat
 var grounds: Dictionary = {}         # fishing ground id -> {pos, stock, cap, richness}
 var open_jobs: Array = []            # vacated job records
@@ -45,14 +48,76 @@ func build() -> void:
 	economy.setup(self, ledger)
 	_build_boats()
 	society.setup(self)
+	ecosystem.setup(self)
+	weather.changed.connect(_on_weather_changed)
 	sim = Simulation.new()
 	sim.name = "Simulation"
 	sim.village = self
 	add_child(sim)
 	if spawn_villagers:
 		_spawn_villagers()
+	economy.assign_owners()
+	for v in villagers:
+		if v.job != null and v.job["role"] == "fisher":
+			ledger.mint(v.hh, "bait", 2, "start_stock")
 	if with_presentation:
 		_build_presentation()
+
+# ------------------------------------------------------------------ helpers shared by the systems
+func household_name(hh: String) -> String:
+	var b: String = households[hh]["building"] if households.has(hh) else hh
+	return "the household at %s" % (buildings[b].record["name"] if buildings.has(b) else b)
+
+func business_name(biz: String) -> String:
+	var id := biz.substr(4)
+	return String(buildings[id].record["name"]) if buildings.has(id) else biz
+
+func damaged_building() -> String:
+	for id in buildings:
+		if buildings[id].state.get("condition", 1.0) < 0.9:
+			return id
+	return ""
+
+func household_in_need(v) -> String:
+	## A household this villager knows (a friend, or a next-door neighbour)
+	## whose larder is empty while someone there is hungry or ill.
+	var best := ""
+	var bs := 0.0
+	for hh in households:
+		if hh == v.hh or households[hh]["members"] <= 0 or economy.food_of(hh) > 0:
+			continue
+		var hungry := 0.0
+		var known := 0.0
+		var frail := false
+		for o in villagers:
+			if o.hh == hh:
+				hungry = maxf(hungry, o.needs["hunger"])
+				known = maxf(known, society.bond(v.villager_id, o.villager_id))
+				frail = frail or o.sick_days > 0 or o.age >= 68.0
+		var near: bool = buildings[households[hh]["building"]].global_position.distance_to(v.home.global_position) < 9.0
+		if hungry < 50.0 or (known < 8.0 and not near):
+			continue
+		var score: float = hungry + known + (25.0 if frail else 0.0) + (10.0 if near else 0.0)
+		if score > bs:
+			bs = score
+			best = hh
+	return best
+
+func _on_weather_changed(st: String) -> void:
+	if st == "storm":
+		journal.add("weather", [], "A storm broke over Saltcrown.", "weather turned from heavy rain", true)
+		# real damage: some roofs lose sheets; they stay damaged until a carpenter mends them
+		for id in buildings:
+			if society.rng.randf() < 0.10:
+				buildings[id].state["condition"] = 0.6
+				journal.add("damage", [], "The storm tore sheets from the roof of %s." % buildings[id].record["name"], "storm", false, buildings[id].global_position)
+	elif st == "heavy_rain":
+		journal.add("weather", [], "Heavy rain set in.", "weather")
+	elif st in ["cloudy", "clear"] and _last_weather in ["light_rain", "heavy_rain", "storm"]:
+		journal.add("weather", [], "The weather cleared.", "weather")
+	_last_weather = st
+
+var _last_weather: String = "clear"
 
 # ------------------------------------------------------------------ world
 func _build_environment() -> void:
@@ -285,7 +350,7 @@ func move_household(v, to_hh: String) -> bool:
 	v.bed = nb
 	nb.owner_id = v.villager_id
 	households[to_hh]["members"] += 1
-	society.record("moved", [v.villager_id], "to %s" % b.building_id)
+	society.record("moved", [v.villager_id], "to %s" % b.record["name"], "a bed was free there")
 	return true
 
 func release_job(v) -> void:
@@ -294,10 +359,27 @@ func release_job(v) -> void:
 		v.job = null
 
 func assign_free_job(v) -> bool:
+	## A young adult chooses among the open jobs: a parent's trade pulls, and so does what they are good at.
 	if v.job != null or open_jobs.is_empty():
 		return false
-	v.job = open_jobs.pop_front()
-	society.record("hired", [v.villager_id], String(v.job["role"]))
+	var parent_roles := []
+	for pid in v.parents:
+		var pv = villager_by_id(pid)
+		if pv and pv.job != null:
+			parent_roles.append(pv.job["role"])
+	var best := 0
+	var bs := -1.0
+	for i in open_jobs.size():
+		var role: String = open_jobs[i]["role"]
+		var skill: String = {"fisher": "fishing", "cook": "cooking", "carpenter": "carpentry", "apprentice": "carpentry", "boatwright": "carpentry"}.get(role, "trade")
+		var sc: float = v.skills[skill] + (0.35 if parent_roles.has(role) else 0.0) + (0.25 if role == "fisher" and v.ambition == "sea" else 0.0) + v.rng.randf() * 0.3
+		if sc > bs:
+			bs = sc
+			best = i
+	v.job = open_jobs[best]
+	open_jobs.remove_at(best)
+	var why := "follows a parent's trade" if parent_roles.has(v.job["role"]) else "own choice among %d open jobs" % (open_jobs.size() + 1)
+	society.record("hired", [v.villager_id], String(v.job["role"]), why)
 	return true
 
 func work_station_for(v) -> Interactable:

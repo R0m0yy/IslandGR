@@ -327,15 +327,17 @@ func _ready() -> void:
 	var old: Dictionary = snap.duplicate(true)
 	old["version"] = 1
 	old.erase("grounds")
+	old.erase("journal")
+	old["weather"]["state"] = "rain"
 	for r in old["villagers"]:
 		r["needs"].erase("thirst")
 	var fo := FileAccess.open("user://lt_test_save_v1.json", FileAccess.WRITE)
 	fo.store_string(JSON.stringify(old))
 	fo.close()
 	var mig: Dictionary = SaveGame.load_file("user://lt_test_save_v1.json")
-	check("version-1 save migrates to the current schema", not mig.has("error") and int(mig["version"]) == SaveGame.VERSION and mig["villagers"][0]["needs"].has("thirst"))
+	check("version-1 save migrates to the current schema", not mig.has("error") and int(mig["version"]) == SaveGame.VERSION and mig["villagers"][0]["needs"].has("thirst") and mig.has("journal") and mig["weather"]["state"] == "light_rain")
 	var fb := FileAccess.open("user://lt_test_bad.json", FileAccess.WRITE)
-	fb.store_string("{\"schema\": \"living-tides.save\", \"version\": 2}")
+	fb.store_string("{\"schema\": \"living-tides.save\", \"version\": 3}")
 	fb.close()
 	check("a damaged save is rejected, not half-applied", SaveGame.load_file("user://lt_test_bad.json").has("error"))
 	v2.queue_free()
@@ -363,7 +365,7 @@ func _ready() -> void:
 			dangling += 1
 		if not v3.households.has(v.hh) or v3.households[v.hh]["building"] != v.home.building_id:
 			bad_house += 1
-		if v.bed == null or v.bed.owner_id != v.villager_id:
+		if v.bed == null or (v.shares_bed_of == "" and v.bed.owner_id != v.villager_id) or (v.shares_bed_of != "" and not v.bed.co_sleepers.has(v.villager_id)):
 			no_bed += 1
 	var members_ok := true
 	for hh in v3.households:

@@ -86,22 +86,42 @@ class FishTripState extends UseObjectState:
 	func _init(villager = null) -> void:
 		super._init(villager)
 		anim = "sit"
+	var _caught: int = 0
+	var _species := {}
+	var _stood_down: bool = false
 	func begin() -> void:
 		boat = obj as Boat
-		_roll = 0.0; _fishing = 0.0; _unload = 0.0
+		_roll = 0.0; _fishing = 0.0; _unload = 0.0; _caught = 0; _species = {}
+		_stood_down = false
+		# a last look at the sky at the mooring: the weather may have turned on the walk down
+		if v.world.weather.unsafe_at_sea():
+			_stood_down = true
+			v.stats["stayed_ashore"] += 1
+			v.note("reached the boat in a storm: not casting off")
+			v.world.journal.add("fishing", [v.villager_id], "%s got down to %s, saw the sea and did not cast off." % [v.display_name, boat.object_id], "storm broke while walking to the harbour")
+			return
+		v.world.ledger.consume(v.hh, "bait", 1, "used_at_sea")       # gear and bait go aboard
 		v.at_sea = true
 		boat.start_trip()
 		v.stats["boat_trips"] += 1
 	func tick(dt: float, minutes: float) -> void:
 		if obj == null:
 			return
+		if _stood_down:
+			v.brain.cooldown["boat_trip"] = GameClock.total_minutes + 60.0
+			v.step_done()
+			return
 		elapsed += minutes
 		var w: Weather = v.world.weather
+		var eco: Ecosystem = v.world.ecosystem
+		var gpos: Vector3 = boat.ground["pos"]
 		match boat.boat_state:
 			"outbound":
 				if w.unsafe_at_sea():
 					boat.aborted += 1
 					v.note("storm: turning back")
+					v.remember("storm", "caught by a storm on the way out and turned back", -5.0)
+					v.world.journal.add("fishing", [v.villager_id], "%s turned %s back as the storm broke." % [v.display_name, boat.object_id], "storm at sea", true, boat.pos)
 					boat.turn_back()
 				elif boat.sail(dt, w.boat_speed_factor()):
 					boat.boat_state = "fishing"
@@ -110,19 +130,31 @@ class FishTripState extends UseObjectState:
 				_fishing += minutes
 				_roll += minutes
 				var l: Ledger = v.world.ledger
+				var bio: float = eco.biomass_near(gpos)
 				while _roll >= 10.0:
 					_roll -= 10.0
 					var room: int = boat.capacity_fish() - l.qty(boat.object_id, "fish")
-					var n: int = mini(mini(1 + v.rng.randi() % 2, room), int(boat.ground["stock"]))
-					if n > 0 and v.rng.randf() < 0.62 * boat.ground["richness"]:
-						l.mint(boat.object_id, "fish", n, "boat_catch")
-						boat.ground["stock"] -= n
-						v.stats["fish_caught"] += n
+					# the catch depends on the fish actually there, the hand on the line, and the sea
+					var chance: float = clampf(bio / 80.0, 0.05, 1.0) * (0.55 + 0.7 * v.skills["fishing"]) * (1.0 - 0.45 * v.world.ocean.roughness())
+					if room > 0 and v.rng.randf() < chance:
+						var got: Dictionary = eco.take_fish(gpos, mini(1 + v.rng.randi() % 2, room))
+						var n := 0
+						for sp in got:
+							n += got[sp]
+							_species[sp] = int(_species.get(sp, 0)) + got[sp]
+						if n > 0:
+							l.mint(boat.object_id, "fish", n, "boat_catch")
+							_caught += n
+							v.stats["fish_caught"] += n
+							v.skills["fishing"] = minf(1.0, v.skills["fishing"] + 0.003 * n)
 				var full: bool = l.qty(boat.object_id, "fish") >= boat.capacity_fish()
-				if full or _fishing > 170.0 or w.unsafe_at_sea() or v.needs["hunger"] > 88.0 or v.needs["energy"] < 14.0 or boat.ground["stock"] <= 0:
+				var patience: float = 170.0 + (40.0 if v.ambition == "sea" else 0.0)
+				var barren: bool = _fishing > 70.0 and _caught == 0
+				if full or _fishing > patience or barren or w.unsafe_at_sea() or v.needs["hunger"] > 88.0 or v.needs["energy"] < 14.0:
 					if w.unsafe_at_sea():
 						boat.aborted += 1
 						v.note("storm: heading home with %d fish" % l.qty(boat.object_id, "fish"))
+						v.remember("storm", "ran for harbour ahead of a storm", -3.0)
 					boat.turn_back()
 					v.play("sit")
 			"inbound":
@@ -132,13 +164,27 @@ class FishTripState extends UseObjectState:
 			"unloading":
 				_unload += minutes
 				if _unload >= 15.0:
+					var before: int = v.world.ledger.money(v.hh)
+					var aboard: int = v.world.ledger.qty(boat.object_id, "fish")
 					v.world.economy.land_catch(v, boat)
+					var earned: int = v.world.ledger.money(v.hh) - before
+					if boat.wear_extra > 0.0:
+						v.remember("sea", "rough water knocked the boat about", -2.0)
 					boat.moor()
+					if _caught == 0:
+						v.stats["empty_trips"] += 1
+						v.remember("fishing", "came home with an empty boat", -4.0)
+						v.world.journal.add("fishing", [v.villager_id], "%s came home with an empty boat." % v.display_name, "few fish on the ground (%d near %s)" % [int(eco.biomass_near(gpos)), boat.ground["name"]], false, boat.pos)
+					elif _caught >= int(boat.capacity_fish() * 0.8):
+						v.remember("fishing", "a full boat: %d fish" % _caught, 5.0)
+						v.world.journal.add("fishing", [v.villager_id], "%s landed a full boat: %d fish (%s), %d sold for %d." % [v.display_name, _caught, str(_species), aboard, earned], "good shoals at %s" % boat.ground["name"], true, boat.pos)
 					v.step_done()
 					return
-		v.global_position = boat.pos + Vector3(0, 0.45, 0)
+		if boat.boat_state in ["outbound", "inbound", "fishing"] and v.world.ocean.roughness() > 0.6:
+			boat.wear_extra += 0.0004 * minutes                     # heavy seas strain the hull
+		v.global_position = boat.pos + Vector3(0, 0.45 + v.world.ocean.height(boat.pos.x, boat.pos.z), 0)
 	func exit() -> void:
-		if boat and boat.boat_state != "moored":
+		if boat and boat.boat_state != "moored" and not _stood_down:
 			boat.moor()                      # interrupted: the boat is brought home, cargo stays aboard
 		v.at_sea = false
 		super.exit()
@@ -170,13 +216,20 @@ class SitState extends UseObjectState:
 		return elapsed >= duration
 
 class ShopState extends UseObjectState:
+	var what: String = "fish"
 	func _init(villager = null) -> void:
 		super._init(villager)
 		anim = "idle"
+	func enter(args: Dictionary) -> void:
+		what = args.get("what", "fish")
+		super.enter(args)
 	func act(_minutes: float) -> bool:
 		return elapsed >= 6.0
 	func finish() -> void:
-		if v.world.economy.buy_fish(v) == 0:
+		if what == "bait":
+			if v.world.economy.buy_bait(v) == 0:
+				v.brain.cooldown["buy_bait"] = GameClock.total_minutes + 90.0
+		elif v.world.economy.buy_fish(v) == 0:
 			v.brain.cooldown["buy_food"] = GameClock.total_minutes + 60.0
 
 class DrinkState extends UseObjectState:
@@ -198,3 +251,21 @@ class WashState extends UseObjectState:
 	func finish() -> void:
 		v.needs["hygiene"] = 100.0
 		v.stats["washes"] += 1
+
+class MendNetsState extends UseObjectState:
+	## A day ashore: mending nets and gear keeps the boat in trim.
+	var duration: float = 60.0
+	func _init(villager = null) -> void:
+		super._init(villager)
+		anim = "work"
+	func enter(args: Dictionary) -> void:
+		duration = args.get("minutes", 60.0)
+		super.enter(args)
+	func act(_minutes: float) -> bool:
+		return elapsed >= duration or v.needs["hunger"] > 70.0
+	func finish() -> void:
+		var b = v.world.boats.get(v.job["place"]) if v.job != null else null
+		if b:
+			b.condition = minf(1.0, b.condition + 0.08)
+		v.stats["nets_mended"] += 1
+		v.skills["fishing"] = minf(1.0, v.skills["fishing"] + 0.002)

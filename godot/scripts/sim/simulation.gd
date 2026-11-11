@@ -33,8 +33,8 @@ func step(dt: float) -> void:
 	village.weather.tick(minutes)
 	village.economy.daily(GameClock.day())
 	village.society.tick(minutes)
-	for g in village.grounds.values():
-		g["stock"] = minf(g["cap"], g["stock"] + 3.0 * minutes / 60.0)      # fish stocks recover slowly
+	village.ocean.advance(dt, village.weather.wind)
+	village.ecosystem.tick(dt, minutes)
 	for o in village.interactables:
 		o.tick(minutes)
 	for d in village.doors:
