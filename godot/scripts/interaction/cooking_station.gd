@@ -38,12 +38,11 @@ func tick(minutes: float) -> void:
 func is_done() -> bool:
 	return stove_state == "cooking" and progress >= COOK_MIN
 
-func finish(household: Dictionary) -> bool:
-	## Called by the cook when is_done(). Moves stock through the pantry.
-	if household.get("raw_fish", 0) <= 0:
+func finish(ledger: Ledger, hh: String) -> bool:
+	## Called by the cook when is_done(). One raw fish leaves the pantry, meals enter it.
+	if not ledger.consume(hh, "fish", 1, "cooked"):
 		return false
-	household["raw_fish"] -= 1
-	household["meals"] = household.get("meals", 0) + MEALS_PER_FISH
+	ledger.mint(hh, "meal", MEALS_PER_FISH, "cooked")
 	meals_cooked += MEALS_PER_FISH
 	return true
 

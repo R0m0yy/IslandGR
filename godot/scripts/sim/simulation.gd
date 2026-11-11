@@ -30,12 +30,18 @@ func advance(seconds: float) -> void:
 
 func step(dt: float) -> void:
 	var minutes := GameClock.advance(dt)
+	village.weather.tick(minutes)
+	village.economy.daily(GameClock.day())
+	village.society.tick(minutes)
+	for g in village.grounds.values():
+		g["stock"] = minf(g["cap"], g["stock"] + 3.0 * minutes / 60.0)      # fish stocks recover slowly
 	for o in village.interactables:
 		o.tick(minutes)
 	for d in village.doors:
 		d.process_door(dt)
-	for v in village.villagers:
-		v.tick(dt, minutes)
+	for v in village.villagers.duplicate():
+		if is_instance_valid(v):
+			v.tick(dt, minutes)
 	steps += 1
 	_light_t -= dt
 	if _light_t <= 0.0:

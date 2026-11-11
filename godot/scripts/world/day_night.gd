@@ -4,6 +4,7 @@ extends Node3D
 var sun: DirectionalLight3D
 var env: Environment
 var sky_mat: ProceduralSkyMaterial
+var village = null
 
 const KEYS := [   # hour, sun colour, sun energy, sky top, sky horizon, ambient energy
 	[0.0, Color(0.45, 0.55, 0.95), 0.10, Color(0.02, 0.03, 0.09), Color(0.05, 0.07, 0.16), 0.12],
@@ -67,6 +68,16 @@ func apply(h: float) -> void:
 	sky_mat.ground_bottom_color = a[3].lerp(b[3], k).darkened(0.3)
 	env.ambient_light_energy = lerpf(a[5], b[5], k)
 	env.fog_light_color = a[4].lerp(b[4], k)
+	if village:
+		# weather on screen: cloud dims and greys the light, rain thickens the air
+		var w: Weather = village.weather
+		var grey := Color(0.55, 0.58, 0.62) * (0.25 + 0.75 * clampf(sun.light_energy, 0.0, 1.0))
+		sun.light_energy *= 1.0 - 0.65 * w.cloud
+		sky_mat.sky_top_color = sky_mat.sky_top_color.lerp(grey.darkened(0.25), w.cloud * 0.85)
+		sky_mat.sky_horizon_color = sky_mat.sky_horizon_color.lerp(grey, w.cloud * 0.85)
+		sky_mat.ground_horizon_color = sky_mat.sky_horizon_color
+		env.fog_density = 0.00035 + 0.006 * w.rain
+		env.fog_light_color = env.fog_light_color.lerp(grey, w.cloud)
 	# sun path: rises in the east (+x), high in the south (+z) so the village,
 	# which faces the south-east camera, is front-lit for most of the day
 	var day := h > 5.5 and h < 19.5

@@ -19,7 +19,15 @@ var fishing_spots: Array = []
 var stroll_nodes: Array = []
 var figures_visible: bool = true
 var street_lamps: Array = []
-var market_stock: int = 4          # raw fish on the market stalls (P01)
+var ledger := Ledger.new()
+var economy := Economy.new()
+var weather := Weather.new()
+var society := Society.new()
+var boats: Dictionary = {}           # id -> Boat
+var grounds: Dictionary = {}         # fishing ground id -> {pos, stock, cap, richness}
+var open_jobs: Array = []            # vacated job records
+var well: Interactable = null
+var villager_root: Node3D = null
 var sim: Simulation
 var day_night = null
 var camera_rig = null
@@ -34,6 +42,9 @@ func build() -> void:
 	_build_graph()
 	_build_buildings()
 	_build_outdoor()
+	economy.setup(self, ledger)
+	_build_boats()
+	society.setup(self)
 	sim = Simulation.new()
 	sim.name = "Simulation"
 	sim.village = self
@@ -101,8 +112,7 @@ func _build_buildings() -> void:
 		if bld.door:
 			doors.append(bld.door)
 		if b.get("household") != null:
-			var start: Dictionary = VillageDB.population.get("start_pantry", {})
-			households[b["household"]["id"]] = {"building": id, "raw_fish": int(start.get("raw_fish", 0)), "meals": int(start.get("meals", 0))}
+			households[b["household"]["id"]] = {"building": id, "members": 0, "capacity": int(b["household"]["capacity"])}
 
 func _build_outdoor() -> void:
 	var root := Node3D.new()
@@ -121,6 +131,16 @@ func _build_outdoor() -> void:
 		fs.global_position = fs.use_position
 		fishing_spots.append(fs)
 		interactables.append(fs)
+	# the plaza well: free drinking water for anyone
+	well = Interactable.new()
+	well.name = "Well"
+	well.object_id = "well"
+	well.kind = "well"
+	well.capacity = 3
+	well.nav_node = "plaza"
+	root.add_child(well)
+	well.use_position = graph.pos["plaza"]
+	interactables.append(well)
 	stroll_nodes = VillageDB.population.get("stroll_nodes", []).filter(func(n): return graph.pos.has(n))
 	for l in VillageDB.environment.get("lamps", []):
 		street_lamps.append(_lamp(root, l["id"], VillageDB.v3(l["pos"]), 9.0, 2.2))
@@ -147,17 +167,138 @@ func set_street_lamps(on: bool) -> void:
 	for l in street_lamps:
 		l.visible = on
 
-func _spawn_villagers() -> void:
+func _build_boats() -> void:
+	## Boats become Interactables with a Ledger account for cargo and a sea route.
 	var root := Node3D.new()
-	root.name = "Villagers"
+	root.name = "Boats"
 	add_child(root)
-	for rec in VillageDB.population.get("villagers", []):
-		if not buildings.has(rec["home"]):
-			continue
-		var v := Villager.new()
-		root.add_child(v)
-		v.setup(rec, self)
-		villagers.append(v)
+	var L: Dictionary = VillageDB.layout
+	var i := 0
+	for g in L["fishing_grounds"]:
+		grounds[g["id"]] = {"pos": Vector3(g["pos"][0], 0, g["pos"][1]), "stock": 90.0, "cap": 140.0,
+			"richness": [1.0, 1.25, 1.1][i % 3], "name": g["name"]}
+		i += 1
+	var lanes := {"FG_A": [Vector3(14.5, 0, 17), Vector3(20, 0, 20), Vector3(22, 0, 22)]}
+	lanes["FG_B"] = lanes["FG_A"] + [Vector3(28, 0, 9), Vector3(35, 0, 8.5), Vector3(44, 0, 9)]     # through The Gate
+	lanes["FG_C"] = lanes["FG_A"] + [Vector3(18, 0, 30), Vector3(10, 0, 34)]
+	var board := {}
+	for e in L["nav"]["edges"]:
+		if e["type"] == "board":
+			board[e["b"]] = e["a"]
+	var visuals := {}
+	var bn := get_node_or_null("Environment/boats")
+	if bn:
+		for c in bn.find_children("BOAT_*", "Node3D", true, false):
+			visuals[String(c.name).substr(0, 7)] = c
+	i = 0
+	for rec in L["boats"]:
+		var b := Boat.new()
+		b.name = rec["id"]
+		b.object_id = rec["id"]
+		b.kind = "boat"
+		b.boat_kind = rec["kind"]
+		b.nav_node = board.get(rec["mooring"], "")
+		root.add_child(b)
+		var mp: Vector3 = graph.pos[rec["mooring"]]
+		b.home_pos = Vector3(mp.x, 0, mp.z)
+		b.pos = b.home_pos
+		b.visual = visuals.get(rec["id"])
+		if b.visual:
+			b.home_yaw = b.visual.rotation.y
+		var gid: String = ["FG_A", "FG_B", "FG_C"][i % 3]
+		b.ground = grounds[gid]
+		b.route = [b.home_pos] + lanes[gid]
+		b.use_position = graph.pos[b.nav_node] if b.nav_node != "" else b.home_pos
+		ledger.open(rec["id"], 0)
+		boats[rec["id"]] = b
+		interactables.append(b)
+		i += 1
+
+func _spawn_villagers() -> void:
+	villager_root = Node3D.new()
+	villager_root.name = "Villagers"
+	add_child(villager_root)
+	var recs: Array = VillageDB.population.get("villagers", [])
+	for rec in recs:
+		if buildings.has(rec["home"]):
+			add_villager(rec)
+	# placeholder data: two adults sharing a home start as a couple
+	for hh in households:
+		var m: Array = villagers.filter(func(x): return x.hh == hh)
+		if m.size() == 2 and m[0].partner == "" and m[1].partner == "":
+			m[0].partner = m[1].villager_id
+			m[1].partner = m[0].villager_id
+			society.bonds[Society.key(m[0].villager_id, m[1].villager_id)] = 70.0
+
+func add_villager(rec: Dictionary):
+	if villager_root == null:
+		villager_root = Node3D.new()
+		villager_root.name = "Villagers"
+		add_child(villager_root)
+	var v := Villager.new()
+	villager_root.add_child(v)
+	v.setup(rec, self)
+	if v.bed == null:
+		v.queue_free()
+		return null
+	villagers.append(v)
+	households[v.hh]["members"] += 1
+	if v.animator:
+		v.animator.visible = figures_visible
+	return v
+
+func remove_villager(v) -> void:
+	v.shutdown()
+	release_job(v)
+	households[v.hh]["members"] -= 1
+	villagers.erase(v)
+	v.queue_free()
+
+func villager_by_id(id: String):
+	for v in villagers:
+		if v.villager_id == id:
+			return v
+	return null
+
+func free_bed(b: Building) -> Bed:
+	for o in b.interactables:
+		if o is Bed and o.owner_id == "":
+			return o
+	return null
+
+func move_household(v, to_hh: String) -> bool:
+	## The villager joins another household if its home has a spare bed.
+	var b: Building = buildings[households[to_hh]["building"]]
+	var nb := free_bed(b)
+	if nb == null:
+		return false
+	if v.bed:
+		v.bed.release(v)
+		if v.shares_bed_of != "":
+			v.bed.co_sleepers.erase(v.villager_id)
+			v.shares_bed_of = ""
+		else:
+			v.bed.owner_id = ""
+	households[v.hh]["members"] -= 1
+	v.hh = to_hh
+	v.home = b
+	v.bed = nb
+	nb.owner_id = v.villager_id
+	households[to_hh]["members"] += 1
+	society.record("moved", [v.villager_id], "to %s" % b.building_id)
+	return true
+
+func release_job(v) -> void:
+	if v.job != null:
+		open_jobs.append(v.job)
+		v.job = null
+
+func assign_free_job(v) -> bool:
+	if v.job != null or open_jobs.is_empty():
+		return false
+	v.job = open_jobs.pop_front()
+	society.record("hired", [v.villager_id], String(v.job["role"]))
+	return true
 
 func work_station_for(v) -> Interactable:
 	## The object a villager works at: something in their employer's building.
@@ -183,7 +324,11 @@ func market_counter(v) -> Interactable:
 func _build_presentation() -> void:
 	day_night = load("res://scripts/world/day_night.gd").new()
 	day_night.name = "DayNight"
+	day_night.village = self
 	add_child(day_night)
+	var atmo = load("res://scripts/world/atmosphere.gd").new()
+	atmo.name = "Atmosphere"
+	atmo.village = self
 	camera_rig = load("res://scripts/camera/orbit_camera.gd").new()
 	camera_rig.name = "CameraRig"
 	add_child(camera_rig)
@@ -192,6 +337,7 @@ func _build_presentation() -> void:
 	hud.name = "HUD"
 	add_child(hud)
 	hud.village = self
+	add_child(atmo)
 
 func set_figures_visible(on: bool) -> void:
 	## Simulation agents keep running; only the temporary figures are hidden.

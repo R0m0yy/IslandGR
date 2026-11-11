@@ -1,9 +1,98 @@
 {
- "days": 5,
+ "days": 7,
+ "economy": {
+  "fish_bought": 162,
+  "fish_kept": 943,
+  "fish_sold_to_market": 193,
+  "levy_missed": 21,
+  "levy_paid": 168,
+  "meals_sold": 16,
+  "repairs": 9,
+  "repairs_unaffordable": 0,
+  "wages_paid": 487,
+  "wages_unpaid": 64
+ },
  "engine": "4.3-stable (official)",
  "failed": 0,
+ "ledger_totals": {
+  "boat_catch": {
+   "money": 0,
+   "n": 772,
+   "qty": 1136
+  },
+  "boat_repair": {
+   "money": 108,
+   "n": 9,
+   "qty": 0
+  },
+  "cooked": {
+   "money": 0,
+   "n": 638,
+   "qty": 1276
+  },
+  "eaten": {
+   "money": 0,
+   "n": 962,
+   "qty": 962
+  },
+  "eaten_out": {
+   "money": 0,
+   "n": 16,
+   "qty": 16
+  },
+  "eatery_cook": {
+   "money": 0,
+   "n": 18,
+   "qty": 36
+  },
+  "eatery_sale": {
+   "money": 64,
+   "n": 16,
+   "qty": 0
+  },
+  "eatery_supply": {
+   "money": 54,
+   "n": 20,
+   "qty": 10
+  },
+  "handline_catch": {
+   "money": 0,
+   "n": 90,
+   "qty": 90
+  },
+  "landing_home": {
+   "money": 0,
+   "n": 943,
+   "qty": 943
+  },
+  "landing_sale": {
+   "money": 610,
+   "n": 386,
+   "qty": 193
+  },
+  "levy": {
+   "money": 1008,
+   "n": 168,
+   "qty": 0
+  },
+  "market_sale": {
+   "money": 812,
+   "n": 324,
+   "qty": 162
+  },
+  "start_stock": {
+   "money": 0,
+   "n": 43,
+   "qty": 48
+  },
+  "wage": {
+   "money": 1948,
+   "n": 487,
+   "qty": 0
+  }
+ },
  "nav_nodes": 496,
- "passed": 31,
+ "passed": 57,
  "results": [
   {
    "detail": 30,
@@ -85,11 +174,19 @@
   },
   {
    "detail": {
-    "meals": 3,
-    "raw_fish": 0
+    "items": {
+     "fish": 0,
+     "meal": 3
+    },
+    "money": 10
    },
    "passed": true,
    "test": "cooking moves stock: 1 raw fish -> 3 meals"
+  },
+  {
+   "detail": 2,
+   "passed": true,
+   "test": "ledger refuses to go negative"
   },
   {
    "detail": "",
@@ -130,51 +227,51 @@
   },
   {
    "detail": {
-    "clock": "Day 6  06:00",
-    "steps": 72000,
-    "wall_ms": 13565
+    "clock": "Day 8  06:00",
+    "steps": 100800,
+    "wall_ms": 32744
    },
    "passed": true,
-   "test": "simulation ran 5 game days"
+   "test": "simulation ran 7 game days"
   },
   {
    "detail": {
     "never_slept": 0,
-    "sleeps": 320
+    "sleeps": 476
    },
    "passed": true,
    "test": "villagers sleep (everyone at least once)"
   },
   {
-   "detail": 627,
+   "detail": 843,
    "passed": true,
    "test": "villagers cook"
   },
   {
    "detail": {
-    "meals_eaten": 646,
+    "meals_eaten": 854,
     "never_ate": 0
    },
    "passed": true,
    "test": "villagers eat (everyone at least once)"
   },
   {
-   "detail": 403,
+   "detail": 1207,
    "passed": true,
    "test": "villagers fish and land a catch"
   },
   {
-   "detail": 482,
+   "detail": 468,
    "passed": true,
    "test": "villagers work"
   },
   {
-   "detail": 1475,
+   "detail": 2232,
    "passed": true,
    "test": "doors are opened by villagers"
   },
   {
-   "detail": 2539,
+   "detail": 3531,
    "passed": true,
    "test": "stairs are climbed"
   },
@@ -187,12 +284,19 @@
   },
   {
    "detail": {
-    "expected": 219,
-    "have": 219,
-    "market": 56
+    "consumed": {
+     "fish": 328,
+     "meal": 978
+    },
+    "minted": {
+     "fish": 1253,
+     "meal": 1005
+    },
+    "money": 2040,
+    "problems": []
    },
    "passed": true,
-   "test": "fish ledger balances (start + caught - cooked = pantries + market)"
+   "test": "ledger balances: money constant, goods = minted - consumed, nothing negative"
   },
   {
    "detail": 0,
@@ -208,58 +312,300 @@
    "test": "nobody starves (no one at maximum hunger for over 60 game minutes)"
   },
   {
+   "detail": {
+    "aborted_by_weather": 1,
+    "fish_landed": 1130,
+    "trips": 96
+   },
+   "passed": true,
+   "test": "boats: crews board, sail, fish and land a catch"
+  },
+  {
+   "detail": {
+    "kept_for_home": 943,
+    "paid": {
+     "money": 610,
+     "n": 386,
+     "qty": 193
+    },
+    "sold": 187
+   },
+   "passed": true,
+   "test": "landed fish is sold to the market for money"
+  },
+  {
+   "detail": "",
+   "passed": true,
+   "test": "cargo never exceeds a boat's capacity"
+  },
+  {
+   "detail": {
+    "fish_bought": 148,
+    "meals_sold_by_eatery": 14
+   },
+   "passed": true,
+   "test": "households buy fish and meals with money"
+  },
+  {
+   "detail": {
+    "council": 204,
+    "levy_missed": 16,
+    "levy_paid": 152,
+    "unpaid": 51,
+    "wages_paid": 417
+   },
+   "passed": true,
+   "test": "wages are paid; levy funds the council"
+  },
+  {
+   "detail": {
+    "buy": 3,
+    "sell": 5,
+    "stock": 36
+   },
+   "passed": true,
+   "test": "market price responds to stock"
+  },
+  {
+   "detail": {
+    "repairs": 9,
+    "unaffordable": 0,
+    "worst_condition": 0.65
+   },
+   "passed": true,
+   "test": "boat wear leads to paid repairs"
+  },
+  {
+   "detail": {
+    "drinks": 499,
+    "washes": 162
+   },
+   "passed": true,
+   "test": "villagers drink and wash"
+  },
+  {
+   "detail": {
+    "clear": 118,
+    "cloudy": 35,
+    "rain": 20,
+    "storm": 18
+   },
+   "passed": true,
+   "test": "weather changed during the run"
+  },
+  {
+   "detail": {
+    "pairs": 660,
+    "strong": 24
+   },
+   "passed": true,
+   "test": "friendships form from time spent together"
+  },
+  {
+   "detail": {
+    "poorest": 0,
+    "richest": 337
+   },
+   "passed": true,
+   "test": "no household has negative money"
+  },
+  {
+   "detail": {
+    "boat": "BOAT_02",
+    "crew_then": "rest_home"
+   },
+   "passed": true,
+   "test": "storm interrupts a trip: boat returns and moors, crew moves on"
+  },
+  {
+   "detail": "",
+   "passed": true,
+   "test": "no boat puts to sea during a storm"
+  },
+  {
+   "detail": "",
+   "passed": true,
+   "test": "save written while 45 villagers were mid-activity"
+  },
+  {
+   "detail": {
+    "audit": [],
+    "villagers": 45
+   },
+   "passed": true,
+   "test": "load restores clock, residents, households, money, weather"
+  },
+  {
+   "detail": {
+    "clock": "Day 10  04:08"
+   },
+   "passed": true,
+   "test": "simulation continues for a day after loading"
+  },
+  {
+   "detail": "",
+   "passed": true,
+   "test": "version-1 save migrates to the current schema"
+  },
+  {
+   "detail": "",
+   "passed": true,
+   "test": "a damaged save is rejected, not half-applied"
+  },
+  {
+   "detail": {
+    "births": 7,
+    "came_of_age": 7,
+    "deaths": 34,
+    "estates": 12,
+    "moves": 5,
+    "partnerships": 1,
+    "retired": 37
+   },
+   "passed": true,
+   "test": "generations: births happen"
+  },
+  {
+   "detail": {
+    "deaths": 34,
+    "retired": 37
+   },
+   "passed": true,
+   "test": "generations: residents age, retire and die"
+  },
+  {
+   "detail": 7,
+   "passed": true,
+   "test": "generations: children come of age"
+  },
+  {
+   "detail": {
+    "audit": [],
+    "estates": 12
+   },
+   "passed": true,
+   "test": "generations: estates settle and the books still balance"
+  },
+  {
+   "detail": {
+    "bad_house": 0,
+    "dangling": 0,
+    "no_bed": 0
+   },
+   "passed": true,
+   "test": "generations: no dangling partners, homes, beds or member counts"
+  },
+  {
    "detail": [
+    {
+     "day": 44,
+     "detail": "shop_hand",
+     "type": "retired",
+     "who": [
+      "V22"
+     ]
+    },
+    {
+     "day": 45,
+     "detail": "Dov, aged 74",
+     "type": "death",
+     "who": [
+      "V05"
+     ]
+    },
+    {
+     "day": 45,
+     "detail": "household HH_H02 closed, estate to HH_H20",
+     "type": "estate",
+     "who": [
+      "V05"
+     ]
+    }
+   ],
+   "passed": true,
+   "test": "generations: life events are recorded as history"
+  },
+  {
+   "detail": {
+    "population": 15,
+    "starved": 0
+   },
+   "passed": true,
+   "test": "generations: village still fed after 45 days"
+  },
+  {
+   "detail": [
+    "climb_stairs",
     "walk",
-    "idle",
     "work",
     "eat",
-    "fish",
-    "open_door",
-    "climb_stairs",
-    "cook",
     "climb_ladder",
+    "fish_trip",
+    "idle",
     "cross_bridge",
+    "cook",
     "sleep",
-    "shop",
-    "sit"
+    "open_door",
+    "drink",
+    "fish",
+    "sit",
+    "wash",
+    "shop"
    ],
    "passed": true,
    "test": "all activity states observed"
   }
  ],
- "sim_wall_ms": 13565,
+ "sim_wall_ms": 32744,
+ "society": {
+  "births": 7,
+  "came_of_age": 7,
+  "deaths": 34,
+  "estates": 12,
+  "moves": 5,
+  "partnerships": 1,
+  "retired": 37
+ },
  "state_samples": {
-  "climb_ladder": 33,
-  "climb_stairs": 359,
-  "cook": 134,
-  "cross_bridge": 51,
-  "eat": 148,
-  "fish": 209,
-  "idle": 150,
-  "open_door": 47,
-  "shop": 4,
-  "sit": 5,
-  "sleep": 2213,
-  "walk": 1023,
-  "work": 664
+  "climb_ladder": 50,
+  "climb_stairs": 535,
+  "cook": 130,
+  "cross_bridge": 67,
+  "drink": 33,
+  "eat": 267,
+  "fish": 33,
+  "fish_trip": 249,
+  "idle": 340,
+  "open_door": 80,
+  "shop": 5,
+  "sit": 277,
+  "sleep": 3294,
+  "walk": 1357,
+  "wash": 26,
+  "work": 704
  },
  "totals": {
-  "bridges_crossed": 173,
-  "doors_opened": 1564,
+  "boat_trips": 96,
+  "bridges_crossed": 230,
+  "doors_opened": 2312,
+  "drinks": 499,
   "failed_paths": 0,
   "failed_uses": 0,
-  "fish_bought": 126,
-  "fish_caught": 403,
-  "fish_sold": 178,
-  "ladders_climbed": 196,
-  "meals_cooked": 627,
-  "meals_eaten": 646,
-  "metres": 112508,
-  "plans": 2675,
-  "sleeps": 320,
-  "stairs_climbed": 2539,
+  "fish_bought": 0,
+  "fish_caught": 1207,
+  "fish_sold": 0,
+  "income": 592,
+  "ladders_climbed": 309,
+  "meals_cooked": 843,
+  "meals_eaten": 854,
+  "metres": 156966,
+  "plans": 5130,
+  "sleeps": 476,
+  "stairs_climbed": 3531,
   "starve_minutes": 0,
-  "work_blocks": 482
+  "wages": 1668,
+  "washes": 162,
+  "work_blocks": 468
  },
- "villagers": 42
+ "villagers": 45
 }

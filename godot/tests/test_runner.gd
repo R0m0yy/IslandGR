@@ -16,12 +16,15 @@ func check(name_: String, ok: bool, detail = "") -> void:
 
 func _ready() -> void:
 	var out_path := ""
-	var days := 2.0
+	var days := 7.0
+	var gen_days := 45.0
 	for a in OS.get_cmdline_user_args():
 		if a.begins_with("--out="):
 			out_path = a.substr(6)
 		if a.begins_with("--days="):
 			days = float(a.substr(7))
+		if a.begins_with("--gen-days="):
+			gen_days = float(a.substr(11))
 	GameClock.reset(6.0)
 	var village := Village.new()
 	village.with_presentation = false
@@ -109,7 +112,9 @@ func _ready() -> void:
 	var stove: CookingStation = h01.all_of("stove")[0]
 	var fake := Node3D.new()
 	add_child(fake)
-	var pantry := {"raw_fish": 1, "meals": 0}
+	var tl := Ledger.new()
+	tl.open("t_home", 10)
+	tl.mint("t_home", "fish", 1, "test")
 	var sseq := [stove.stove_state]
 	stove.begin_use(fake)
 	sseq.append(stove.stove_state)
@@ -119,11 +124,12 @@ func _ready() -> void:
 		if sseq[-1] != stove.stove_state:
 			sseq.append(stove.stove_state)
 	var done: bool = stove.is_done()
-	stove.finish(pantry)
+	stove.finish(tl, "t_home")
 	stove.release(fake)
 	sseq.append(stove.stove_state)
 	check("stove cold>lit>cooking>cold, fire light on while lit", sseq == ["cold", "lit", "cooking", "cold"] and lit_light and done and not stove.light.visible, sseq)
-	check("cooking moves stock: 1 raw fish -> 3 meals", pantry == {"raw_fish": 0, "meals": 3}, pantry)
+	check("cooking moves stock: 1 raw fish -> 3 meals", tl.qty("t_home", "fish") == 0 and tl.qty("t_home", "meal") == 3 and tl.audit().is_empty(), tl.acc["t_home"])
+	check("ledger refuses to go negative", not tl.consume("t_home", "fish", 1, "x") and not tl.pay("t_home", "t_home", 99, "x") and tl.audit().is_empty(), tl.refused)
 	var bed: Bed = h01.all_of("bed")[0]
 	var owner_v = null
 	for v in village.villagers:
@@ -184,7 +190,7 @@ func _ready() -> void:
 			tot[k] = tot.get(k, 0.0) + v.stats[k]
 		if v.stats["starve_minutes"] > 60.0:
 			starving += 1
-			starved_info.append({"id": v.villager_id, "home": v.home.building_id, "job": v.job, "pantry": v.household, "starve_minutes": v.stats["starve_minutes"], "log": v.log.slice(-8)})
+			starved_info.append({"id": v.villager_id, "home": v.home.building_id, "job": v.job, "pantry": village.ledger.acc[v.hh], "starve_minutes": v.stats["starve_minutes"], "log": v.log.slice(-8)})
 		if v.stats["sleeps"] == 0:
 			never_slept += 1
 		if v.stats["meals_eaten"] == 0:
@@ -206,22 +212,182 @@ func _ready() -> void:
 	check("doors are opened by villagers", door_opens > 0 and tot["doors_opened"] > 0, door_opens)
 	check("stairs are climbed", tot["stairs_climbed"] > 0, tot["stairs_climbed"])
 	check("no villager is stuck while travelling", max_stuck < 300.0, {"max_stuck_s": max_stuck})
-	var stock_now := village.market_stock
-	for hh in village.households.values():
-		stock_now += hh["raw_fish"]
-	var start: Dictionary = VillageDB.population.get("start_pantry", {})
-	var expected := 4 + village.households.size() * int(start.get("raw_fish", 0)) + int(tot["fish_caught"]) - int(tot["meals_cooked"]) / CookingStation.MEALS_PER_FISH
-	check("fish ledger balances (start + caught - cooked = pantries + market)", stock_now == expected, {"have": stock_now, "expected": expected, "market": village.market_stock})
+	var problems: Array = village.ledger.audit()
+	check("ledger balances: money constant, goods = minted - consumed, nothing negative", problems.is_empty(),
+		{"problems": problems, "money": village.ledger.money_issued, "minted": village.ledger.minted, "consumed": village.ledger.consumed})
 	check("no route failures", tot["failed_paths"] == 0, tot["failed_paths"])
 	check("nobody starves (no one at maximum hunger for over 60 game minutes)", starving == 0, {"cases": starved_info, "total_minutes_at_max": snappedf(tot["starve_minutes"], 0.1)})
+	# ---- 6. boats, fishing economy, weather, needs (same long run)
+	var trips := 0
+	var landed := 0
+	var aborted := 0
+	var worst_cond := 1.0
+	for bid in village.boats:
+		var bt: Boat = village.boats[bid]
+		trips += bt.trips
+		landed += bt.landed
+		aborted += bt.aborted
+		worst_cond = minf(worst_cond, bt.condition)
+	var es: Dictionary = village.economy.stats
+	var lt: Dictionary = village.ledger.totals
+	check("boats: crews board, sail, fish and land a catch", trips > 0 and landed > 0 and tot["boat_trips"] == trips, {"trips": trips, "fish_landed": landed, "aborted_by_weather": aborted})
+	check("landed fish is sold to the market for money", es["fish_sold_to_market"] > 0 and lt.has("landing_sale") and lt["landing_sale"]["money"] > 0, {"sold": es["fish_sold_to_market"], "kept_for_home": es["fish_kept"], "paid": lt.get("landing_sale", {})})
+	check("cargo never exceeds a boat's capacity", village.boats.values().all(func(x): return village.ledger.qty(x.object_id, "fish") <= x.capacity_fish()))
+	check("households buy fish and meals with money", es["fish_bought"] > 0 and es["meals_sold"] > 0, {"fish_bought": es["fish_bought"], "meals_sold_by_eatery": es["meals_sold"]})
+	check("wages are paid; levy funds the council", es["wages_paid"] > 0 and es["levy_paid"] > 0, {"wages_paid": es["wages_paid"], "unpaid": es["wages_unpaid"], "levy_paid": es["levy_paid"], "levy_missed": es["levy_missed"], "council": village.ledger.money(Economy.COUNCIL)})
+	check("market price responds to stock", village.economy.fish_sell_price() >= 5 and village.economy.fish_buy_price() >= 3, {"stock": village.ledger.qty(Economy.MARKET, "fish"), "buy": village.economy.fish_buy_price(), "sell": village.economy.fish_sell_price()})
+	check("boat wear leads to paid repairs", es["repairs"] > 0 or worst_cond >= Boat.REPAIR_BELOW - Boat.TRIP_WEAR - 0.001, {"repairs": es["repairs"], "unaffordable": es["repairs_unaffordable"], "worst_condition": snappedf(worst_cond, 0.01)})
+	check("villagers drink and wash", tot["drinks"] > 0 and tot["washes"] > 0, {"drinks": tot["drinks"], "washes": tot["washes"]})
+	check("weather changed during the run", village.weather.hours_in.values().filter(func(x): return x > 0).size() >= 2, village.weather.hours_in)
+	check("friendships form from time spent together", village.society.bonds.size() > 20, {"pairs": village.society.bonds.size(), "strong": village.society.bonds.values().filter(func(x): return x >= 45.0).size()})
+	var poorest := 1 << 30
+	var richest := 0
+	for hh in village.households:
+		poorest = mini(poorest, village.ledger.money(hh))
+		richest = maxi(richest, village.ledger.money(hh))
+	check("no household has negative money", poorest >= 0, {"poorest": poorest, "richest": richest})
+
+	# ---- 7. interruption: a storm turns a boat round
+	var crew = null
+	var boat: Boat = null
+	village.weather.force("clear")
+	for i in 3000:
+		village.sim.advance(6.0)
+		village.weather.state = "clear"
+		for bb in village.boats.values():
+			if bb.boat_state == "outbound" and not bb.users.is_empty():
+				boat = bb
+				crew = bb.users[0]
+		if boat:
+			break
+	if boat == null:
+		check("storm interrupts a trip (no boat put to sea within the wait)", false)
+	else:
+		var ab0 := boat.aborted
+		village.weather.force("storm")
+		var back := false
+		for i in 600:
+			village.sim.advance(2.0)
+			village.weather.state = "storm"
+			if boat.boat_state == "moored":
+				back = true
+				break
+		var next_act: String = crew.activity
+		check("storm interrupts a trip: boat returns and moors, crew moves on", back and boat.aborted == ab0 + 1 and not crew.at_sea, {"boat": boat.object_id, "crew_then": next_act})
+		var sailed := false
+		for i in 300:
+			village.sim.advance(2.0)
+			village.weather.state = "storm"
+			for bb in village.boats.values():
+				sailed = sailed or bb.boat_state == "outbound"
+		check("no boat puts to sea during a storm", not sailed)
+		village.weather.force("clear")
+
+	# ---- 8. save / load mid-activity
+	var save_path := "user://lt_test_save.json"
+	village.sim.advance(600.0)
+	var busy := 0
+	for v in village.villagers:
+		if v.fsm.current_name != "idle":
+			busy += 1
+	var snap: Dictionary = SaveGame.snapshot(village)
+	var ok_save: bool = SaveGame.save(village, save_path)
+	var n_before: int = village.villagers.size()
+	var clock_before := GameClock.total_minutes
+	var money_before := {}
+	for id in village.ledger.acc:
+		money_before[id] = village.ledger.money(id)
+	village.queue_free()
+	await get_tree().process_frame
+	GameClock.reset(6.0)
+	var v2 := Village.new()
+	v2.with_presentation = false
+	add_child(v2)
+	v2.sim.auto = false
+	await get_tree().process_frame
+	var data: Dictionary = SaveGame.load_file(save_path)
+	var applied: bool = SaveGame.apply(v2, data)
+	var same_money := true
+	for id in money_before:
+		same_money = same_money and v2.ledger.money(id) == money_before[id]
+	var ages_ok := true
+	for r in snap["villagers"]:
+		var nv = v2.villager_by_id(r["id"])
+		ages_ok = ages_ok and nv != null and absf(nv.age - r["age"]) < 0.001 and nv.hh == r["household"] and nv.partner == r["partner"] \
+			and absf(nv.needs["hunger"] - r["needs"]["hunger"]) < 0.001
+	check("save written while %d villagers were mid-activity" % busy, ok_save and busy > 0)
+	check("load restores clock, residents, households, money, weather", applied and v2.villagers.size() == n_before and absf(GameClock.total_minutes - clock_before) < 0.01
+		and same_money and ages_ok and v2.weather.state == snap["weather"]["state"] and v2.ledger.audit().is_empty(),
+		{"villagers": v2.villagers.size(), "audit": v2.ledger.audit()})
+	v2.sim.advance(1440.0)
+	var stuck2 := 0
+	for v in v2.villagers:
+		stuck2 += v.stats["failed_paths"]
+	check("simulation continues for a day after loading", v2.ledger.audit().is_empty() and stuck2 == int(tot["failed_paths"]) and v2.villagers.size() >= n_before, {"clock": GameClock.text()})
+	var old: Dictionary = snap.duplicate(true)
+	old["version"] = 1
+	old.erase("grounds")
+	for r in old["villagers"]:
+		r["needs"].erase("thirst")
+	var fo := FileAccess.open("user://lt_test_save_v1.json", FileAccess.WRITE)
+	fo.store_string(JSON.stringify(old))
+	fo.close()
+	var mig: Dictionary = SaveGame.load_file("user://lt_test_save_v1.json")
+	check("version-1 save migrates to the current schema", not mig.has("error") and int(mig["version"]) == SaveGame.VERSION and mig["villagers"][0]["needs"].has("thirst"))
+	var fb := FileAccess.open("user://lt_test_bad.json", FileAccess.WRITE)
+	fb.store_string("{\"schema\": \"living-tides.save\", \"version\": 2}")
+	fb.close()
+	check("a damaged save is rejected, not half-applied", SaveGame.load_file("user://lt_test_bad.json").has("error"))
+	v2.queue_free()
+	await get_tree().process_frame
+
+	# ---- 9. generations: accelerated calendar (1 game day = 1 year of life)
+	GameClock.reset(6.0)
+	var v3 := Village.new()
+	v3.with_presentation = false
+	add_child(v3)
+	v3.sim.auto = false
+	v3.society.days_per_year = 1.0
+	await get_tree().process_frame
+	var pop0: int = v3.villagers.size()
+	var tg := Time.get_ticks_msec()
+	v3.sim.advance(gen_days * 1440.0)
+	var sc: Dictionary = v3.society.counts
+	var dangling := 0
+	var bad_house := 0
+	var no_bed := 0
+	for v in v3.villagers:
+		if v.partner != "" and v3.villager_by_id(v.partner) == null:
+			dangling += 1
+		if v.partner != "" and v3.villager_by_id(v.partner) != null and v3.villager_by_id(v.partner).partner != v.villager_id:
+			dangling += 1
+		if not v3.households.has(v.hh) or v3.households[v.hh]["building"] != v.home.building_id:
+			bad_house += 1
+		if v.bed == null or v.bed.owner_id != v.villager_id:
+			no_bed += 1
+	var members_ok := true
+	for hh in v3.households:
+		members_ok = members_ok and v3.households[hh]["members"] == v3.villagers.filter(func(x): return x.hh == hh).size()
+	var starved3 := 0
+	for v in v3.villagers:
+		if v.stats["starve_minutes"] > 180.0:
+			starved3 += 1
+	print("GEN ", gen_days, " days: ", sc, " population ", pop0, " -> ", v3.villagers.size(), " events ", v3.society.events.size(), " wall_ms ", Time.get_ticks_msec() - tg)
+	check("generations: births happen", sc["births"] > 0, sc)
+	check("generations: residents age, retire and die", sc["deaths"] > 0 and sc["retired"] > 0, {"deaths": sc["deaths"], "retired": sc["retired"]})
+	check("generations: children come of age", sc["came_of_age"] > 0 or gen_days < 17.0, sc["came_of_age"])
+	check("generations: estates settle and the books still balance", v3.ledger.audit().is_empty(), {"estates": sc["estates"], "audit": v3.ledger.audit()})
+	check("generations: no dangling partners, homes, beds or member counts", dangling == 0 and bad_house == 0 and no_bed == 0 and members_ok, {"dangling": dangling, "bad_house": bad_house, "no_bed": no_bed})
+	check("generations: life events are recorded as history", v3.society.events.size() >= sc["births"] + sc["deaths"], v3.society.events.slice(-3))
+	check("generations: village still fed after %d days" % int(gen_days), starved3 == 0, {"starved": starved3, "population": v3.villagers.size()})
 	var all_states := true
-	for s in ["walk", "sleep", "eat", "cook", "fish", "work", "climb_stairs"]:
+	for s in ["walk", "sleep", "eat", "cook", "work", "climb_stairs", "fish_trip", "drink"]:
 		all_states = all_states and state_seen.has(s)
 	check("all activity states observed", all_states, state_seen.keys())
 
 	var summary := {"engine": Engine.get_version_info()["string"], "passed": results.size() - failures, "failed": failures,
-		"days": days, "villagers": village.villagers.size(), "nav_nodes": g.pos.size(), "totals": tot, "state_samples": state_seen,
-		"sim_wall_ms": wall_ms, "results": results}
+		"days": days, "villagers": n_before, "nav_nodes": g.pos.size(), "totals": tot, "state_samples": state_seen,
+		"sim_wall_ms": wall_ms, "economy": es, "ledger_totals": lt, "society": sc, "results": results}
 	if out_path != "":
 		var f := FileAccess.open(out_path, FileAccess.WRITE)
 		if f:

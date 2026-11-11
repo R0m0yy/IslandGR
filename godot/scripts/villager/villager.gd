@@ -16,10 +16,20 @@ var display_name: String = ""
 var world = null                    # Village
 var graph: NavGraph = null
 var home: Building = null
-var household: Dictionary = {}
+var hh: String = ""                 # household id = Ledger account
 var job = null
 var bed: Bed = null
-var needs := {"hunger": 25.0, "energy": 85.0}
+var age: float = 30.0
+var partner: String = ""
+var parents: Array = []
+var children: Array = []
+var at_sea: bool = false
+var shares_bed_of: String = ""
+var diligence: float = 1.0          # personal traits: small, persistent differences
+var sociability: float = 1.0
+var wake_offset: float = 0.0
+var health: float = 100.0
+var needs := {"hunger": 25.0, "energy": 85.0, "thirst": 20.0, "hygiene": 80.0, "social": 60.0}
 var rng := RandomNumberGenerator.new()
 var brain: VillagerBrain
 var fsm: StateMachine
@@ -35,7 +45,7 @@ var plan: Array = []
 var activity: String = ""
 var stuck_time: float = 0.0
 var stats := {"sleeps": 0, "meals_cooked": 0, "meals_eaten": 0, "fish_caught": 0, "work_blocks": 0, "doors_opened": 0,
-	"stairs_climbed": 0, "ladders_climbed": 0, "bridges_crossed": 0, "failed_paths": 0, "failed_uses": 0,
+	"stairs_climbed": 0, "ladders_climbed": 0, "bridges_crossed": 0, "failed_paths": 0, "failed_uses": 0, "boat_trips": 0, "wages": 0, "income": 0, "drinks": 0, "washes": 0,
 	"plans": 0, "fish_bought": 0, "fish_sold": 0, "metres": 0.0, "max_hunger": 0.0, "starve_minutes": 0.0}
 var log: Array = []
 
@@ -46,15 +56,35 @@ func setup(rec: Dictionary, village) -> void:
 	world = village
 	graph = village.graph
 	home = village.buildings[rec["home"]]
-	household = village.households[rec["household"]]
+	hh = rec["household"]
 	job = rec.get("job")
 	rng.seed = hash(villager_id) & 0x7fffffff
+	age = rec["age"] if rec.has("age") else 20.0 + float(rng.randi() % 36)
+	partner = rec.get("partner", "")
+	parents = rec.get("parents", []).duplicate()
+	children = rec.get("children", []).duplicate()
+	diligence = 0.8 + rng.randf() * 0.4
+	sociability = 0.6 + rng.randf() * 0.8
+	wake_offset = rng.randf_range(-0.6, 0.9)
 	var beds := home.all_of("bed")
-	if rec["bed_slot"] < beds.size():
-		bed = beds[rec["bed_slot"]]
+	if rec.get("shares_bed_of", "") != "":
+		bed = null
+	elif int(rec.get("bed_slot", -1)) >= 0 and int(rec["bed_slot"]) < beds.size():
+		bed = beds[int(rec["bed_slot"])]
+	else:
+		bed = village.free_bed(home)
+	if bed == null and rec.get("shares_bed_of", "") != "":
+		# a young child sleeps in a parent's bed until one of their own is free
+		var par = village.villager_by_id(rec["shares_bed_of"])
+		if par and par.bed and par.home == home:
+			bed = par.bed
+			shares_bed_of = rec["shares_bed_of"]
+			bed.co_sleepers.append(villager_id)
+	elif bed:
 		bed.owner_id = villager_id
 	needs["hunger"] = 20.0 + rng.randf() * 25.0
 	needs["energy"] = 70.0 + rng.randf() * 25.0
+	needs["thirst"] = 10.0 + rng.randf() * 25.0
 	animator = VillagerAnimator.new()
 	animator.name = "Animator"
 	add_child(animator)
@@ -74,18 +104,34 @@ func setup(rec: Dictionary, village) -> void:
 	fsm.add("work", Activities.WorkState.new(self))
 	fsm.add("sit", Activities.SitState.new(self))
 	fsm.add("shop", Activities.ShopState.new(self))
-	at_node = bed.nav_node if bed else home.node_id("hub0")
+	fsm.add("fish_trip", Activities.FishTripState.new(self))
+	fsm.add("drink", Activities.DrinkState.new(self))
+	fsm.add("wash", Activities.WashState.new(self))
+	at_node = rec.get("at_node", bed.nav_node if bed else home.node_id("hub0"))
+	if not graph.pos.has(at_node):
+		at_node = home.node_id("hub0")
+	for k in rec.get("needs", {}):
+		needs[k] = float(rec["needs"][k])
+	health = float(rec.get("health", 100.0))
+	for k in rec.get("stats", {}):
+		stats[k] = rec["stats"][k]
 	global_position = graph.pos[at_node]
 	fsm.change("idle", {"seconds": rng.randf() * 2.0})
 
 # ------------------------------------------------------------------ tick
 func tick(dt: float, minutes: float) -> void:
 	var asleep := fsm.current_name == "sleep"
-	needs["hunger"] = minf(100.0, needs["hunger"] + (2.2 if asleep else 6.5) * minutes / 60.0)
+	var hrs := minutes / 60.0
+	needs["hunger"] = minf(100.0, needs["hunger"] + (2.2 if asleep else 6.5) * hrs)
+	needs["thirst"] = minf(100.0, needs["thirst"] + (2.5 if asleep else 8.0) * hrs)
 	if needs["hunger"] >= 99.9:
 		stats["starve_minutes"] += minutes
 	if not asleep:
-		needs["energy"] = maxf(0.0, needs["energy"] - 5.5 * minutes / 60.0)
+		needs["energy"] = maxf(0.0, needs["energy"] - 5.5 * hrs)
+		needs["hygiene"] = maxf(0.0, needs["hygiene"] - 3.0 * hrs)
+		needs["social"] = maxf(0.0, needs["social"] - 2.5 * hrs)
+	var deprived: bool = needs["hunger"] >= 99.9 or needs["thirst"] >= 99.9
+	health = clampf(health + (-5.0 if deprived else 1.0) * hrs, 0.0, 100.0)
 	stats["max_hunger"] = maxf(stats["max_hunger"], needs["hunger"])
 	fsm.tick(dt, minutes)
 
@@ -191,16 +237,37 @@ func unsnap() -> void:
 		global_position = graph.pos[at_node]
 
 func on_catch(_spot) -> void:
+	## hand-line catch from a pier or the shore: straight into the household pantry
+	world.ledger.mint(hh, "fish", 1, "handline_catch")
 	stats["fish_caught"] += 1
-	# working fishers land every second fish at the market; the rest goes home
-	if job != null and job["role"] == "fisher" and stats["fish_caught"] % 2 == 0:
-		world.market_stock += 1
-		stats["fish_sold"] += 1
-	else:
-		household["raw_fish"] = household.get("raw_fish", 0) + 1
 	var st = fsm.current
 	if st and st.has_method("on_catch"):
 		st.on_catch()
+
+func mood() -> float:
+	## Derived, never stored (VILLAGER_AI.md).
+	var m: float = 100.0 - 0.35 * needs["hunger"] - 0.2 * needs["thirst"] - 0.2 * (100.0 - needs["energy"]) \
+		- 0.15 * (100.0 - needs["hygiene"]) - 0.2 * (100.0 - needs["social"])
+	return clampf(m + 25.0, 0.0, 100.0)
+
+func note(msg: String) -> void:
+	_note(msg)
+
+func info() -> Dictionary:
+	## Everything the resident inspector shows.
+	var friends := []
+	for o in world.villagers:
+		if o != self:
+			var b: float = world.society.bond(villager_id, o.villager_id)
+			if b >= 20.0:
+				friends.append([b, o.display_name])
+	friends.sort_custom(func(x, y): return x[0] > y[0])
+	return {"id": villager_id, "name": display_name, "age": int(age), "household": hh, "home": home.building_id,
+		"job": (job["role"] + " @ " + String(job["place"])) if job != null else ("child" if age < 16.0 else ("retired" if age >= 65.0 else "none")),
+		"activity": activity, "state": fsm.current_name, "going_to": path[-1] if not path.is_empty() else "",
+		"needs": needs.duplicate(), "mood": int(mood()), "health": int(health),
+		"household_money": world.ledger.money(hh), "pantry": world.ledger.acc[hh]["items"].duplicate(),
+		"partner": partner, "children": children.size(), "friends": friends.slice(0, 4), "recent": log.slice(-5)}
 
 func inside_building() -> String:
 	var i := at_node.find(":")
@@ -213,3 +280,31 @@ func _note(msg: String) -> void:
 	log.append("%s %s" % [GameClock.text(), msg])
 	if log.size() > 40:
 		log.pop_front()
+
+func to_record() -> Dictionary:
+	## Persistent state (save game). The current activity is not stored: after a
+	## load the villager stands at `at_node` and decides again.
+	var slot := -1
+	if bed and shares_bed_of == "":
+		slot = home.all_of("bed").find(bed)
+	return {"id": villager_id, "name": display_name, "household": hh, "home": home.building_id, "bed_slot": slot, "job": job,
+		"shares_bed_of": shares_bed_of, "age": age, "partner": partner, "parents": parents, "children": children, "needs": needs.duplicate(), "health": health,
+		"at_node": at_node,
+		"stats": stats.duplicate(), "activity": activity, "state": fsm.current_name}
+
+func shutdown() -> void:
+	## Leave the world cleanly: finish the current state, drop every reservation.
+	if fsm.current:
+		fsm.current.exit()
+		fsm.current = null
+	for st in plan:
+		if st.has("use"):
+			st["use"].release(self)
+	plan = []
+	if bed:
+		bed.release(self)
+		if shares_bed_of != "":
+			bed.co_sleepers.erase(villager_id)
+		else:
+			bed.owner_id = ""
+			bed.co_sleepers.clear()

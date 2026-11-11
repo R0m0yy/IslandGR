@@ -11,6 +11,7 @@ uniform float wave_height = 0.11;
 uniform float wave_scale = 0.22;
 uniform float wave_speed = 0.55;
 uniform float foam_width = 0.6;
+uniform float storm = 0.0;        // 0 clear .. 1 overcast: greys the water
 uniform sampler2D height_tex : filter_linear, repeat_disable;   // terrain height, baked by the Blender pipeline
 uniform vec4 height_rect = vec4(-53.0, -41.0, 51.0, 37.0);      // x0, z0, x1, z1 covered by height_tex
 uniform vec2 height_range = vec2(-3.0, 1.0);
@@ -48,6 +49,7 @@ void fragment() {
 	col *= 0.86 + 0.22 * facet;
 	float f = 1.0 - smoothstep(0.0, foam_width, water_depth + sin(TIME * 1.3 + wpos.x * 0.9 + wpos.z * 0.7) * 0.15);
 	col = mix(col, foam, f * 0.85);
+	col = mix(col, vec3(dot(col, vec3(0.33))) * vec3(0.8, 0.9, 1.0), storm * 0.55);
 	ALBEDO = col;
 	ROUGHNESS = 0.18;
 	SPECULAR = 0.45;
