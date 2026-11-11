@@ -171,3 +171,6 @@ Boat trips 97 · fish caught 2163 (by boats: {'mackerel': 187, 'scad': 630, 'sna
 | 14 | Preserve layout and systems | PASSED (layout untouched; all earlier suites still run) |
 | 15 | Modular architecture | PASSED: separate Ledger, Economy, Weather, Ocean, Ecosystem, Society, Journal, SaveGame |
 | 17 | Long-duration testing | Done: day, 7 days, a year, 45 and 90 accelerated years |
+
+### Last change after the final suites
+Watching the recording showed the notable journal flooded with gull thefts (15 at the market in one morning): a cascade, since each theft excites the other gulls and nothing in the world responded to repeated losses. Added: after a theft, that stall or boat is **vigilant for two hours** (fish covered, birds waved off: success 6 %), and only the first theft at a place per day is notable. Re-run after the change: scenarios **A, C, G 22 / 22**, a 7-day economy run **9 / 9**. Over 7 days: 36 thefts in 197 attempts. The regression, scenario B, D, E, F, the one-year and the 90-year results above come from the build just before this change, which touched only gull success rates.

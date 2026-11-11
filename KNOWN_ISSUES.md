@@ -86,3 +86,4 @@
 | 59 | Visual | The cinematic camera and the wildlife camera have only been exercised by scripts, never by a person | Medium (unverified) |
 | 60 | Tests | Scenario B and the capture's gift scene bend the world on purpose (food spoiled, savings lost); every such step is labelled `scenario_setup_*` in the ledger | — |
 | 61 | Tests | The capture's neighbour-help shot timed out (no gift happened in the 10-hour window on that build) | Low |
+| 62 | Wildlife | Gull thefts first cascaded (15 in a morning); a stall-vigilance rule now limits them to about 5 a day across the market and boats. The longer suites predate this rule | Low |

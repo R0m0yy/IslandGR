@@ -36,7 +36,9 @@ var crabs: Array = []
 var birds: Array = []
 var stats := {"thefts": 0, "theft_attempts": 0, "scavenged": 0, "bird_dives": 0, "bird_catches": 0, "robbed_in_air": 0, "predator_kills": 0,
 	"dolphin_feeds": 0, "school_flights": 0, "crab_bolts": 0, "caught_by_boats": {"scad": 0, "snapper": 0, "mackerel": 0}}
-var fertility: float = 1.0        # scales regrowth; lowered by the "poor season" scenario
+var fertility: float = 1.0
+var vigilant_until: Dictionary = {}   # account -> game minute: after a theft the stall keeper covers the fish and watches the birds
+var _theft_day: Dictionary = {}        # scales regrowth; lowered by the "poor season" scenario
 
 func setup(v, seed_: int = 23) -> void:
 	village = v
@@ -344,11 +346,16 @@ func _attempt_theft(b: Dictionary, e: Dictionary) -> void:
 	stats["theft_attempts"] += 1
 	var chance := 0.32 if e["guarded"] else 0.8
 	chance += 0.12 * (b["hunger"] - 55.0) / 45.0             # a hungrier bird is bolder
+	if GameClock.total_minutes < float(vigilant_until.get(e["account"], -1.0)):
+		chance = 0.06                                         # fish covered, someone waving the birds off
 	if l.qty(e["account"], "fish") > 0 and rng.randf() < chance:
 		l.consume(e["account"], "fish", 1, "stolen_by_gull")
 		b["carry"] = true
 		b["state"] = "flee"
 		stats["thefts"] += 1
+		vigilant_until[e["account"]] = GameClock.total_minutes + 120.0
+		var first_today: bool = _theft_day.get(e["account"], -1) != GameClock.day()
+		_theft_day[e["account"]] = GameClock.day()
 		var who = e["who"]
 		var where: String = "the market stalls" if e["account"] == Economy.MARKET else "the catch on %s" % e["account"]
 		var names := []
@@ -358,7 +365,7 @@ func _attempt_theft(b: Dictionary, e: Dictionary) -> void:
 			who.stats["thefts_suffered"] += 1
 			names.append(who.villager_id)
 		village.journal.add("wildlife", names, "A gull snatched a fish from %s%s." % [where, (" while %s was unloading" % who.display_name) if who != null and e["account"] != Economy.MARKET else ""],
-			"hungry gull (%d), %s fish in the open" % [int(b["hunger"]), "guarded" if e["guarded"] else "unattended"], true, e["pos"])
+			"hungry gull (%d), %s fish in the open" % [int(b["hunger"]), "guarded" if e["guarded"] else "unattended"], first_today, e["pos"])
 		# the commotion draws the others
 		for o in birds:
 			if o["kind"] == "gull" and o != b and o["state"] in ["patrol", "roost"] and o["pos"].distance_to(e["pos"]) < 40.0:
