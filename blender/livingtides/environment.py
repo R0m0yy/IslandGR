@@ -496,9 +496,15 @@ def boat(m, rng, kind="skiff", role="boat_a"):
     for t in (0.3, 0.55, 0.78) if kind == "skiff" else (0.2, 0.42):
         i = int(t * n); x, hb, sh, kl = st[i]
         m.box(x - 0.11, -hb + 0.04, sh - 0.2, x + 0.11, hb - 0.04, sh - 0.16, "wood_light", rng=rng, vary=0.08)
-    for i in range(2, n - 2):
-        x, hb, sh, kl = st[i]
-        m.box(x - 0.17, -hb * 0.55, kl + 0.1, x + 0.17, hb * 0.55, kl + 0.13, "wood_mid", rng=rng, vary=0.1)
+    # floor boards sit above the waterline and run wall to wall, bow to stern:
+    # the sea surface passes underneath and can never be seen inside the boat
+    fz = 0.17
+    for i in range(n):
+        x0_, hb0_, _, _ = st[i]; x1_, hb1_, _, _ = st[i + 1]
+        w0, w1 = max(hb0_ - 0.03, 0.02), max(hb1_ - 0.03, 0.02)
+        pts = [(x0_, -w0, fz - 0.03), (x1_, -w1, fz - 0.03), (x1_, w1, fz - 0.03), (x0_, w0, fz - 0.03),
+               (x0_, -w0, fz), (x1_, -w1, fz), (x1_, w1, fz), (x0_, w0, fz)]
+        m.add(pts, Mesh._BOX_F, "wood_mid" if i % 2 else "wood_light", 1.0 + rng.uniform(-0.06, 0.06))
     if kind == "skiff":
         for sg in (-1, 1):
             m.beam((-0.9, sg * 0.3, 0.3), (1.2, sg * 0.42, 0.42), 0.05, 0.04, "wood_light")

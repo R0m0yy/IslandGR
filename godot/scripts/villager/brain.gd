@@ -101,6 +101,8 @@ func decide() -> Dictionary:
 	if v.sick_days > 0:
 		s["rest_home"] = 60.0
 	s["stroll"] = (14.0 + (100.0 - v.needs["social"]) * 0.2 * v.sociability) * out_f if not night else 0.0
+	if h >= 7.5 and h < 12.5 and GameClock.day() % 7 != 6:
+		s["stroll"] += 9.0 * out_f                             # market hours draw people out
 	if h >= 17.8 and h < 19.4 and adult:
 		s["stroll"] += 10.0 * v.sociability * out_f            # evening walks to see the sunset
 	s["rest_home"] = maxf(s.get("rest_home", 0.0), (9.0 if not night else 22.0) + (16.0 if out_f < 0.5 else 0.0) + (8.0 if v.ambition == "family" else 0.0))
@@ -207,6 +209,10 @@ func _plan(act: String) -> Array:
 				n = "q_n_pierA" if (leaving and h2 < 10.0 and v.age >= 5.0) else "door_" + home.building_id
 				if n == "q_n_pierA":
 					v.note("ran down to watch the boats go out")
+			elif h2 >= 7.5 and h2 < 12.5 and v.rng.randf() < 0.65:
+				# market morning: people drift down to the stalls and the quay to look, meet and talk
+				n = ["q_n_mkt", "q_n_mkt", "q_n_pierA", "q_n_pierB", "q_corner", "plaza"][v.rng.randi() % 6]
+				v.note("went down to the market")
 			elif h2 >= 17.8 and h2 < 19.4 and w.weather.state in ["clear", "cloudy"]:
 				n = "k_look" if v.rng.randf() < 0.5 else "sp_1"     # out to watch the sun go down
 				v.note("went to watch the sunset")

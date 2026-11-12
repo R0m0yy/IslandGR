@@ -17,6 +17,8 @@ var door: Door = null
 var lights: Array = []
 var state: Dictionary = {"condition": 1.0, "lights_on": false, "door_open": false}
 var cutaway: bool = false
+var merged: MeshInstance3D = null       # all exterior groups as one mesh (few draw calls); groups show only in cutaway
+static var merge_exteriors: bool = true
 var _lit_glass: StandardMaterial3D = null
 
 func setup(id: String) -> void:
@@ -31,7 +33,56 @@ func setup(id: String) -> void:
 		model = scene.instantiate()
 		add_child(model)
 		_index_groups(model)
+	if merge_exteriors and model and DisplayServer.get_name() != "headless":
+		_merge_exterior()   # skipped on the headless dummy renderer (no mesh data there)
 	_make_interactables()
+
+func _merge_exterior() -> void:
+	## A building is ~9 nodes x 3-4 materials = ~30 draw calls. Seen from outside
+	## it only needs one mesh with one surface per material. The separate groups
+	## (and the interior) are kept for cutaway and switched in on demand.
+	var by_mat := {}
+	var inv := global_transform.affine_inverse()
+	for g in groups:
+		if g == "DOOR_main" or g == "INTERIOR" or g == "FLOOR2":
+			continue
+		for mi in _mesh_nodes(groups[g]):
+			var mesh: Mesh = mi.mesh
+			for si in mesh.get_surface_count():
+				var mat := mesh.surface_get_material(si)
+				if not by_mat.has(mat):
+					var st := SurfaceTool.new()
+					st.begin(Mesh.PRIMITIVE_TRIANGLES)
+					by_mat[mat] = st
+				by_mat[mat].append_from(mesh, si, inv * mi.global_transform)
+	var out := ArrayMesh.new()
+	for mat in by_mat:
+		by_mat[mat].commit(out)
+		out.surface_set_material(out.get_surface_count() - 1, mat)
+	merged = MeshInstance3D.new()
+	merged.name = "EXTERIOR_merged"
+	merged.mesh = out
+	model.add_child(merged)
+	merged.global_transform = global_transform
+	_show_groups(false)
+
+func _mesh_nodes(n: Node) -> Array:
+	var out := []
+	if n is MeshInstance3D and n.mesh != null:
+		out.append(n)
+	for c in n.find_children("*", "MeshInstance3D", true, false):
+		if c.mesh != null:
+			out.append(c)
+	return out
+
+func _show_groups(on: bool, hide_sides: Array = []) -> void:
+	for g in groups:
+		if g == "DOOR_main":
+			continue
+		var vis: bool = on
+		if on and (g == "ROOF" or g == "FLOOR2" or (g.begins_with("WALL_") and hide_sides.has(g.substr(5)))):
+			vis = false
+		groups[g].visible = vis
 
 func _index_groups(n: Node) -> void:
 	for c in n.get_children():
@@ -158,6 +209,10 @@ func _set_glass(on: bool) -> void:
 func set_cutaway(on: bool, hide_sides: Array = ["S", "E"]) -> void:
 	## Fades the camera-facing wall groups and lifts the roof (BUILDING_CONTRACT).
 	cutaway = on
+	if merged:
+		merged.visible = not on
+		_show_groups(on, hide_sides)
+		return
 	for g in groups:
 		var hide: bool = on and (g == "ROOF" or g == "FLOOR2" or (g.begins_with("WALL_") and hide_sides.has(g.substr(5))))
 		groups[g].visible = not hide

@@ -73,7 +73,7 @@ if (!window.WebGL2RenderingContext) fail('This browser has no WebGL 2. Use a cur
 else if (typeof DecompressionStream === 'undefined') fail('This browser lacks DecompressionStream. Use a current Chrome, Edge or Firefox.');
 else {
   const engine = new Engine({executable:'index', canvasResizePolicy:2, focusCanvas:true,
-    fileSizes:{'index.pck':14054816,'index.wasm':35376909}, args:[],
+    fileSizes:{'index.pck':14063264,'index.wasm':35376909}, args:[],
     onExit:()=>{ msg.textContent='The game closed. Reload the page to start again.'; boot.style.display='flex'; }});
   window.__lt = {engine, started:false, log:[]};
   engine.startGame({executable:'index', mainPack:'index.pck',

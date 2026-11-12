@@ -18,6 +18,7 @@ var doors: Array = []
 var fishing_spots: Array = []
 var stroll_nodes: Array = []
 var figures_visible: bool = true
+var low_quality: bool = false         # phones / browsers: fewer pixels, no shadow pass, lighter sea
 var street_lamps: Array = []
 var ledger := Ledger.new()
 var economy := Economy.new()
@@ -43,6 +44,7 @@ func _ready() -> void:
 	build()
 
 func build() -> void:
+	low_quality = OS.has_feature("web") or OS.has_feature("mobile")
 	_build_environment()
 	_build_graph()
 	_build_buildings()
@@ -140,8 +142,8 @@ func _build_environment() -> void:
 	sea.name = "Sea"
 	var pm := PlaneMesh.new()
 	pm.size = Vector2(420, 420)
-	pm.subdivide_width = 160
-	pm.subdivide_depth = 160
+	pm.subdivide_width = 64 if low_quality else 160
+	pm.subdivide_depth = 64 if low_quality else 160
 	sea.mesh = pm
 	var sm := ShaderMaterial.new()
 	sm.shader = OCEAN_SHADER
@@ -421,6 +423,19 @@ func _build_presentation() -> void:
 	day_night.name = "DayNight"
 	day_night.village = self
 	add_child(day_night)
+	if low_quality:
+		var phone: bool = DisplayServer.is_touchscreen_available()
+		var vp := get_viewport()
+		vp.msaa_3d = Viewport.MSAA_DISABLED
+		vp.scaling_3d_scale = 0.6 if phone else 0.8          # the 3D view renders at fewer pixels; the UI stays sharp
+		day_night.sun.shadow_enabled = not phone              # the shadow pass redraws the whole village
+		day_night.sun.directional_shadow_mode = DirectionalLight3D.SHADOW_ORTHOGONAL
+		day_night.sun.directional_shadow_max_distance = 140.0
+		day_night.moon.shadow_enabled = false
+		for id in buildings:
+			var ls: Array = buildings[id].lights
+			while ls.size() > 1:
+				ls.pop_back().queue_free()
 	var atmo = load("res://scripts/world/atmosphere.gd").new()
 	atmo.name = "Atmosphere"
 	atmo.village = self

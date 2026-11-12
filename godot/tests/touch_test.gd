@@ -138,6 +138,12 @@ func _ready() -> void:
 	await get_tree().process_frame
 	hud._t = 0.0
 	hud._process(1.0)
+	var hb = v.buildings.values()[0]
+	check("building exterior is merged into one mesh (fewer draw calls)", hb.merged != null and hb.merged.visible and hb.merged.mesh.get_surface_count() <= 6, hb.merged.mesh.get_surface_count() if hb.merged else -1)
+	hb.set_cutaway(true)
+	var cut_ok: bool = not hb.merged.visible and not hb.groups["ROOF"].visible and hb.groups["WALL_N"].visible and not hb.groups["WALL_S"].visible
+	hb.set_cutaway(false)
+	check("merged building: cutaway shows the inside, then restores the merged exterior", cut_ok and hb.merged.visible and not hb.groups["ROOF"].visible)
 	check("Hide UI hides the bar and shows the small Show UI button", not hud.touch_bar.visible and hud.show_btn.visible)
 	hud.show_btn.pressed.emit()
 	hud._t = 0.0
