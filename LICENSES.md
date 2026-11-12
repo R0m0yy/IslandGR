@@ -7,4 +7,10 @@
 | Mixamo animations/characters | Adobe | Adobe forum answers describe royalty-free use in commercial games, with redistribution of raw files prohibited | **UNVERIFIED** — official terms not read first-hand; do not treat as approved |
 | Audio | — | — | None sourced yet |
 
-No third-party assets are in the project.
+## Third-party assets (from session 6)
+| Item | Source | License | Status |
+|---|---|---|---|
+| MakeHuman base mesh, body/face/expression targets, `game_engine` rig and skin weights (`third_party/makehuman_cc0/`) | MPFB 2 (MakeHuman for Blender), github.com/makehumancommunity/mpfb2, commit recorded in `third_party/makehuman_cc0/SOURCE_COMMIT.txt` | **CC0 1.0 Universal** - `LICENSE.ASSETS.md` copied alongside. MPFB's `LICENSE.md` states the base mesh, proxies, targets, modifiers, rigs, poses, expressions and mesh JSON are CC0, and that the MakeHuman team claims nothing over output (exports, renders, saved models) | **Verified** (licence files read first-hand in session 6). Compatible with commercial use; no attribution required |
+| MPFB program code | same repository | GPLv3 | **Not used and not included.** Our scripts read the CC0 data files directly; no MPFB Python code is imported, copied or shipped, so the GPL does not reach the project |
+
+Everything else (character modelling, clothing, hair, props, eyes, animations) is authored in this project by our own scripts.
