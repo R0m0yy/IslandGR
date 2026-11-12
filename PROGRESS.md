@@ -153,3 +153,25 @@
 - Unverified: everything that needs a GPU, a person or ears.
 
 **Next:** see `DEVELOPMENT_ROADMAP.md` (session 5 list).
+
+## Session 6 (2026-11-12) — hero villagers, wildlife models, phone + sea pass
+
+**Completed and executed**
+- Licence check: MakeHuman assets CC0 (recorded in LICENSES.md); MPFB GPL code not used. CC0 data vendored in `third_party/makehuman_cc0/`.
+- Web build hosted as a claude.ai artifact (https://claude.ai/artifact/4WcwyejUb2HBEmYazLKAHV, version 3); iPad/iPhone touch controls (pan, pinch, twist, tilt, tap, button bar); `tests/touch_test` 23/23 PASSED.
+- Phone performance: merged building exteriors (one mesh per building outside cutaway), web/mobile quality profile (render scale 0.6 phone / 0.8 tablet, no MSAA, no phone shadows), lighter sea mesh. Frame rate on a real phone UNVERIFIED.
+- Boats: sealed full-width floor planks; no sea visible inside hulls (renders `evidence/renders_sea_v2/`).
+- Sea: opaque depth-banded shader with shore foam, rolling foam bands, whitecaps, storm grey.
+- Market: residents' morning strolls favour the market quay and plaza.
+- Hero villagers A–D (`blender/livingtides/characters/hero.py`, `garments.py`, `cast.py`, `blender/build_characters.py`): stylised MakeHuman bodies with modelled eyes, eyebrow and hair clumps, beard (C), 12 facial shape keys, clothing as separate thick shells cut from the body with plane-cut hems and cuffs, bands (belts, cuffs, collars, hat bands), buttons, pockets, buckle, hats, props. One 53-bone game_engine rig (child built from the same definition at child joints). Body faces under clothing deleted. Renders, turntables, face expression sheets, wireframes, triangle counts, GLB exports, .blend files.
+- Wildlife models: 12 species (`blender/livingtides/animals.py`, `blender/build_animals.py`), reference sheet, `godot/assets/env/animals.glb`.
+- Regression 57/57 PASSED after the phone patch.
+
+**Failed or open**
+- Triangle budget 8–10k: A 10,699, B 11,231, C 14,578 (beard 5k) FAILED; D 9,475 PASSED.
+- C's beard is blocky and hides the mouth; collar points read as icicles. Needs a rebuild before approval.
+- Crowd LOD (~4k) counted by decimation only; not exported.
+- NOT IMPLEMENTED: animations (idle, walk, stairs, job), Godot placement on the Harbour Stair, hand/foot/garment close-ups, extreme-pose clipping test, seams as geometry.
+- Animal GLB not yet used in the game (placeholders remain).
+
+**Blocked on the owner:** approve / reject each villager A–D (gallery: https://claude.ai/artifact/NH6R3Ev1V3NS9nYCWTfx4c).

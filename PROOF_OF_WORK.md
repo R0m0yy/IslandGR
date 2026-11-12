@@ -1,7 +1,31 @@
 # PROOF OF WORK — live scorecard
 
 Statuses: **PASSED** (executed, evidence on disk) · **FAILED** (tested, defect found) · **UNVERIFIED** · **NOT IMPLEMENTED**.
-Last update: 2026-11-12, session 5. Earlier session records are preserved unchanged below.
+Last update: 2026-11-12, session 6. Earlier session records are preserved unchanged below.
+
+## Session 6 — hero villagers, wildlife, phone and sea
+
+| Item | Status | Evidence |
+|---|---|---|
+| MakeHuman CC0 licence check | PASSED | LICENSES.md, third_party/makehuman_cc0/LICENSE.ASSETS.md |
+| Four hero villagers built and rigged (53 bones, child rig from same definition) | PASSED | evidence/characters/<A-D>/tris.json, blender/out/characters/*.blend, godot/assets/characters/*.glb |
+| Facial shape keys (blink L/R, smile, frown, brows up/down, 5 mouth shapes) | PASSED | evidence/characters/<A-D>/faces.png |
+| Hero render (Cycles) | PASSED | evidence/characters/<A-D>/hero.png |
+| 8-angle turntable | PASSED | evidence/characters/<A-D>/turntable.png |
+| Wireframe + triangle counts per part | PASSED | wireframe.png, tris.json |
+| Comparison image | PASSED | evidence/characters/comparison.png |
+| 8–10k triangle budget | FAILED | A 10,699 · B 11,231 · C 14,578 · D 9,475 |
+| ~4k crowd version | UNVERIFIED | decimation count only (≈3,96–4,07k), not exported |
+| Hands / feet / per-garment close-ups | NOT IMPLEMENTED | |
+| Animations (idle, walk, stairs, job) incl. extreme pose | NOT IMPLEMENTED | |
+| Godot placement and screenshots | NOT IMPLEMENTED | GLBs exported, not imported into a scene |
+| Wildlife models, 12 species + reference sheet | PASSED | evidence/animals/reference_sheet.png, godot/assets/env/animals.glb |
+| Sealed boat decks | PASSED | evidence/renders_sea_v2/T01_boat_at_sea.png |
+| New sea shader | PASSED (software GL) | evidence/renders_sea_v2/ |
+| Phone quality profile + merged buildings | PASSED (tests) / UNVERIFIED (iPhone fps) | evidence/logs/touch_test.log, godot_tests_stdout.log |
+| Regression | PASSED 57/57 | evidence/logs/godot_tests_stdout.log |
+
+Known shortfalls: C beard blocky and over budget; collar points on C read as icicles; D curls leave gaps; stubble on A is paint only; headwrap turns on B sit proud; inner clothing layers (shirts, trousers, top) are single-sided with thick hem edges to save triangles; seams are not modelled.
 
 ## Session 5 — the living world
 

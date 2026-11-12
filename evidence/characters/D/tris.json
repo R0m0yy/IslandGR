@@ -1,0 +1,39 @@
+{
+ "key": "D",
+ "title": "Harbour child",
+ "height_m": 1.27,
+ "total_tris": 9475,
+ "parts": {
+  "body": 4100,
+  "eye_l": 196,
+  "eye_r": 196,
+  "eyebrows": 192,
+  "hair": 2496,
+  "shirt": 741,
+  "shirt_collar": 112,
+  "sleeve_hem_l": 112,
+  "sleeve_hem_r": 112,
+  "shorts": 888,
+  "shorts_waist": 112,
+  "bucket": 150,
+  "bucket_handle": 68
+ },
+ "crowd_lod_tris_estimate": 3986,
+ "body_faces_removed_under_clothing": 460,
+ "shape_keys": [
+  "blink",
+  "blink_L",
+  "blink_R",
+  "smile",
+  "frown",
+  "brows_up",
+  "brows_down",
+  "mouth_open",
+  "mouth_oo",
+  "mouth_ee",
+  "mouth_mbp",
+  "mouth_fv"
+ ],
+ "bones": 53,
+ "missing_targets": []
+}

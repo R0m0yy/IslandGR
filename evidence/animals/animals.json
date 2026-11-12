@@ -1,0 +1,74 @@
+{
+ "gull": {
+  "title": "Laughing gull",
+  "length_m": 1.3,
+  "frame": 1.2400000095367432,
+  "tris": 188
+ },
+ "pelican": {
+  "title": "Brown pelican",
+  "length_m": 1.3,
+  "frame": 2.0999999046325684,
+  "tris": 348
+ },
+ "tern": {
+  "title": "Royal tern",
+  "length_m": 0.9,
+  "frame": 0.8399999737739563,
+  "tris": 180
+ },
+ "frigatebird": {
+  "title": "Magnificent frigatebird",
+  "length_m": 1.9,
+  "frame": 2.200000047683716,
+  "tris": 222
+ },
+ "sandpiper": {
+  "title": "Spotted sandpiper",
+  "length_m": 0.19,
+  "frame": 0.25132229924201965,
+  "tris": 150
+ },
+ "dolphin": {
+  "title": "Bottlenose dolphin",
+  "length_m": 2.7,
+  "frame": 2.7209999561309814,
+  "tris": 292
+ },
+ "turtle": {
+  "title": "Green turtle",
+  "length_m": 1.1,
+  "frame": 1.7599999904632568,
+  "tris": 256
+ },
+ "barracuda": {
+  "title": "Great barracuda",
+  "length_m": 1.4,
+  "frame": 1.5262036323547363,
+  "tris": 228
+ },
+ "scad": {
+  "title": "Bigeye scad (school)",
+  "length_m": 0.25,
+  "frame": 0.26600000262260437,
+  "tris": 212
+ },
+ "snapper": {
+  "title": "Red snapper",
+  "length_m": 0.45,
+  "frame": 0.4779999852180481,
+  "tris": 204
+ },
+ "mackerel": {
+  "title": "King mackerel",
+  "length_m": 0.5,
+  "frame": 0.531000018119812,
+  "tris": 212
+ },
+ "crab": {
+  "title": "Ghost crab",
+  "length_m": 0.08,
+  "frame": 0.16086921095848083,
+  "tris": 420
+ }
+}

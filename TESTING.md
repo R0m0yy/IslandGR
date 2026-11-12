@@ -31,5 +31,13 @@ uv venv -p python3.11 .venv && uv pip install -p .venv/bin/python "bpy>=4.2,<5" 
 python3 tools/sync_godot_data.py && python3 tools/test_pipeline.py
 ```
 
-## 5. Hero villagers (session 6) - NOT READY TO TEST
-Requested: four detailed hero characters. **Status: NOT IMPLEMENTED beyond groundwork.** Done: MakeHuman/MPFB asset licence verified as CC0 and recorded in `LICENSES.md`; CC0 data vendored in `third_party/makehuman_cc0/`; body loader `blender/livingtides/characters/mh.py` (one 45-year-old male body builds, 1.95 m tall at current settings, 0 missing targets). Not done: faces, hands, clothing, hair, props, rig binding, expressions, animations, renders, Godot import. There is nothing character-related to look at yet. Residents in the game are still the neutral grey placeholder.
+## 5. Hero villagers (session 6) - FIRST PASS, AWAITING APPROVAL
+Four characters built: A fisher captain, B market vendor, C elder net-mender, D harbour child.
+Rebuild everything (renders, GLBs, .blend):
+```
+/opt/lt/bl/bin/python blender/build_characters.py          # all four, ~10 min on 2 CPUs
+/opt/lt/bl/bin/python blender/build_characters.py A --quick # one character, low samples
+/opt/lt/bl/bin/python blender/build_animals.py               # wildlife sheet + animals.glb
+```
+Look at `evidence/characters/comparison.png`, then each `evidence/characters/<A-D>/` (hero, turntable, faces, wireframe, tris.json) and `evidence/animals/reference_sheet.png`.
+Not yet done: animations, Godot placement, per-garment close-ups, the crowd LOD export. The game still shows the grey placeholder residents.
