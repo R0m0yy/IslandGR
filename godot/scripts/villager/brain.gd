@@ -107,7 +107,8 @@ func decide() -> Dictionary:
 		s["stroll"] += 10.0 * v.sociability * out_f            # evening walks to see the sunset
 	# a swim off the spit on a fine warm day (children from eight, with the grown-ups about)
 	if h >= 10.0 and h < 17.0 and w.weather.state == "clear" and out_f > 0.8 and v.age >= 8.0 and v.age < 70.0 and v.sick_days == 0:
-		s["swim"] = 8.0 + (100.0 - v.needs["hygiene"]) * 0.08 + (100.0 - v.needs["social"]) * 0.06 + (6.0 if v.age < 16.0 else 0.0)
+		# a treat, not a duty: at most one swim a day, and errands come first
+		s["swim"] = 4.0 + (100.0 - v.needs["hygiene"]) * 0.05 + (100.0 - v.needs["social"]) * 0.04 + (5.0 if v.age < 16.0 else 0.0)
 	s["rest_home"] = maxf(s.get("rest_home", 0.0), (9.0 if not night else 22.0) + (16.0 if out_f < 0.5 else 0.0) + (8.0 if v.ambition == "family" else 0.0))
 	for k in s.keys():
 		if cooldown.get(k, -1.0) > GameClock.total_minutes:

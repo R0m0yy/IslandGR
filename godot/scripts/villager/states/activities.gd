@@ -338,5 +338,6 @@ class SwimState extends VillagerState:
 			v.needs["hygiene"] = 100.0
 			v.needs["social"] = minf(100.0, v.needs["social"] + 15.0)
 			v.stats["swims"] = int(v.stats.get("swims", 0)) + 1
+			v.brain.cooldown["swim"] = GameClock.total_minutes + 1440.0
 			v.unsnap()
 			v.step_done()
