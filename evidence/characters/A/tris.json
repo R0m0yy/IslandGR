@@ -2,32 +2,105 @@
  "key": "A",
  "title": "Fisher captain",
  "height_m": 1.76,
- "total_tris": 10699,
- "parts": {
-  "body": 3197,
-  "eye_l": 196,
-  "eye_r": 196,
-  "eyebrows": 192,
-  "hair": 784,
-  "shirt": 841,
-  "sleeve_roll_l": 112,
-  "sleeve_roll_r": 112,
-  "collar": 112,
-  "vest": 916,
-  "vest_pockets": 96,
-  "vest_buttons": 80,
-  "trousers": 739,
-  "trouser_cuff_l": 112,
-  "trouser_cuff_r": 112,
-  "belt": 112,
-  "buckle": 12,
-  "boots": 1376,
-  "souwester": 480,
-  "rope_coil": 840,
-  "fish": 82
+ "hero_total_tris": 80298,
+ "hero_parts": {
+  "body": 16608,
+  "eye_l": 624,
+  "eye_r": 624,
+  "hair": 3268,
+  "brows": 960,
+  "shirt_hem0": 1460,
+  "shirt": 9072,
+  "sleeve_roll_l": 2100,
+  "sleeve_roll_r": 2100,
+  "collar": 1136,
+  "shirt_buttons": 108,
+  "trousers": 5744,
+  "trouser_cuff_l": 1596,
+  "trouser_cuff_r": 1540,
+  "belt_edge0": 2120,
+  "belt": 852,
+  "buckle": 60,
+  "belt_keepers": 24,
+  "vest_hem0": 5180,
+  "vest": 5004,
+  "pocket_l_106_edge0": 320,
+  "pocket_l_106": 96,
+  "flap_l_106_edge0": 240,
+  "flap_l_106": 76,
+  "pocket_button_l_106": 36,
+  "pocket_l_123_edge0": 290,
+  "pocket_l_123": 432,
+  "flap_l_123_edge0": 230,
+  "flap_l_123": 132,
+  "pocket_button_l_123": 36,
+  "pocket_r_106_edge0": 310,
+  "pocket_r_106": 96,
+  "flap_r_106_edge0": 250,
+  "flap_r_106": 76,
+  "pocket_button_r_106": 36,
+  "pocket_r_123_edge0": 290,
+  "pocket_r_123": 436,
+  "flap_r_123_edge0": 220,
+  "flap_r_123": 132,
+  "pocket_button_r_123": 36,
+  "boot_rims": 1120,
+  "boots": 9616,
+  "boot_soles": 672,
+  "souwester": 2080,
+  "rope_coil": 2592,
+  "fish": 268
  },
- "crowd_lod_tris_estimate": 3975,
- "body_faces_removed_under_clothing": 1565,
+ "game_total_tris": 17397,
+ "game_parts": {
+  "body": 3359,
+  "eye_l": 250,
+  "eye_r": 250,
+  "hair": 528,
+  "brows": 248,
+  "shirt_hem0": 250,
+  "shirt": 1468,
+  "sleeve_roll_l": 338,
+  "sleeve_roll_r": 338,
+  "collar": 250,
+  "shirt_buttons": 108,
+  "trousers": 928,
+  "trouser_cuff_l": 258,
+  "trouser_cuff_r": 250,
+  "belt_edge0": 342,
+  "belt": 250,
+  "buckle": 60,
+  "belt_keepers": 24,
+  "vest_hem0": 838,
+  "vest": 810,
+  "pocket_l_106_edge0": 250,
+  "pocket_l_106": 96,
+  "flap_l_106_edge0": 240,
+  "flap_l_106": 76,
+  "pocket_button_l_106": 36,
+  "pocket_l_123_edge0": 250,
+  "pocket_l_123": 250,
+  "flap_l_123_edge0": 230,
+  "flap_l_123": 132,
+  "pocket_button_l_123": 36,
+  "pocket_r_106_edge0": 250,
+  "pocket_r_106": 96,
+  "flap_r_106_edge0": 250,
+  "flap_r_106": 76,
+  "pocket_button_r_106": 36,
+  "pocket_r_123_edge0": 250,
+  "pocket_r_123": 248,
+  "flap_r_123_edge0": 220,
+  "flap_r_123": 132,
+  "pocket_button_r_123": 36,
+  "boot_rims": 250,
+  "boots": 1556,
+  "boot_soles": 250,
+  "souwester": 336,
+  "rope_coil": 418,
+  "fish": 250
+ },
+ "body_faces_removed_under_clothing": 5490,
  "shape_keys": [
   "blink",
   "blink_L",
@@ -43,5 +116,78 @@
   "mouth_fv"
  ],
  "bones": 53,
- "missing_targets": []
+ "clips": {
+  "idle": {
+   "frames": 73,
+   "seconds": 3.0,
+   "loop": true
+  },
+  "walk": {
+   "frames": 25,
+   "seconds": 1.0,
+   "loop": true
+  },
+  "climb_stairs": {
+   "frames": 27,
+   "seconds": 1.1,
+   "loop": true
+  },
+  "climb_ladder": {
+   "frames": 30,
+   "seconds": 1.2,
+   "loop": true
+  },
+  "open_door": {
+   "frames": 30,
+   "seconds": 1.2,
+   "loop": false
+  },
+  "cook": {
+   "frames": 35,
+   "seconds": 1.4,
+   "loop": true
+  },
+  "eat": {
+   "frames": 44,
+   "seconds": 1.8,
+   "loop": true
+  },
+  "sit": {
+   "frames": 97,
+   "seconds": 4.0,
+   "loop": true
+  },
+  "sleep": {
+   "frames": 97,
+   "seconds": 4.0,
+   "loop": true
+  },
+  "fish": {
+   "frames": 73,
+   "seconds": 3.0,
+   "loop": true
+  },
+  "work": {
+   "frames": 23,
+   "seconds": 0.9,
+   "loop": true
+  },
+  "wave": {
+   "frames": 20,
+   "seconds": 0.8,
+   "loop": true
+  },
+  "run": {
+   "frames": 17,
+   "seconds": 0.66,
+   "loop": true
+  },
+  "haul_rope": {
+   "frames": 39,
+   "seconds": 1.6,
+   "loop": true
+  }
+ },
+ "missing_targets": [],
+ "seconds": 681.0
 }

@@ -192,14 +192,14 @@ def build_one(key):
     # faces
     hc = np.array(c.pose_head()) if hasattr(c, "pose_head") else None
     hb = c.rig.pose.bones["head"]
-    hc = np.array(c.rig.matrix_world @ ((hb.head + hb.tail) / 2))
+    hc = np.array(c.rig.matrix_world @ (hb.head + (hb.tail - hb.head) * 0.42))
     sc.render.resolution_x, sc.render.resolution_y = 620, 680
     sc.cycles.samples = S_SMALL * 3
     ff = []
     for name, keys in (("neutral", {}), ("smile", {"smile": 1.0}), ("blink", {"blink": 1.0}), ("talk", {"mouth_open": 0.8, "brows_up": 0.5}),
                        ("frown", {"frown": 1.0, "brows_down": 0.6}), ("oo", {"mouth_oo": 1.0})):
         set_keys(c, **keys)
-        cam(sc, hc + np.array([0.2, -0.6, 0.0]) * c.k, hc + np.array([0, 0, -0.02]) * c.k, 60)
+        cam(sc, hc + np.array([0.17, -0.55, 0.02]) * c.k, hc + np.array([0, 0, -0.01]) * c.k, 60)
         f = os.path.join(out, f"_face_{name}.png"); bl_io.render(sc, f); ff.append(f)
     set_keys(c)
     montage(os.path.join(out, "faces.png"), 3, ff)
@@ -247,7 +247,7 @@ def build_one(key):
     wires = wire_overlay(c)
     cam(sc, (0.9 * H, -2.35 * H, 0.6 * H), (0, 0, 0.5 * H), 50)
     bl_io.render(sc, os.path.join(out, "wireframe.png"))
-    hb = c.rig.pose.bones["head"]; hc = np.array(c.rig.matrix_world @ ((hb.head + hb.tail) / 2))
+    hb = c.rig.pose.bones["head"]; hc = np.array(c.rig.matrix_world @ (hb.head + (hb.tail - hb.head) * 0.42))
     sc.render.resolution_x, sc.render.resolution_y = 900, 900
     cam(sc, hc + np.array([0.25, -0.62, 0.02]) * c.k, hc + np.array([0, 0, -0.02]) * c.k, 60)
     bl_io.render(sc, os.path.join(out, "wireframe_face.png"))
@@ -294,8 +294,11 @@ def build_one(key):
 
 if __name__ == "__main__":
     os.makedirs(EV, exist_ok=True)
-    infos = [build_one(k) for k in KEYS]
-    if set(KEYS) == set(cast.SPECS):
+    only_cmp = "--comparison-only" in sys.argv
+    infos = [] if only_cmp else [build_one(k) for k in KEYS]
+    if only_cmp:
+        infos = [json.load(open(os.path.join(EV, k, "tris.json"))) for k in cast.SPECS]
+    if set(KEYS) == set(cast.SPECS) or only_cmp:
         bl_io.reset_scene(); sc = bpy.context.scene
         xs = {"A": -1.35, "B": -0.45, "C": 0.45, "D": 1.3}
         for k in KEYS:

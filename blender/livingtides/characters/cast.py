@@ -259,7 +259,7 @@ class Char:
         v = upper - P[:, 2]
         v = np.minimum(v, P[:, 2] - (m[2] - chin_drop * k))                   # under the chin, down the throat
         v = np.minimum(v, (self.ear["l"][1] - 0.012 * k) - P[:, 1])           # stop in front of the ears
-        lipf = np.sqrt((rel[:, 0] / (0.031 * k)) ** 2 + (rel[:, 2] / (0.0135 * k)) ** 2) - 1.0
+        lipf = np.sqrt((rel[:, 0] / (0.029 * k)) ** 2 + ((rel[:, 2] - 0.0015 * k) / (0.0105 * k)) ** 2) - 1.0
         lip_front = rel[:, 1] < 0.02
         v = np.where(lip_front, np.minimum(v, lipf * 0.012 * k), v)
         v = np.where(W[:, BI["head"]] + W[:, BI["neck_01"]] > 0.3, v, -1)
@@ -1139,7 +1139,7 @@ def build_C():
     hf = c.hair_field(front=0.75, side=0.05, back=-0.85, temple_dip=0.05)
     c.hair_volume("hair", hf, lambda P: np.full(len(P), 0.008 * k), white, subdiv=0,
                   grooves=lambda P, N: 0.003 * k * np.abs(np.sin(P[:, 2] * 220 + P[:, 1] * 60)), taper=0.01)
-    c.hair_volume("brows", c.brow_field(0.42, 1.55), lambda P: np.full(len(P), 0.006 * k), white, subdiv=2,
+    c.hair_volume("brows", c.brow_field(0.24, 1.45), lambda P: np.full(len(P), 0.0045 * k), white, subdiv=2,
                   grooves=lambda P, N: 0.002 * k * np.abs(np.sin(P[:, 0] * 500 - P[:, 2] * 300)), taper=0.004)
 
     wz, P, W = c.waist_z, c.P, c.W
