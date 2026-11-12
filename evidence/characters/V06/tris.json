@@ -1,0 +1,50 @@
+{
+ "key": "V06",
+ "variant": {
+  "look": "f",
+  "age": 27,
+  "skin": 1,
+  "hair": "wrap",
+  "wrap": "#D7A546",
+  "top": [
+   "short",
+   "#F1EEE6",
+   "scoop"
+  ],
+  "bottom": [
+   "skirt",
+   "#7B4F86"
+  ],
+  "feet": "sandals",
+  "weight": 0.48,
+  "role": "worker"
+ },
+ "hero_total_tris": 54252,
+ "game_total_tris": 11129,
+ "clips": [
+  "idle",
+  "walk",
+  "climb_stairs",
+  "climb_ladder",
+  "open_door",
+  "cook",
+  "eat",
+  "sit",
+  "sleep",
+  "fish",
+  "work",
+  "wave",
+  "run",
+  "give",
+  "carry",
+  "row",
+  "steer",
+  "swim",
+  "cast",
+  "haul_net",
+  "sweep",
+  "talk",
+  "play"
+ ],
+ "height_m": 1.590272187215397
+}

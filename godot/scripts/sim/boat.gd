@@ -27,6 +27,9 @@ var _targets: Array = []
 var _passed: int = 0
 var _dir: int = 1
 var _bob: float = 0.0
+var crew = null                     # the villager aboard (FishTripState)
+var gear := {}                      # visual gear: oars (pivots) or motor + propeller
+var engine: bool = false            # fishing boats carry an outboard; skiffs are rowed
 
 func capacity_fish() -> int:
 	return CAPACITY.get(boat_kind, 10)

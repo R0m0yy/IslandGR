@@ -105,6 +105,9 @@ func decide() -> Dictionary:
 		s["stroll"] += 9.0 * out_f                             # market hours draw people out
 	if h >= 17.8 and h < 19.4 and adult:
 		s["stroll"] += 10.0 * v.sociability * out_f            # evening walks to see the sunset
+	# a swim off the spit on a fine warm day (children from eight, with the grown-ups about)
+	if h >= 10.0 and h < 17.0 and w.weather.state == "clear" and out_f > 0.8 and v.age >= 8.0 and v.age < 70.0 and v.sick_days == 0:
+		s["swim"] = 8.0 + (100.0 - v.needs["hygiene"]) * 0.08 + (100.0 - v.needs["social"]) * 0.06 + (6.0 if v.age < 16.0 else 0.0)
 	s["rest_home"] = maxf(s.get("rest_home", 0.0), (9.0 if not night else 22.0) + (16.0 if out_f < 0.5 else 0.0) + (8.0 if v.ambition == "family" else 0.0))
 	for k in s.keys():
 		if cooldown.get(k, -1.0) > GameClock.total_minutes:
@@ -217,7 +220,12 @@ func _plan(act: String) -> Array:
 				n = "k_look" if v.rng.randf() < 0.5 else "sp_1"     # out to watch the sun go down
 				v.note("went to watch the sunset")
 				return [{"go": n}, {"idle": 40.0 + v.rng.randf() * 30.0, "anim": "idle"}]
-			return [{"go": n}, {"idle": 6.0 + v.rng.randf() * 14.0}]
+			return [{"go": n}, {"idle": 6.0 + v.rng.randf() * 14.0, "social": true}]
+		"swim":
+			var beach: String = ["sp_1", "sp_2"][v.rng.randi() % 2]
+			if not w.graph.pos.has(beach):
+				return []
+			return [{"go": beach}, {"swim": 25.0 + v.rng.randf() * 25.0}, {"idle": 4.0}]
 		"rest_home":
 			var seat2 = home.find("chair", v)
 			if seat2:

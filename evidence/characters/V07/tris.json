@@ -1,0 +1,53 @@
+{
+ "key": "V07",
+ "variant": {
+  "look": "f",
+  "age": 41,
+  "skin": 4,
+  "hair": "coils",
+  "top": [
+   "long",
+   "#F3EFE4",
+   "v"
+  ],
+  "bottom": [
+   "rolled",
+   "#3F7DC0"
+  ],
+  "feet": "sandals",
+  "hat": [
+   "straw",
+   "#D9BE7A"
+  ],
+  "weight": 0.6,
+  "role": "worker"
+ },
+ "hero_total_tris": 54992,
+ "game_total_tris": 11559,
+ "clips": [
+  "idle",
+  "walk",
+  "climb_stairs",
+  "climb_ladder",
+  "open_door",
+  "cook",
+  "eat",
+  "sit",
+  "sleep",
+  "fish",
+  "work",
+  "wave",
+  "run",
+  "give",
+  "carry",
+  "row",
+  "steer",
+  "swim",
+  "cast",
+  "haul_net",
+  "sweep",
+  "talk",
+  "play"
+ ],
+ "height_m": 1.6016971269198195
+}

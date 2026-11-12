@@ -11,6 +11,37 @@ extends Node3D
 ## the clips; nothing else in the game refers to bones or meshes.
 
 const CLIPS := ["idle", "walk", "climb_stairs", "climb_ladder", "open_door", "cook", "eat", "sit", "sleep", "fish", "work", "wave"]
+## clips the character models add (blender/livingtides/characters/anim.py)
+const EXTRA := ["run", "give", "carry", "row", "steer", "swim", "cast", "haul_net", "sweep", "talk", "play"]
+const LOOPING := ["idle", "walk", "climb_stairs", "climb_ladder", "cook", "eat", "sit", "sleep", "fish", "work", "wave",
+	"run", "give", "carry", "row", "steer", "swim", "cast", "haul_net", "sweep", "talk", "play"]
+## character variants (godot/assets/characters/V*.glb) by age group and look
+const POOLS := {
+	"child": ["V13", "V14"],
+	"elder_m": ["V09", "V10"], "elder_f": ["V11", "V12"],
+	"m": ["V01", "V02", "V03", "V04"], "f": ["V05", "V06", "V07", "V08"],
+	"fisher_m": ["V01", "V01", "V04"], "fisher_f": ["V07"],
+	"trade_m": ["V04", "V02"], "trade_f": ["V05", "V06"],
+	"cook_f": ["V08", "V05"], "cook_m": ["V02"],
+}
+const SHADER := preload("res://shaders/hero_character.gdshader")
+static var _sm_cache := {}          # clip list -> shared AnimationNodeStateMachine
+
+var model: Node3D = null
+var skel: Skeleton3D = null
+var variant: String = ""
+var props := {}                     # name -> Node3D under a BoneAttachment3D
+var face_meshes: Array = []
+var _blink_in: float = 2.0
+var _blink_t: float = -1.0
+var _brng := RandomNumberGenerator.new()
+var _prop_timer := {}               # name -> seconds left (handover props)
+var lane: float = 0.0               # personal sideways offset while walking (people do not share one line)
+var _ground_dy: float = 0.0
+var _ray_tick: int = 0
+var _yaw: float = 0.0
+var _yaw_init := false
+const WALKING := ["walk", "climb_stairs", "run", "carry", "cross_bridge"]
 
 var player: AnimationPlayer
 var tree: AnimationTree
@@ -75,7 +106,253 @@ func build(_tint: Color = Color.WHITE) -> void:
 	playback = tree.get("parameters/playback")
 	play("idle")
 
+static func pick_variant(villager_id: String, age: float, role: String) -> String:
+	var h: int = absi(hash(villager_id))
+	var look: String = "f" if h % 2 == 1 else "m"
+	var pool_key: String = look
+	if age < 13.0:
+		pool_key = "child"
+	elif age >= 62.0:
+		pool_key = "elder_" + look
+	elif role == "fisher":
+		pool_key = "fisher_" + look
+	elif role in ["fishmonger", "market_clerk", "shopkeeper", "shop_hand", "storekeeper"]:
+		pool_key = "trade_" + look
+	elif role in ["cook", "server"]:
+		pool_key = "cook_" + look
+	var pool: Array = POOLS.get(pool_key, POOLS[look])
+	var key: String = pool[(h / 7) % pool.size()]
+	return key if ResourceLoader.exists("res://assets/characters/%s.glb" % key) else ""
+
+func build_for(villager) -> void:
+	## A real character for this resident when the variant models exist, otherwise the mannequin.
+	var role: String = villager.job["role"] if villager.job != null else ""
+	var key := pick_variant(villager.villager_id, villager.age, role)
+	if key == "":
+		build()
+		return
+	build_model(key, villager.villager_id)
+
+func build_model(key: String, seed_id: String) -> void:
+	variant = key
+	_brng.seed = hash(seed_id)
+	lane = (float(absi(hash(seed_id)) % 5) - 2.0) * 0.13
+	rig = Node3D.new()
+	rig.name = "Rig"
+	add_child(rig)
+	model = load("res://assets/characters/%s.glb" % key).instantiate()
+	model.rotation.y = PI            # Blender -Y forward imports as +Z; the figures face -Z
+	rig.add_child(model)
+	player = model.find_child("AnimationPlayer", true, false)
+	for n in player.get_animation_list():
+		var a: Animation = player.get_animation(n)
+		a.loop_mode = Animation.LOOP_LINEAR if LOOPING.has(String(n)) else Animation.LOOP_NONE
+	for sk in model.find_children("*", "Skeleton3D", true, false):
+		skel = sk
+	# per-resident colours: clothing hue / value and skin tone ride on the vertex alpha tag
+	var rng := RandomNumberGenerator.new()
+	rng.seed = hash(seed_id + "_look")
+	var hue := rng.randf_range(-0.5, 0.5) if rng.randf() < 0.8 else 0.0
+	var val := rng.randf_range(0.82, 1.12)
+	var tone := rng.randf_range(0.82, 1.18)
+	var mats := {}
+	for mi in model.find_children("*", "MeshInstance3D", true, false):
+		var m: MeshInstance3D = mi
+		if m.mesh == null:
+			continue
+		if m.find_blend_shape_by_name("blink") >= 0:
+			face_meshes.append(m)
+		var part := String(m.name).substr(String(m.name).find("_") + 1)
+		var mode := 0
+		if part == "body":
+			mode = 1
+		else:
+			for pre in ["top", "bottom", "apron", "vest", "collar", "sleeve_roll", "skirt", "hat", "headwrap", "shirt", "trousers", "shorts"]:
+				if part.begins_with(pre) and not part.ends_with("_band"):
+					mode = 2
+					break
+		for si in m.mesh.get_surface_count():
+			var src = m.mesh.surface_get_material(si)
+			var key2 := [src, mode]
+			if not mats.has(key2):
+				var d := ShaderMaterial.new()
+				d.shader = SHADER
+				if src is StandardMaterial3D:
+					d.set_shader_parameter("roughness_v", src.roughness)
+					d.set_shader_parameter("metallic_v", src.metallic)
+				d.set_shader_parameter("cloth_hue", hue)
+				d.set_shader_parameter("cloth_val", val)
+				d.set_shader_parameter("skin_tone", tone)
+				d.set_shader_parameter("tag_mode", mode)
+				mats[key2] = d
+			m.set_surface_override_material(si, mats[key2])
+	_make_props()
+	# state machine over every clip the model has (one shared resource per clip list)
+	var names: Array = []
+	for c in CLIPS + EXTRA:
+		if player.has_animation(c):
+			names.append(c)
+	var ck := ",".join(names)
+	if not _sm_cache.has(ck):
+		var sm := AnimationNodeStateMachine.new()
+		var i := 0
+		for c in names:
+			var an := AnimationNodeAnimation.new()
+			an.animation = c
+			sm.add_node(c, an, Vector2(160 * (i % 6), 90 * (i / 6)))
+			i += 1
+		for a in names:
+			for b in names:
+				if a != b:
+					var tr := AnimationNodeStateMachineTransition.new()
+					tr.xfade_time = 0.22
+					sm.add_transition(a, b, tr)
+		_sm_cache[ck] = sm
+	tree = AnimationTree.new()
+	tree.name = "AnimationTree"
+	tree.tree_root = _sm_cache[ck]
+	model.add_child(tree)              # so its root node (..) is the model, like the imported player
+	tree.anim_player = tree.get_path_to(player)
+	tree.active = true
+	playback = tree.get("parameters/playback")
+	play("idle")
+
+# ------------------------------------------------------------------ props in hands
+func _attach(name_: String, bone: String, node: Node3D) -> void:
+	if skel == null or skel.find_bone(bone) < 0:
+		return
+	var ba := BoneAttachment3D.new()
+	ba.bone_name = bone
+	skel.add_child(ba)
+	ba.add_child(node)
+	node.visible = false
+	props[name_] = node
+
+func _mesh(m: Mesh, c: Color, pos: Vector3, rot: Vector3 = Vector3.ZERO) -> MeshInstance3D:
+	var mi := MeshInstance3D.new()
+	mi.mesh = m
+	mi.position = pos
+	mi.rotation = rot
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = c
+	mat.roughness = 0.7
+	mi.material_override = mat
+	return mi
+
+func _make_props() -> void:
+	# bone space: Y runs along the bone (towards the fingers)
+	var rod := Node3D.new()
+	var cm := CylinderMesh.new(); cm.top_radius = 0.006; cm.bottom_radius = 0.014; cm.height = 2.2
+	rod.add_child(_mesh(cm, Color(0.42, 0.3, 0.18), Vector3(0, 0.05, 0.9), Vector3(PI / 2 - 0.3, 0, 0)))
+	_attach("rod", "hand_r", rod)
+	var fish := Node3D.new()
+	var fm := CapsuleMesh.new(); fm.radius = 0.035; fm.height = 0.3
+	fish.add_child(_mesh(fm, Color(0.55, 0.62, 0.68), Vector3(0, 0.16, 0.0)))
+	_attach("fish", "hand_r", fish)
+	var fruit := Node3D.new()
+	var sm := SphereMesh.new(); sm.radius = 0.045; sm.height = 0.08
+	fruit.add_child(_mesh(sm, Color(0.95, 0.55, 0.12), Vector3(0, 0.1, -0.03)))
+	_attach("fruit", "hand_r", fruit)
+	var bread := Node3D.new()
+	var bm := CapsuleMesh.new(); bm.radius = 0.04; bm.height = 0.2
+	bread.add_child(_mesh(bm, Color(0.85, 0.62, 0.32), Vector3(0, 0.1, 0), Vector3(0, 0, PI / 2)))
+	_attach("bread", "hand_r", bread)
+	var crate := Node3D.new()
+	var bx := BoxMesh.new(); bx.size = Vector3(0.42, 0.24, 0.3)
+	crate.add_child(_mesh(bx, Color(0.62, 0.45, 0.28), Vector3(-0.2, 0.12, -0.12)))
+	_attach("crate", "hand_r", crate)
+	var broom := Node3D.new()
+	var brm := CylinderMesh.new(); brm.top_radius = 0.012; brm.bottom_radius = 0.012; brm.height = 1.3
+	broom.add_child(_mesh(brm, Color(0.55, 0.4, 0.25), Vector3(0, 0.05, 0.25), Vector3(PI / 2 + 0.5, 0, 0)))
+	_attach("broom", "hand_r", broom)
+
+func show_prop(name_: String, on: bool, seconds: float = -1.0) -> void:
+	if props.has(name_):
+		props[name_].visible = on
+		if on and seconds > 0.0:
+			_prop_timer[name_] = seconds
+		elif not on:
+			_prop_timer.erase(name_)
+
+func phase() -> float:
+	## 0..1 position in the current clip (boats sync their oars to the rower).
+	if player == null or player.current_animation == "":
+		return 0.0
+	var a: Animation = player.get_animation(player.current_animation)
+	return fposmod(player.current_animation_position / maxf(0.01, a.length), 1.0)
+
+func _physics_process(_dt: float) -> void:
+	## Feet on the real surface: the walk graph is straight lines between nodes, the
+	## stairs, decks and rock are not. Only the figure moves; the simulation keeps its position.
+	if model == null or not visible or not is_inside_tree():
+		return
+	_ray_tick = (_ray_tick + 1) % 3
+	if _ray_tick != 0:
+		return
+	var target := 0.0
+	if current in WALKING:
+		var p := global_position
+		var q := PhysicsRayQueryParameters3D.create(p + Vector3(0, 0.7, 0), p + Vector3(0, -0.9, 0))
+		var hit := get_world_3d().direct_space_state.intersect_ray(q)
+		if not hit.is_empty():
+			target = clampf(hit["position"].y - p.y, -0.45, 0.45)
+	_ground_dy = target
+
+func _process(dt: float) -> void:
+	if model == null:
+		return
+	# smooth the figure toward the simulation pose: ground height, walking lane, turning
+	var walking := current in WALKING
+	rig.position.y = lerpf(rig.position.y, _ground_dy, clampf(dt * 10.0, 0.0, 1.0))
+	rig.position.x = lerpf(rig.position.x, lane if walking else 0.0, clampf(dt * 3.0, 0.0, 1.0))
+	var parent_yaw: float = get_parent().rotation.y if get_parent() is Node3D else 0.0
+	if not _yaw_init:
+		_yaw = parent_yaw; _yaw_init = true
+	_yaw = lerp_angle(_yaw, parent_yaw, clampf(dt * 8.0, 0.0, 1.0))
+	rig.rotation.y = angle_difference(parent_yaw, _yaw)
+	for k in _prop_timer.keys():
+		_prop_timer[k] -= dt
+		if _prop_timer[k] <= 0.0:
+			show_prop(k, false)
+	if not visible:
+		return
+	if current == "sleep":
+		_set_shape("blink", 1.0)
+		return
+	if _blink_t >= 0.0:
+		_blink_t += dt
+		var u: float = _blink_t / 0.16
+		_set_shape("blink", sin(clampf(u, 0.0, 1.0) * PI))
+		if u >= 1.0:
+			_blink_t = -1.0
+			_set_shape("blink", 0.0)
+	else:
+		_blink_in -= dt
+		if _blink_in <= 0.0:
+			_blink_t = 0.0
+			_blink_in = _brng.randf_range(2.0, 6.0)
+
+func _set_shape(shape: String, v: float) -> void:
+	for m in face_meshes:
+		var i: int = m.find_blend_shape_by_name(shape)
+		if i >= 0:
+			m.set_blend_shape_value(i, v)
+
 func play(clip: String) -> void:
+	if model != null:
+		if clip == current:
+			return
+		var c: String = clip if player.has_animation(clip) else ({"cross_bridge": "walk", "shop": "idle", "drink": "eat", "wash": "cook",
+			"mend_nets": "work", "shoo": "wave"}.get(clip, "idle"))
+		current = clip
+		show_prop("rod", c in ["fish", "cast"])
+		show_prop("broom", c == "sweep")
+		if playback:
+			if playback.get_current_node() == &"":
+				playback.start(c)
+			else:
+				playback.travel(c)
+		return
 	if clip == current or not CLIPS.has(clip):
 		return
 	current = clip

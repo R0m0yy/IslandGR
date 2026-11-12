@@ -1,0 +1,51 @@
+{
+ "key": "V02",
+ "variant": {
+  "look": "m",
+  "age": 29,
+  "skin": 1,
+  "hair": "coils",
+  "beard": "short",
+  "top": [
+   "short",
+   "#D7A546",
+   "crew"
+  ],
+  "bottom": [
+   "trousers",
+   "#B59E73"
+  ],
+  "feet": "sandals",
+  "weight": 0.5,
+  "muscle": 0.6,
+  "role": "worker"
+ },
+ "hero_total_tris": 73988,
+ "game_total_tris": 11398,
+ "clips": [
+  "idle",
+  "walk",
+  "climb_stairs",
+  "climb_ladder",
+  "open_door",
+  "cook",
+  "eat",
+  "sit",
+  "sleep",
+  "fish",
+  "work",
+  "wave",
+  "run",
+  "give",
+  "carry",
+  "row",
+  "steer",
+  "swim",
+  "cast",
+  "haul_net",
+  "sweep",
+  "talk",
+  "play"
+ ],
+ "height_m": 1.6991341546056338
+}

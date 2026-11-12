@@ -1,0 +1,55 @@
+{
+ "key": "V03",
+ "variant": {
+  "look": "m",
+  "age": 24,
+  "skin": 3,
+  "hair": "crop",
+  "beard": null,
+  "top": [
+   "tank",
+   "#F1EEE6",
+   "crew"
+  ],
+  "bottom": [
+   "shorts",
+   "#3FA79E"
+  ],
+  "feet": "sandals",
+  "hat": [
+   "straw",
+   "#D9BE7A"
+  ],
+  "weight": 0.42,
+  "muscle": 0.6,
+  "role": "worker"
+ },
+ "hero_total_tris": 52008,
+ "game_total_tris": 11536,
+ "clips": [
+  "idle",
+  "walk",
+  "climb_stairs",
+  "climb_ladder",
+  "open_door",
+  "cook",
+  "eat",
+  "sit",
+  "sleep",
+  "fish",
+  "work",
+  "wave",
+  "run",
+  "give",
+  "carry",
+  "row",
+  "steer",
+  "swim",
+  "cast",
+  "haul_net",
+  "sweep",
+  "talk",
+  "play"
+ ],
+ "height_m": 1.728710105329516
+}

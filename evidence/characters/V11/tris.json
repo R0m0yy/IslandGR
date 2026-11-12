@@ -1,0 +1,49 @@
+{
+ "key": "V11",
+ "variant": {
+  "look": "f",
+  "age": 66,
+  "skin": 5,
+  "hair": "bun_white",
+  "top": [
+   "long",
+   "#EBDCB4",
+   "crew"
+  ],
+  "bottom": [
+   "skirt_long",
+   "#553828"
+  ],
+  "feet": "sandals",
+  "weight": 0.62,
+  "role": "elder"
+ },
+ "hero_total_tris": 47058,
+ "game_total_tris": 11275,
+ "clips": [
+  "idle",
+  "walk",
+  "climb_stairs",
+  "climb_ladder",
+  "open_door",
+  "cook",
+  "eat",
+  "sit",
+  "sleep",
+  "fish",
+  "work",
+  "wave",
+  "run",
+  "give",
+  "carry",
+  "row",
+  "steer",
+  "swim",
+  "cast",
+  "haul_net",
+  "sweep",
+  "talk",
+  "play"
+ ],
+ "height_m": 1.5840827874970769
+}

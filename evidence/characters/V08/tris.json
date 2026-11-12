@@ -1,0 +1,50 @@
+{
+ "key": "V08",
+ "variant": {
+  "look": "f",
+  "age": 22,
+  "skin": 3,
+  "hair": "bun",
+  "top": [
+   "tank",
+   "#B5463C",
+   "scoop"
+  ],
+  "bottom": [
+   "skirt",
+   "#B5463C"
+  ],
+  "apron": "#F1EEE6",
+  "feet": "bare",
+  "weight": 0.45,
+  "role": "cook"
+ },
+ "hero_total_tris": 46616,
+ "game_total_tris": 10716,
+ "clips": [
+  "idle",
+  "walk",
+  "climb_stairs",
+  "climb_ladder",
+  "open_door",
+  "cook",
+  "eat",
+  "sit",
+  "sleep",
+  "fish",
+  "work",
+  "wave",
+  "run",
+  "give",
+  "carry",
+  "row",
+  "steer",
+  "swim",
+  "cast",
+  "haul_net",
+  "sweep",
+  "talk",
+  "play"
+ ],
+ "height_m": 1.592170589153181
+}

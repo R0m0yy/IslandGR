@@ -1,0 +1,51 @@
+{
+ "key": "V12",
+ "variant": {
+  "look": "f",
+  "age": 70,
+  "skin": 0,
+  "hair": "wrap",
+  "wrap": "madras",
+  "top": [
+   "short",
+   "#3F7DC0",
+   "scoop"
+  ],
+  "bottom": [
+   "skirt_long",
+   "#3F7DC0"
+  ],
+  "apron": "#F1EEE6",
+  "feet": "sandals",
+  "weight": 0.6,
+  "role": "elder"
+ },
+ "hero_total_tris": 75630,
+ "game_total_tris": 9956,
+ "clips": [
+  "idle",
+  "walk",
+  "climb_stairs",
+  "climb_ladder",
+  "open_door",
+  "cook",
+  "eat",
+  "sit",
+  "sleep",
+  "fish",
+  "work",
+  "wave",
+  "run",
+  "give",
+  "carry",
+  "row",
+  "steer",
+  "swim",
+  "cast",
+  "haul_net",
+  "sweep",
+  "talk",
+  "play"
+ ],
+ "height_m": 1.540463203880883
+}

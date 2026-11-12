@@ -1,0 +1,49 @@
+{
+ "key": "V14",
+ "variant": {
+  "look": "f",
+  "age": 7,
+  "skin": 3,
+  "hair": "puffs",
+  "top": [
+   "short",
+   "#E9B92F",
+   "scoop"
+  ],
+  "bottom": [
+   "skirt",
+   "#E9B92F"
+  ],
+  "feet": "sandals",
+  "weight": 0.45,
+  "role": "child"
+ },
+ "hero_total_tris": 50956,
+ "game_total_tris": 11343,
+ "clips": [
+  "idle",
+  "walk",
+  "climb_stairs",
+  "climb_ladder",
+  "open_door",
+  "cook",
+  "eat",
+  "sit",
+  "sleep",
+  "fish",
+  "work",
+  "wave",
+  "run",
+  "give",
+  "carry",
+  "row",
+  "steer",
+  "swim",
+  "cast",
+  "haul_net",
+  "sweep",
+  "talk",
+  "play"
+ ],
+ "height_m": 1.1800000000000002
+}

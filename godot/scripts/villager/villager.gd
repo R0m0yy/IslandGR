@@ -110,7 +110,7 @@ func setup(rec: Dictionary, village) -> void:
 	animator = VillagerAnimator.new()
 	animator.name = "Animator"
 	add_child(animator)
-	animator.build(Color.from_hsv(rng.randf(), 0.55, 0.85))
+	animator.build_for(self)          # a character model per resident (mannequin if the models are missing)
 	brain = VillagerBrain.new(self)
 	fsm = StateMachine.new()
 	fsm.add("idle", IdleState.new(self))
@@ -130,6 +130,7 @@ func setup(rec: Dictionary, village) -> void:
 	fsm.add("drink", Activities.DrinkState.new(self))
 	fsm.add("wash", Activities.WashState.new(self))
 	fsm.add("mend_nets", Activities.MendNetsState.new(self))
+	fsm.add("swim", Activities.SwimState.new(self))
 	at_node = rec.get("at_node", bed.nav_node if bed else home.node_id("hub0"))
 	if not graph.pos.has(at_node):
 		at_node = home.node_id("hub0")
@@ -163,7 +164,7 @@ func tick(dt: float, minutes: float) -> void:
 	_shelter_t -= dt
 	if _shelter_t <= 0.0:
 		_shelter_t = 4.0
-		if world.weather.shelter_needed() and not at_sea and inside_building() == "" and activity in ["stroll", "fish", "give_food"]:
+		if world.weather.shelter_needed() and not at_sea and inside_building() == "" and activity in ["stroll", "fish", "give_food", "swim"]:
 			seek_shelter()
 	fsm.tick(dt, minutes)
 
@@ -246,8 +247,24 @@ func _run_step() -> void:
 	elif st.has("repair"):
 		world.economy.repair_building(self, st["repair"])
 		fsm.change("idle", {"seconds": 40.0, "anim": "work"})
+	elif st.has("swim"):
+		fsm.change("swim", {"minutes": st["swim"]})
 	elif st.has("idle"):
-		fsm.change("idle", {"seconds": st["idle"], "anim": st.get("anim", "idle")})
+		var a: String = st.get("anim", "idle")
+		if a == "idle" and st.get("social", false):
+			# someone to talk to nearby? then talk; children play instead of standing about
+			if age < 13.0:
+				a = "play"
+			else:
+				for o in world.villagers:
+					if o != self and o.fsm.current_name == "idle" and o.global_position.distance_to(global_position) < 3.0:
+						a = "talk"
+						face(o.global_position - global_position)
+						if o.animator and o.animator.current == "idle":
+							o.react("talk", 6.0)
+							o.face(global_position - o.global_position)
+						break
+		fsm.change("idle", {"seconds": st["idle"], "anim": a})
 
 # ------------------------------------------------------------------ travel
 func next_segment() -> void:

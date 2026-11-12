@@ -23,12 +23,21 @@ from mathutils import Vector
 from livingtides import bl_io
 from livingtides.characters import hero, cast, anim
 from livingtides.characters import garments as G
+from livingtides.characters import crowd
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 EV = os.path.join(ROOT, "evidence", "characters")
 QUICK = "--quick" in sys.argv
 ANIM_RENDERS = "--no-anim-renders" not in sys.argv
-KEYS = [a for a in sys.argv[1:] if a in cast.SPECS] or list(cast.SPECS)
+KEYS = [a for a in sys.argv[1:] if a in cast.SPECS or a in crowd.VARIANTS] or list(cast.SPECS)
+if "--crowd" in sys.argv:
+    KEYS = list(crowd.VARIANTS)
+GAME_TRIS_CROWD = 9000
+
+
+def build_any(key):
+    c = cast.build(key) if key in cast.SPECS else crowd.build_variant(key)
+    return c
 S_HERO = 12 if QUICK else 48
 S_SMALL = 8 if QUICK else 16
 GAME_TRIS = 13000
@@ -169,20 +178,34 @@ def export_glb(c, path):
                               export_vertex_color="MATERIAL", export_apply=False)
 
 
-def export_only(key):
-    """Rebuild, bake and export the game GLB without renders (fast path)."""
+def export_only(key, portrait=None):
+    """Rebuild, bake and export the game GLB without renders (fast path).
+    `portrait`: also render one small Cycles portrait for the crowd lineup."""
     bl_io.reset_scene()
-    c = cast.build(key)
+    c = build_any(key)
+    crowd.tag_tint_channel(c)
     anim.bake(c)
     anim.show(c, "idle", 0.0)
-    game_tris = make_game_lod(c, GAME_TRIS)
+    if portrait:
+        sc = bpy.context.scene
+        stage(sc, 420, 760, S_SMALL * 2)
+        H = c.spec["height_m"]
+        cam(sc, (0.9 * H, -2.4 * H, 0.6 * H), (0, 0, 0.5 * H), 50)
+        bl_io.render(sc, portrait)
+    hero_tris = sum(c.tris().values())
+    game_tris = make_game_lod(c, GAME_TRIS if key in cast.SPECS else GAME_TRIS_CROWD)
     gdir = os.path.join(ROOT, "godot", "assets", "characters"); os.makedirs(gdir, exist_ok=True)
     export_glb(c, os.path.join(gdir, key + ".glb"))
     tj = os.path.join(EV, key, "tris.json")
     if os.path.exists(tj):
         info = json.load(open(tj)); info["game_total_tris"] = sum(game_tris.values()); info["game_parts"] = game_tris
         json.dump(info, open(tj, "w"), indent=1)
-    print("EXPORTED", key, sum(game_tris.values()), flush=True)
+    else:
+        os.makedirs(os.path.dirname(tj), exist_ok=True)
+        v = crowd.VARIANTS.get(key, {})
+        json.dump({"key": key, "variant": v, "hero_total_tris": hero_tris, "game_total_tris": sum(game_tris.values()),
+                   "clips": anim.clips_for(key), "height_m": c.spec["height_m"]}, open(tj, "w"), indent=1, default=str)
+    print("EXPORTED", key, hero_tris, sum(game_tris.values()), flush=True)
 
 
 def build_one(key):
@@ -315,9 +338,17 @@ def build_one(key):
 
 if __name__ == "__main__":
     os.makedirs(EV, exist_ok=True)
-    if "--export-only" in sys.argv:
+    if "--export-only" in sys.argv or "--crowd" in sys.argv:
+        ports = []
         for k in KEYS:
-            export_only(k)
+            pth = os.path.join(EV, "crowd", f"_p_{k}.png") if "--crowd" in sys.argv else None
+            if pth:
+                os.makedirs(os.path.dirname(pth), exist_ok=True)
+            export_only(k, pth)
+            if pth:
+                ports.append(pth)
+        if ports:
+            montage(os.path.join(EV, "crowd", "lineup.png"), 7, ports)
         sys.exit(0)
     only_cmp = "--comparison-only" in sys.argv
     infos = [] if only_cmp else [build_one(k) for k in KEYS]

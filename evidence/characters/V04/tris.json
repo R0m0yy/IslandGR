@@ -1,0 +1,52 @@
+{
+ "key": "V04",
+ "variant": {
+  "look": "m",
+  "age": 46,
+  "skin": 0,
+  "hair": "coils",
+  "beard": "short",
+  "top": [
+   "long",
+   "#E9DFC6",
+   "v"
+  ],
+  "vest": "#7B4F86",
+  "bottom": [
+   "trousers",
+   "#3B3A3F"
+  ],
+  "feet": "boots",
+  "weight": 0.62,
+  "muscle": 0.5,
+  "role": "trader"
+ },
+ "hero_total_tris": 89668,
+ "game_total_tris": 10776,
+ "clips": [
+  "idle",
+  "walk",
+  "climb_stairs",
+  "climb_ladder",
+  "open_door",
+  "cook",
+  "eat",
+  "sit",
+  "sleep",
+  "fish",
+  "work",
+  "wave",
+  "run",
+  "give",
+  "carry",
+  "row",
+  "steer",
+  "swim",
+  "cast",
+  "haul_net",
+  "sweep",
+  "talk",
+  "play"
+ ],
+ "height_m": 1.737200861362642
+}

@@ -1,0 +1,55 @@
+{
+ "key": "V01",
+ "variant": {
+  "look": "m",
+  "age": 38,
+  "skin": 2,
+  "hair": "crop",
+  "beard": "stubble",
+  "top": [
+   "rolled",
+   "#EFEBE1",
+   "v"
+  ],
+  "bottom": [
+   "rolled",
+   "#26355A"
+  ],
+  "feet": "boots",
+  "hat": [
+   "flatcap",
+   "#55595E"
+  ],
+  "weight": 0.55,
+  "muscle": 0.7,
+  "role": "fisher"
+ },
+ "hero_total_tris": 55344,
+ "game_total_tris": 10766,
+ "clips": [
+  "idle",
+  "walk",
+  "climb_stairs",
+  "climb_ladder",
+  "open_door",
+  "cook",
+  "eat",
+  "sit",
+  "sleep",
+  "fish",
+  "work",
+  "wave",
+  "run",
+  "give",
+  "carry",
+  "row",
+  "steer",
+  "swim",
+  "cast",
+  "haul_net",
+  "sweep",
+  "talk",
+  "play"
+ ],
+ "height_m": 1.6838444119280471
+}

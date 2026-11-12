@@ -2,9 +2,13 @@ extends Node3D
 ## Presentation of the living world. Draws what the simulation says is true:
 ## every animal comes from Ecosystem state, boats ride the shared Ocean wave
 ## model, rain and sea state follow Weather. Nothing here changes the
-## simulation. Animal shapes are simple placeholders (not final art).
+## simulation. Animals are the Blender models (assets/env/animals.glb) moved by
+## animal.gdshader; primitive stand-ins are used only if that file is missing.
 
 const SWAY := preload("res://shaders/foliage_sway.gdshader")
+const ANIMAL_SHADER := preload("res://shaders/animal.gdshader")
+var _animal_meshes := {}            # species -> Mesh from assets/env/animals.glb
+var _amats := {}
 
 var village = null
 var rain: CPUParticles3D
@@ -48,6 +52,32 @@ func _mesh(parent: Node3D, mesh: Mesh, c: Color, pos := Vector3.ZERO, rot := Vec
 	mi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	if nm != "":
 		mi.name = nm
+	parent.add_child(mi)
+	return mi
+
+func _animal(parent: Node3D, sp: String, mode: int, rate: float, amp: float, body: float = 0.05, nm := "Model") -> MeshInstance3D:
+	## A modelled animal (animals.glb) animated by animal.gdshader; null if the model is missing.
+	if _animal_meshes.is_empty() and ResourceLoader.exists("res://assets/env/animals.glb"):
+		var sc: Node = load("res://assets/env/animals.glb").instantiate()
+		for mi in sc.find_children("ANIMAL_*", "MeshInstance3D", true, false):
+			_animal_meshes[String(mi.name).substr(7)] = mi.mesh
+		sc.free()
+	if not _animal_meshes.has(sp):
+		return null
+	var k := "%s_%d_%.2f_%.2f" % [sp, mode, rate, amp]
+	if not _amats.has(k):
+		var m := ShaderMaterial.new()
+		m.shader = ANIMAL_SHADER
+		m.set_shader_parameter("mode", mode)
+		m.set_shader_parameter("rate", rate)
+		m.set_shader_parameter("amp", amp)
+		m.set_shader_parameter("body", body)
+		_amats[k] = m
+	var mi := MeshInstance3D.new()
+	mi.name = nm
+	mi.mesh = _animal_meshes[sp]
+	mi.material_override = _amats[k]
+	mi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	parent.add_child(mi)
 	return mi
 
@@ -116,7 +146,9 @@ func _build_animals() -> void:
 		root.add_child(n)
 		var fishes = []
 		for i in 14:
-			var f = _mesh(n, _box(0.32 if s["sp"] != "snapper" else 0.42, 0.08, 0.1), fish_col[s["sp"]])
+			var f = _animal(n, s["sp"], 2, 2.2, 1.0, 0.0, "Fish%d" % i)
+			if f == null:
+				f = _mesh(n, _box(0.32 if s["sp"] != "snapper" else 0.42, 0.08, 0.1), fish_col[s["sp"]])
 			fishes.append(f)
 		_schools[s["id"]] = [n, fishes]
 		watchables.append(["%s school" % s["sp"], n])
@@ -124,8 +156,9 @@ func _build_animals() -> void:
 		var n = Node3D.new()
 		n.name = h["id"]
 		root.add_child(n)
-		_mesh(n, _box(1.3, 0.16, 0.18), Color(0.34, 0.38, 0.42))
-		_mesh(n, _box(0.25, 0.25, 0.04), Color(0.3, 0.33, 0.37), Vector3(-0.68, 0.05, 0))
+		if _animal(n, "barracuda", 2, 1.1, 0.5, 0.0) == null:
+			_mesh(n, _box(1.3, 0.16, 0.18), Color(0.34, 0.38, 0.42))
+			_mesh(n, _box(0.25, 0.25, 0.04), Color(0.3, 0.33, 0.37), Vector3(-0.68, 0.05, 0))
 		_hunters[h["id"]] = n
 		watchables.append(["barracuda", n])
 	var pod = Node3D.new()
@@ -136,29 +169,27 @@ func _build_animals() -> void:
 		var n = Node3D.new()
 		n.name = d["id"]
 		pod.add_child(n)
-		_mesh(n, _sphere(0.28, 2.0), Color(0.48, 0.55, 0.62), Vector3.ZERO, Vector3(0, 0, PI / 2))
-		_mesh(n, _box(0.08, 0.36, 0.22), Color(0.42, 0.48, 0.55), Vector3(0.05, 0.3, 0), Vector3(0, 0, -0.4), Vector3.ONE, "Fin")
-		_mesh(n, _box(0.12, 0.06, 0.6), Color(0.42, 0.48, 0.55), Vector3(-0.98, 0, 0))
+		if _animal(n, "dolphin", 3, 0.9, 1.0, 0.0) == null:
+			_mesh(n, _sphere(0.28, 2.0), Color(0.48, 0.55, 0.62), Vector3.ZERO, Vector3(0, 0, PI / 2))
+			_mesh(n, _box(0.08, 0.36, 0.22), Color(0.42, 0.48, 0.55), Vector3(0.05, 0.3, 0), Vector3(0, 0, -0.4), Vector3.ONE, "Fin")
+			_mesh(n, _box(0.12, 0.06, 0.6), Color(0.42, 0.48, 0.55), Vector3(-0.98, 0, 0))
 		_dolphins[d["id"]] = n
 	for t in eco.turtles:
 		var n = Node3D.new()
 		n.name = t["id"]
 		root.add_child(n)
-		_mesh(n, _sphere(0.45, 0.32), Color(0.40, 0.42, 0.24))
-		_mesh(n, _sphere(0.12), Color(0.55, 0.55, 0.38), Vector3(0.5, 0.02, 0))
-		for fx in [-0.25, 0.25]:
-			for fz in [-0.32, 0.32]:
-				_mesh(n, _box(0.22, 0.03, 0.12), Color(0.5, 0.5, 0.33), Vector3(fx, -0.05, fz), Vector3(0, 0.5 * sign(fx * fz), 0))
+		if _animal(n, "turtle", 4, 0.35, 1.0, 0.0) == null:
+			_mesh(n, _sphere(0.45, 0.32), Color(0.40, 0.42, 0.24))
+			_mesh(n, _sphere(0.12), Color(0.55, 0.55, 0.38), Vector3(0.5, 0.02, 0))
 		_turtles[t["id"]] = n
 		watchables.append(["sea turtle", n])
 	for c in eco.crabs:
 		var n = Node3D.new()
 		n.name = c["id"]
 		root.add_child(n)
-		_mesh(n, _box(0.14, 0.06, 0.11), Color(0.92, 0.82, 0.62))
-		for sx in [-1, 1]:
-			for k in 3:
-				_mesh(n, _box(0.02, 0.02, 0.09), Color(0.88, 0.78, 0.6), Vector3(-0.04 + k * 0.04, -0.02, 0.08 * sx), Vector3(0.5 * sx, 0, 0))
+		if _animal(n, "crab", 5, 2.5, 1.0, 0.0) == null:
+			_mesh(n, _box(0.14, 0.06, 0.11), Color(0.92, 0.82, 0.62))
+		n.scale = Vector3.ONE * 1.6                     # read at village scale
 		_crabs[c["id"]] = n
 	watchables.append(["ghost crabs", _crabs[eco.crabs[0]["id"]]])
 	var spec = {   # body colour, wing colour, wingspan, body length
@@ -173,6 +204,17 @@ func _build_animals() -> void:
 		var n = Node3D.new()
 		n.name = b["id"]
 		root.add_child(n)
+		var rate_b: float = {"gull": 2.6, "tern": 3.2, "pelican": 1.3, "frigatebird": 0.6, "sandpiper": 4.0}[b["kind"]]
+		var fly = _animal(n, b["kind"], 1, rate_b, 0.9 if b["kind"] != "frigatebird" else 0.25, 0.06, "Fly")
+		if fly != null:
+			var perch = _animal(n, b["kind"], 0, 0.0, 0.0, 0.06, "Perch")
+			perch.scale = Vector3(1, 1, 0.3)             # wings folded against the body
+			_birds[b["id"]] = n
+			var fish0 = _mesh(n, _box(0.16, 0.04, 0.05), Color(0.75, 0.8, 0.85), Vector3(sp[3] * 0.5, -0.05, 0), Vector3.ZERO, Vector3.ONE, "Carry")
+			fish0.visible = false
+			if b["kind"] in ["pelican", "frigatebird"] or b["id"] == "gull0":
+				watchables.append([b["kind"], n])
+			continue
 		_mesh(n, _sphere(sp[3] * 0.4, sp[3]), sp[0], Vector3.ZERO, Vector3(0, 0, PI / 2))
 		if b["kind"] == "pelican":
 			_mesh(n, _box(0.36, 0.05, 0.07), Color(0.86, 0.66, 0.32), Vector3(0.38, 0.03, 0))
@@ -261,11 +303,35 @@ func _process(dt: float) -> void:
 			var sl: Vector2 = oc.slope(bp.x, bp.z)
 			b.visual.rotation.x = clampf(sl.y * 1.6, -0.35, 0.35)
 			b.visual.rotation.z = clampf(-sl.x * 1.6, -0.35, 0.35)
+			_animate_gear(b, t)
 			var wk: CPUParticles3D = _wakes[b]
 			wk.global_position = Vector3(bp.x, _sea_y(bp) + 0.05, bp.z)
 			wk.emitting = b.boat_state in ["outbound", "inbound"]
 	_draw_animals(eco, t)
 	_fill_audio(w)
+
+func _animate_gear(b, t: float) -> void:
+	## Oars follow the rower's stroke (same phase as the clip); the propeller spins under way.
+	var under_way: bool = b.boat_state in ["outbound", "inbound"]
+	if b.gear.has("prop"):
+		if under_way:
+			b.gear["prop"].rotation.x = fmod(t * 40.0, TAU)
+		b.gear["motor"].rotation.y = 0.12 * sin(t * 0.4) if under_way else 0.0
+		return
+	var rowing: bool = under_way and b.crew != null and b.crew.animator != null and b.crew.animator.current == "row"
+	var ph: float = b.crew.animator.phase() if rowing else 0.0
+	for side in [-1, 1]:
+		var piv: Node3D = b.gear.get("oar%d" % side)
+		if piv == null:
+			continue
+		if rowing:
+			var u: float = 0.5 - 0.5 * cos(TAU * ph)        # 0 catch .. 1 finish (matches anim.py clip_row)
+			var drive: bool = ph < 0.5
+			piv.rotation.y = side * lerpf(0.55, -0.45, u)     # blades sweep aft through the water
+			piv.rotation.x = side * (0.18 if drive else -0.12)   # dipped during the drive, feathered above water on recovery
+		else:
+			piv.rotation.y = side * -1.35                  # shipped along the hull
+			piv.rotation.x = side * -0.15
 
 func _draw_animals(eco: Ecosystem, t: float) -> void:
 	for s in eco.schools:
@@ -336,8 +402,12 @@ func _draw_animals(eco: Ecosystem, t: float) -> void:
 		else:
 			flap = 1.35                                      # perched: wings folded
 			n6.rotation.z = 0.0
-		n6.get_node("WingL").rotation.x = PI / 2 - flap
-		n6.get_node("WingR").rotation.x = PI / 2 + flap
+		if n6.has_node("Fly"):
+			n6.get_node("Fly").visible = flying and b["state"] != "dive"
+			n6.get_node("Perch").visible = not flying or b["state"] == "dive"
+		else:
+			n6.get_node("WingL").rotation.x = PI / 2 - flap
+			n6.get_node("WingR").rotation.x = PI / 2 + flap
 		n6.get_node("Carry").visible = b["carry"]
 	var heap = village.ledger.qty(Economy.SCRAPS, "fish")
 	var i = 0

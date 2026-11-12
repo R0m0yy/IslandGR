@@ -21,6 +21,7 @@ var figures_visible: bool = true
 var low_quality: bool = false         # phones / browsers: fewer pixels, no shadow pass, lighter sea
 var show_heroes: bool = true          # the four hero villagers on the Harbour Stair (presentation only)
 var hero_showcase = null
+var village_life = null
 var street_lamps: Array = []
 var ledger := Ledger.new()
 var economy := Economy.new()
@@ -136,8 +137,8 @@ func _build_environment() -> void:
 			var inst: Node3D = load(path).instantiate()
 			inst.name = n
 			env.add_child(inst)
-			if n == "island":
-				# real collision geometry for the rock (ray picks, future physics)
+			if n in ["island", "structures"]:
+				# real collision geometry for the rock, stairs, piers and decks (ray picks, feet on the steps)
 				for mi in inst.find_children("*", "MeshInstance3D", true, false):
 					mi.create_trimesh_collision()
 	var sea := MeshInstance3D.new()
@@ -274,8 +275,10 @@ func _build_boats() -> void:
 		b.home_pos = Vector3(mp.x, 0, mp.z)
 		b.pos = b.home_pos
 		b.visual = visuals.get(rec["id"])
+		b.engine = rec["kind"] == "fishing_boat"
 		if b.visual:
 			b.home_yaw = b.visual.rotation.y
+			_fit_boat_gear(b)
 		var gid: String = ["FG_A", "FG_B", "FG_C"][i % 3]
 		b.ground = grounds[gid]
 		b.route = [b.home_pos] + lanes[gid]
@@ -284,6 +287,88 @@ func _build_boats() -> void:
 		boats[rec["id"]] = b
 		interactables.append(b)
 		i += 1
+
+var _swim_spots := {}
+func swim_spot(node: String) -> Vector3:
+	## A point in the water a few metres off a beach node (found once by probing the rock collision).
+	if _swim_spots.has(node):
+		return _swim_spots[node]
+	var p: Vector3 = graph.pos.get(node, Vector3.ZERO)
+	var best := p + Vector3(0, 0, 5)
+	if is_inside_tree():
+		var space := get_world_3d().direct_space_state
+		for i in 16:
+			var a := TAU * i / 16.0
+			var q := p + Vector3(cos(a), 0, sin(a)) * 5.5
+			var ray := PhysicsRayQueryParameters3D.create(q + Vector3(0, 20, 0), q + Vector3(0, -20, 0))
+			var hit := space.intersect_ray(ray)
+			if hit.is_empty() or hit["position"].y < -0.6:
+				best = q
+				break
+	_swim_spots[node] = Vector3(best.x, 0, best.z)
+	return _swim_spots[node]
+
+func _fit_boat_gear(b: Boat) -> void:
+	## Oars in rowlocks for skiffs, an outboard motor on the transom for fishing boats.
+	## Bow is +x in the boat models; the gear is animated by atmosphere.gd.
+	var aabb := AABB()
+	var first := true
+	var inv: Transform3D = b.visual.global_transform.affine_inverse()
+	for mi in b.visual.find_children("*", "MeshInstance3D", true, false):
+		var bb: AABB = (inv * mi.global_transform) * mi.get_aabb()       # in the boat's own frame
+		aabb = bb if first else aabb.merge(bb)
+		first = false
+	var L: float = maxf(aabb.size.x, 3.0)
+	var W: float = maxf(aabb.size.z, 1.0)
+	var top: float = aabb.position.y + aabb.size.y * 0.55
+	var wood := StandardMaterial3D.new(); wood.albedo_color = Color(0.55, 0.4, 0.26); wood.roughness = 0.8
+	var dark := StandardMaterial3D.new(); dark.albedo_color = Color(0.12, 0.12, 0.13); dark.roughness = 0.45; dark.metallic = 0.4
+	if not b.engine:
+		for side in [-1, 1]:
+			var piv := Node3D.new()
+			piv.name = "Oar%d" % side
+			piv.position = Vector3(aabb.get_center().x - L * 0.05, top, side * W * 0.48)
+			b.visual.add_child(piv)
+			var shaft := MeshInstance3D.new()
+			var cm := CylinderMesh.new(); cm.top_radius = 0.022; cm.bottom_radius = 0.022; cm.height = 2.3
+			shaft.mesh = cm; shaft.material_override = wood
+			shaft.rotation = Vector3(PI / 2, 0, 0)
+			shaft.position = Vector3(0, 0, side * 0.75)
+			piv.add_child(shaft)
+			var blade := MeshInstance3D.new()
+			var bx := BoxMesh.new(); bx.size = Vector3(0.16, 0.02, 0.5)
+			blade.mesh = bx; blade.material_override = wood
+			blade.position = Vector3(0, 0, side * 1.75)
+			piv.add_child(blade)
+			b.gear["oar%d" % side] = piv
+	else:
+		var motor := Node3D.new()
+		motor.name = "Outboard"
+		motor.position = Vector3(aabb.position.x - 0.05, top - 0.05, 0)
+		b.visual.add_child(motor)
+		var head := MeshInstance3D.new()
+		var hb := BoxMesh.new(); hb.size = Vector3(0.32, 0.36, 0.26)
+		head.mesh = hb; head.material_override = dark; head.position = Vector3(-0.08, 0.2, 0)
+		motor.add_child(head)
+		var leg := MeshInstance3D.new()
+		var lb := BoxMesh.new(); lb.size = Vector3(0.08, 0.7, 0.06)
+		leg.mesh = lb; leg.material_override = dark; leg.position = Vector3(-0.12, -0.3, 0)
+		motor.add_child(leg)
+		var prop := Node3D.new(); prop.position = Vector3(-0.12, -0.62, 0)
+		motor.add_child(prop)
+		for k in 3:
+			var bl := MeshInstance3D.new()
+			var pb := BoxMesh.new(); pb.size = Vector3(0.02, 0.14, 0.05)
+			bl.mesh = pb; bl.material_override = dark
+			bl.rotation = Vector3(k * TAU / 3.0, 0, 0.4)
+			prop.add_child(bl)
+		var tiller := MeshInstance3D.new()
+		var tb := CylinderMesh.new(); tb.top_radius = 0.015; tb.bottom_radius = 0.015; tb.height = 0.6
+		tiller.mesh = tb; tiller.material_override = dark
+		tiller.rotation = Vector3(0, 0, PI / 2 - 0.2); tiller.position = Vector3(0.25, 0.3, 0)
+		motor.add_child(tiller)
+		b.gear["motor"] = motor
+		b.gear["prop"] = prop
 
 func _spawn_villagers() -> void:
 	villager_root = Node3D.new()
@@ -452,6 +537,10 @@ func _build_presentation() -> void:
 	hud.village = self
 	hud.attach()
 	add_child(atmo)
+	var life = load("res://scripts/world/village_life.gd").new()
+	life.setup(self)
+	add_child(life)
+	village_life = life
 	if show_heroes:
 		var hs = load("res://scripts/world/hero_showcase.gd").new()
 		if hs.setup(self):

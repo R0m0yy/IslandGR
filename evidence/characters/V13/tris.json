@@ -1,0 +1,50 @@
+{
+ "key": "V13",
+ "variant": {
+  "look": "m",
+  "age": 9,
+  "skin": 2,
+  "hair": "coils",
+  "top": [
+   "short",
+   "#B5463C",
+   "crew",
+   "stripes"
+  ],
+  "bottom": [
+   "shorts",
+   "#3F7DC0"
+  ],
+  "feet": "bare",
+  "weight": 0.45,
+  "role": "child"
+ },
+ "hero_total_tris": 55150,
+ "game_total_tris": 14148,
+ "clips": [
+  "idle",
+  "walk",
+  "climb_stairs",
+  "climb_ladder",
+  "open_door",
+  "cook",
+  "eat",
+  "sit",
+  "sleep",
+  "fish",
+  "work",
+  "wave",
+  "run",
+  "give",
+  "carry",
+  "row",
+  "steer",
+  "swim",
+  "cast",
+  "haul_net",
+  "sweep",
+  "talk",
+  "play"
+ ],
+ "height_m": 1.3
+}

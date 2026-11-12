@@ -97,10 +97,10 @@ def fabric(base, var=0.07, scale=0.09, seed=0, fade=0.0, shade=0.0):
 
 
 class Char:
-    def __init__(self, key):
+    def __init__(self, key, spec=None):
         self.key = key
-        self.spec = SPECS[key]
-        self.rng = np.random.default_rng({"A": 11, "B": 22, "C": 33, "D": 44}[key])
+        self.spec = spec or SPECS[key]
+        self.rng = np.random.default_rng({"A": 11, "B": 22, "C": 33, "D": 44}.get(key, abs(hash(key)) % 10000))
         self.coll = bpy.data.collections.new(self.spec["name"])
         bpy.context.scene.collection.children.link(self.coll)
         self.parts = {}            # name -> (object, category)

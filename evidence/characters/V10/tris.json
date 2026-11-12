@@ -1,0 +1,55 @@
+{
+ "key": "V10",
+ "variant": {
+  "look": "m",
+  "age": 72,
+  "skin": 1,
+  "hair": "side_white",
+  "beard": "stubble_white",
+  "top": [
+   "short",
+   "#3F7DC0",
+   "crew"
+  ],
+  "bottom": [
+   "rolled",
+   "#B59E73"
+  ],
+  "feet": "bare",
+  "hat": [
+   "straw",
+   "#C9A86A"
+  ],
+  "weight": 0.42,
+  "muscle": 0.3,
+  "role": "elder"
+ },
+ "hero_total_tris": 47570,
+ "game_total_tris": 10727,
+ "clips": [
+  "idle",
+  "walk",
+  "climb_stairs",
+  "climb_ladder",
+  "open_door",
+  "cook",
+  "eat",
+  "sit",
+  "sleep",
+  "fish",
+  "work",
+  "wave",
+  "run",
+  "give",
+  "carry",
+  "row",
+  "steer",
+  "swim",
+  "cast",
+  "haul_net",
+  "sweep",
+  "talk",
+  "play"
+ ],
+ "height_m": 1.7462071749723502
+}

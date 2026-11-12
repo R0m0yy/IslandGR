@@ -102,6 +102,8 @@ class FishTripState extends UseObjectState:
 			return
 		v.world.ledger.consume(v.hh, "bait", 1, "used_at_sea")       # gear and bait go aboard
 		v.at_sea = true
+		boat.crew = v
+		v.play("steer" if boat.engine else "row")
 		boat.start_trip()
 		v.stats["boat_trips"] += 1
 	func tick(dt: float, minutes: float) -> void:
@@ -125,10 +127,11 @@ class FishTripState extends UseObjectState:
 					boat.turn_back()
 				elif boat.sail(dt, w.boat_speed_factor()):
 					boat.boat_state = "fishing"
-					v.play("fish")
+					v.play("cast")
 			"fishing":
 				_fishing += minutes
 				_roll += minutes
+				v.play("cast" if int(_fishing / 25.0) % 2 == 0 else "haul_net")      # line, then the net, in turns
 				var l: Ledger = v.world.ledger
 				var bio: float = eco.biomass_near(gpos)
 				while _roll >= 10.0:
@@ -156,11 +159,13 @@ class FishTripState extends UseObjectState:
 						v.note("storm: heading home with %d fish" % l.qty(boat.object_id, "fish"))
 						v.remember("storm", "ran for harbour ahead of a storm", -3.0)
 					boat.turn_back()
-					v.play("sit")
+					v.play("steer" if boat.engine else "row")
 			"inbound":
 				if boat.sail(dt, w.boat_speed_factor()):
 					boat.boat_state = "unloading"
-					v.play("work")
+					v.play("carry")
+					if v.animator:
+						v.animator.show_prop("crate", true, 12.0)
 			"unloading":
 				_unload += minutes
 				if _unload >= 15.0:
@@ -182,10 +187,22 @@ class FishTripState extends UseObjectState:
 					return
 		if boat.boat_state in ["outbound", "inbound", "fishing"] and v.world.ocean.roughness() > 0.6:
 			boat.wear_extra += 0.0004 * minutes                     # heavy seas strain the hull
-		v.global_position = boat.pos + Vector3(0, 0.45 + v.world.ocean.height(boat.pos.x, boat.pos.z), 0)
+		# aboard: rowers sit amidships facing the stern, the motor man sits by the outboard facing the bow
+		var hd: float = boat.visual.rotation.y if boat.visual else 0.0
+		var bow := Vector3(cos(hd), 0, -sin(hd))
+		var seat := -0.15 if not boat.engine else -1.2
+		if boat.boat_state == "fishing":
+			seat = 0.4
+		v.global_position = boat.pos + bow * seat + Vector3(0, 0.45 + v.world.ocean.height(boat.pos.x, boat.pos.z), 0)
+		var face := -bow if (not boat.engine and boat.boat_state in ["outbound", "inbound"]) else bow
+		if boat.boat_state == "fishing":
+			face = bow.cross(Vector3.UP)            # over the side
+		v.rotation.y = atan2(-face.x, -face.z)
 	func exit() -> void:
 		if boat and boat.boat_state != "moored" and not _stood_down:
 			boat.moor()                      # interrupted: the boat is brought home, cargo stays aboard
+		if boat and boat.crew == v:
+			boat.crew = null
 		v.at_sea = false
 		super.exit()
 
@@ -223,14 +240,35 @@ class ShopState extends UseObjectState:
 	func enter(args: Dictionary) -> void:
 		what = args.get("what", "fish")
 		super.enter(args)
+	func begin() -> void:
+		# the buyer reaches across the counter; whoever is serving takes a fish from the
+		# ice box and hands it over (seen, not teleported)
+		v.play("give")
+		var seller = _seller()
+		if seller and seller.animator:
+			seller.react("give", 2.6)
+			seller.animator.show_prop("fish" if what == "fish" else "bread", true, 1.5)
+	func _seller():
+		if obj == null:
+			return null
+		for o in v.world.villagers:
+			if o != v and o.fsm.current is WorkState and o.fsm.current.obj != null and o.global_position.distance_to(v.global_position) < 6.0:
+				return o
+		return null
 	func act(_minutes: float) -> bool:
 		return elapsed >= 6.0
 	func finish() -> void:
+		var got := 0
 		if what == "bait":
-			if v.world.economy.buy_bait(v) == 0:
+			got = v.world.economy.buy_bait(v)
+			if got == 0:
 				v.brain.cooldown["buy_bait"] = GameClock.total_minutes + 90.0
-		elif v.world.economy.buy_fish(v) == 0:
-			v.brain.cooldown["buy_food"] = GameClock.total_minutes + 60.0
+		else:
+			got = v.world.economy.buy_fish(v)
+			if got == 0:
+				v.brain.cooldown["buy_food"] = GameClock.total_minutes + 60.0
+		if got > 0 and v.animator:
+			v.animator.show_prop("fish", true, 45.0)     # carried home in the hand
 
 class DrinkState extends UseObjectState:
 	func _init(villager = null) -> void:
@@ -269,3 +307,36 @@ class MendNetsState extends UseObjectState:
 			b.condition = minf(1.0, b.condition + 0.08)
 		v.stats["nets_mended"] += 1
 		v.skills["fishing"] = minf(1.0, v.skills["fishing"] + 0.002)
+
+
+class SwimState extends VillagerState:
+	## A swim off the beach on a fine day: wade out, swim slow loops in the shallows
+	## (front crawl at the waterline), come back. Washes, and lifts the mood.
+	var minutes_left: float = 30.0
+	var spot: Vector3
+	var _a: float = 0.0
+	var _r: float = 2.5
+	var _dir: float = 1.0
+	func _init(villager = null) -> void:
+		super._init(villager)
+		anim = "swim"
+	func enter(args: Dictionary) -> void:
+		minutes_left = args.get("minutes", 30.0)
+		spot = v.world.swim_spot(v.at_node)
+		_a = v.rng.randf() * TAU
+		_r = v.rng.randf_range(1.6, 3.4)
+		_dir = 1.0 if v.rng.randf() < 0.5 else -1.0
+		v.play("swim")
+	func tick(dt: float, minutes: float) -> void:
+		minutes_left -= minutes
+		_a += _dir * dt * 0.35 / maxf(_r, 0.5)          # ~0.35 m/s
+		var p := spot + Vector3(cos(_a), 0, sin(_a)) * _r
+		p.y = v.world.ocean.height(p.x, p.z)
+		v.global_position = p
+		v.face(Vector3(-sin(_a), 0, cos(_a)) * _dir)
+		if minutes_left <= 0.0:
+			v.needs["hygiene"] = 100.0
+			v.needs["social"] = minf(100.0, v.needs["social"] + 15.0)
+			v.stats["swims"] = int(v.stats.get("swims", 0)) + 1
+			v.unsnap()
+			v.step_done()

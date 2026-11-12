@@ -1,0 +1,50 @@
+{
+ "key": "V05",
+ "variant": {
+  "look": "f",
+  "age": 34,
+  "skin": 2,
+  "hair": "bun",
+  "top": [
+   "blouse",
+   "#D8725F",
+   "scoop"
+  ],
+  "bottom": [
+   "skirt_long",
+   "#3FA79E"
+  ],
+  "apron": "#EBDCB4",
+  "feet": "sandals",
+  "weight": 0.55,
+  "role": "trader"
+ },
+ "hero_total_tris": 49048,
+ "game_total_tris": 11435,
+ "clips": [
+  "idle",
+  "walk",
+  "climb_stairs",
+  "climb_ladder",
+  "open_door",
+  "cook",
+  "eat",
+  "sit",
+  "sleep",
+  "fish",
+  "work",
+  "wave",
+  "run",
+  "give",
+  "carry",
+  "row",
+  "steer",
+  "swim",
+  "cast",
+  "haul_net",
+  "sweep",
+  "talk",
+  "play"
+ ],
+ "height_m": 1.6385010231719759
+}
