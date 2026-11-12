@@ -718,7 +718,7 @@ def paint_vertices(ob, fn, smooth=True, sharp_angle=0.9):
     cols = np.ones((len(me.loops), 4)); cols[:, :3] = C[vi]
     if "Col" in me.color_attributes:
         me.color_attributes.remove(me.color_attributes["Col"])
-    ca = me.color_attributes.new("Col", "BYTE_COLOR", "CORNER")
+    ca = me.color_attributes.new("Col", "FLOAT_COLOR", "CORNER")   # linear float, like the village assets (glTF COLOR_0 is linear)
     ca.data.foreach_set("color_srgb", cols.ravel())
     me.color_attributes.active_color = ca
     shade(ob, smooth, sharp_angle)
@@ -737,7 +737,7 @@ def paint_faces_v2(ob, fn, smooth=True, sharp_angle=0.9):
         cols[p.loop_start:p.loop_start + p.loop_total, :3] = FC[p.index]
     if "Col" in me.color_attributes:
         me.color_attributes.remove(me.color_attributes["Col"])
-    ca = me.color_attributes.new("Col", "BYTE_COLOR", "CORNER")
+    ca = me.color_attributes.new("Col", "FLOAT_COLOR", "CORNER")   # linear float, like the village assets (glTF COLOR_0 is linear)
     ca.data.foreach_set("color_srgb", cols.ravel())
     me.color_attributes.active_color = ca
     shade(ob, smooth, sharp_angle)

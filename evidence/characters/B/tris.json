@@ -2,37 +2,69 @@
  "key": "B",
  "title": "Market vendor",
  "height_m": 1.66,
- "total_tris": 11231,
- "parts": {
-  "body": 4620,
-  "eye_l": 196,
-  "eye_r": 196,
-  "eyebrows": 192,
-  "top": 877,
-  "sleeve_hem_l": 112,
-  "sleeve_hem_r": 112,
-  "skirt": 1152,
-  "skirt_hem": 256,
-  "waistband": 112,
-  "apron": 284,
-  "apron_ties": 112,
-  "apron_bow": 192,
-  "headwrap": 560,
-  "wrap_turn_0": 112,
-  "wrap_turn_1": 112,
-  "wrap_turn_2": 112,
-  "headwrap_knot": 120,
-  "earrings": 224,
-  "sandal_soles": 24,
-  "sandal_strap_toe_l": 112,
-  "sandal_strap_ankle_l": 112,
-  "sandal_strap_toe_r": 112,
-  "sandal_strap_ankle_r": 112,
-  "basket": 620,
-  "fruit": 486
+ "hero_total_tris": 90282,
+ "hero_parts": {
+  "body": 23520,
+  "eye_l": 624,
+  "eye_r": 624,
+  "brows": 976,
+  "top_hem0": 2990,
+  "top": 6068,
+  "skirt": 4896,
+  "skirt_hem": 1584,
+  "waistband": 1008,
+  "apron_hem": 2100,
+  "apron": 880,
+  "apron_pocket_edge0": 420,
+  "apron_pocket": 120,
+  "apron_bow": 836,
+  "headwrap_rim": 3052,
+  "headwrap": 30632,
+  "headwrap_knot": 804,
+  "earrings": 896,
+  "sandal_soles": 536,
+  "sandal_instep_l": 588,
+  "sandal_ankle_l": 436,
+  "sandal_instep_r": 580,
+  "sandal_ankle_r": 360,
+  "basket": 3192,
+  "mangoes": 1120,
+  "bananas": 544,
+  "limes": 672,
+  "mango_in_hand": 224
  },
- "crowd_lod_tris_estimate": 3964,
- "body_faces_removed_under_clothing": 342,
+ "game_total_tris": 14747,
+ "game_parts": {
+  "body": 4233,
+  "eye_l": 250,
+  "eye_r": 250,
+  "brows": 250,
+  "top_hem0": 430,
+  "top": 872,
+  "skirt": 704,
+  "skirt_hem": 250,
+  "waistband": 250,
+  "apron_hem": 302,
+  "apron": 250,
+  "apron_pocket_edge0": 250,
+  "apron_pocket": 120,
+  "apron_bow": 250,
+  "headwrap_rim": 262,
+  "headwrap": 2646,
+  "headwrap_knot": 250,
+  "earrings": 250,
+  "sandal_soles": 250,
+  "sandal_instep_l": 250,
+  "sandal_ankle_l": 248,
+  "sandal_instep_r": 250,
+  "sandal_ankle_r": 248,
+  "basket": 458,
+  "mangoes": 250,
+  "bananas": 250,
+  "limes": 250,
+  "mango_in_hand": 224
+ },
+ "body_faces_removed_under_clothing": 2034,
  "shape_keys": [
   "blink",
   "blink_L",
@@ -48,5 +80,78 @@
   "mouth_fv"
  ],
  "bones": 53,
- "missing_targets": []
+ "clips": {
+  "idle": {
+   "frames": 73,
+   "seconds": 3.0,
+   "loop": true
+  },
+  "walk": {
+   "frames": 25,
+   "seconds": 1.0,
+   "loop": true
+  },
+  "climb_stairs": {
+   "frames": 27,
+   "seconds": 1.1,
+   "loop": true
+  },
+  "climb_ladder": {
+   "frames": 30,
+   "seconds": 1.2,
+   "loop": true
+  },
+  "open_door": {
+   "frames": 30,
+   "seconds": 1.2,
+   "loop": false
+  },
+  "cook": {
+   "frames": 35,
+   "seconds": 1.4,
+   "loop": true
+  },
+  "eat": {
+   "frames": 44,
+   "seconds": 1.8,
+   "loop": true
+  },
+  "sit": {
+   "frames": 97,
+   "seconds": 4.0,
+   "loop": true
+  },
+  "sleep": {
+   "frames": 97,
+   "seconds": 4.0,
+   "loop": true
+  },
+  "fish": {
+   "frames": 73,
+   "seconds": 3.0,
+   "loop": true
+  },
+  "work": {
+   "frames": 23,
+   "seconds": 0.9,
+   "loop": true
+  },
+  "wave": {
+   "frames": 20,
+   "seconds": 0.8,
+   "loop": true
+  },
+  "run": {
+   "frames": 17,
+   "seconds": 0.66,
+   "loop": true
+  },
+  "hand_fruit": {
+   "frames": 63,
+   "seconds": 2.6,
+   "loop": true
+  }
+ },
+ "missing_targets": [],
+ "seconds": 576.4
 }

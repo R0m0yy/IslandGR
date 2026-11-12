@@ -130,7 +130,7 @@ def make_game_lod(c, target):
         t = tr[n]
         if t < 200:
             continue
-        r = ratio * (1.25 if n == "body" else 1.0)
+        r = ratio * (1.25 if n == "body" else (0.6 if n in c.patterns else 1.0))
         r = min(1.0, max(r, 250 / t))
         if r >= 0.98:
             continue
@@ -140,6 +140,11 @@ def make_game_lod(c, target):
         hero.decimate(ob, r, sym=False)
         if had:
             hero.add_shape_keys(ob)
+        if n in c.patterns:            # stripes / checks: re-slice and repaint crisp per-face colour after decimation
+            cuts = c.pattern_cuts.get(n, [])
+            if len(cuts) == 1:         # stripes: cheap to re-slice; two-way checks would double the triangles
+                G.plane_cuts(ob, *cuts[0])
+            G.paint_faces_v2(ob, c.patterns[n], smooth=True, sharp_angle=1.0)
         G.shade(ob, True, 1.0)
     for n, (ob, cat) in c.parts.items():
         for m in ob.modifiers:
@@ -162,6 +167,22 @@ def export_glb(c, path):
                               export_skins=True, export_morph=True, export_morph_normal=False,
                               export_animations=True, export_animation_mode="NLA_TRACKS",
                               export_vertex_color="MATERIAL", export_apply=False)
+
+
+def export_only(key):
+    """Rebuild, bake and export the game GLB without renders (fast path)."""
+    bl_io.reset_scene()
+    c = cast.build(key)
+    anim.bake(c)
+    anim.show(c, "idle", 0.0)
+    game_tris = make_game_lod(c, GAME_TRIS)
+    gdir = os.path.join(ROOT, "godot", "assets", "characters"); os.makedirs(gdir, exist_ok=True)
+    export_glb(c, os.path.join(gdir, key + ".glb"))
+    tj = os.path.join(EV, key, "tris.json")
+    if os.path.exists(tj):
+        info = json.load(open(tj)); info["game_total_tris"] = sum(game_tris.values()); info["game_parts"] = game_tris
+        json.dump(info, open(tj, "w"), indent=1)
+    print("EXPORTED", key, sum(game_tris.values()), flush=True)
 
 
 def build_one(key):
@@ -294,6 +315,10 @@ def build_one(key):
 
 if __name__ == "__main__":
     os.makedirs(EV, exist_ok=True)
+    if "--export-only" in sys.argv:
+        for k in KEYS:
+            export_only(k)
+        sys.exit(0)
     only_cmp = "--comparison-only" in sys.argv
     infos = [] if only_cmp else [build_one(k) for k in KEYS]
     if only_cmp:

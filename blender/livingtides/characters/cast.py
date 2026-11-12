@@ -107,6 +107,8 @@ class Char:
         self.rig = None
         self.fields = {}           # garment name -> field (for clipping checks)
         self.pre = {}              # garment name -> un-thickened copy (edges for collars / cuffs, surface for patches)
+        self.patterns = {}         # part name -> face colour fn, re-applied after the game LOD decimation
+        self.pattern_cuts = {}     # part name -> [(axis, spacing)], re-sliced after decimation so stripes stay crisp
 
     # ------------------------------------------------------------ setup
     @property
@@ -286,7 +288,8 @@ class Char:
         return ob
 
     def garment(self, name, faces, field, offset, thick, colour, extra=None, subdiv=0, pattern=None, face_colour=None,
-                hems=None, hide=True, hide_margin=0.012, rim_only=False, cat="clothing", sharp=0.85, mat=None, relax=0):
+                hems=None, hide=True, hide_margin=0.012, rim_only=False, cat="clothing", sharp=0.85, mat=None, relax=0,
+                pattern_cuts=None):
         """Cut a garment from the body, inflate it, thicken it, roll its hems.
         `relax` smooths the cloth surface so it drapes over anatomy instead of
         shrink-wrapping it."""
@@ -321,6 +324,9 @@ class Char:
             G.thicken(ob, thick, rim_only=rim_only)
         if face_colour is not None:
             G.paint_faces_v2(ob, face_colour, smooth=True, sharp_angle=sharp)
+            self.patterns[name] = face_colour
+            if pattern_cuts:
+                self.pattern_cuts[name] = pattern_cuts
         else:
             G.paint_vertices(ob, colour, smooth=True, sharp_angle=sharp)
         hero.assign(ob, mat)
@@ -415,7 +421,13 @@ class Char:
             rb = G.piping(ob, r, step=0.006, sides=7)
             ro = G.bm_to_object(rb, name + "_rim", self.coll)
             G.copy_weights_from(ro, Pg, Wg)
-            G.paint_faces_v2(ro, rc, smooth=True, sharp_angle=1.0) if face_colour else G.paint_vertices(ro, rc, smooth=True)
+            if face_colour:
+                G.paint_faces_v2(ro, rc, smooth=True, sharp_angle=1.0)
+                self.patterns[name + "_rim"] = rc
+                if cuts:
+                    self.pattern_cuts[name + "_rim"] = cuts
+            else:
+                G.paint_vertices(ro, rc, smooth=True)
             hero.assign(ro)
             self.add(name + "_rim", ro, cat)
         if cuts:
@@ -430,6 +442,9 @@ class Char:
         gg = np.concatenate([g, g])[:nn] if nn >= n0 else g[:nn]
         if face_colour:
             G.paint_faces_v2(ob, face_colour, smooth=True, sharp_angle=sharp)
+            self.patterns[name] = face_colour
+            if cuts:
+                self.pattern_cuts[name] = cuts
         else:
             G.paint_vertices(ob, lambda P, N, W: colour(P, N, bb, gg), smooth=True, sharp_angle=sharp)
         hero.assign(ob)
@@ -1286,7 +1301,7 @@ def build_D():
     def stripes(ob):
         G.plane_cuts(ob, (0, 0, 1), stripe_w)
     stripe_col = lambda C, N, I: np.where((np.floor(C[:, 2] / stripe_w) % 2 == 0)[:, None], blue, white) * (1 + 0.03 * G.vnoise(C, 0.05, 1))[:, None]
-    shirt, _ = c.garment("shirt", shirt_faces, shirt_f, 0.007, 0.003, None, pattern=stripes, relax=3, face_colour=stripe_col,
+    shirt, _ = c.garment("shirt", shirt_faces, shirt_f, 0.007, 0.003, None, pattern=stripes, relax=3, pattern_cuts=[((0, 0, 1), stripe_w)], face_colour=stripe_col,
                          extra=lambda P, N, W: 0.004 * G.vnoise(P, 0.04, 2) + 0.016 * smoothstep(wz + 0.03, wz - 0.02, P[:, 2]),
                          hems=[(0.004, "#F3EFE4", lambda L: L[:, 2].mean() < neck - 0.03)])
     # ribbed crew collar band

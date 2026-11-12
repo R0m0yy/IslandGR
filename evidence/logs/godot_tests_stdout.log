@@ -21,7 +21,7 @@ PASS  placeholder rig exposes all 12 animation clips  ["idle", "walk", "climb_st
 PASS  animation state machine travels idle -> walk  walk
 SIM totals over 7.0 days, 42 villagers: { "sleeps": 463, "meals_cooked": 801, "meals_eaten": 821, "fish_caught": 400, "work_blocks": 508, "doors_opened": 2155, "stairs_climbed": 3085, "ladders_climbed": 255, "bridges_crossed": 111, "failed_paths": 0, "failed_uses": 0, "boat_trips": 39, "thefts_suffered": 27, "nets_mended": 19, "gifts_given": 3, "gifts_received": 6, "sheltered": 35, "stayed_ashore": 10, "empty_trips": 6, "repairs_done": 13, "wages": 1172, "income": 463, "drinks": 445, "washes": 154, "plans": 4904, "fish_bought": 0, "fish_sold": 0, "metres": 135793, "starve_minutes": 0 }
 SIM state samples: { "open_door": 69, "walk": 1163, "idle": 334, "climb_stairs": 443, "work": 764, "fish_trip": 112, "eat": 260, "climb_ladder": 44, "cook": 132, "sleep": 3088, "sit": 491, "mend_nets": 27, "fish": 48, "shop": 7, "cross_bridge": 37, "drink": 21, "wash": 16 }
-PASS  simulation ran 7 game days  { "clock": "Day 8  06:00", "steps": 100800, "wall_ms": 43092 }
+PASS  simulation ran 7 game days  { "clock": "Day 8  06:00", "steps": 100800, "wall_ms": 36400 }
 PASS  villagers sleep (everyone at least once)  { "sleeps": 463, "never_slept": 0 }
 PASS  villagers cook  801
 PASS  villagers eat (everyone at least once)  { "meals_eaten": 821, "never_ate": 0 }
@@ -1819,7 +1819,7 @@ ERROR: Parameter "m" is null.
    at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
 ERROR: Parameter "m" is null.
    at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
-GEN 45 days: { "births": 36, "deaths": 36, "partnerships": 17, "came_of_age": 26, "retired": 30, "moves": 18, "estates": 7, "illnesses": 19, "newcomers": 0, "greetings": 2449 } population 42 -> 42 events 235 wall_ms 312833
+GEN 45 days: { "births": 36, "deaths": 36, "partnerships": 17, "came_of_age": 26, "retired": 30, "moves": 18, "estates": 7, "illnesses": 19, "newcomers": 0, "greetings": 2449 } population 42 -> 42 events 235 wall_ms 295684
 PASS  generations: births happen  { "births": 36, "deaths": 36, "partnerships": 17, "came_of_age": 26, "retired": 30, "moves": 18, "estates": 7, "illnesses": 19, "newcomers": 0, "greetings": 2449 }
 PASS  generations: residents age, retire and die  { "deaths": 36, "retired": 30 }
 PASS  generations: children come of age  26

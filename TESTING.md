@@ -31,13 +31,12 @@ uv venv -p python3.11 .venv && uv pip install -p .venv/bin/python "bpy>=4.2,<5" 
 python3 tools/sync_godot_data.py && python3 tools/test_pipeline.py
 ```
 
-## 5. Hero villagers (session 6) - FIRST PASS, AWAITING APPROVAL
-Four characters built: A fisher captain, B market vendor, C elder net-mender, D harbour child.
-Rebuild everything (renders, GLBs, .blend):
+## 5. Hero villagers (session 7) - SECOND PASS, AWAITING APPROVAL
+In the game: the four villagers are on the Harbour Stair (the stone stair up from the harbour quay). The captain walks up and down it.
+Rebuild (Blender, ~10 min per villager with renders):
 ```
-/opt/lt/bl/bin/python blender/build_characters.py          # all four, ~10 min on 2 CPUs
-/opt/lt/bl/bin/python blender/build_characters.py A --quick # one character, low samples
-/opt/lt/bl/bin/python blender/build_animals.py               # wildlife sheet + animals.glb
+/opt/lt/bl/bin/python blender/build_characters.py              # all four + comparison
+/opt/lt/bl/bin/python blender/build_characters.py A --quick    # one villager, low samples
+/opt/lt/bl/bin/python blender/build_characters.py B D --export-only   # just the game GLBs
 ```
-Look at `evidence/characters/comparison.png`, then each `evidence/characters/<A-D>/` (hero, turntable, faces, wireframe, tris.json) and `evidence/animals/reference_sheet.png`.
-Not yet done: animations, Godot placement, per-garment close-ups, the crowd LOD export. The game still shows the grey placeholder residents.
+Godot checks: `godot --headless res://tests/hero_test.tscn` (add xvfb + `-- --out=/abs/dir` for screenshots).

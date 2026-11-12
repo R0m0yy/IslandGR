@@ -10,6 +10,7 @@ extends Node3D
 const LOOPING := ["idle", "walk", "climb_stairs", "climb_ladder", "cook", "eat", "sit", "sleep", "fish", "work", "wave", "run",
 	"haul_rope", "hand_fruit", "mend_net", "run_play"]
 const JOB := {"A": "haul_rope", "B": "hand_fruit", "C": "mend_net", "D": "run_play"}
+const HERO_SHADER := preload("res://shaders/hero_character.gdshader")
 const TITLES := {"A": "Fisher captain", "B": "Market vendor", "C": "Elder net-mender", "D": "Harbour child"}
 
 var key: String = ""
@@ -42,10 +43,35 @@ func setup(k: String) -> bool:
 		for n in player.get_animation_list():
 			var a: Animation = player.get_animation(n)
 			a.loop_mode = Animation.LOOP_LINEAR if LOOPING.has(String(n)) else Animation.LOOP_NONE
+	var lifted := {}
 	for mi in model.find_children("*", "MeshInstance3D", true, false):
 		var m: MeshInstance3D = mi
 		if m.mesh and m.find_blend_shape_by_name("blink") >= 0:
 			face_meshes.append(m)
+		# hero_character.gdshader: vertex colour with a tone lift + soft rim, so faces and
+		# clothes read as in the approved Blender renders (the village itself is unchanged)
+		if m.mesh:
+			for si in m.mesh.get_surface_count():
+				var mat = m.mesh.surface_get_material(si)
+				if mat is StandardMaterial3D:
+					if not lifted.has(mat):
+						var d := ShaderMaterial.new()
+						d.shader = HERO_SHADER
+						d.set_shader_parameter("roughness_v", mat.roughness)
+						d.set_shader_parameter("metallic_v", mat.metallic)
+						lifted[mat] = d
+					m.set_surface_override_material(si, lifted[mat])
+	# a soft personal fill light in front of the face (no shadows, short range), so
+	# faces read in the shade of the cliffs; it travels with the villager
+	var fill := OmniLight3D.new()
+	fill.name = "FaceFill"
+	fill.position = Vector3(0.0, 1.55 if k != "D" else 1.15, -1.1)
+	fill.omni_range = 2.6
+	fill.light_energy = 0.6
+	fill.light_specular = 0.05
+	fill.light_color = Color(1.0, 0.95, 0.88)
+	fill.shadow_enabled = false
+	add_child(fill)
 	play("idle")
 	return true
 

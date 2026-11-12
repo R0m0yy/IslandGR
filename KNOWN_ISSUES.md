@@ -87,3 +87,12 @@
 | 60 | Tests | Scenario B and the capture's gift scene bend the world on purpose (food spoiled, savings lost); every such step is labelled `scenario_setup_*` in the ledger | — |
 | 61 | Tests | The capture's neighbour-help shot timed out (no gift happened in the 10-hour window on that build) | Low |
 | 62 | Wildlife | Gull thefts first cascaded (15 in a morning); a stall-vigilance rule now limits them to about 5 a day across the market and boats. The longer suites predate this rule | Low |
+
+
+## Session 7 — hero villagers v2
+- Godot shows dark skin and navy / deep cloth darker and more saturated than the Blender (AgX) renders. Mitigated with `hero_character.gdshader` (albedo power curve 0.66, slight desaturation, rim) and a per-hero fill light; in deep cliff shade faces are still darker than in the renders.
+- The game versions are decimated (14.7k–19.3k tris); stripes are re-sliced after decimation, the madras checks are only repainted, so their edges step.
+- C's beard hides most of the mouth; B's fitted top shows some body shape; A's boot toes faintly visible; the fish prop is plain.
+- Feet follow the clip, not the stair step heights (no foot IK). No root motion: the showcase script moves the captain along the stair.
+- glTF import adds the held props as extra skeleton nodes named `<key>_<prop>`; tests exclude them from the 53-bone rig count.
+- The four heroes are presentation only; the 42 simulated residents still use the grey placeholder.

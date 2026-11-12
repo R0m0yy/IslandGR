@@ -1,7 +1,23 @@
 # PROOF OF WORK — live scorecard
 
 Statuses: **PASSED** (executed, evidence on disk) · **FAILED** (tested, defect found) · **UNVERIFIED** · **NOT IMPLEMENTED**.
-Last update: 2026-11-12, session 6. Earlier session records are preserved unchanged below.
+Last update: 2026-11-12, session 7. Earlier session records are preserved unchanged below.
+
+## Session 7 — hero villagers v2 (faces, hair, clothes, movement)
+
+| Item | Status | Evidence |
+|---|---|---|
+| Full-resolution faces, 12 facial shape keys | PASSED | evidence/characters/<A-D>/faces.png, wireframe_face.png |
+| Hair / beard / brows as volumes with clean hairlines | PASSED | hero.png, turntable.png, parts.png |
+| Clothing: separate thick pieces, hems, collars, pockets, buttons, buckle, soles | PASSED | parts.png, hands.png, feet.png |
+| 14 animations each (12 contract + run + job) | PASSED | anim_<clip>.png (4 phases each), tris.json "clips" |
+| Clothing in extreme poses | PASSED (visual) | anim_extreme.png |
+| Godot: loads, all clips, blend shapes, 53-bone rig, clip switching, captain walks the stair | PASSED 22/22 headless, 26/26 xvfb | evidence/logs/hero_test_headless.log, hero_test_xvfb.log |
+| Godot screenshots (game camera + close-ups) | PASSED | evidence/characters/godot/ |
+| Game-version triangles | PASSED (14.7k–19.3k) | tris.json game_total_tris |
+| 8–10k triangle target (original brief) | FAILED (dropped for detail) | close-up versions 54k–100k |
+| Motion read by a person | UNVERIFIED | |
+| Foot IK on stairs, lip-sync, hero models on all residents | NOT IMPLEMENTED | |
 
 ## Session 6 — hero villagers, wildlife, phone and sea
 

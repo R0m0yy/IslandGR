@@ -418,7 +418,7 @@ def paint(ob, face_colours):
         return ob
     if "Col" in me.color_attributes:
         me.color_attributes.remove(me.color_attributes["Col"])
-    ca = me.color_attributes.new("Col", "BYTE_COLOR", "CORNER")
+    ca = me.color_attributes.new("Col", "FLOAT_COLOR", "CORNER")
     cols = np.zeros((len(me.loops), 4))
     for p in me.polygons:
         c = face_colours[p.index]

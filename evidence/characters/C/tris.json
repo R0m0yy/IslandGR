@@ -2,37 +2,71 @@
  "key": "C",
  "title": "Elder net-mender",
  "height_m": 1.66,
- "total_tris": 14578,
- "parts": {
-  "body": 3639,
-  "eye_l": 196,
-  "eye_r": 196,
-  "eyebrows": 224,
-  "beard": 2976,
-  "moustache": 352,
-  "hair": 1488,
-  "shirt": 770,
-  "shirt_collar": 112,
-  "collar_points": 16,
-  "cardigan": 1576,
-  "cardigan_cuff_l": 112,
-  "cardigan_cuff_r": 112,
-  "cardigan_buttons": 120,
-  "cardigan_pockets": 24,
-  "trousers": 713,
-  "sandal_soles": 24,
-  "sandal_strap_toe_l": 112,
-  "sandal_strap_ankle_l": 112,
-  "sandal_strap_toe_r": 112,
-  "sandal_strap_ankle_r": 112,
-  "flatcap": 400,
-  "cane": 100,
-  "net": 660,
-  "net_knots": 256,
-  "net_float": 64
+ "hero_total_tris": 99644,
+ "hero_parts": {
+  "body": 20632,
+  "eye_l": 624,
+  "eye_r": 624,
+  "beard": 26248,
+  "moustache": 6104,
+  "hair": 4008,
+  "brows": 1048,
+  "shirt": 5174,
+  "collar": 960,
+  "cardigan_hem0": 3270,
+  "cardigan": 9412,
+  "cardigan_buttons": 220,
+  "pocket_l_edge0": 340,
+  "pocket_l": 96,
+  "pocket_r_edge0": 350,
+  "pocket_r": 96,
+  "trousers_hem0": 730,
+  "trousers": 6452,
+  "sandal_soles": 616,
+  "sandal_instep_l": 580,
+  "sandal_ankle_l": 304,
+  "sandal_instep_r": 572,
+  "sandal_ankle_r": 296,
+  "flatcap": 1760,
+  "cap_band": 560,
+  "cane": 508,
+  "net": 3416,
+  "net_knots": 4420,
+  "net_float": 224
  },
- "crowd_lod_tris_estimate": 4065,
- "body_faces_removed_under_clothing": 1023,
+ "game_total_tris": 16821,
+ "game_parts": {
+  "body": 3364,
+  "eye_l": 250,
+  "eye_r": 250,
+  "beard": 3424,
+  "moustache": 796,
+  "hair": 522,
+  "brows": 250,
+  "shirt": 675,
+  "collar": 248,
+  "cardigan_hem0": 426,
+  "cardigan": 1226,
+  "cardigan_buttons": 220,
+  "pocket_l_edge0": 250,
+  "pocket_l": 96,
+  "pocket_r_edge0": 250,
+  "pocket_r": 96,
+  "trousers_hem0": 250,
+  "trousers": 840,
+  "sandal_soles": 250,
+  "sandal_instep_l": 250,
+  "sandal_ankle_l": 250,
+  "sandal_instep_r": 250,
+  "sandal_ankle_r": 250,
+  "flatcap": 394,
+  "cap_band": 250,
+  "cane": 250,
+  "net": 444,
+  "net_knots": 576,
+  "net_float": 224
+ },
+ "body_faces_removed_under_clothing": 3478,
  "shape_keys": [
   "blink",
   "blink_L",
@@ -48,5 +82,78 @@
   "mouth_fv"
  ],
  "bones": 53,
- "missing_targets": []
+ "clips": {
+  "idle": {
+   "frames": 73,
+   "seconds": 3.0,
+   "loop": true
+  },
+  "walk": {
+   "frames": 25,
+   "seconds": 1.0,
+   "loop": true
+  },
+  "climb_stairs": {
+   "frames": 27,
+   "seconds": 1.1,
+   "loop": true
+  },
+  "climb_ladder": {
+   "frames": 30,
+   "seconds": 1.2,
+   "loop": true
+  },
+  "open_door": {
+   "frames": 30,
+   "seconds": 1.2,
+   "loop": false
+  },
+  "cook": {
+   "frames": 35,
+   "seconds": 1.4,
+   "loop": true
+  },
+  "eat": {
+   "frames": 44,
+   "seconds": 1.8,
+   "loop": true
+  },
+  "sit": {
+   "frames": 97,
+   "seconds": 4.0,
+   "loop": true
+  },
+  "sleep": {
+   "frames": 97,
+   "seconds": 4.0,
+   "loop": true
+  },
+  "fish": {
+   "frames": 73,
+   "seconds": 3.0,
+   "loop": true
+  },
+  "work": {
+   "frames": 23,
+   "seconds": 0.9,
+   "loop": true
+  },
+  "wave": {
+   "frames": 20,
+   "seconds": 0.8,
+   "loop": true
+  },
+  "run": {
+   "frames": 17,
+   "seconds": 0.66,
+   "loop": true
+  },
+  "mend_net": {
+   "frames": 49,
+   "seconds": 2.0,
+   "loop": true
+  }
+ },
+ "missing_targets": [],
+ "seconds": 561.8
 }

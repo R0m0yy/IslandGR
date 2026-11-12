@@ -175,3 +175,23 @@
 - Animal GLB not yet used in the game (placeholders remain).
 
 **Blocked on the owner:** approve / reject each villager A–D (gallery: https://claude.ai/artifact/NH6R3Ev1V3NS9nYCWTfx4c).
+
+## Session 7 (2026-11-12) — hero villagers v2 (owner: faces, hair, clothes not good enough; add all movement)
+
+**Completed and executed**
+- Characters rebuilt on the FULL-RESOLUTION MakeHuman body (smooth shaded) instead of a decimated faceted one: faces keep lids, lips, nostrils, ears, cheek and jaw structure. Skin painted per vertex from MakeHuman detail-target regions (lips, lids, eye bags, nostrils, cheeks, ears, laugh lines, age). New eyes (cornea bulge, iris ring, pupil), upper lashes.
+- Hair, beards, moustache and brows are volumes grown from the skin with iso-cut hairlines; coils (D, A), combed locks (C). They inherit the face shape keys exactly (they are cut from the same skin).
+- Clothing cut from the full body with iso-cuts on smooth fields: clean necklines, cuffs, hems, armholes; rolled hems and binding, shirt collars, patch pockets and flaps, belt with buckle and keepers, puff sleeves, ribbed cardigan, trouser crease, crisp stripes / madras via plane slicing, boots and sandals with soles.
+- Animation: `characters/anim.py`, 14 baked clips per villager (12 game-contract clips + run + job clip), held props follow the hands. Exported as glTF animations.
+- Game versions (14.7k–19.3k tris) exported to `godot/assets/characters/`; close-up versions 54k–100k tris in `blender/out/characters/*.blend` (not in git).
+- Godot: `HeroVillager` (clips, loops, blinks, smile; `shaders/hero_character.gdshader` tone lift + soft rim and a personal fill light so dark skin and cloth read like the Blender renders), `hero_showcase.gd` puts the four on the Harbour Stair (captain walks the stair and hauls rope, vendor offers fruit, elder mends net, child plays and waves). `tests/hero_test.tscn` 22/22 headless, 26/26 with screenshots.
+- Evidence: `evidence/characters/<A-D>/` (hero, turntable, faces, hands, feet, parts, wireframe_face, 14 animation sheets, extreme poses), `evidence/characters/godot/`, comparison.
+
+**Decisions taken without the owner (confirm or reverse)**
+1. Dropped the 8–10k triangle target for the close-up models to reach the requested detail; the game uses decimated 17–19k versions.
+2. Smooth shading on characters (the village stays faceted).
+3. The four heroes are presentation only (not simulated residents) until the look is approved.
+
+**Open**
+- Foot IK on stairs, root motion, lip-sync: NOT IMPLEMENTED. Motion quality UNVERIFIED by a person.
+- C's beard hides most of the mouth; B's top shows some body shape; A's boot toes faintly visible.
