@@ -1,0 +1,21 @@
+PASS  viewport has a size  (820, 1180)
+PASS  one-finger drag pans the map  (-13.36135, 0, 11.2115)
+PASS  dragging right moves the view left (grab the map)  
+PASS  touch mode switches the interface on  
+PASS  dragging down moves the view forward  (-11.2115, 0, -13.36135)
+PASS  pinching apart zooms in  [95, 36.5384615384615]
+PASS  pinching back zooms out again  [36.5384615384615, 95]
+PASS  twisting two fingers rotates the view  0.25
+PASS  two fingers sliding down tilt the camera  -0.6
+PASS  a tap selects the person under the finger  ["Cleo", Villager_V01:<Node3D#73618426959>]
+PASS  a drag is not a tap  
+PASS  button bar is shown after touch  
+PASS  a finger that starts on the bar does not move the map  
+PASS  Pause button toggles the simulation  
+PASS  Speed button cycles x1 -> x4  4
+PASS  Speed cycles back to x1  
+PASS  Journal button opens the journal  
+PASS  Hide UI hides the bar and shows the small Show UI button  
+PASS  Show UI brings it back  
+PASS  bar stays within 3 rows at iPad portrait width  (804, 126)
+RESULT: PASSED

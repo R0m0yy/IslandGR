@@ -6,6 +6,9 @@
 3. Controls: RMB orbit · wheel zoom · WASD pan · Q/E rotate · LMB select resident/boat/building · Tab next resident · G follow household · B boat · N wildlife · K cinematic · T timeline · F family tree · J journal · I village inspector · C cutaway · V show/hide the grey placeholder figures · H hide UI · 1-4 speed (x1 x4 x16 x60) · Space pause · F5 save / F9 load.
 4. **None of this has been operated by a person yet** (see PROOF_OF_WORK.md). Please report anything that looks wrong or feels dead.
 
+### iPad / touch controls
+Drag with one finger to move the map · pinch to zoom · twist two fingers to rotate · slide two fingers up/down to tilt · tap a resident, boat or building to select it (tap empty ground to release). A button bar appears at the bottom on touch devices (pause, speed, village, journal, follow modes, save/load, hide UI). Test: `godot/tests/touch_test.tscn` (21 checks, log in `evidence/logs/touch_test.log`).
+
 ## 2. Run the automated tests (headless)
 ```
 cd godot

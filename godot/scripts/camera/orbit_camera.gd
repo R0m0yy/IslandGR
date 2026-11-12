@@ -23,6 +23,13 @@ var _cine_label := ""
 var _fi := -1
 var _bi := -1
 var _saved_dist := 95.0
+var touch_mode := false                  # true once a finger has touched the screen
+var _touches := {}                       # finger index -> current position
+var _tstart := {}                        # finger index -> [start pos, start ms, moved]
+var _blocked := {}                       # fingers that began on a button or panel
+var _pd := 0.0                           # last two-finger distance / angle / centre
+var _pa := 0.0
+var _pc := Vector2.ZERO
 
 func _ready() -> void:
 	cam = Camera3D.new()
@@ -107,6 +114,11 @@ func pick(screen: Vector2) -> void:
 		release()
 
 func _unhandled_input(ev: InputEvent) -> void:
+	if ev is InputEventScreenTouch or ev is InputEventScreenDrag:
+		_touch(ev)
+		return
+	if ev is InputEventMouse and ev.device == InputEvent.DEVICE_ID_EMULATION:
+		return                           # mouse events synthesised from touch: the gestures below handle those fingers
 	if ev is InputEventMouseMotion:
 		if ev.button_mask & MOUSE_BUTTON_MASK_RIGHT:
 			goal_yaw -= ev.relative.x * 0.005
@@ -187,6 +199,75 @@ func _process(dt: float) -> void:
 	yaw = lerp_angle(yaw, goal_yaw, k)
 	pitch = lerpf(pitch, goal_pitch, k)
 	_apply()
+
+func release_follow() -> void:
+	follow = null
+	family_hh = ""
+	cinematic = false
+
+func _touch(ev: InputEvent) -> void:
+	## One finger drags the map, a tap selects, two fingers pinch to zoom, twist to
+	## rotate and slide up or down to tilt. Fingers that start on a button or panel
+	## belong to the interface and are ignored here.
+	touch_mode = true
+	if ev is InputEventScreenTouch:
+		if ev.pressed:
+			if village and village.hud and village.hud.touch_blocks(ev.position):
+				_blocked[ev.index] = true
+				return
+			_touches[ev.index] = ev.position
+			_tstart[ev.index] = [ev.position, Time.get_ticks_msec(), false]
+			if _touches.size() >= 2:
+				_pinch_reset()
+		else:
+			if _blocked.erase(ev.index):
+				return
+			if _touches.has(ev.index):
+				var st: Array = _tstart[ev.index]
+				if _touches.size() == 1 and not st[2] and Time.get_ticks_msec() - int(st[1]) < 450 and ev.position.distance_to(st[0]) < 16.0 and village:
+					pick(ev.position)
+				_touches.erase(ev.index)
+				_tstart.erase(ev.index)
+				if _touches.size() >= 2:
+					_pinch_reset()
+		return
+	if not _touches.has(ev.index):
+		return
+	_touches[ev.index] = ev.position
+	if _touches.size() == 1:
+		var st2: Array = _tstart[ev.index]
+		if not st2[2] and ev.position.distance_to(st2[0]) > 16.0:
+			st2[2] = true
+		if st2[2]:
+			release_follow()
+			var b := Basis(Vector3.UP, yaw)
+			goal_target += b * Vector3(-ev.relative.x, 0.0, -ev.relative.y) * dist * 0.0017
+	else:
+		for k in _tstart:
+			_tstart[k][2] = true
+		var keys: Array = _touches.keys()
+		keys.sort()
+		var a: Vector2 = _touches[keys[0]]
+		var c: Vector2 = _touches[keys[1]]
+		var d := a.distance_to(c)
+		var ang := (c - a).angle()
+		var ctr := (a + c) * 0.5
+		if _pd > 8.0 and d > 8.0:
+			goal_dist = clampf(goal_dist * (_pd / d), 5.0, 240.0)
+			goal_yaw += angle_difference(_pa, ang)
+			goal_pitch = clampf(goal_pitch - (ctr.y - _pc.y) * 0.005, deg_to_rad(-85), deg_to_rad(-8))
+		_pd = d
+		_pa = ang
+		_pc = ctr
+
+func _pinch_reset() -> void:
+	var keys: Array = _touches.keys()
+	keys.sort()
+	var a: Vector2 = _touches[keys[0]]
+	var c: Vector2 = _touches[keys[1]]
+	_pd = a.distance_to(c)
+	_pa = (c - a).angle()
+	_pc = (a + c) * 0.5
 
 func _cinema(dt: float) -> void:
 	## Cinematic observer: a slow drift round the subject; every half minute it

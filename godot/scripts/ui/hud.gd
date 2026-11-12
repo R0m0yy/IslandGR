@@ -18,6 +18,11 @@ var show_village = false
 var view = "resident"               # resident | timeline | family
 var journal_mode = 0                 # 0 off, 1 all, 2 notable, 3 followed resident
 var hidden_ui = false
+var touch_bar: PanelContainer
+var show_btn: Button
+var speed_btn: Button
+var pause_btn: Button
+var _touch_on = false
 var _t = 0.0
 var _toast_t = 0.0
 
@@ -35,6 +40,80 @@ func _ready() -> void:
 	add_child(help)
 	toast = _label(Vector2(14, 34), 14)
 	add_child(toast)
+	_build_touch_bar()
+
+func _build_touch_bar() -> void:
+	## On-screen buttons for everything a keyboard does. They press the same keys the
+	## keyboard would, so there is exactly one code path for each command.
+	touch_bar = PanelContainer.new()
+	touch_bar.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_WIDE)
+	touch_bar.offset_top = -132
+	touch_bar.offset_bottom = -6
+	touch_bar.offset_left = 8
+	touch_bar.offset_right = -8
+	var sb = StyleBoxFlat.new()
+	sb.bg_color = Color(0.07, 0.1, 0.13, 0.82)
+	sb.set_corner_radius_all(12)
+	sb.set_content_margin_all(6)
+	touch_bar.add_theme_stylebox_override("panel", sb)
+	var flow = HFlowContainer.new()
+	flow.add_theme_constant_override("h_separation", 6)
+	flow.add_theme_constant_override("v_separation", 6)
+	touch_bar.add_child(flow)
+	pause_btn = _tbtn(flow, "Pause", KEY_SPACE)
+	speed_btn = _tbtn(flow, "x1", -1)
+	speed_btn.pressed.connect(func():
+		if village:
+			var order = [1.0, 4.0, 16.0, 60.0]
+			var i = order.find(village.sim.time_scale)
+			village.sim.time_scale = order[(i + 1) % order.size()])
+	for e in [["Village", KEY_I], ["Journal", KEY_J], ["Person", KEY_TAB], ["Family", KEY_G], ["Boat", KEY_B], ["Wildlife", KEY_N], ["Cinema", KEY_K],
+			["Life", KEY_T], ["Tree", KEY_F], ["Cutaway", KEY_C], ["Figures", KEY_V], ["Save", KEY_F5], ["Load", KEY_F9], ["Hide UI", KEY_H]]:
+		_tbtn(flow, e[0], e[1])
+	add_child(touch_bar)
+	touch_bar.visible = false
+	show_btn = Button.new()
+	show_btn.text = "Show UI"
+	show_btn.custom_minimum_size = Vector2(110, 52)
+	show_btn.focus_mode = Control.FOCUS_NONE
+	show_btn.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_RIGHT)
+	show_btn.offset_left = -126
+	show_btn.offset_top = -66
+	show_btn.offset_right = -10
+	show_btn.offset_bottom = -10
+	show_btn.pressed.connect(func(): hidden_ui = false)
+	show_btn.visible = false
+	add_child(show_btn)
+
+func _tbtn(parent: Control, text: String, key: int) -> Button:
+	var b = Button.new()
+	b.text = text
+	b.custom_minimum_size = Vector2(74, 52)
+	b.focus_mode = Control.FOCUS_NONE
+	b.add_theme_font_size_override("font_size", 15)
+	if key >= 0:
+		b.pressed.connect(func(): _press(key))
+	parent.add_child(b)
+	return b
+
+func _press(key: int) -> void:
+	var e = InputEventKey.new()
+	e.keycode = key
+	e.physical_keycode = key
+	e.pressed = true
+	Input.parse_input_event(e)
+	var r = InputEventKey.new()
+	r.keycode = key
+	r.physical_keycode = key
+	r.pressed = false
+	Input.parse_input_event(r)
+
+func touch_blocks(p: Vector2) -> bool:
+	## True when a finger at p is on a button or a panel and so belongs to the interface.
+	for c in [touch_bar, panel, side, show_btn]:
+		if c != null and c.visible and c.get_global_rect().has_point(p):
+			return true
+	return false
 
 func _panel(preset: int, pos: Vector2, w: float) -> PanelContainer:
 	var p := PanelContainer.new()
@@ -270,6 +349,8 @@ func _process(dt: float) -> void:
 	_toast_t -= dt
 	toast.visible = _toast_t > 0.0 and not hidden_ui
 	help.visible = not hidden_ui
+	if touch_bar and not _touch_on:
+		touch_bar.visible = false
 	top.visible = not hidden_ui
 	_t -= dt
 	if _t > 0.0 or village == null:
@@ -277,6 +358,14 @@ func _process(dt: float) -> void:
 	_t = 0.25
 	var w: Weather = village.weather
 	var rig = village.camera_rig
+	_touch_on = DisplayServer.is_touchscreen_available() or (rig != null and rig.touch_mode)
+	touch_bar.visible = _touch_on and not hidden_ui
+	show_btn.visible = _touch_on and hidden_ui
+	speed_btn.text = "x%d" % int(village.sim.time_scale)
+	pause_btn.text = "Play" if not village.sim.auto else "Pause"
+	if _touch_on:
+		help.text = "Drag to move · pinch to zoom · twist to turn · two fingers up/down to tilt · tap to select"
+		help.position.y = -150
 	var mode = rig.mode_text() if rig else ""
 	top.text = "%s   ·   %s   ·   x%d%s%s" % [GameClock.text(), w.state.replace("_", " "), int(village.sim.time_scale), "" if village.sim.auto else "  (paused)", ("   ·   " + mode) if mode != "" else ""]
 	var txt = ""

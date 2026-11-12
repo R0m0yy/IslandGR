@@ -7,8 +7,8 @@
 :root[data-theme="light"]{--bg:#e9f1f5;--panel:#ffffff;--line:#bfd0da;--fg:#10222d;--mut:#4a6272;--accent:#b8760a;--accent-ink:#ffffff;--bad:#b3261e;color-scheme:light}
 html,body{height:100%}
 body{background:var(--bg);color:var(--fg);font:14px/1.5 "Inter",system-ui,sans-serif;overflow:hidden}
-#stage{position:fixed;inset:0;background:#0b1620}
-#canvas{display:block;width:100%;height:100%;outline:none}
+#stage{position:fixed;inset:0;background:#0b1620;touch-action:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+#canvas{display:block;width:100%;height:100%;outline:none;touch-action:none;-webkit-tap-highlight-color:transparent}
 #boot{position:fixed;inset:0;z-index:5;background:var(--bg);overflow:auto;padding-block:24px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex}
 #card{margin:auto;width:min(640px,100%);display:grid;gap:18px}
 h1{margin:0;font:600 34px/1.1 "Space Grotesk","Inter",system-ui,sans-serif;letter-spacing:.01em;text-wrap:balance}
@@ -25,10 +25,11 @@ small{color:var(--mut)}
 <div id="stage"><canvas id="canvas" tabindex="0"></canvas></div>
 <div id="boot"><div id="card">
   <h1>Living Tides</h1>
-  <p id="msg">Loading Saltcrown (22 MB). The village starts at 06:00 and runs by itself: residents wake, fish, trade, shelter from storms and raise families. Click the picture once it appears to give it keyboard focus.</p>
+  <p id="msg">Loading Saltcrown (22 MB). The village starts at 06:00 and runs by itself: residents wake, fish, trade, shelter from storms and raise families. Click or tap the picture once it appears.</p>
   <div id="bar" role="progressbar" aria-label="Loading"><i></i></div>
   <div id="err"></div>
   <div class="keys"><table>
+    <tr><td>iPad</td><td>drag with one finger to move · pinch to zoom · twist two fingers to turn · slide two fingers up or down to tilt · tap a resident, boat or building to select it · the button bar at the bottom has pause, speed, panels and follow modes</td></tr>
     <tr><td>Mouse</td><td>left-click a resident, boat or building to select it · right-drag orbit · wheel zoom · middle-drag pan</td></tr>
     <tr><td>Keys</td><td>W A S D pan · Q / E rotate · Space pause · 1 2 3 4 speed (x1 x4 x16 x60)</td></tr>
     <tr><td>Follow</td><td>Tab next resident · G their household · B a boat · N wildlife · K cinematic mode · Esc release</td></tr>
@@ -65,12 +66,14 @@ window.fetch = async function(input, init){
 <script>
 const bar = document.querySelector('#bar i'), msg = document.getElementById('msg'), err = document.getElementById('err'), boot = document.getElementById('boot');
 function fail(t){ err.style.display='block'; err.textContent=t; msg.textContent='The game could not start. Please send this message to the developer:'; }
+['gesturestart','gesturechange','gestureend'].forEach(t => document.addEventListener(t, e => e.preventDefault()));
+document.addEventListener('touchmove', e => { if (e.target.id === 'canvas') e.preventDefault(); }, {passive:false});
 window.addEventListener('unhandledrejection', e => { if (!window.__lt || !window.__lt.started) fail(String(e.reason && (e.reason.stack || e.reason.message) || e.reason)); });
 if (!window.WebGL2RenderingContext) fail('This browser has no WebGL 2. Use a current Chrome, Edge or Firefox.');
 else if (typeof DecompressionStream === 'undefined') fail('This browser lacks DecompressionStream. Use a current Chrome, Edge or Firefox.');
 else {
   const engine = new Engine({executable:'index', canvasResizePolicy:2, focusCanvas:true,
-    fileSizes:{'index.pck':14049904,'index.wasm':35376909}, args:[],
+    fileSizes:{'index.pck':14054816,'index.wasm':35376909}, args:[],
     onExit:()=>{ msg.textContent='The game closed. Reload the page to start again.'; boot.style.display='flex'; }});
   window.__lt = {engine, started:false, log:[]};
   engine.startGame({executable:'index', mainPack:'index.pck',
