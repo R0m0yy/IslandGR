@@ -19,6 +19,8 @@ var fishing_spots: Array = []
 var stroll_nodes: Array = []
 var figures_visible: bool = true
 var low_quality: bool = false         # phones / browsers: fewer pixels, no shadow pass, lighter sea
+var show_heroes: bool = true          # the four hero villagers on the Harbour Stair (presentation only)
+var hero_showcase = null
 var street_lamps: Array = []
 var ledger := Ledger.new()
 var economy := Economy.new()
@@ -450,6 +452,13 @@ func _build_presentation() -> void:
 	hud.village = self
 	hud.attach()
 	add_child(atmo)
+	if show_heroes:
+		var hs = load("res://scripts/world/hero_showcase.gd").new()
+		if hs.setup(self):
+			add_child(hs)
+			hero_showcase = hs
+		else:
+			hs.free()
 
 func set_figures_visible(on: bool) -> void:
 	## Simulation agents keep running; only the temporary figures are hidden.

@@ -425,3 +425,385 @@ def scalp_points(body, info, test, density=1.0, rng=None):
         if test(d, C[i]) and rng.random() < density:
             pts.append(C[i]); nrm.append(N[i])
     return np.array(pts), np.array(nrm)
+
+
+# ====================================================================== v2 toolkit (hero quality)
+# Garments and hair are cut from the FULL-RESOLUTION MakeHuman body so they keep its
+# clean quad flow. Edges are made with iso-cuts on smooth scalar fields, so necklines,
+# hairlines, sleeves and hems are clean curves rather than stair-stepped triangles.
+
+def dense_from_bm(bm, ob):
+    dl = bm.verts.layers.deform.active
+    names = {g.index: g.name for g in ob.vertex_groups}
+    W = np.zeros((len(bm.verts), len(BONES)))
+    if dl is None:
+        return W
+    for v in bm.verts:
+        for gi, w in v[dl].items():
+            b = names.get(gi)
+            if b in BI:
+                W[v.index, BI[b]] = w
+    s = W.sum(1, keepdims=True)
+    return W / np.maximum(s, 1e-9)
+
+
+def copy_part(src, name, coll, face_keep=None):
+    """Duplicate `src` (mesh + vertex groups + attributes); keep faces where
+    face_keep(centres, mean_weights) is True."""
+    me = src.data.copy()
+    ob = bpy.data.objects.new(name, me)
+    coll.objects.link(ob)
+    for g in src.vertex_groups:
+        ob.vertex_groups.new(name=g.name)
+    if me.shape_keys:
+        ob.shape_key_clear()
+    if face_keep is not None:
+        bm = bmesh.new(); bm.from_mesh(me)
+        bm.verts.ensure_lookup_table(); bm.verts.index_update()
+        W = dense_from_bm(bm, ob)
+        C = np.array([f.calc_center_median() for f in bm.faces])
+        FW = np.array([W[[v.index for v in f.verts]].mean(axis=0) for f in bm.faces])
+        keep = face_keep(C, FW)
+        kill = [f for f, k in zip(bm.faces, keep) if not k]
+        bmesh.ops.delete(bm, geom=kill, context="FACES")
+        bmesh.ops.delete(bm, geom=[v for v in bm.verts if not v.link_faces], context="VERTS")
+        bm.to_mesh(me); bm.free()
+    for a in [a.name for a in me.attributes if a.name.startswith(("rest", "mask_"))]:
+        me.attributes.remove(me.attributes[a])
+    return ob
+
+
+def drop_islands(bm, keep_frac=0.08, min_faces=12):
+    """Delete small disconnected fragments left by a cut."""
+    seen = set(); comps = []
+    for f in bm.faces:
+        if f in seen:
+            continue
+        stack = [f]; comp = []; seen.add(f)
+        while stack:
+            g = stack.pop(); comp.append(g)
+            for e in g.edges:
+                for h in e.link_faces:
+                    if h not in seen:
+                        seen.add(h); stack.append(h)
+        comps.append(comp)
+    if not comps:
+        return
+    big = max(len(c) for c in comps)
+    kill = [f for c in comps if len(c) < max(min_faces, keep_frac * big) for f in c]
+    if kill:
+        bmesh.ops.delete(bm, geom=kill, context="FACES")
+        bmesh.ops.delete(bm, geom=[v for v in bm.verts if not v.link_faces], context="VERTS")
+
+
+def iso_cut(ob, field, keep_positive=True, clean=True):
+    """Split the mesh along field == 0 and delete the negative side.
+    field(P (n,3), W (n,bones)) -> (n,). Vertex groups and point attributes on the
+    new edge are interpolated by bmesh."""
+    bm = bmesh.new(); bm.from_mesh(ob.data)
+    bm.verts.ensure_lookup_table(); bm.verts.index_update()
+    P = np.array([v.co[:] for v in bm.verts])
+    W = dense_from_bm(bm, ob)
+    f = np.asarray(field(P, W), dtype=float)
+    if not keep_positive:
+        f = -f
+    f[np.abs(f) < 1e-7] = 1e-7
+    vals = {v: f[v.index] for v in bm.verts}
+    cross = [e for e in bm.edges if (vals[e.verts[0]] > 0) != (vals[e.verts[1]] > 0)]
+    newv = []
+    for e in cross:
+        a, b = e.verts
+        fa, fb = vals[a], vals[b]
+        t = fa / (fa - fb)
+        ne, nv = bmesh.utils.edge_split(e, a, float(min(0.999, max(0.001, t))))
+        vals[nv] = 0.0
+        newv.append(nv)
+    if newv:
+        bmesh.ops.connect_verts(bm, verts=newv, check_degenerate=False)
+    kill = [fc for fc in bm.faces if sum(vals.get(v, 0.0) for v in fc.verts) < 0]
+    bmesh.ops.delete(bm, geom=kill, context="FACES")
+    bmesh.ops.delete(bm, geom=[v for v in bm.verts if not v.link_faces], context="VERTS")
+    if clean:
+        drop_islands(bm)
+    bm.to_mesh(ob.data); bm.free()
+    ob.data.update()
+    return ob
+
+
+def plane_cuts(ob, axis, spacing, offset=0.0):
+    """Slice the whole mesh with parallel planes (crisp stripes / checks)."""
+    bm = bmesh.new(); bm.from_mesh(ob.data)
+    a = np.array(axis, float); a /= np.linalg.norm(a)
+    P = np.array([v.co[:] for v in bm.verts])
+    h = P @ a
+    k0, k1 = int(math.floor((h.min() - offset) / spacing)), int(math.ceil((h.max() - offset) / spacing))
+    for k in range(k0, k1 + 1):
+        co = a * (offset + k * spacing)
+        geom = bm.verts[:] + bm.edges[:] + bm.faces[:]
+        bmesh.ops.bisect_plane(bm, geom=geom, plane_co=Vector(co), plane_no=Vector(a), dist=1e-6)
+    bm.to_mesh(ob.data); bm.free()
+    ob.data.update()
+
+
+def subdivide(ob, cuts=1, smooth=0.0):
+    bm = bmesh.new(); bm.from_mesh(ob.data)
+    bmesh.ops.subdivide_edges(bm, edges=bm.edges[:], cuts=cuts, use_grid_fill=True, smooth=smooth)
+    bm.to_mesh(ob.data); bm.free(); ob.data.update()
+
+
+def vnormals(ob):
+    ob.data.update()
+    n = np.zeros(len(ob.data.vertices) * 3)
+    ob.data.vertices.foreach_get("normal", n)
+    return n.reshape(-1, 3)
+
+
+def displace(ob, fn):
+    """fn(P, N, W) -> per-vertex offset along the normal."""
+    P = hero.get_co(ob.data); N = vnormals(ob); W = hero.read_groups(ob)
+    d = np.broadcast_to(np.asarray(fn(P, N, W), float), (len(P),))
+    hero.set_co(ob.data, P + N * d[:, None])
+
+
+def thicken(ob, t, rim=True, rim_only=False, offset=-1.0):
+    m = ob.modifiers.new("sol", "SOLIDIFY"); m.thickness = t; m.offset = offset; m.use_rim = rim; m.use_rim_only = rim_only
+    m.use_even_offset = False
+    dg = bpy.context.evaluated_depsgraph_get()
+    nm = bpy.data.meshes.new_from_object(ob.evaluated_get(dg), preserve_all_data_layers=True, depsgraph=dg)
+    ob.modifiers.remove(m); old = ob.data; ob.data = nm; bpy.data.meshes.remove(old)
+
+
+def boundary_loops(ob):
+    me = ob.data
+    bm = bmesh.new(); bm.from_mesh(me)
+    edges = [e for e in bm.edges if e.is_boundary]
+    adj = {}
+    for e in edges:
+        a, b = e.verts[0].index, e.verts[1].index
+        adj.setdefault(a, []).append(b); adj.setdefault(b, []).append(a)
+    P = np.array([v.co[:] for v in bm.verts]); bm.free()
+    loops, seen = [], set()
+    for s in adj:
+        if s in seen:
+            continue
+        loop = [s]; seen.add(s); prev = None; cur = s
+        while True:
+            nxt = [x for x in adj[cur] if x != prev and x not in seen]
+            if not nxt:
+                break
+            prev, cur = cur, nxt[0]; loop.append(cur); seen.add(cur)
+        if len(loop) > 3:
+            loops.append(P[loop])
+    return loops
+
+
+def resample(loop, step, closed=True):
+    pts = np.vstack([loop, loop[:1]]) if closed else loop
+    seg = np.linalg.norm(np.diff(pts, axis=0), axis=1)
+    L = np.concatenate([[0], np.cumsum(seg)])
+    n = max(6, int(L[-1] / step))
+    s = np.linspace(0, L[-1], n, endpoint=not closed)
+    out = np.array([np.interp(s, L, pts[:, k]) for k in range(3)]).T
+    return out
+
+
+def smooth_path(pts, it=2, closed=True):
+    p = pts.copy()
+    for _ in range(it):
+        if closed:
+            p = (np.roll(p, 1, 0) + 2 * p + np.roll(p, -1, 0)) / 4
+        else:
+            p[1:-1] = (p[:-2] + 2 * p[1:-1] + p[2:]) / 4
+    return p
+
+
+def ring_tube(bm, pts, r, sides=6, closed=True, twist=0.0, ridge=0.0):
+    """Tube along a (closed) path; `ridge` adds a twisted-rope profile."""
+    n = len(pts)
+    verts, faces = [], []
+    prev_up = None
+    for k in range(n):
+        t = pts[(k + 1) % n] - pts[k - 1] if closed else pts[min(k + 1, n - 1)] - pts[max(k - 1, 0)]
+        R = orient(t, prev_up if prev_up is not None else (0, 0, 1))
+        prev_up = tuple(R.col[1])
+        for j in range(sides):
+            b = 2 * math.pi * j / sides
+            rr = r * (1 + ridge * math.cos(3 * b + twist * k))
+            verts.append(tuple(pts[k] + np.array(R @ Vector((math.cos(b) * rr, math.sin(b) * rr, 0)))))
+    m = n if closed else n - 1
+    for k in range(m):
+        k2 = (k + 1) % n
+        for j in range(sides):
+            j2 = (j + 1) % sides
+            faces.append((k * sides + j, k * sides + j2, k2 * sides + j2, k2 * sides + j))
+    if not closed:
+        faces.append(tuple(reversed(range(sides))))
+        faces.append(tuple((n - 1) * sides + j for j in range(sides)))
+    return add_geom(bm, verts, faces)
+
+
+def piping(ob, r, step=0.008, select=None, sides=5, lift=0.0, normals_from=None):
+    """Rolled hems / binding: a tube along every boundary loop of `ob`
+    (optionally only loops where select(loop_points) is True)."""
+    bm = bmesh.new()
+    for loop in boundary_loops(ob):
+        if select is not None and not select(loop):
+            continue
+        pts = smooth_path(resample(loop, step), 3)
+        ring_tube(bm, pts, r, sides=sides)
+    return bm
+
+
+def collar(ob, loop_select, height, flare, thick, coll, name, points=0.0):  # ob: un-thickened garment
+    """Shirt collar standing up from the neckline loop and folding out.
+    `points` > 0 pulls the two front ends down into collar points."""
+    bm = bmesh.new()
+    for loop in boundary_loops(ob):
+        if not loop_select(loop):
+            continue
+        pts = smooth_path(resample(loop, 0.008), 1)
+        c = pts.mean(axis=0)
+        n = len(pts)
+        rows = []
+        for k, p in enumerate(pts):
+            out = p - c; out[2] = 0; out /= np.linalg.norm(out) + 1e-9
+            front = max(0.0, -out[1])
+            row = []
+            for u in np.linspace(0, 1, 4):
+                lift = math.sin(u * math.pi * 0.5) * height
+                fl = (1 - math.cos(u * math.pi * 0.5)) * flare
+                drop = points * front ** 6 * u
+                row.append(p + np.array([0, 0, lift * (1 - front * 0.6) - drop]) + out * (fl + 0.003))
+            rows.append(row)
+        verts = [tuple(v) for row in rows for v in row]
+        faces = []
+        for k in range(n):
+            k2 = (k + 1) % n
+            for j in range(3):
+                faces.append((k * 4 + j, k2 * 4 + j, k2 * 4 + j + 1, k * 4 + j + 1))
+        add_geom(bm, verts, faces)
+    obc = bm_to_object(bm, name, coll)
+    thicken(obc, thick, offset=0)
+    return obc
+
+
+# ------------------------------------------------------------------ smooth colour
+def vnoise(P, scale, seed=0):
+    """Smooth 3D value noise in [-1, 1]."""
+    q = np.asarray(P) / scale + seed * 17.13
+    i = np.floor(q).astype(np.int64); f = q - i
+    f = f * f * (3 - 2 * f)
+
+    def h(x, y, z):
+        n = (x * 73856093) ^ (y * 19349663) ^ (z * 83492791) ^ (seed * 2654435761)
+        n = (n ^ (n >> 13)) * 1274126177
+        return ((n & 0xFFFF) / 32767.5) - 1.0
+    out = 0
+    for dx in (0, 1):
+        for dy in (0, 1):
+            for dz in (0, 1):
+                w = (f[:, 0] if dx else 1 - f[:, 0]) * (f[:, 1] if dy else 1 - f[:, 1]) * (f[:, 2] if dz else 1 - f[:, 2])
+                out = out + w * h(i[:, 0] + dx, i[:, 1] + dy, i[:, 2] + dz)
+    return out
+
+
+def paint_vertices(ob, fn, smooth=True, sharp_angle=0.9):
+    """fn(P, N, W) -> (n,3) sRGB per vertex, written as corner colours."""
+    me = ob.data
+    if len(me.polygons) == 0:
+        return ob
+    P = hero.get_co(me); N = vnormals(ob); W = hero.read_groups(ob)
+    C = np.clip(np.asarray(fn(P, N, W), float), 0, 1)
+    vi = np.zeros(len(me.loops), dtype=np.int64); me.loops.foreach_get("vertex_index", vi)
+    cols = np.ones((len(me.loops), 4)); cols[:, :3] = C[vi]
+    if "Col" in me.color_attributes:
+        me.color_attributes.remove(me.color_attributes["Col"])
+    ca = me.color_attributes.new("Col", "BYTE_COLOR", "CORNER")
+    ca.data.foreach_set("color_srgb", cols.ravel())
+    me.color_attributes.active_color = ca
+    shade(ob, smooth, sharp_angle)
+    return ob
+
+
+def paint_faces_v2(ob, fn, smooth=True, sharp_angle=0.9):
+    """fn(centres, normals, face_index_array) -> (f,3) per face (crisp patterns)."""
+    me = ob.data
+    if len(me.polygons) == 0:
+        return ob
+    C = hero.face_centres(ob); N = hero.face_normals(ob)
+    FC = np.clip(np.asarray(fn(C, N, np.arange(len(C))), float), 0, 1)
+    cols = np.ones((len(me.loops), 4))
+    for p in me.polygons:
+        cols[p.loop_start:p.loop_start + p.loop_total, :3] = FC[p.index]
+    if "Col" in me.color_attributes:
+        me.color_attributes.remove(me.color_attributes["Col"])
+    ca = me.color_attributes.new("Col", "BYTE_COLOR", "CORNER")
+    ca.data.foreach_set("color_srgb", cols.ravel())
+    me.color_attributes.active_color = ca
+    shade(ob, smooth, sharp_angle)
+    return ob
+
+
+def shade(ob, smooth=True, sharp_angle=0.9):
+    me = ob.data
+    vals = [smooth] * len(me.polygons)
+    me.polygons.foreach_set("use_smooth", vals)
+    if smooth:
+        try:
+            me.set_sharp_from_angle(angle=sharp_angle)
+        except Exception:
+            pass
+    me.update()
+
+
+def mixc(a, b, t):
+    a = np.asarray(a, float); b = np.asarray(b, float)
+    t = np.asarray(t, float)
+    if t.ndim == 1:
+        t = t[:, None]
+    return a * (1 - t) + b * t
+
+
+# ------------------------------------------------------------------ geometric fields
+def limb_plane(bone, t, radius=0.1, keep="head", soft=0.0):
+    """Field for a cut across a limb at fraction t (bone = (head, tail)).
+    Positive on the kept side, +1 far from the limb."""
+    h, tl = np.asarray(bone[0]), np.asarray(bone[1])
+    L = np.linalg.norm(tl - h); d = (tl - h) / L
+    co = h + (tl - h) * t
+
+    def f(P, W):
+        a = (P - co) @ d
+        ah = (P - h) @ d
+        r = np.linalg.norm((P - h) - np.outer(ah, d), axis=1)
+        near = (r < radius) & (ah > -0.05 * L) & (ah < 1.6 * L)
+        v = -a if keep == "head" else a
+        return np.where(near, v, 1.0)
+    return f
+
+
+def fmin(*fs):
+    return lambda P, W: np.min(np.vstack([f(P, W) for f in fs]), axis=0)
+
+
+def fmax(*fs):
+    return lambda P, W: np.max(np.vstack([f(P, W) for f in fs]), axis=0)
+
+
+def bone_sum(W, names):
+    return W[:, [BI[n] for n in names if n in BI]].sum(axis=1)
+
+
+def hide_body_under(body, field, margin=0.012, sel=None):
+    """Delete body faces that lie wholly inside a garment (field > margin at all
+    their vertices). `sel(P, W)` optionally limits which body verts count."""
+    P = hero.get_co(body.data); W = hero.read_groups(body)
+    f = np.asarray(field(P, W))
+    inside = f > margin
+    if sel is not None:
+        inside &= sel(P, W)
+    hid = set(body.get("_hide", []))
+    for p in body.data.polygons:
+        if all(inside[v] for v in p.vertices):
+            hid.add(p.index)
+    body["_hide"] = list(hid)

@@ -40,7 +40,24 @@ EXPRESSIONS = {
     "mouth_fv":   [("mouth-eversion", 0.6), ("mouth-open", 0.1)],
 }
 
-KEEP_GROUPS = {"body", "helper-upper-teeth", "helper-lower-teeth", "helper-tongue"}
+REGION_TARGETS = {
+    "lips": ["mouth/mouth-upperlip-volume-incr", "mouth/mouth-lowerlip-volume-incr"],
+    "lip_upper": ["mouth/mouth-upperlip-volume-incr"],
+    "nose": ["nose/nose-volume-incr"],
+    "nostrils": ["nose/nose-flaring-incr"],
+    "brows": ["eyebrows/eyebrows-trans-up"],
+    "cheeks": ["cheek/l-cheek-volume-incr", "cheek/r-cheek-volume-incr"],
+    "eyebags": ["eyes/l-eye-bag-incr", "eyes/r-eye-bag-incr"],
+    "lids": ["expression/units/caucasian/eye-left-closure", "expression/units/caucasian/eye-right-closure"],
+    "ears": ["ears/l-ear-scale-incr", "ears/r-ear-scale-incr"],
+    "chin": ["chin/chin-prominent-incr"],
+    "jaw": ["chin/chin-width-incr"],
+    "laugh": ["mouth/mouth-laugh-lines-in"],
+    "forehead": ["head/head-age-incr"],
+}
+
+KEEP_GROUPS = {"body", "helper-upper-teeth", "helper-lower-teeth", "helper-tongue",
+               "helper-l-eyelashes-2", "helper-r-eyelashes-2"}   # upper lashes only
 
 
 # ------------------------------------------------------------------ colours
@@ -244,7 +261,7 @@ def build_body(spec, coll):
     me = ob.data
     # per-face part tag for colouring (body / teeth / tongue) as a face attribute
     tag = me.attributes.new("part", "INT", "FACE")
-    tag.data.foreach_set("value", [0 if g == "body" else (1 if "teeth" in g else 2) for g in fgroup])
+    tag.data.foreach_set("value", [0 if g == "body" else (1 if "teeth" in g else (3 if "eyelash" in g else 2)) for g in fgroup])
     for k, d in ex.items():
         put_vec_attr(me, "ex_" + k, d[used])
     put_vec_attr(me, "rest", Vs[used])
@@ -255,6 +272,20 @@ def build_body(spec, coll):
     dens = ob.vertex_groups.new(name="_density")
     for i in range(len(used)):
         dens.add([i], float(spec.get("body_density", 0.3) + (1 - spec.get("body_density", 0.3)) * max(face_w[i], 0.8 * hand_w[i])), "REPLACE")
+    # soft region masks taken from the MakeHuman detail targets (which vertices each target moves)
+    masks = {}
+    for name, rels in REGION_TARGETS.items():
+        m = np.zeros(n)
+        for rel in rels:
+            t = mh.target(rel)
+            if t is None:
+                continue
+            idx, d = t
+            mag = np.linalg.norm(d, axis=1)
+            if mag.max() > 0:
+                m[idx] = np.maximum(m[idx], mag / mag.max())
+        masks[name] = m[used]
+        put_float_attr(me, "mask_" + name, m[used])
     eyes = {}
     for side in ("l", "r"):
         idx = VG[f"helper-{side}-eye"]
@@ -263,7 +294,7 @@ def build_body(spec, coll):
     head_idx = used[Wd[used, BI["head"]] > 0.95]
     hc = Vs[head_idx].mean(axis=0)
     info = {"joints": J, "scale": s, "missing_targets": miss, "full_res_tris": sum(len(f) - 2 for f in F2),
-            "V_full": Vs, "bones": mh.bone_positions(Vs), "eyes": eyes, "head_c": hc,
+            "V_full": Vs, "used": used, "masks": masks, "bones": mh.bone_positions(Vs), "eyes": eyes, "head_c": hc,
             "head_r": float(np.percentile(np.linalg.norm(Vs[head_idx] - hc, axis=1), 90)),
             "mouth": Vs[VG["joint-mouth"]].mean(axis=0) if "joint-mouth" in VG else J.get("joint-mouth")}
     return ob, info

@@ -42,3 +42,40 @@ Objects do not yet attach to hands, so nothing is shown being carried - the simu
 - Boat crews now stand on the boat as it rides the shared wave surface (`Ocean.height`). Boats pitch and roll to the wave slope in `atmosphere.gd`.
 - Animals are animated from simulation state (wing beats by species, folded wings when perched or diving, a dolphin breach arc, turtle surfacing, crab burrow retreat). They are placeholders, not final art.
 - Still missing: carrying (nothing is visibly carried even though the ledger moves goods), boarding / disembarking, net handling, unloading crates, run, turn, stop.
+
+
+## Session 7 update — hero villagers have real clips
+The four hero villagers (A captain, B vendor, C elder, D child) now carry baked
+keyframe animation on the shared 53-bone game rig (`blender/livingtides/characters/anim.py`,
+24 fps, one glTF animation per clip, exported in `godot/assets/characters/<key>.glb`).
+In Godot `HeroVillager` (`scripts/villager/hero_villager.gd`) plays them with the same
+`play(clip)` contract as the placeholder, loops the cyclic ones, blinks every 2–6 s
+and smiles while waving or offering fruit.
+
+| Clip | Length | Loop | Motion |
+|---|---|---|---|
+| idle | 3.0 s | yes | breathing, weight shift, head looks around |
+| walk | 1.0 s | yes | stride, knee flex in swing, pelvis bob/yaw/roll, counter-swinging arms |
+| run | 0.66 s | yes | longer stride, high knees, pumping arms, forward lean |
+| climb_stairs | 1.1 s | yes | knee lift, forward lean, bigger bob |
+| climb_ladder | 1.2 s | yes | hands alternate up the rails, legs alternate |
+| open_door | 1.2 s | no | reach, grip, push with a lean |
+| cook | 1.4 s | yes | stirring circle, other hand steadies the pot |
+| eat | 1.8 s | yes | seated, hand to mouth |
+| sit | 4.0 s | yes | seated (pelvis drops by thigh length), breathing, looks around |
+| sleep | 4.0 s | yes | lying on the back at bed height, slow breathing, eyes closed (Godot) |
+| fish | 3.0 s | yes | both hands forward on a rod, small bobbing |
+| work | 0.9 s | yes | hammer raise and strike |
+| wave | 0.8 s | yes | raised hand waving (smile in Godot) |
+| haul_rope (A) | 1.6 s | yes | hand-over-hand pull, leaning back |
+| hand_fruit (B) | 2.6 s | yes | offers a mango, holds, takes it back; basket stays on the hip |
+| mend_net (C) | 2.0 s | yes | knotting motions at chest height, head bowed |
+| run_play (D) | 0.7 s | yes | skipping run with a hop |
+
+Character holds are layered under every clip: B's left arm keeps the basket, C keeps
+his stoop, cane and net, A and D keep the fish / bucket hand closed.
+
+Status: clips exist and play in Godot (`tests/hero_test.tscn`). **UNVERIFIED:** how
+they read in motion to a person (only still frames were reviewed). **Not done:** foot
+IK on stairs (feet follow the clip, not the step heights), root motion, facial
+lip-sync, using the hero models for the 42 simulated residents.
