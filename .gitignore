@@ -4,3 +4,6 @@ blender/out/
 dist/
 godot/.godot/
 *.blend1
+
+web/
+web_site/

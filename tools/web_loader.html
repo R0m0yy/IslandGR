@@ -1,0 +1,83 @@
+<title>Living Tides</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+/* Layout: the game fills the frame; a harbour-blue start card sits over it until the village has loaded. */
+:root{--bg:#0e1a24;--panel:#14232f;--line:#27404f;--fg:#eaf2f6;--mut:#9db3c1;--accent:#f2b84b;--accent-ink:#241800;--bad:#ff9a8a;color-scheme:dark}
+@media (prefers-color-scheme: light){:root:not([data-theme="dark"]){--bg:#e9f1f5;--panel:#ffffff;--line:#bfd0da;--fg:#10222d;--mut:#4a6272;--accent:#b8760a;--accent-ink:#ffffff;--bad:#b3261e;color-scheme:light}}
+:root[data-theme="light"]{--bg:#e9f1f5;--panel:#ffffff;--line:#bfd0da;--fg:#10222d;--mut:#4a6272;--accent:#b8760a;--accent-ink:#ffffff;--bad:#b3261e;color-scheme:light}
+html,body{height:100%}
+body{background:var(--bg);color:var(--fg);font:14px/1.5 "Inter",system-ui,sans-serif;overflow:hidden}
+#stage{position:fixed;inset:0;background:#0b1620}
+#canvas{display:block;width:100%;height:100%;outline:none}
+#boot{position:fixed;inset:0;z-index:5;background:var(--bg);overflow:auto;padding-block:24px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex}
+#card{margin:auto;width:min(640px,100%);display:grid;gap:18px}
+h1{margin:0;font:600 34px/1.1 "Space Grotesk","Inter",system-ui,sans-serif;letter-spacing:.01em;text-wrap:balance}
+#msg{margin:0;color:var(--mut);max-width:60ch}
+#bar{height:8px;background:var(--line);border-radius:4px;overflow:hidden}
+#bar i{display:block;height:100%;width:0;background:var(--accent);transition:width .25s}
+#err{display:none;color:var(--bad);white-space:pre-wrap;word-break:break-word;border:1px solid var(--bad);border-radius:8px;padding:12px;font:12px/1.5 ui-monospace,monospace}
+table{border-collapse:collapse;width:100%;font-size:13px}
+td{padding:5px 0;border-top:1px solid var(--line);vertical-align:top}
+td:first-child{white-space:nowrap;padding-right:16px;color:var(--accent);font-weight:600}
+.keys{min-width:0;overflow-x:auto}
+small{color:var(--mut)}
+</style>
+<div id="stage"><canvas id="canvas" tabindex="0"></canvas></div>
+<div id="boot"><div id="card">
+  <h1>Living Tides</h1>
+  <p id="msg">Loading Saltcrown (22 MB). The village starts at 06:00 and runs by itself: residents wake, fish, trade, shelter from storms and raise families. Click the picture once it appears to give it keyboard focus.</p>
+  <div id="bar" role="progressbar" aria-label="Loading"><i></i></div>
+  <div id="err"></div>
+  <div class="keys"><table>
+    <tr><td>Mouse</td><td>left-click a resident, boat or building to select it · right-drag orbit · wheel zoom · middle-drag pan</td></tr>
+    <tr><td>Keys</td><td>W A S D pan · Q / E rotate · Space pause · 1 2 3 4 speed (x1 x4 x16 x60)</td></tr>
+    <tr><td>Follow</td><td>Tab next resident · G their household · B a boat · N wildlife · K cinematic mode · Esc release</td></tr>
+    <tr><td>Panels</td><td>I village · J journal · T timeline · F family tree · C cutaway · V show or hide the grey placeholder figures · H hide UI</td></tr>
+    <tr><td>Save</td><td>F5 save · F9 load (kept in this browser)</td></tr>
+  </table></div>
+  <small>Research build. Characters are grey placeholders, not final art. Frame rate depends on your graphics card; if it is slow, press 4 to speed time up and H to hide the interface.</small>
+</div></div>
+<script>
+// Game data ships as base64 text parts (the host serves only web file types). They are fetched, decoded and
+// joined here, and the engine's .wasm (gzip, 35 MB to 8 MB) is expanded before the loader reads it.
+const PARTS = {pck: 3, wasm: 2};
+const origFetch = window.fetch.bind(window);
+async function joined(prefix, n){
+  const texts = await Promise.all(Array.from({length:n}, (_, i) => origFetch(prefix + '.' + i + '.txt').then(r => { if (!r.ok) throw new Error('missing ' + prefix + '.' + i + ' (' + r.status + ')'); return r.text(); })));
+  const out = []; let total = 0;
+  for (const t of texts) { const bin = atob(t.trim()); const u = new Uint8Array(bin.length); for (let i = 0; i < bin.length; i++) u[i] = bin.charCodeAt(i); out.push(u); total += u.length; }
+  const all = new Uint8Array(total); let o = 0; for (const u of out) { all.set(u, o); o += u.length; }
+  return all;
+}
+window.fetch = async function(input, init){
+  const url = (typeof input === 'string') ? input : input.url;
+  if (/index\.pck(\?.*)?$/.test(url)) {
+    return new Response(await joined('pck', PARTS.pck), {status:200, headers:{'Content-Type':'application/octet-stream'}});
+  }
+  if (/index\.wasm(\?.*)?$/.test(url)) {
+    const gz = await joined('wasm', PARTS.wasm);
+    return new Response(new Blob([gz]).stream().pipeThrough(new DecompressionStream('gzip')), {status:200, headers:{'Content-Type':'application/wasm'}});
+  }
+  return origFetch(input, init);
+};
+</script>
+<script src="index.js"></script>
+<script>
+const bar = document.querySelector('#bar i'), msg = document.getElementById('msg'), err = document.getElementById('err'), boot = document.getElementById('boot');
+function fail(t){ err.style.display='block'; err.textContent=t; msg.textContent='The game could not start. Please send this message to the developer:'; }
+window.addEventListener('unhandledrejection', e => { if (!window.__lt || !window.__lt.started) fail(String(e.reason && (e.reason.stack || e.reason.message) || e.reason)); });
+if (!window.WebGL2RenderingContext) fail('This browser has no WebGL 2. Use a current Chrome, Edge or Firefox.');
+else if (typeof DecompressionStream === 'undefined') fail('This browser lacks DecompressionStream. Use a current Chrome, Edge or Firefox.');
+else {
+  const engine = new Engine({executable:'index', canvasResizePolicy:2, focusCanvas:true,
+    fileSizes:{'index.pck':14049904,'index.wasm':35376909}, args:[],
+    onExit:()=>{ msg.textContent='The game closed. Reload the page to start again.'; boot.style.display='flex'; }});
+  window.__lt = {engine, started:false, log:[]};
+  engine.startGame({executable:'index', mainPack:'index.pck',
+    onProgress:(c,t)=>{ bar.style.width = (t ? Math.min(100, c/t*100) : 50) + '%'; },
+    onPrint:(...a)=>{ window.__lt.log.push(a.join(' ')); },
+    onPrintError:(...a)=>{ window.__lt.log.push('ERR '+a.join(' ')); }
+  }).then(()=>{ window.__lt.started=true; boot.style.display='none'; document.getElementById('canvas').focus(); })
+    .catch(e=>fail(String(e && (e.stack || e.message) || e)));
+}
+</script>
