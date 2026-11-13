@@ -32,7 +32,7 @@ void fragment() {
 		// darker/lighter skin; the pinkish lips and pale nails keep their relation
 		c *= skin_tone;
 	}
-	c = pow(c, vec3(lift));
+	c = pow(clamp(c, vec3(0.0), vec3(4.0)), vec3(lift));   // the hue rotation can push a channel below 0: pow(<0) is NaN on WebGL
 	float l = dot(c, vec3(0.2126, 0.7152, 0.0722));
 	ALBEDO = mix(c, vec3(l), soften);
 	ROUGHNESS = roughness_v;

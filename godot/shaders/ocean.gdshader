@@ -59,7 +59,9 @@ void vertex() {
 }
 
 void fragment() {
-	vec3 n = normalize(cross(dFdy(VERTEX), dFdx(VERTEX)));
+	vec3 fn = cross(dFdy(VERTEX), dFdx(VERTEX));
+	// a degenerate pixel has no derivative: normalize(0) is NaN on WebGL and glow would spread it
+	vec3 n = dot(fn, fn) > 1e-12 ? normalize(fn) : NORMAL;
 	NORMAL = n;
 	float depth = vdepth;
 	float k = smoothstep(0.0, 2.7, depth);

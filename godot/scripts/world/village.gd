@@ -45,9 +45,24 @@ var _lamps_on := false
 
 func _ready() -> void:
 	build()
+	if OS.has_feature("web") or "--diag" in OS.get_cmdline_user_args():
+		_diag_later()
+
+func _diag_later() -> void:
+	## One-off render diagnostics printed to the log (the web loader keeps them in window.__lt.log).
+	for wait in [3.0, 12.0]:
+		await get_tree().create_timer(wait).timeout
+		var cam := get_viewport().get_camera_3d()
+		var vis := 0
+		for n in find_children("*", "VisualInstance3D", true, false):
+			if n.is_visible_in_tree():
+				vis += 1
+		print("DIAG t=", wait, " cam=", cam.get_path() if cam else "none", " xf=", cam.global_transform if cam else "", " near/far=", [cam.near, cam.far] if cam else [],
+			" vp=", get_viewport().get_visible_rect().size, " scale3d=", get_viewport().scaling_3d_scale, " visible_meshes=", vis,
+			" env=", get_viewport().world_3d.environment != null if get_viewport().world_3d else "no world", " fps=", Engine.get_frames_per_second())
 
 func build() -> void:
-	low_quality = OS.has_feature("web") or OS.has_feature("mobile")
+	low_quality = OS.has_feature("web") or OS.has_feature("mobile") or "--lowq" in OS.get_cmdline_user_args()
 	_build_environment()
 	_build_graph()
 	_build_buildings()

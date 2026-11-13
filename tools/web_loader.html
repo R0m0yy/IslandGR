@@ -41,7 +41,7 @@ small{color:var(--mut)}
 <script>
 // Game data ships as base64 text parts (the host serves only web file types). They are fetched, decoded and
 // joined here, and the engine's .wasm (gzip, 35 MB to 8 MB) is expanded before the loader reads it.
-const PARTS = {pck: 4, wasm: 2};
+const PARTS = {pck: 7, wasm: 2};
 const origFetch = window.fetch.bind(window);
 async function joined(prefix, n){
   const texts = await Promise.all(Array.from({length:n}, (_, i) => origFetch(prefix + '.' + i + '.txt').then(r => { if (!r.ok) throw new Error('missing ' + prefix + '.' + i + ' (' + r.status + ')'); return r.text(); })));
@@ -73,7 +73,7 @@ if (!window.WebGL2RenderingContext) fail('This browser has no WebGL 2. Use a cur
 else if (typeof DecompressionStream === 'undefined') fail('This browser lacks DecompressionStream. Use a current Chrome, Edge or Firefox.');
 else {
   const engine = new Engine({executable:'index', canvasResizePolicy:2, focusCanvas:true,
-    fileSizes:{'index.pck':20521120,'index.wasm':35376909}, args:[],
+    fileSizes:{'index.pck':41692656,'index.wasm':35376909}, args:[],
     onExit:()=>{ msg.textContent='The game closed. Reload the page to start again.'; boot.style.display='flex'; }});
   window.__lt = {engine, started:false, log:[]};
   engine.startGame({executable:'index', mainPack:'index.pck',
