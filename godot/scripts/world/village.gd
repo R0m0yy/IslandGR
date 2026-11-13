@@ -18,7 +18,12 @@ var doors: Array = []
 var fishing_spots: Array = []
 var stroll_nodes: Array = []
 var figures_visible: bool = true
-var low_quality: bool = false         # phones / browsers: fewer pixels, no shadow pass, lighter sea
+var low_quality: bool = false
+# Browsers / phones: only this many residents are drawn at once (the nearest to the camera).
+# WebGL ran out of per-character resources with ~35 animated characters on screen and
+# then drew no 3D at all (found by bisection, Session 8); hidden residents keep living.
+const FIGURE_BUDGET := 20
+var _budget_t := 0.0         # phones / browsers: fewer pixels, no shadow pass, lighter sea
 var show_heroes: bool = true          # the four hero villagers on the Harbour Stair (presentation only)
 var hero_showcase = null
 var village_life = null
@@ -126,6 +131,8 @@ func build() -> void:
 			ledger.mint(v.hh, "bait", 2, "start_stock")
 	if with_presentation:
 		_build_presentation()
+		if low_quality:
+			apply_figure_budget()
 
 # ------------------------------------------------------------------ helpers shared by the systems
 func household_name(hh: String) -> String:
@@ -612,6 +619,22 @@ func _build_presentation() -> void:
 			hero_showcase = hs
 		else:
 			hs.free()
+
+func _process(delta: float) -> void:
+	if not low_quality or not with_presentation:
+		return
+	_budget_t -= delta
+	if _budget_t <= 0.0:
+		_budget_t = 0.5
+		apply_figure_budget()
+
+func apply_figure_budget() -> void:
+	var cam := get_viewport().get_camera_3d() if is_inside_tree() else null
+	var cp: Vector3 = cam.global_position if cam else Vector3.ZERO
+	var list: Array = villagers.filter(func(v): return v.animator != null and v.animator.rig != null)
+	list.sort_custom(func(a, b): return a.global_position.distance_squared_to(cp) < b.global_position.distance_squared_to(cp))
+	for i in list.size():
+		list[i].animator.rig.visible = i < FIGURE_BUDGET
 
 func set_figures_visible(on: bool) -> void:
 	## Simulation agents keep running; only the temporary figures are hidden.

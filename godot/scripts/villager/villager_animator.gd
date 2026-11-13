@@ -186,27 +186,6 @@ func build_model(key: String, seed_id: String) -> void:
 				d.set_shader_parameter("tag_mode", mode)
 				mats[key2] = d
 			m.set_surface_override_material(si, mats[key2])
-	var ua := OS.get_cmdline_user_args()
-	if "--charstd" in ua or "--noskin" in ua or "--noblend" in ua:
-		# web render bisection: plain material / no skinning / no blend shapes
-		for mi in model.find_children("*", "MeshInstance3D", true, false):
-			var m: MeshInstance3D = mi
-			if m.mesh == null:
-				continue
-			if "--charstd" in ua:
-				var sm := StandardMaterial3D.new()
-				sm.vertex_color_use_as_albedo = true
-				for si in m.mesh.get_surface_count():
-					m.set_surface_override_material(si, sm)
-			if "--noskin" in ua:
-				m.skeleton = NodePath("")
-				m.skin = null
-			if "--noblend" in ua and m.mesh is ArrayMesh and m.mesh.get_blend_shape_count() > 0:
-				var am := ArrayMesh.new()
-				for si in m.mesh.get_surface_count():
-					am.add_surface_from_arrays(m.mesh.surface_get_primitive_type(si), m.mesh.surface_get_arrays(si))
-					am.surface_set_material(si, m.get_surface_override_material(si))
-				m.mesh = am
 	_make_props()
 	# state machine over every clip the model has (one shared resource per clip list)
 	var names: Array = []
