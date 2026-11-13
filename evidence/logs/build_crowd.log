@@ -582,3 +582,41 @@ Fra:1 Mem:122.87M (Peak 410.83M) | Time:00:00.96 | Mem:73.09M, Peak:233.05M | Sc
 Fra:1 Mem:122.87M (Peak 410.83M) | Time:00:00.96 | Mem:73.09M, Peak:233.05M | Scene, ViewLayer | Loading denoising kernels (may take a few minutes the first time)
 Fra:1 Mem:122.87M (Peak 410.83M) | Time:00:00.96 | Mem:73.09M, Peak:233.05M | Scene, ViewLayer | Sample 0/32
 Fra:1 Mem:146.05M (Peak 410.83M) | Time:00:01.20 | Remaining:00:07.43 | Mem:96.22M, Peak:233.05M | Scene, ViewLayer | Sample 1/32
+Fra:1 Mem:155.79M (Peak 410.83M) | Time:00:09.71 | Mem:96.22M, Peak:233.05M | Scene, ViewLayer | Sample 32/32
+Fra:1 Mem:155.79M (Peak 410.83M) | Time:00:09.71 | Mem:96.22M, Peak:233.05M | Scene, ViewLayer | Finished
+Saved: '/home/user/IslandGR/evidence/characters/crowd/_p_V06.png'
+Time: 00:09.77 (Saving: 00:00.05)
+
+01:31:21 | INFO: Starting glTF 2.0 export
+01:31:21 | INFO: Extracting primitive: V06_body.001
+01:31:21 | INFO: Primitives created: 1
+01:31:21 | WARNING: There are more than 4 joint vertex influences.The 4 with highest weight will be used (and normalized).
+01:31:21 | INFO: Extracting primitive: V06_bottom.001
+01:31:21 | INFO: Primitives created: 1
+01:31:21 | INFO: Extracting primitive: V06_brows.001
+01:31:21 | INFO: Primitives created: 1
+01:31:21 | INFO: Extracting primitive: V06_eye_l.001
+01:31:21 | INFO: Primitives created: 1
+01:31:21 | INFO: Extracting primitive: V06_eye_r.001
+01:31:21 | INFO: Primitives created: 1
+01:31:21 | INFO: Extracting primitive: V06_headwrap.001
+01:31:21 | INFO: Primitives created: 1
+01:31:21 | INFO: Extracting primitive: V06_sandal_ankle_l.001
+01:31:21 | INFO: Primitives created: 1
+01:31:21 | INFO: Extracting primitive: V06_sandal_ankle_r.001
+01:31:21 | INFO: Primitives created: 1
+01:31:21 | INFO: Extracting primitive: V06_sandal_instep_l.001
+01:31:21 | INFO: Primitives created: 1
+01:31:21 | INFO: Extracting primitive: V06_sandal_instep_r.001
+01:31:21 | INFO: Primitives created: 1
+01:31:21 | INFO: Extracting primitive: V06_sandal_soles.001
+01:31:21 | INFO: Primitives created: 1
+01:31:21 | INFO: Extracting primitive: V06_skirt_hems.001
+01:31:21 | INFO: Primitives created: 1
+01:31:21 | INFO: Extracting primitive: V06_top.001
+01:31:21 | INFO: Primitives created: 1
+01:31:21 | INFO: Extracting primitive: V06_top_hem0.001
+01:31:21 | INFO: Primitives created: 1
+01:31:25 | INFO: Finished glTF 2.0 export in 4.162425518035889 s
+
+EXPORTED V06 54042 11147
