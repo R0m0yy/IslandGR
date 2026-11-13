@@ -35,6 +35,7 @@ var skills := {"fishing": 0.2, "cooking": 0.2, "trade": 0.2, "carpentry": 0.2}
 var memories: Array = []            # {"day", "type", "text", "valence"} - significant events only, capped
 var sick_days: int = 0
 var _react_t: float = 0.0
+var _hunger_break_at: float = -1.0
 var _shelter_t: float = 0.0
 var health: float = 100.0
 var needs := {"hunger": 25.0, "energy": 85.0, "thirst": 20.0, "hygiene": 80.0, "social": 60.0}
@@ -150,6 +151,18 @@ func tick(dt: float, minutes: float) -> void:
 	needs["thirst"] = minf(100.0, needs["thirst"] + (2.5 if asleep else 8.0) * hrs)
 	if needs["hunger"] >= 99.9:
 		stats["starve_minutes"] += minutes
+	# too hungry to carry on: drop a job, stroll, rest or swim (not mid-walk, not at sea) and decide again;
+	# the brain then puts food first (at most once an hour, so a blocked kitchen cannot cause thrashing)
+	if not asleep and needs["hunger"] >= 97.0 and not at_sea and GameClock.total_minutes >= _hunger_break_at \
+			and activity in ["work", "stroll", "rest_home", "swim", "mend_nets", "repair", "wash"] \
+			and fsm.current_name in ["work", "sit", "idle", "swim", "wash"]:
+		_hunger_break_at = GameClock.total_minutes + 60.0
+		_note("too hungry to go on with %s" % activity)
+		for st in plan:
+			if st.has("use"):
+				st["use"].release(self)
+		plan = []
+		fsm.change("idle", {"seconds": 0.5})
 	if not asleep:
 		needs["energy"] = maxf(0.0, needs["energy"] - 5.5 * hrs)
 		needs["hygiene"] = maxf(0.0, needs["hygiene"] - 3.0 * hrs)
