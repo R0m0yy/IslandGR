@@ -30,9 +30,9 @@ func bond(a: String, b: String) -> float:
 	return bonds.get(key(a, b), 0.0)
 
 var settings := {"fertile_min": 18.0, "fertile_max": 45.0, "births_per_fertile_year": 0.55, "birth_gap_years": 2.0, "pair_bond": 28.0,
-	"immigration": true, "vacancy_years": 1.5, "old_age": 70.0, "illness_per_day": 0.006,
+	"immigration": true, "vacancy_years": 1.5, "capacity": 55, "old_age": 70.0, "illness_per_day": 0.006,
 	"max_household": 6, "acquaintance_per_year": 10.0}
-var birth_blocked := {"age": 0, "no_room": 0, "money": 0, "gap": 0, "apart": 0}     # why couples did not have a child (couple-days)
+var birth_blocked := {"age": 0, "no_room": 0, "money": 0, "gap": 0, "apart": 0, "crowded": 0}     # why couples did not have a child (couple-days)
 
 const TEXT := {"birth": "A child, %s, was born %s.", "death": "%s died (%s).", "partnership": "%s and %s became a couple.",
 	"came_of_age": "%s came of age.", "retired": "%s retired (%s).", "moved": "%s moved %s.", "hired": "%s started work as %s.",
@@ -250,6 +250,10 @@ func _births(years: float) -> void:
 			continue
 		if village.ledger.money(v.hh) < 20:
 			birth_blocked["money"] += 1
+			continue
+		# carrying capacity: the island's fishing feeds about this many; families hold off when it is full
+		if village.villagers.size() >= int(settings.get("capacity", 55)):
+			birth_blocked["crowded"] += 1
 			continue
 		if rng.randf() < settings["births_per_fertile_year"] * years:
 			var rec := {"id": "V%d" % next_id, "name": CHILD_NAMES[next_id % CHILD_NAMES.size()], "household": v.hh, "home": v.home.building_id,

@@ -569,7 +569,7 @@ ERROR: Parameter "m" is null.
    at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
 ERROR: Parameter "m" is null.
    at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
-== scenario A done in 8744 ms
+== scenario A done in 8981 ms
 PASS  [B] a neighbour noticed and brought food (within 120 game minutes)  { "giver": "Milo", "transaction": [537.8, "gift", "HH_H06", "HH_H07", "fish", 3] }
 PASS  [B] the goods really moved: recipient pantry gained what the giver lost  
 PASS  [B] recipients remember the kindness  ["Milo brought us 3 fish when we had nothing", "Milo brought us 3 fish when we had nothing"]
@@ -1139,7 +1139,7 @@ ERROR: Parameter "m" is null.
    at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
 ERROR: Parameter "m" is null.
    at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
-== scenario B done in 3641 ms
+== scenario B done in 3529 ms
 PASS  [C] gulls stole fish on their own (in 280 game minutes)  { "thefts": 3, "attempts": 13 }
 PASS  [C] every theft removed a fish from the right account in the ledger  ["BIZ_P01", "BIZ_P01", "BOAT_01"]
 PASS  [C] every theft is in the journal with its cause  
@@ -1708,7 +1708,7 @@ ERROR: Parameter "m" is null.
    at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
 ERROR: Parameter "m" is null.
    at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
-== scenario C done in 2505 ms
+== scenario C done in 2588 ms
 PASS  [D] boats at sea came home and none left during the storm  { "at_sea_when_it_broke": 4, "moored_now": 6, "departures": 0 }
 PASS  [D] people outdoors sought shelter  { "ran_for_shelter": 12, "still_strolling_or_shore_fishing": 0 }
 PASS  [D] the sea rose with the wind (wave model)  0.99
@@ -2279,7 +2279,7 @@ ERROR: Parameter "m" is null.
    at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
 ERROR: Parameter "m" is null.
    at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
-== scenario D done in 9310 ms
+== scenario D done in 9448 ms
 PASS  [E] life events happened: partnerships, births, new jobs  { "births": 29, "partnerships": 12, "hired": 11, "moves": 12 }
 PASS  [E] a child born here grew up and took a job  [{ "id": "V1000", "name": "Ari", "age": 24, "job": { "role": "net_maker", "place": "P04", "hours": [6, 18] }, "home": "H17", "parents": ["V01", "V02"] }, { "id": "V1001", "name": "Bea", "age": 24, "job": <null>, "home": "H17", "parents": ["V05", "V06"] }, { "id": "V1002", "name": "Cai", "age": 24, "job": { "role": "storekeeper", "place": "P03", "hours": [6, 18] }, "home": "H07", "parents": ["V13",
 ERROR: Parameter "m" is null.
@@ -4501,7 +4501,7 @@ ERROR: Parameter "m" is null.
    at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
 ERROR: Parameter "m" is null.
    at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
-== scenario E done in 219104 ms
+== scenario E done in 235565 ms
 PASS  [F] supply fell: less fish landed  { "normal": 171, "poor": 22 }
 PASS  [F] the market responded: fish got dearer  { "normal": 4.58, "poor": 5.63 }
 PASS  [F] households changed behaviour: bought less, fished for themselves, or took credit  { "bought_fish": [48, 50], "handline_fish": [41, 108], "on_credit": [0, 0], "households_ever_without_food": [15, 16] }
@@ -5093,7 +5093,7 @@ ERROR: Parameter "m" is null.
    at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
 ERROR: Parameter "m" is null.
    at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
-== scenario F done in 47952 ms
+== scenario F done in 49083 ms
 PASS  [G] fish schools travel  642
 PASS  [G] schools bolt from predators and boats  20
 PASS  [G] barracuda hunt and eat fish  15
@@ -5665,7 +5665,7 @@ ERROR: Parameter "m" is null.
    at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
 ERROR: Parameter "m" is null.
    at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
-== scenario G done in 8192 ms
+== scenario G done in 8590 ms
 PASS  [Y] the run completed (28 game days; 28 = one year)  Day 29  05:59
 PASS  [Y] no route failures or failed object uses  { "failed_paths": 0, "failed_uses": 0 }
 PASS  [Y] nobody starves  0
@@ -6297,10 +6297,10 @@ ERROR: Parameter "m" is null.
    at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
 ERROR: Parameter "m" is null.
    at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
-== scenario Y done in 208935 ms
-PASS  [P] population does not collapse over 90 years  { "start": 42, "min": 57, "max": 107, "final": 96 }
-PASS  [P] population changes are explained by recorded births, deaths and arrivals  { "births": 117, "newcomers": 2, "deaths": 65, "final": 96 }
-PASS  [P] several generations: grandchildren of the founders exist  { "births": 117, "deaths": 65, "partnerships": 59, "came_of_age": 107, "retired": 55, "moves": 55, "estates": 14, "illnesses": 48, "newcomers": 2, "greetings": 12352 }
+== scenario Y done in 196856 ms
+PASS  [P] population does not collapse over 90 years  { "start": 42, "min": 57, "max": 107, "final": 98 }
+PASS  [P] population changes are explained by recorded births, deaths and arrivals  { "births": 121, "newcomers": 0, "deaths": 65, "final": 98 }
+PASS  [P] several generations: grandchildren of the founders exist  { "births": 121, "deaths": 65, "partnerships": 59, "came_of_age": 111, "retired": 53, "moves": 62, "estates": 15, "illnesses": 39, "newcomers": 0, "greetings": 13668 }
 PASS  [P] family links stay consistent  { "dangling": 0, "audit": [] }
 PASS  [P] businesses changed hands when owners left  20
 ERROR: Parameter "m" is null.
@@ -8293,7 +8293,31 @@ ERROR: Parameter "m" is null.
    at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
 ERROR: Parameter "m" is null.
    at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
-== scenario P done in 1061629 ms
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+== scenario P done in 1346283 ms
 RESULT: PASSED (61 passed, 0 failed)
 WARNING: ObjectDB instances leaked at exit (run with --verbose for details).
      at: cleanup (core/object/object.cpp:2284)
