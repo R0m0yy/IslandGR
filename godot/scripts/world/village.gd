@@ -71,6 +71,13 @@ func _ready() -> void:
 			hero_showcase.visible = false
 		if village_life:
 			village_life.visible = false
+	if "--novillagers" in ua:
+		for v in villagers:
+			v.visible = false
+	if "--noheroes" in ua and hero_showcase:
+		hero_showcase.visible = false
+	if "--nolife" in ua and village_life:
+		village_life.visible = false
 	if "--noanimals" in ua and atmosphere and atmosphere.has_node("Wildlife"):
 		atmosphere.get_node("Wildlife").visible = false
 
