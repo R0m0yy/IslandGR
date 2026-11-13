@@ -20,7 +20,7 @@
   "role": "child"
  },
  "hero_total_tris": 55150,
- "game_total_tris": 14148,
+ "game_total_tris": 14130,
  "clips": [
   "idle",
   "walk",
@@ -46,5 +46,18 @@
   "talk",
   "play"
  ],
- "height_m": 1.3
+ "height_m": 1.3,
+ "game_parts": {
+  "body": 4806,
+  "eye_l": 250,
+  "eye_r": 250,
+  "hair": 1276,
+  "brows": 250,
+  "top_hem0": 354,
+  "top": 5628,
+  "bottom_hem0": 250,
+  "bottom": 548,
+  "belt_edge0": 270,
+  "belt": 248
+ }
 }
