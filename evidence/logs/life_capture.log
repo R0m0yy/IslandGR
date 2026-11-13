@@ -19,9 +19,11 @@ WARNING: Screen-space ambient occlusion (SSAO) can only be enabled when using th
      at: environment_set_ssao (servers/rendering/storage/environment_storage.cpp:574)
 saved L01_market_stalls at Day 1  09:40
 saved L02_village_crowd at Day 1  09:40
-BOAT BOAT_02 state=outbound crew=Ada fsm=fish_trip anim=row animator.current=row tree=row travel=[] phase=0.2195798165239 gear=["oar-1", "oar1"] variant=V01
+BOAT BOAT_02 state=outbound crew=Ada fsm=fish_trip anim=row animator.current=row tree=row travel=[] phase=0.21544981619554 gear=["oar-1", "oar1"] variant=V01
+  NEAR Ada d=0.39 local=(-0.15, 0.45, -0.01) at_sea=true fsm=fish_trip anim=row react=0
 saved L03_rowing_skiff at Day 1  09:58
 BOAT BOAT_05 state=inbound crew=Wren fsm=fish_trip anim=steer animator.current=steer tree=steer travel=[] phase=0 gear=["motor", "prop"] variant=V04
+  NEAR Wren d=2.35 local=(-2.25, 0.65, 0.04) at_sea=true fsm=fish_trip anim=steer react=0
 saved L04_motor_boat at Day 1  11:53
 saved L05_swimmers at Day 1  13:33
 saved L06_surf_shore at Day 1  13:33

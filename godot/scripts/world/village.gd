@@ -71,6 +71,15 @@ func _ready() -> void:
 			hero_showcase.visible = false
 		if village_life:
 			village_life.visible = false
+	for a in ua:
+		if a.begins_with("--skipvill="):
+			var skip := int(a.substr(11))
+			for i in villagers.size():
+				villagers[i].visible = i >= skip
+		if a.begins_with("--maxvill="):
+			var keep := int(a.substr(10))
+			for i in villagers.size():
+				villagers[i].visible = i < keep
 	if "--novillagers" in ua:
 		for v in villagers:
 			v.visible = false
