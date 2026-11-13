@@ -313,6 +313,13 @@ func buy_meal(v) -> bool:
 		ledger.consume(EATERY, "meal", 1, "eaten_out")
 		stats["meals_sold"] += 1
 		return true
+	if v.needs["hunger"] >= 85.0 and food_of(v.hh) == 0 and ledger.qty(EATERY, "meal") > 0:
+		# nobody goes hungry with the eatery open: a meal on the house for someone with nothing
+		ledger.consume(EATERY, "meal", 1, "charity_meal")
+		stats["charity_meals"] = int(stats.get("charity_meals", 0)) + 1
+		v.remember("charity", "the eatery fed us when we had nothing", 4.0)
+		village.journal.add("community", [v.villager_id], "The eatery gave %s a meal on the house." % v.display_name, "hungry, empty larder, empty purse")
+		return true
 	return false
 
 func buy_bait(v) -> int:

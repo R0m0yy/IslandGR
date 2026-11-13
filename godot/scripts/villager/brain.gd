@@ -53,6 +53,8 @@ func decide() -> Dictionary:
 		s["buy_food"] = (need * 1.0 + 11.0) if (meals == 0 and raw == 0 and shop_open and w.weather.state != "storm" and l.qty(Economy.MARKET, "fish") > 0 and purse >= w.economy.fish_sell_price()) else 0.0
 		var eatery_open: bool = h >= 7.0 and h < 21.0 and l.qty(Economy.EATERY, "meal") > 0
 		s["eat_out"] = (hunger * 1.05 + 4.0) if (meals == 0 and hunger > 45.0 and eatery_open and purse >= Economy.MEAL_PRICE + 6) else 0.0
+		if eatery_open and meals == 0 and raw == 0 and hunger >= 85.0 and purse < Economy.MEAL_PRICE + 6:
+			s["eat_out"] = maxf(s["eat_out"], hunger * 1.15 + 12.0)     # a meal on the house (Economy.buy_meal)
 		if eatery_open and purse > 90 and hunger > 35.0:
 			# a household with money to spare treats itself now and then
 			s["eat_out"] = maxf(s["eat_out"], hunger * 0.9 + 10.0 * v.sociability)
