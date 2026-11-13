@@ -161,6 +161,24 @@ func _new_day() -> void:
 			bonds.erase(k)
 
 func _partnerships() -> void:
+	# couples who could not move in together when they paired up try again each year:
+	# one moves in with the other, or, if neither home has room, they set up together in an empty house
+	for a in village.villagers.duplicate():
+		if a.partner == "" or a.villager_id > a.partner:
+			continue
+		var b = village.villager_by_id(a.partner)
+		if b == null or b.hh == a.hh:
+			continue
+		var moved: bool = village.move_household(b, a.hh) or village.move_household(a, b.hh)
+		if not moved:
+			for hh2 in village.households:
+				if village.households[hh2]["members"] == 0 and village.move_household(a, hh2):
+					if not village.move_household(b, hh2):
+						pass                    # a has the new house; b follows when a bed frees up
+					moved = true
+					break
+		if moved:
+			counts["moves"] += 1
 	var singles: Array = village.villagers.filter(func(v): return v.partner == "" and v.age >= 18.0 and v.age < 60.0)
 	for i in singles.size():
 		var a = singles[i]
