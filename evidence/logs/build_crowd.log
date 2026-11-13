@@ -929,3 +929,95 @@ Time: 00:09.57 (Saving: 00:00.03)
 01:33:06 | INFO: Finished glTF 2.0 export in 4.742156744003296 s
 
 EXPORTED V09 61954 11565
+Fra:1 Mem:49.96M (Peak 49.96M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | V10_eye_l
+Fra:1 Mem:50.00M (Peak 50.00M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | rim
+Fra:1 Mem:50.01M (Peak 50.01M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | fill
+Fra:1 Mem:50.01M (Peak 50.01M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | ground
+Fra:1 Mem:50.13M (Peak 50.13M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | LT_sun
+Fra:1 Mem:50.13M (Peak 50.13M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | V10_hat_band
+Fra:1 Mem:50.21M (Peak 50.21M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | V10_eye_r
+Fra:1 Mem:50.52M (Peak 50.52M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | V10_hair
+Fra:1 Mem:50.82M (Peak 50.82M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | V10_hat
+Fra:1 Mem:52.05M (Peak 52.05M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | V10_belt_edge0
+Fra:1 Mem:56.26M (Peak 56.26M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | V10_belt
+Fra:1 Mem:56.42M (Peak 56.42M) | Time:00:00.00 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | V10_brows
+Fra:1 Mem:56.52M (Peak 56.52M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | V10_top
+Fra:1 Mem:56.79M (Peak 57.67M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | V10_top_hem0
+Fra:1 Mem:55.26M (Peak 59.98M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | V10_bottom
+Fra:1 Mem:55.25M (Peak 59.98M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | V10_bottom_hem0
+Fra:1 Mem:55.03M (Peak 59.98M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Initializing
+Fra:1 Mem:51.01M (Peak 59.98M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Waiting for render to start
+Fra:1 Mem:51.01M (Peak 59.98M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Scene
+Fra:1 Mem:51.01M (Peak 59.98M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Shaders
+Fra:1 Mem:51.01M (Peak 59.98M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Loading render kernels (may take a few minutes the first time)
+Fra:1 Mem:51.10M (Peak 59.98M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Procedurals
+Fra:1 Mem:51.10M (Peak 59.98M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Background
+Fra:1 Mem:51.10M (Peak 59.98M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Camera
+Fra:1 Mem:51.10M (Peak 59.98M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Meshes Flags
+Fra:1 Mem:51.10M (Peak 59.98M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Objects
+Fra:1 Mem:51.10M (Peak 59.98M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Objects | Copying Transformations to device
+Fra:1 Mem:51.10M (Peak 59.98M) | Time:00:00.02 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Particle Systems
+Fra:1 Mem:51.10M (Peak 59.98M) | Time:00:00.02 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Particle Systems | Copying Particles to device
+Fra:1 Mem:51.10M (Peak 59.98M) | Time:00:00.02 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Meshes
+Fra:1 Mem:51.10M (Peak 59.98M) | Time:00:00.02 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Objects | Applying Static Transformations
+Fra:1 Mem:51.10M (Peak 59.98M) | Time:00:00.02 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Mesh | Computing attributes
+Fra:1 Mem:53.62M (Peak 59.98M) | Time:00:00.02 | Mem:0.01M, Peak:0.01M | Scene, ViewLayer | Updating Mesh | Copying Attributes to device
+Fra:1 Mem:53.62M (Peak 59.98M) | Time:00:00.02 | Mem:2.52M, Peak:2.52M | Scene, ViewLayer | Updating Scene BVH | Building
+Fra:1 Mem:53.62M (Peak 59.98M) | Time:00:00.02 | Mem:2.52M, Peak:2.52M | Scene, ViewLayer | Updating Scene BVH | Building BVH
+Fra:1 Mem:53.62M (Peak 59.98M) | Time:00:00.02 | Mem:3.97M, Peak:3.97M | Scene, ViewLayer | Updating Scene BVH | Building BVH 0%
+Fra:1 Mem:53.62M (Peak 59.98M) | Time:00:00.02 | Mem:5.56M, Peak:7.01M | Scene, ViewLayer | Updating Scene BVH | Copying BVH to device
+Fra:1 Mem:53.62M (Peak 59.98M) | Time:00:00.02 | Mem:5.56M, Peak:7.01M | Scene, ViewLayer | Updating Mesh | Computing normals
+Fra:1 Mem:55.01M (Peak 59.98M) | Time:00:00.03 | Mem:5.56M, Peak:7.01M | Scene, ViewLayer | Updating Mesh | Copying Mesh to device
+Fra:1 Mem:55.01M (Peak 59.98M) | Time:00:00.03 | Mem:6.95M, Peak:7.01M | Scene, ViewLayer | Updating Objects Flags
+Fra:1 Mem:55.01M (Peak 59.98M) | Time:00:00.03 | Mem:6.95M, Peak:7.01M | Scene, ViewLayer | Updating Primitive Offsets
+Fra:1 Mem:55.01M (Peak 59.98M) | Time:00:00.03 | Mem:6.95M, Peak:7.01M | Scene, ViewLayer | Updating Images
+Fra:1 Mem:55.01M (Peak 59.98M) | Time:00:00.03 | Mem:6.95M, Peak:7.01M | Scene, ViewLayer | Updating Images | Loading sky_nishita
+Fra:1 Mem:56.02M (Peak 59.98M) | Time:00:00.14 | Mem:7.95M, Peak:7.95M | Scene, ViewLayer | Updating Camera Volume
+Fra:1 Mem:56.02M (Peak 59.98M) | Time:00:00.14 | Mem:7.95M, Peak:7.95M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:56.02M (Peak 59.98M) | Time:00:00.14 | Mem:8.03M, Peak:8.03M | Scene, ViewLayer | Updating Lights
+Fra:1 Mem:56.02M (Peak 59.98M) | Time:00:00.14 | Mem:8.03M, Peak:8.03M | Scene, ViewLayer | Updating Lights | Importance map
+Fra:1 Mem:120.05M (Peak 408.02M) | Time:00:00.93 | Mem:72.08M, Peak:232.04M | Scene, ViewLayer | Updating Lights | Computing tree
+Fra:1 Mem:120.05M (Peak 408.02M) | Time:00:00.93 | Mem:72.08M, Peak:232.04M | Scene, ViewLayer | Updating Integrator
+Fra:1 Mem:120.05M (Peak 408.02M) | Time:00:00.93 | Mem:72.08M, Peak:232.04M | Scene, ViewLayer | Updating Film
+Fra:1 Mem:120.06M (Peak 408.02M) | Time:00:00.93 | Mem:71.99M, Peak:232.04M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:120.06M (Peak 408.02M) | Time:00:00.93 | Mem:72.08M, Peak:232.04M | Scene, ViewLayer | Updating Baking
+Fra:1 Mem:120.06M (Peak 408.02M) | Time:00:00.93 | Mem:72.08M, Peak:232.04M | Scene, ViewLayer | Updating Device | Writing constant memory
+Fra:1 Mem:120.06M (Peak 408.02M) | Time:00:00.93 | Mem:72.08M, Peak:232.04M | Scene, ViewLayer | Loading denoising kernels (may take a few minutes the first time)
+Fra:1 Mem:120.06M (Peak 408.02M) | Time:00:00.93 | Mem:72.08M, Peak:232.04M | Scene, ViewLayer | Sample 0/32
+Fra:1 Mem:143.24M (Peak 408.02M) | Time:00:01.12 | Remaining:00:06.03 | Mem:95.22M, Peak:232.04M | Scene, ViewLayer | Sample 1/32
+Fra:1 Mem:152.98M (Peak 408.02M) | Time:00:09.05 | Mem:95.22M, Peak:232.04M | Scene, ViewLayer | Sample 32/32
+Fra:1 Mem:152.98M (Peak 408.02M) | Time:00:09.05 | Mem:95.22M, Peak:232.04M | Scene, ViewLayer | Finished
+Saved: '/home/user/IslandGR/evidence/characters/crowd/_p_V10.png'
+Time: 00:09.09 (Saving: 00:00.03)
+
+01:33:33 | INFO: Starting glTF 2.0 export
+01:33:33 | INFO: Extracting primitive: V10_belt.001
+01:33:33 | INFO: Primitives created: 1
+01:33:33 | WARNING: There are more than 4 joint vertex influences.The 4 with highest weight will be used (and normalized).
+01:33:33 | INFO: Extracting primitive: V10_belt_edge0.001
+01:33:33 | INFO: Primitives created: 1
+01:33:33 | INFO: Extracting primitive: V10_body.001
+01:33:33 | INFO: Primitives created: 1
+01:33:33 | INFO: Extracting primitive: V10_bottom.001
+01:33:33 | INFO: Primitives created: 1
+01:33:33 | INFO: Extracting primitive: V10_bottom_hem0.001
+01:33:33 | INFO: Primitives created: 1
+01:33:33 | INFO: Extracting primitive: V10_brows.001
+01:33:33 | INFO: Primitives created: 1
+01:33:33 | INFO: Extracting primitive: V10_eye_l.001
+01:33:33 | INFO: Primitives created: 1
+01:33:33 | INFO: Extracting primitive: V10_eye_r.001
+01:33:33 | INFO: Primitives created: 1
+01:33:33 | INFO: Extracting primitive: V10_hair.001
+01:33:33 | INFO: Primitives created: 1
+01:33:33 | INFO: Extracting primitive: V10_hat.001
+01:33:33 | INFO: Primitives created: 1
+01:33:33 | INFO: Extracting primitive: V10_hat_band.001
+01:33:33 | INFO: Primitives created: 1
+01:33:33 | INFO: Extracting primitive: V10_top.001
+01:33:33 | INFO: Primitives created: 1
+01:33:33 | INFO: Extracting primitive: V10_top_hem0.001
+01:33:33 | INFO: Primitives created: 1
+01:33:37 | INFO: Finished glTF 2.0 export in 3.9152114391326904 s
+
+EXPORTED V10 47564 10738
