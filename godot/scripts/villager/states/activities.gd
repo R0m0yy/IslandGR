@@ -190,10 +190,11 @@ class FishTripState extends UseObjectState:
 		# aboard: rowers sit amidships facing the stern, the motor man sits by the outboard facing the bow
 		var hd: float = boat.visual.rotation.y if boat.visual else 0.0
 		var bow := Vector3(cos(hd), 0, -sin(hd))
-		var seat := -0.15 if not boat.engine else -1.2
+		var seat := -0.15 if not boat.engine else -2.3      # helmsman aft of the wheelhouse, by the outboard
 		if boat.boat_state == "fishing":
-			seat = 0.4
-		v.global_position = boat.pos + bow * seat + Vector3(0, 0.45 + v.world.ocean.height(boat.pos.x, boat.pos.z), 0)
+			seat = 0.4 if not boat.engine else 1.05         # fishing boats work from the foredeck, between mast and net pile
+		var bp: Vector3 = boat.visual_pos()
+		v.global_position = bp + bow * seat + Vector3(0, 0.45 + v.world.ocean.height(bp.x, bp.z), 0)
 		var face := -bow if (not boat.engine and boat.boat_state in ["outbound", "inbound"]) else bow
 		if boat.boat_state == "fishing":
 			face = bow.cross(Vector3.UP)            # over the side

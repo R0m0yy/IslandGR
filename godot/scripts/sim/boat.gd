@@ -34,10 +34,24 @@ var engine: bool = false            # fishing boats carry an outboard; skiffs ar
 func capacity_fish() -> int:
 	return CAPACITY.get(boat_kind, 10)
 
+func spread() -> Vector3:
+	## Boats bound for the same ground share its waypoint; each hull is drawn a few metres to its
+	## own side once clear of the mooring so two boats never sit inside one another.
+	## Presentation only: `pos` (the simulation position) is unchanged.
+	var digits := object_id.right(2)
+	var slot: int = int(digits) if digits.is_valid_int() else absi(hash(object_id))
+	var a: float = float(slot % 6) * TAU / 6.0 + 0.4          # six boats, six directions 60 degrees apart
+	var away: float = clampf((Vector3(pos.x, 0, pos.z) - Vector3(home_pos.x, 0, home_pos.z)).length() / 25.0, 0.0, 1.0)
+	return Vector3(cos(a), 0, sin(a)) * 7.0 * away
+
+func visual_pos() -> Vector3:
+	return pos + spread()
+
 func place(p: Vector3, heading: Vector3 = Vector3.ZERO) -> void:
 	pos = p
 	if visual:
-		visual.global_position = Vector3(p.x, visual.global_position.y, p.z)
+		var vp := visual_pos()
+		visual.global_position = Vector3(vp.x, visual.global_position.y, vp.z)
 		if heading.length_squared() > 1e-6:
 			visual.rotation.y = atan2(-heading.z, heading.x)       # bow is +x in the model
 

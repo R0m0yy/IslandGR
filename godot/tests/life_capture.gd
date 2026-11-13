@@ -47,12 +47,20 @@ func _ready() -> void:
 		print("BOAT ", got.object_id, " state=", got.boat_state, " crew=", crew.display_name, " fsm=", crew.fsm.current_name,
 			" anim=", crew.fsm.current.anim, " animator.current=", crew.animator.current, " tree=", crew.animator.playback.get_current_node(), " travel=", crew.animator.playback.get_travel_path(), " phase=", crew.animator.phase(),
 			" gear=", got.gear.keys(), " variant=", crew.animator.variant)
+		for v in village.villagers:
+			if v.global_position.distance_to(got.visual_pos()) < 5.0:
+				print("  NEAR ", v.display_name, " d=", snappedf(v.global_position.distance_to(got.visual_pos()), 0.01), " local=", got.visual.to_local(v.global_position).snapped(Vector3.ONE * 0.01),
+					" at_sea=", v.at_sea, " fsm=", v.fsm.current_name, " anim=", v.animator.current if v.animator else "-", " react=", v._react_t)
 		var hd: float = got.visual.rotation.y
 		var bow := Vector3(cos(hd), 0, -sin(hd))
 		var side := bow.cross(Vector3.UP)
 		var out: Vector3 = Vector3(got.pos.x, 0, got.pos.z).normalized()
 		var sea_side: Vector3 = side if side.dot(out) > 0.0 else -side
-		await _shot(want[0], got.pos + sea_side * 4.0 + bow * 1.2 + Vector3(0, 2.2, 0), got.pos + Vector3(0, 0.6, 0))
+		var vp: Vector3 = got.visual_pos()
+		await _shot(want[0], vp + sea_side * 4.0 + bow * 1.2 + Vector3(0, 2.2, 0), vp + Vector3(0, 0.6, 0))
+	if "--boats-only" in OS.get_cmdline_user_args():
+		get_tree().quit()
+		return
 	# a fine afternoon: some residents go for a swim off the spit
 	await _advance_to(13.2)
 	var n := 0
