@@ -20,7 +20,7 @@
   "role": "cook"
  },
  "hero_total_tris": 46616,
- "game_total_tris": 10716,
+ "game_total_tris": 10753,
  "clips": [
   "idle",
   "walk",
@@ -46,5 +46,19 @@
   "talk",
   "play"
  ],
- "height_m": 1.592170589153181
+ "height_m": 1.592170589153181,
+ "game_parts": {
+  "body": 5909,
+  "eye_l": 250,
+  "eye_r": 250,
+  "hair": 486,
+  "hair_bun": 250,
+  "brows": 250,
+  "top_hem0": 758,
+  "top": 938,
+  "bottom": 748,
+  "skirt_hems": 298,
+  "apron_hem": 366,
+  "apron": 250
+ }
 }
