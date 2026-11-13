@@ -22,7 +22,7 @@
   "role": "trader"
  },
  "hero_total_tris": 89668,
- "game_total_tris": 10776,
+ "game_total_tris": 10710,
  "clips": [
   "idle",
   "walk",
@@ -48,5 +48,25 @@
   "talk",
   "play"
  ],
- "height_m": 1.737200861362642
+ "height_m": 1.737200861362642,
+ "game_parts": {
+  "body": 2329,
+  "eye_l": 250,
+  "eye_r": 250,
+  "hair": 868,
+  "brows": 250,
+  "beard": 1334,
+  "top_hem0": 254,
+  "top": 1132,
+  "collar": 250,
+  "bottom_hem0": 250,
+  "bottom": 375,
+  "belt_edge0": 250,
+  "belt": 250,
+  "vest_hem0": 606,
+  "vest": 568,
+  "vest_buttons": 144,
+  "boots": 1100,
+  "boot_soles": 250
+ }
 }

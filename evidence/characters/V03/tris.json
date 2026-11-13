@@ -25,7 +25,7 @@
   "role": "worker"
  },
  "hero_total_tris": 52008,
- "game_total_tris": 11536,
+ "game_total_tris": 11508,
  "clips": [
   "idle",
   "walk",
@@ -51,5 +51,25 @@
   "talk",
   "play"
  ],
- "height_m": 1.728710105329516
+ "height_m": 1.728710105329516,
+ "game_parts": {
+  "body": 5276,
+  "eye_l": 250,
+  "eye_r": 250,
+  "hair": 508,
+  "brows": 250,
+  "top_hem0": 712,
+  "top": 1046,
+  "bottom_hem0": 250,
+  "bottom": 600,
+  "belt_edge0": 342,
+  "belt": 250,
+  "hat": 276,
+  "hat_band": 248,
+  "sandal_soles": 250,
+  "sandal_instep_l": 250,
+  "sandal_ankle_l": 250,
+  "sandal_instep_r": 250,
+  "sandal_ankle_r": 250
+ }
 }

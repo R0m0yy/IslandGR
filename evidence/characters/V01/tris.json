@@ -25,7 +25,7 @@
   "role": "fisher"
  },
  "hero_total_tris": 55344,
- "game_total_tris": 10766,
+ "game_total_tris": 10716,
  "clips": [
   "idle",
   "walk",
@@ -51,5 +51,24 @@
   "talk",
   "play"
  ],
- "height_m": 1.6838444119280471
+ "height_m": 1.6838444119280471,
+ "game_parts": {
+  "body": 3364,
+  "eye_l": 250,
+  "eye_r": 250,
+  "hair": 466,
+  "brows": 250,
+  "top_hem0": 394,
+  "top": 1464,
+  "sleeve_roll_l": 250,
+  "sleeve_roll_r": 250,
+  "collar": 250,
+  "bottom_hem0": 250,
+  "bottom": 478,
+  "belt_edge0": 342,
+  "belt": 250,
+  "hat": 400,
+  "boots": 1558,
+  "boot_soles": 250
+ }
 }
