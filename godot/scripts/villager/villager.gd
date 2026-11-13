@@ -175,6 +175,8 @@ func remember(type: String, text: String, valence: float = 0.0) -> void:
 
 func react(clip: String, seconds: float) -> void:
 	## A brief visible reaction (shooing a gull, waving) that does not change the plan.
+	if at_sea or (fsm and fsm.current_name == "swim"):
+		return              # a crew keeps rowing / steering / hauling and a swimmer keeps swimming: no standing up to shoo a gull
 	_react_t = seconds
 	if animator:
 		animator.play({"shoo": "work"}.get(clip, clip))

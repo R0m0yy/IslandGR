@@ -28,6 +28,11 @@ varying float crest;
 varying float vdepth;
 varying float surf;
 
+vec2 hash2(vec2 p) {
+	p = vec2(dot(p, vec2(127.1, 311.7)), dot(p, vec2(269.5, 183.3)));
+	return fract(sin(p) * 43758.5453);
+}
+
 float h(vec2 p, float t) {
 	return sin(p.x * wave_scale + t) * 0.5 + sin(p.y * wave_scale * 1.3 - t * 0.8) * 0.35
 		+ sin((p.x + p.y) * wave_scale * 2.1 + t * 1.7) * 0.15
@@ -84,7 +89,13 @@ void fragment() {
 	col = mix(col, col * vec3(0.55, 0.65, 1.0), (1.0 - light_level) * 0.6);
 	ALBEDO = col;
 	// sun glints: a few facets flash as they tilt toward the sun
-	float glint = pow(max(0.0, sin(dot(wpos.xz, vec2(4.1, 3.3)) + TIME * 3.0) * sin(dot(wpos.xz, vec2(-2.7, 5.2)) - TIME * 2.3)), 12.0);
+	// scattered at random (jittered cells, each flashing at its own moment), never on a grid
+	vec2 gp = wpos.xz * 1.3 + vec2(TIME * 0.11, -TIME * 0.07);
+	vec2 gc = floor(gp);
+	vec2 gr = hash2(gc);
+	float gd = length(fract(gp) - (0.2 + 0.6 * gr));
+	float flash = pow(max(0.0, sin(TIME * (1.3 + 1.7 * gr.x) + gr.y * 40.0)), 24.0);
+	float glint = (1.0 - smoothstep(0.03, 0.11, gd)) * flash * step(0.55, fract(gr.x * 13.7 + gr.y * 7.1));
 	EMISSION = vec3(1.0, 0.97, 0.9) * glint * 0.6 * light_level * k * (1.0 - storm);
 	ROUGHNESS = 0.1;
 	SPECULAR = 0.6 * light_level + 0.2;
