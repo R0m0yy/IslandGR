@@ -79,3 +79,32 @@ Status: clips exist and play in Godot (`tests/hero_test.tscn`). **UNVERIFIED:** 
 they read in motion to a person (only still frames were reviewed). **Not done:** foot
 IK on stairs (feet follow the clip, not the step heights), root motion, facial
 lip-sync, using the hero models for the 42 simulated residents.
+
+## Session 8 update — every resident animated, life clips
+All 42 residents now use one of 14 crowd characters (`crowd.py`, V01–V14) and the four
+heroes keep their own; every character carries the same 23 clips (A–D add their job
+clip, so 24). `VillagerAnimator` plays them through a shared AnimationTree state machine.
+
+| Clip | Length | Loop | Motion | Used by |
+|---|---|---|---|---|
+| give | 2.4 s | no* | take an item from the hip / counter, reach it out, hold, return | fish-market server and buyer, stallholders and customers (prop shown in hand) |
+| carry | 1.0 s | yes | walk with both hands holding a load in front | crews unloading the catch (crate prop) |
+| row | 1.8 s | yes | seated facing the stern: catch, drive, finish, recovery; oars follow the clip phase | skiff crews outbound / inbound |
+| steer | 3.0 s | yes | seated at the stern, hand on the outboard tiller, looking ahead | fishing-boat helmsman |
+| swim | 1.4 s | yes | front crawl at the waterline, flutter kick | swimmers off the spit |
+| cast | 4.0 s | yes | back swing, flick, then wait with the rod | crew at the fishing grounds (rod prop) |
+| haul_net | 1.5 s | yes | bent over the gunwale, hand over hand | crew at the fishing grounds, alternating with cast |
+| sweep | 1.2 s | yes | broom strokes side to side | stallholders between customers (broom prop) |
+| talk | 2.4 s | yes | gestures, head turns, weight shift | residents who meet within 3 m (both face each other) |
+| play | 0.8 s | yes | hop and skip, arms high | children idling outdoors |
+| run | 0.66 s | yes | as Session 7 | — |
+
+\* looped in the tree, timed by the caller.
+
+Reactions (`Villager.react`) no longer interrupt a crew at sea or a swimmer: a gull
+pestering a boat used to make the helmsman stand up mid-voyage.
+
+Status: PASSED for loading and playing in Godot (`tests/hero_test.tscn`,
+`tests/life_capture.tscn` screenshots). UNVERIFIED: how the motion reads to a person in
+real time. NOT IMPLEMENTED: foot IK, oar blades meeting the moving wave surface exactly
+(the oars swing with the clip, the hull rides the swell).
