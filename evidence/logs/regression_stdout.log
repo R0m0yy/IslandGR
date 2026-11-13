@@ -1,0 +1,21 @@
+Godot Engine v4.3.stable.official.77dcf97d8 - https://godotengine.org
+
+PASS  layout has 30 buildings  30
+PASS  30 building prefabs instanced  30
+PASS  every prefab has ROOF, BASE, wall groups and a hinged door node  []
+PASS  environment GLBs loaded  
+PASS  interaction anchors placed (368 stubs in layout)  367
+PASS  all 435 door-to-door pairs routable  { "unreachable": 0, "longest_m": 119.3 }
+PASS  every interior anchor reachable from its front door  []
+PASS  every villager's bed connects to every fishing spot  0
+PASS  quay cottage -> crown cottage route uses stairs  ["door", "walk", "stair"]
+PASS  door cycles closed>opening>open>closing>closed  ["closed", "opening", "open", "closing", "closed"]
+PASS  door leaf node rotates ~100 deg about its hinge  100
+PASS  stove cold>lit>cooking>cold, fire light on while lit  ["cold", "lit", "cooking", "cold"]
+PASS  cooking moves stock: 1 raw fish -> 3 meals  { "money": 10, "items": { "fish": 0, "meal": 3 } }
+PASS  ledger refuses to go negative  2
+PASS  bed is reserved for its owner only  
+PASS  interior lighting follows building state  
+PASS  cutaway hides roof + camera-facing walls  
+PASS  placeholder rig exposes all 12 animation clips  ["idle", "walk", "climb_stairs", "climb_ladder", "open_door", "cook", "eat", "sit", "sleep", "fish", "work", "wave"]
+PASS  animation state machine travels idle -> walk  walk

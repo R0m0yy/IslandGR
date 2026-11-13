@@ -104,3 +104,7 @@
 - Feet follow surfaces by a ray cast; on very steep rock a figure can still dip a few centimetres.
 - Swimmers loop near a fixed spot off the spit; they do not use the walk graph in the water.
 - Screenshots come from software rendering under xvfb; the hardware look and frame rate on a phone are UNVERIFIED with 46 animated characters.
+- Browsers / phones draw only the 20 residents nearest the camera (FIGURE_BUDGET in village.gd). The limit was found under Chromium's software WebGL; real phone GPUs may allow more or fewer. UNVERIFIED on a real device.
+- The motor-boat helmsman's hand rests near, not on, the tiller; oar blades follow the clip, not the exact wave surface.
+- Boats on a shared ground are spread apart only visually; their simulation positions still coincide.
+- The village population is capped at 55 for births (carrying capacity); immigration still fills empty houses.

@@ -207,7 +207,15 @@
 - Ocean: long swell added to the shared wave model (boats ride it), surf rising and rolling into the shallows, breaking foam, caustics over sand, sun glints, tide range 0.45 m (visible high / low water).
 - Wildlife: the 12 Blender animal models replace the placeholder shapes, animated in a vertex shader (wingbeats, swimming tails, dolphin undulation, turtle flippers, crab legs).
 - Life: swimming off the spit on fine days (a leisure activity with its own state), people talk when they meet at the market, children play, a seaplane crosses the sky now and then, a yacht sails round the horizon.
-- Tests: regression 57/57; scenario A failed once (an extra random draw changed a resident's day) and passes after giving the swim score its own noise source.
+- Follow-up fixes found while checking the work:
+  - short beards on V02 / V04 / V09 read as blocks over the mouth; now a small rounded chin tuft over painted stubble;
+  - sun glints on the sea formed a visible grid; now scattered at random;
+  - a helmsman stood up to shoo gulls (the shoo reaction used the hammer clip) and sat inside the wheelhouse; crews and swimmers now ignore reactions and the helmsman sits aft by the outboard;
+  - boats fishing the same ground overlapped exactly; each hull is now drawn to its own side (visual only);
+  - hunger: older children grill a fish when nobody has cooked, neighbours look in on frail households sooner, and residents near starving drop work or leisure to eat;
+  - society: couples who could not move in together now retry each year; births pause while the village is at its carrying capacity (55);
+  - web: the browser build drew no 3D at all (only the sky). Bisection showed WebGL running out of per-character resources once ~35 animated characters were on screen; browsers and phones now draw the 20 residents nearest the camera. Shaders were also guarded against NaN (pow / normalize).
+- Tests: TESTS_PLACEHOLDER
 
 **Not done / open**
 - Variant clothing colours come from per-mesh tags in Godot (the glTF exporter dropped the vertex-alpha tags).
