@@ -215,7 +215,8 @@
   - hunger: older children grill a fish when nobody has cooked, neighbours look in on frail households sooner, and residents near starving drop work or leisure to eat;
   - society: couples who could not move in together now retry each year; births pause while the village is at its carrying capacity (55);
   - web: the browser build drew no 3D at all (only the sky). Bisection showed WebGL running out of per-character resources once ~35 animated characters were on screen; browsers and phones now draw the 20 residents nearest the camera. Shaders were also guarded against NaN (pow / normalize).
-- Tests: TESTS_PLACEHOLDER
+- Tests (final): regression 57/57 (45-year generations, village fed, population 55), living-world scenarios 61/61 (90-year population 55–57), hero_test 22/22 headless; web build smoke-tested in Chromium software WebGL (renders, runs 100 s with zoom). Published: playable artifact v6, gallery v3.
+- Hunger safety net: the eatery gives a meal on the house to a resident near starving with an empty larder and purse (journalled).
 
 **Not done / open**
 - Variant clothing colours come from per-mesh tags in Godot (the glTF exporter dropped the vertex-alpha tags).

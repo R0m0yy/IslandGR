@@ -3,6 +3,24 @@
 Statuses: **PASSED** (executed, evidence on disk) · **FAILED** (tested, defect found) · **UNVERIFIED** · **NOT IMPLEMENTED**.
 Last update: 2026-11-12, session 7. Earlier session records are preserved unchanged below.
 
+## Session 8 — a living village
+
+| Item | Status | Evidence |
+|---|---|---|
+| All 42 residents use real character models (14 crowd variants V01–V14) | PASSED | evidence/characters/crowd/lineup.png, evidence/characters/V01..V14/tris.json |
+| 23 clips per character (12 game + run, give, carry, row, steer, swim, cast, haul_net, sweep, talk, play) | PASSED | hero_test 22/22, ANIMATION_MATRIX.md |
+| Skiffs rowed (oars follow the stroke), fishing boats motored (outboard, seated helmsman) | PASSED | evidence/renders_life/L03, L04 |
+| Visible handover at fish market and quay stalls | PASSED | L01; activities.gd ShopState, village_life.gd |
+| Ocean swell, surf, foam, caustics, glints, 0.45 m tide | PASSED | L05, L06, L08 |
+| Modelled, animated wildlife | PASSED | L07, L08 |
+| Swimming, talking, children playing, seaplane, yacht | PASSED | L05, L09 |
+| Regression suite | PASSED 57/57 | evidence/logs/regression_stdout.log |
+| Living-world scenarios | PASSED 61/61 | evidence/logs/living_world_stdout.log |
+| Browser build renders and runs | PASSED (software WebGL) | evidence/renders_web/W01, W02; W00 bisection |
+| Browser draws all residents at once | FAILED → limited to the 20 nearest | WebGL drew no 3D at ~35 animated characters |
+| Motion read by a person; phone / iPad frame rate | UNVERIFIED | |
+| Foot IK, lip-sync, plane / outboard sound, stall goods in the ledger | NOT IMPLEMENTED | |
+
 ## Session 7 — hero villagers v2 (faces, hair, clothes, movement)
 
 | Item | Status | Evidence |

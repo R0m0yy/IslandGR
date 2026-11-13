@@ -25,7 +25,7 @@ small{color:var(--mut)}
 <div id="stage"><canvas id="canvas" tabindex="0"></canvas></div>
 <div id="boot"><div id="card">
   <h1>Living Tides</h1>
-  <p id="msg">Loading Saltcrown (22 MB). The village starts at 06:00 and runs by itself: residents wake, fish, trade, shelter from storms and raise families. Click or tap the picture once it appears.</p>
+  <p id="msg">Loading Saltcrown (42 MB). The village starts at 06:00 and runs by itself: residents wake, fish, trade, shelter from storms and raise families. Click or tap the picture once it appears.</p>
   <div id="bar" role="progressbar" aria-label="Loading"><i></i></div>
   <div id="err"></div>
   <div class="keys"><table>
@@ -33,10 +33,10 @@ small{color:var(--mut)}
     <tr><td>Mouse</td><td>left-click a resident, boat or building to select it · right-drag orbit · wheel zoom · middle-drag pan</td></tr>
     <tr><td>Keys</td><td>W A S D pan · Q / E rotate · Space pause · 1 2 3 4 speed (x1 x4 x16 x60)</td></tr>
     <tr><td>Follow</td><td>Tab next resident · G their household · B a boat · N wildlife · K cinematic mode · Esc release</td></tr>
-    <tr><td>Panels</td><td>I village · J journal · T timeline · F family tree · C cutaway · V show or hide the grey placeholder figures · H hide UI</td></tr>
+    <tr><td>Panels</td><td>I village · J journal · T timeline · F family tree · C cutaway · V show or hide the residents · H hide UI</td></tr>
     <tr><td>Save</td><td>F5 save · F9 load (kept in this browser)</td></tr>
   </table></div>
-  <small>Research build. Characters are grey placeholders, not final art. Frame rate depends on your graphics card; if it is slow, press 4 to speed time up and H to hide the interface.</small>
+  <small>Research build. In the browser the 20 residents nearest the camera are drawn; zoom in to see people at work. Frame rate depends on your graphics card; if it is slow, press 4 to speed time up and H to hide the interface.</small>
 </div></div>
 <script>
 // Game data ships as base64 text parts (the host serves only web file types). They are fetched, decoded and
@@ -73,7 +73,7 @@ if (!window.WebGL2RenderingContext) fail('This browser has no WebGL 2. Use a cur
 else if (typeof DecompressionStream === 'undefined') fail('This browser lacks DecompressionStream. Use a current Chrome, Edge or Firefox.');
 else {
   const engine = new Engine({executable:'index', canvasResizePolicy:2, focusCanvas:true,
-    fileSizes:{'index.pck':41696176,'index.wasm':35376909}, args:[],
+    fileSizes:{'index.pck':41696800,'index.wasm':35376909}, args:[],
     onExit:()=>{ msg.textContent='The game closed. Reload the page to start again.'; boot.style.display='flex'; }});
   window.__lt = {engine, started:false, log:[]};
   engine.startGame({executable:'index', mainPack:'index.pck',
