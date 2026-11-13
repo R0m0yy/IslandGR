@@ -25,7 +25,7 @@
   "role": "elder"
  },
  "hero_total_tris": 72278,
- "game_total_tris": 11669,
+ "game_total_tris": 11565,
  "clips": [
   "idle",
   "walk",
@@ -51,5 +51,26 @@
   "talk",
   "play"
  ],
- "height_m": 1.6892959023605059
+ "height_m": 1.6892959023605059,
+ "game_parts": {
+  "body": 3763,
+  "eye_l": 250,
+  "eye_r": 250,
+  "hair": 568,
+  "brows": 250,
+  "beard": 1550,
+  "top_hem0": 312,
+  "top": 1446,
+  "collar": 250,
+  "bottom_hem0": 250,
+  "bottom": 478,
+  "belt_edge0": 304,
+  "belt": 250,
+  "hat": 394,
+  "sandal_soles": 250,
+  "sandal_instep_l": 250,
+  "sandal_ankle_l": 250,
+  "sandal_instep_r": 250,
+  "sandal_ankle_r": 250
+ }
 }
