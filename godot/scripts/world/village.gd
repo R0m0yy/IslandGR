@@ -102,7 +102,8 @@ func household_in_need(v) -> String:
 				known = maxf(known, society.bond(v.villager_id, o.villager_id))
 				frail = frail or o.sick_days > 0 or o.age >= 68.0
 		var near: bool = buildings[households[hh]["building"]].global_position.distance_to(v.home.global_position) < 9.0
-		if hungry < 50.0 or (known < 8.0 and not near):
+		# frail households (the old, the ill) are looked in on sooner
+		if hungry < (35.0 if frail else 50.0) or (known < 8.0 and not near):
 			continue
 		var score: float = hungry + known + (25.0 if frail else 0.0) + (10.0 if near else 0.0)
 		if score > bs:

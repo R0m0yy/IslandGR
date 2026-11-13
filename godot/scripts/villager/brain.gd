@@ -44,6 +44,9 @@ func decide() -> Dictionary:
 	for o in w.villagers:
 		if o.hh == v.hh:
 			need = maxf(need, o.needs["hunger"])
+	if not adult and v.age >= 9.0 and meals == 0 and raw > 0 and hunger > 65.0:
+		# an older child left hungry (the grown-ups asleep or out) grills a fish for themselves
+		s["cook"] = hunger * 1.05 + 6.0
 	if adult:
 		s["cook"] = (need * 1.1 + 12.0) if (meals == 0 and raw > 0 and need > 30.0) else 0.0
 		var shop_open := h >= 6.0 and h < 20.0
