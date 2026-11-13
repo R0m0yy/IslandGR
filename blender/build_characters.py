@@ -31,7 +31,8 @@ QUICK = "--quick" in sys.argv
 ANIM_RENDERS = "--no-anim-renders" not in sys.argv
 KEYS = [a for a in sys.argv[1:] if a in cast.SPECS or a in crowd.VARIANTS] or list(cast.SPECS)
 if "--crowd" in sys.argv:
-    KEYS = list(crowd.VARIANTS)
+    # `--crowd` alone rebuilds every variant; `--crowd V02 V09` rebuilds just those (lineup tiles patched)
+    KEYS = [a for a in sys.argv[1:] if a in crowd.VARIANTS] or list(crowd.VARIANTS)
 GAME_TRIS_CROWD = 9000
 
 
@@ -347,8 +348,9 @@ if __name__ == "__main__":
             export_only(k, pth)
             if pth:
                 ports.append(pth)
-        if ports:
-            montage(os.path.join(EV, "crowd", "lineup.png"), 7, ports)
+        allp = [os.path.join(EV, "crowd", f"_p_{k}.png") for k in crowd.VARIANTS]
+        if ports and all(os.path.exists(f) for f in allp):
+            montage(os.path.join(EV, "crowd", "lineup.png"), 7, allp, remove=False)   # portraits kept (git-ignored)
         sys.exit(0)
     only_cmp = "--comparison-only" in sys.argv
     infos = [] if only_cmp else [build_one(k) for k in KEYS]

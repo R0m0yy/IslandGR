@@ -169,12 +169,15 @@ def beard(c, style):
         return
     k = c.k; m = c.m
     white = style.endswith("white")
-    col = (lambda P, N, b, g: G.mixc(np.tile([0.93, 0.92, 0.88], (len(P), 1)), np.array([0.7, 0.68, 0.64]), np.clip(g / (0.003 * k), 0, 1))) if white else \
-          (lambda P, N, b, g: G.mixc(np.tile([0.05, 0.035, 0.03], (len(P), 1)), np.array([0.14, 0.1, 0.08]), np.clip(g / (0.002 * k), 0, 1)))
-    # short beard = painted stubble (paint_skin) + a neat goatee on the chin; the lips stay clear
-    gf = lambda P, W: np.minimum(np.minimum(0.024 * k - np.abs(P[:, 0] - m[0]), (m[2] - 0.016 * k) - P[:, 2]),
-                                 np.minimum(P[:, 2] - (m[2] - 0.06 * k), np.where(P[:, 1] < m[1] + 0.015, 1.0, -1.0)))
-    c.hair_volume("beard", gf, lambda P: np.full(len(P), 0.005 * k), col, subdiv=1,
+    col = (lambda P, N, b, g: G.mixc(np.tile([0.62, 0.6, 0.57], (len(P), 1)), np.array([0.4, 0.38, 0.35]), np.clip(g / (0.003 * k), 0, 1))) if white else \
+          (lambda P, N, b, g: G.mixc(np.tile([0.085, 0.06, 0.048], (len(P), 1)), np.array([0.16, 0.115, 0.09]), np.clip(g / (0.002 * k), 0, 1)))
+    # short beard = painted stubble (paint_skin) + a small rounded goatee tuft on the chin point;
+    # elliptical so it reads as hair, not a block, and it starts well below the lower lip
+    cz = m[2] - 0.042 * k
+    gf = lambda P, W: np.minimum(np.minimum(0.02 * k * (1.0 - np.sqrt(((P[:, 0] - m[0]) / (0.017 * k)) ** 2 + ((P[:, 2] - cz) / (0.02 * k)) ** 2)),
+                                            (m[2] - 0.02 * k) - P[:, 2]),
+                                 np.where(P[:, 1] < m[1] + 0.015, 1.0, -1.0))
+    c.hair_volume("beard", gf, lambda P: np.full(len(P), 0.0032 * k), col, subdiv=1,
                   grooves=lambda P, N: 0.0015 * k * np.abs(np.sin(P[:, 0] * 380)), taper=0.006)
 
 
