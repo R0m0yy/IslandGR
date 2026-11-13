@@ -26,29 +26,33 @@ func _ready() -> void:
 	await _advance_to(9.6)
 	await _shot("L01_market_stalls", Vector3(9.5, 3.4, 9.5), Vector3(9.5, 2.2, 2.6))
 	await _shot("L02_village_crowd", Vector3(-4, 22, 34), Vector3(-2, 4, 4))
-	# boats: find one being rowed and one under motor
-	var rowed = null
-	var motored = null
-	for i in 400:
-		for b in village.boats.values():
-			if b.boat_state in ["outbound", "inbound"] and b.crew != null and b.pos.distance_to(b.home_pos) > 6.0:
-				if b.engine and motored == null:
-					motored = b
-				if not b.engine and rowed == null:
-					rowed = b
-		if rowed and motored:
-			break
-		village.sim.advance(2.0)
-		await get_tree().process_frame
-	for pair in [["L03_rowing_skiff", rowed], ["L04_motor_boat", motored]]:
-		var b = pair[1]
-		if b == null:
-			print("no boat for ", pair[0])
+	# boats: photograph a rowed skiff and a motor boat while they are under way in open water
+	for want in [["L03_rowing_skiff", false], ["L04_motor_boat", true]]:
+		var got = null
+		for i in 600:
+			for b in village.boats.values():
+				if b.engine == want[1] and b.boat_state in ["outbound", "inbound"] and b.crew != null and b.pos.length() > 24.0:
+					got = b
+					break
+			if got:
+				break
+			village.sim.advance(1.0)
+			await get_tree().process_frame
+		if got == null:
+			print("no boat for ", want[0])
 			continue
-		var hd: float = b.visual.rotation.y
+		var crew = got.crew
+		crew._react_t = 0.0
+		crew.play(crew.fsm.current.anim)
+		print("BOAT ", got.object_id, " state=", got.boat_state, " crew=", crew.display_name, " fsm=", crew.fsm.current_name,
+			" anim=", crew.fsm.current.anim, " animator.current=", crew.animator.current, " tree=", crew.animator.playback.get_current_node(), " travel=", crew.animator.playback.get_travel_path(), " phase=", crew.animator.phase(),
+			" gear=", got.gear.keys(), " variant=", crew.animator.variant)
+		var hd: float = got.visual.rotation.y
 		var bow := Vector3(cos(hd), 0, -sin(hd))
 		var side := bow.cross(Vector3.UP)
-		await _shot(pair[0], b.pos + side * 5.5 + bow * 2.0 + Vector3(0, 2.6, 0), b.pos + Vector3(0, 0.6, 0))
+		var out: Vector3 = Vector3(got.pos.x, 0, got.pos.z).normalized()
+		var sea_side: Vector3 = side if side.dot(out) > 0.0 else -side
+		await _shot(want[0], got.pos + sea_side * 4.0 + bow * 1.2 + Vector3(0, 2.2, 0), got.pos + Vector3(0, 0.6, 0))
 	# a fine afternoon: some residents go for a swim off the spit
 	await _advance_to(13.2)
 	var n := 0
@@ -81,10 +85,9 @@ func _ready() -> void:
 	var life = village.village_life
 	if life and life.plane:
 		life._launch_plane()
-		life.plane.global_position = Vector3(-40, 55, 40)
-		for i in 3:
-			await get_tree().process_frame
-		await _shot("L09_plane_over_the_bay", Vector3(10, 4, 40), life.plane.global_position)
+		life.set_process(false)                  # hold the plane still for the photograph
+		life.plane.global_position = Vector3(-10, 30, 70)
+		await _shot("L09_plane_over_the_bay", Vector3(14, 5, 44), life.plane.global_position)
 	get_tree().quit()
 
 func _advance_to(hour: float) -> void:

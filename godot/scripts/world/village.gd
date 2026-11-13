@@ -321,6 +321,12 @@ func _fit_boat_gear(b: Boat) -> void:
 	var L: float = maxf(aabb.size.x, 3.0)
 	var W: float = maxf(aabb.size.z, 1.0)
 	var top: float = aabb.position.y + aabb.size.y * 0.55
+	if first or aabb.size.y < 0.3:
+		# hull measurements of the boat models (blender/livingtides/environment.py boat())
+		L = 6.2 if b.engine else 3.6
+		W = 1.9 if b.engine else 1.15
+		top = 0.62 if b.engine else 0.42
+		aabb = AABB(Vector3(-L / 2.0, 0.0, -W / 2.0), Vector3(L, top / 0.55, W))
 	var wood := StandardMaterial3D.new(); wood.albedo_color = Color(0.55, 0.4, 0.26); wood.roughness = 0.8
 	var dark := StandardMaterial3D.new(); dark.albedo_color = Color(0.12, 0.12, 0.13); dark.roughness = 0.45; dark.metallic = 0.4
 	if not b.engine:

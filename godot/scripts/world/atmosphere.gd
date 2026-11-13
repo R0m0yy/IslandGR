@@ -243,8 +243,8 @@ func _build_animals() -> void:
 
 func _wake(b) -> CPUParticles3D:
 	var p = CPUParticles3D.new()
-	p.amount = 40
-	p.lifetime = 2.6
+	p.amount = 26
+	p.lifetime = 2.2
 	p.local_coords = false
 	p.direction = Vector3(0, 0.1, 0)
 	p.spread = 30.0
@@ -305,7 +305,9 @@ func _process(dt: float) -> void:
 			b.visual.rotation.z = clampf(-sl.x * 1.6, -0.35, 0.35)
 			_animate_gear(b, t)
 			var wk: CPUParticles3D = _wakes[b]
-			wk.global_position = Vector3(bp.x, _sea_y(bp) + 0.05, bp.z)
+			var hd: float = b.visual.rotation.y
+			var stern: Vector3 = bp - Vector3(cos(hd), 0, -sin(hd)) * 1.8
+			wk.global_position = Vector3(stern.x, _sea_y(stern) + 0.02, stern.z)
 			wk.emitting = b.boat_state in ["outbound", "inbound"]
 	_draw_animals(eco, t)
 	_fill_audio(w)

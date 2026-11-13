@@ -85,8 +85,10 @@ func _mingle() -> void:
 				var k: String = key(g[i].villager_id, g[j].villager_id)
 				if bonds.get(k, 0.0) >= 30.0 and _greeted.get(k, -1) != GameClock.day():
 					_greeted[k] = GameClock.day()               # friends who meet wave to each other, once a day
-					g[i].react("wave", 2.0)
-					g[j].react("wave", 2.0)
+					if not g[i].at_sea:
+						g[i].react("wave", 2.0)
+					if not g[j].at_sea:
+						g[j].react("wave", 2.0)
 					counts["greetings"] += 1
 				var courting: bool = g[i].partner == "" and g[j].partner == "" and g[i].age >= 17.0 and g[j].age >= 17.0 and g[i].hh != g[j].hh
 				bonds[k] = minf(100.0, bonds.get(k, 0.0) + (0.6 if g[i].hh == g[j].hh else (2.2 if courting else 0.9)))

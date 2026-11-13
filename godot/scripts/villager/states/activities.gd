@@ -103,7 +103,7 @@ class FishTripState extends UseObjectState:
 		v.world.ledger.consume(v.hh, "bait", 1, "used_at_sea")       # gear and bait go aboard
 		v.at_sea = true
 		boat.crew = v
-		v.play("steer" if boat.engine else "row")
+		_show("steer" if boat.engine else "row")
 		boat.start_trip()
 		v.stats["boat_trips"] += 1
 	func tick(dt: float, minutes: float) -> void:
@@ -127,11 +127,11 @@ class FishTripState extends UseObjectState:
 					boat.turn_back()
 				elif boat.sail(dt, w.boat_speed_factor()):
 					boat.boat_state = "fishing"
-					v.play("cast")
+					_show("cast")
 			"fishing":
 				_fishing += minutes
 				_roll += minutes
-				v.play("cast" if int(_fishing / 25.0) % 2 == 0 else "haul_net")      # line, then the net, in turns
+				_show("cast" if int(_fishing / 25.0) % 2 == 0 else "haul_net")      # line, then the net, in turns
 				var l: Ledger = v.world.ledger
 				var bio: float = eco.biomass_near(gpos)
 				while _roll >= 10.0:
@@ -159,11 +159,11 @@ class FishTripState extends UseObjectState:
 						v.note("storm: heading home with %d fish" % l.qty(boat.object_id, "fish"))
 						v.remember("storm", "ran for harbour ahead of a storm", -3.0)
 					boat.turn_back()
-					v.play("steer" if boat.engine else "row")
+					_show("steer" if boat.engine else "row")
 			"inbound":
 				if boat.sail(dt, w.boat_speed_factor()):
 					boat.boat_state = "unloading"
-					v.play("carry")
+					_show("carry")
 					if v.animator:
 						v.animator.show_prop("crate", true, 12.0)
 			"unloading":
@@ -198,7 +198,11 @@ class FishTripState extends UseObjectState:
 		if boat.boat_state == "fishing":
 			face = bow.cross(Vector3.UP)            # over the side
 		v.rotation.y = atan2(-face.x, -face.z)
+	func _show(clip: String) -> void:
+		anim = clip                      # a brief reaction returns to this, not to the default
+		v.play(clip)
 	func exit() -> void:
+		anim = "sit"
 		if boat and boat.boat_state != "moored" and not _stood_down:
 			boat.moor()                      # interrupted: the boat is brought home, cargo stays aboard
 		if boat and boat.crew == v:

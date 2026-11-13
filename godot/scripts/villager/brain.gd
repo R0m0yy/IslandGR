@@ -113,7 +113,11 @@ func decide() -> Dictionary:
 	for k in s.keys():
 		if cooldown.get(k, -1.0) > GameClock.total_minutes:
 			s[k] = 0.0
-		s[k] += v.rng.randf() * 3.0 if s[k] > 0.0 else 0.0
+		if k == "swim":
+			# own noise source: adding a leisure option must not shift every later random draw
+			s[k] += fposmod(GameClock.total_minutes * 0.37 + float(absi(hash(v.villager_id)) % 97), 3.0) if s[k] > 0.0 else 0.0
+		else:
+			s[k] += v.rng.randf() * 3.0 if s[k] > 0.0 else 0.0
 	last_scores = s
 	var order := s.keys()
 	order.sort_custom(func(a, b): return s[a] > s[b])

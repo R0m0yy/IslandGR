@@ -276,6 +276,8 @@ func show_prop(name_: String, on: bool, seconds: float = -1.0) -> void:
 
 func phase() -> float:
 	## 0..1 position in the current clip (boats sync their oars to the rower).
+	if playback != null and playback.get_current_node() != &"":
+		return fposmod(playback.get_current_play_position() / maxf(0.01, playback.get_current_length()), 1.0)
 	if player == null or player.current_animation == "":
 		return 0.0
 	var a: Animation = player.get_animation(player.current_animation)
