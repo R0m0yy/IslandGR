@@ -96,3 +96,11 @@
 - Feet follow the clip, not the stair step heights (no foot IK). No root motion: the showcase script moves the captain along the stair.
 - glTF import adds the held props as extra skeleton nodes named `<key>_<prop>`; tests exclude them from the 53-bone rig count.
 - The four heroes are presentation only; the 42 simulated residents still use the grey placeholder.
+
+
+## Session 8 — living village
+- The four hero villagers on the Harbour Stair are separate from the 42 residents; residents use the 14 crowd variants, so look-alikes exist (same variant, different colours).
+- Stall trade (fruit, bread) is presentation only; it does not move ledger goods. The fish market handover is tied to the real purchase.
+- Feet follow surfaces by a ray cast; on very steep rock a figure can still dip a few centimetres.
+- Swimmers loop near a fixed spot off the spit; they do not use the walk graph in the water.
+- Screenshots come from software rendering under xvfb; the hardware look and frame rate on a phone are UNVERIFIED with 46 animated characters.

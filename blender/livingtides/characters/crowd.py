@@ -171,9 +171,11 @@ def beard(c, style):
     white = style.endswith("white")
     col = (lambda P, N, b, g: G.mixc(np.tile([0.93, 0.92, 0.88], (len(P), 1)), np.array([0.7, 0.68, 0.64]), np.clip(g / (0.003 * k), 0, 1))) if white else \
           (lambda P, N, b, g: G.mixc(np.tile([0.05, 0.035, 0.03], (len(P), 1)), np.array([0.14, 0.1, 0.08]), np.clip(g / (0.002 * k), 0, 1)))
-    bf = lambda P, W: c.beard_field(P, W, moustache=True, chin_drop=0.06)
-    c.hair_volume("beard", bf, lambda P: np.full(len(P), 0.0055 * k), col, subdiv=1,
-                  grooves=lambda P, N: 0.0018 * k * np.abs(np.sin(P[:, 0] * 380 + 2 * np.sin(P[:, 2] * 120))), taper=0.005)
+    # short beard = painted stubble (paint_skin) + a neat goatee on the chin; the lips stay clear
+    gf = lambda P, W: np.minimum(np.minimum(0.024 * k - np.abs(P[:, 0] - m[0]), (m[2] - 0.016 * k) - P[:, 2]),
+                                 np.minimum(P[:, 2] - (m[2] - 0.06 * k), np.where(P[:, 1] < m[1] + 0.015, 1.0, -1.0)))
+    c.hair_volume("beard", gf, lambda P: np.full(len(P), 0.005 * k), col, subdiv=1,
+                  grooves=lambda P, N: 0.0015 * k * np.abs(np.sin(P[:, 0] * 380)), taper=0.006)
 
 
 def top(c, spec):
@@ -443,7 +445,7 @@ def build_variant(key):
     c = Char(key, spec)
     c.variant = v
     c.build_body()
-    stub = 0.5 if v.get("beard") and v["beard"].startswith("stubble") else 0.0
+    stub = 0.5 if v.get("beard") and (v["beard"].startswith("stubble") or v["beard"].startswith("short")) and not v["beard"].endswith("white") else 0.0
     c.paint_skin(lips="#3B1E18" if v["look"] == "m" else "#5A2A26", stubble=stub, blush=0.1, age=1.0 if v["age"] > 60 else 0.2)
     c.eyes()
     hair(c, v["hair"])

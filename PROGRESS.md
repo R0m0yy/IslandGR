@@ -195,3 +195,21 @@
 **Open**
 - Foot IK on stairs, root motion, lip-sync: NOT IMPLEMENTED. Motion quality UNVERIFIED by a person.
 - C's beard hides most of the mouth; B's top shows some body shape; A's boot toes faintly visible.
+
+## Session 8 (2026-11-12 / 13) — a living village (owner: everyone needs a real character, boats rowed / motored, ocean and animals alive, a busy market)
+
+**Completed and executed**
+- Every resident is a real character: `blender/livingtides/characters/crowd.py` builds 14 villager variants (randomised MakeHuman faces, hair styles, beards, modular outfits, footwear); `VillagerAnimator.build_for` picks one per resident by age group, look and job, with per-resident clothing hue/value and skin tone (`hero_character.gdshader`). The grey mannequin is now only a fallback.
+- 23 clips per character (`anim.py`): the 12 game clips plus run, give, carry, row, steer, swim, cast, haul_net, sweep, talk, play.
+- Walking: feet follow the real stair / deck / rock surface (stairs and piers now have collision), each resident walks a personal lane, turns are smoothed. The simulation positions are unchanged.
+- Boats: skiffs are rowed (crew seated facing the stern, oars swing with the stroke phase), fishing boats carry an outboard with a spinning propeller and a seated helmsman; at the grounds the crew casts a rod and hauls nets in turns; ashore they carry a crate. Wake moved to the stern.
+- Trade you can see: at the fish market the server takes a fish from the ice and hands it over, the buyer walks home holding it. Market stalls on the quay (fish on ice, fruit, bread) with stallholders who serve residents who stop by (presentation only; the fish market is the real economy).
+- Ocean: long swell added to the shared wave model (boats ride it), surf rising and rolling into the shallows, breaking foam, caustics over sand, sun glints, tide range 0.45 m (visible high / low water).
+- Wildlife: the 12 Blender animal models replace the placeholder shapes, animated in a vertex shader (wingbeats, swimming tails, dolphin undulation, turtle flippers, crab legs).
+- Life: swimming off the spit on fine days (a leisure activity with its own state), people talk when they meet at the market, children play, a seaplane crosses the sky now and then, a yacht sails round the horizon.
+- Tests: regression 57/57; scenario A failed once (an extra random draw changed a resident's day) and passes after giving the swim score its own noise source.
+
+**Not done / open**
+- Variant clothing colours come from per-mesh tags in Godot (the glTF exporter dropped the vertex-alpha tags).
+- Foot IK, lip-sync, carried goods for the bait / store trades, sound for the plane and outboards: NOT IMPLEMENTED.
+- Market stalls and the plane / yacht are ambience, not simulated.

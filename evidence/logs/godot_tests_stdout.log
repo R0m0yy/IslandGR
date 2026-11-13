@@ -19,32 +19,32 @@ PASS  interior lighting follows building state
 PASS  cutaway hides roof + camera-facing walls  
 PASS  placeholder rig exposes all 12 animation clips  ["idle", "walk", "climb_stairs", "climb_ladder", "open_door", "cook", "eat", "sit", "sleep", "fish", "work", "wave"]
 PASS  animation state machine travels idle -> walk  walk
-SIM totals over 7.0 days, 42 villagers: { "sleeps": 457, "meals_cooked": 801, "meals_eaten": 811, "fish_caught": 447, "work_blocks": 514, "doors_opened": 2117, "stairs_climbed": 2960, "ladders_climbed": 268, "bridges_crossed": 117, "failed_paths": 0, "failed_uses": 0, "boat_trips": 43, "thefts_suffered": 17, "nets_mended": 23, "gifts_given": 6, "gifts_received": 12, "sheltered": 35, "stayed_ashore": 5, "empty_trips": 7, "repairs_done": 13, "wages": 1180, "income": 385, "drinks": 465, "washes": 154, "plans": 5616, "fish_bought": 0, "fish_sold": 0, "metres": 133644, "starve_minutes": 0, "swims": 2 }
-SIM state samples: { "climb_stairs": 412, "walk": 1198, "idle": 306, "work": 758, "eat": 264, "fish_trip": 125, "open_door": 74, "cross_bridge": 43, "climb_ladder": 34, "cook": 127, "sleep": 3084, "sit": 495, "drink": 29, "mend_nets": 29, "shop": 8, "fish": 44, "wash": 25, "swim": 1 }
-PASS  simulation ran 7 game days  { "clock": "Day 8  06:00", "steps": 100800, "wall_ms": 47922 }
-PASS  villagers sleep (everyone at least once)  { "sleeps": 457, "never_slept": 0 }
-PASS  villagers cook  801
-PASS  villagers eat (everyone at least once)  { "meals_eaten": 811, "never_ate": 0 }
-PASS  villagers fish and land a catch  447
-PASS  villagers work  514
-PASS  doors are opened by villagers  2050
-PASS  stairs are climbed  2960
-PASS  no villager is stuck while travelling  { "max_stuck_s": 0 }
-PASS  ledger balances: money constant, goods = minted - consumed, nothing negative  { "problems": [], "money": 2100, "minted": { "fish": 474, "meal": 849, "bait": 128 }, "consumed": { "fish": 409, "meal": 818, "bait": 43 } }
+SIM totals over 7.0 days, 42 villagers: { "sleeps": 460, "meals_cooked": 810, "meals_eaten": 816, "fish_caught": 451, "work_blocks": 509, "doors_opened": 2115, "stairs_climbed": 2932, "ladders_climbed": 284, "bridges_crossed": 121, "failed_paths": 0, "failed_uses": 0, "boat_trips": 42, "thefts_suffered": 17, "nets_mended": 15, "gifts_given": 11, "gifts_received": 22, "sheltered": 31, "stayed_ashore": 5, "empty_trips": 8, "repairs_done": 13, "wages": 1156, "income": 394, "drinks": 456, "washes": 155, "plans": 5621, "fish_bought": 0, "fish_sold": 0, "metres": 135677, "starve_minutes": 0 }
+SIM state samples: { "climb_stairs": 445, "walk": 1189, "idle": 339, "work": 750, "eat": 269, "fish_trip": 123, "open_door": 67, "cross_bridge": 36, "climb_ladder": 39, "cook": 129, "sleep": 3058, "sit": 485, "drink": 31, "mend_nets": 19, "shop": 7, "fish": 54, "wash": 16 }
+PASS  simulation ran 7 game days  { "clock": "Day 8  06:00", "steps": 100800, "wall_ms": 44580 }
+PASS  villagers sleep (everyone at least once)  { "sleeps": 460, "never_slept": 0 }
+PASS  villagers cook  810
+PASS  villagers eat (everyone at least once)  { "meals_eaten": 816, "never_ate": 0 }
+PASS  villagers fish and land a catch  451
+PASS  villagers work  509
+PASS  doors are opened by villagers  2054
+PASS  stairs are climbed  2932
+PASS  no villager is stuck while travelling  { "max_stuck_s": 60 }
+PASS  ledger balances: money constant, goods = minted - consumed, nothing negative  { "problems": [], "money": 2100, "minted": { "fish": 478, "meal": 858, "bait": 116 }, "consumed": { "fish": 416, "meal": 824, "bait": 42 } }
 PASS  no route failures  0
 PASS  nobody starves (no one at maximum hunger for over 60 game minutes)  { "cases": [], "total_minutes_at_max": 0 }
-PASS  boats: crews board, sail, fish and land a catch  { "trips": 43, "fish_landed": 351, "aborted_by_weather": 2 }
-PASS  landed fish is sold to the market for money  { "sold": 113, "kept_for_home": 206, "paid": { "n": 226, "money": 341, "qty": 113 } }
+PASS  boats: crews board, sail, fish and land a catch  { "trips": 42, "fish_landed": 341, "aborted_by_weather": 2 }
+PASS  landed fish is sold to the market for money  { "sold": 101, "kept_for_home": 195, "paid": { "n": 202, "money": 319, "qty": 101 } }
 PASS  cargo never exceeds a boat's capacity  
-PASS  households buy fish and meals with money  { "fish_bought": 112, "meals_sold_by_eatery": 20 }
-PASS  wages are paid; levy funds the council  { "wages_paid": 295, "unpaid": 219, "levy_paid": 126, "levy_missed": 0, "council": 290 }
-PASS  market price responds to stock  { "stock": 2, "buy": 8, "sell": 10 }
-PASS  boat wear leads to paid repairs  { "repairs": 1, "unaffordable": 0, "worst_condition": 0.7 }
-PASS  villagers drink and wash  { "drinks": 465, "washes": 154 }
+PASS  households buy fish and meals with money  { "fish_bought": 116, "meals_sold_by_eatery": 17 }
+PASS  wages are paid; levy funds the council  { "wages_paid": 289, "unpaid": 220, "levy_paid": 126, "levy_missed": 0, "council": 311 }
+PASS  market price responds to stock  { "stock": 9, "buy": 8, "sell": 10 }
+PASS  boat wear leads to paid repairs  { "repairs": 1, "unaffordable": 0, "worst_condition": 0.78 }
+PASS  villagers drink and wash  { "drinks": 456, "washes": 155 }
 PASS  weather changed during the run  { "clear": 95, "cloudy": 25, "light_rain": 17, "heavy_rain": 24, "storm": 8 }
-PASS  friendships form from time spent together  { "pairs": 702, "strong": 24 }
-PASS  no household has negative money  { "poorest": 38, "richest": 154 }
-PASS  storm interrupts a trip: boat returns and moors, crew moves on  { "boat": "BOAT_06", "crew_then": "eat" }
+PASS  friendships form from time spent together  { "pairs": 698, "strong": 25 }
+PASS  no household has negative money  { "poorest": 40, "richest": 173 }
+PASS  storm interrupts a trip: boat returns and moors, crew moves on  { "boat": "BOAT_06", "crew_then": "drink" }
 PASS  no boat puts to sea during a storm  
 ERROR: Parameter "m" is null.
    at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
@@ -1679,76 +1679,16 @@ ERROR: Parameter "m" is null.
    at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
 ERROR: Parameter "m" is null.
    at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
-GEN 45 days: { "births": 35, "deaths": 37, "partnerships": 18, "came_of_age": 27, "retired": 31, "moves": 19, "estates": 7, "illnesses": 19, "newcomers": 0, "greetings": 2470 } population 42 -> 40 events 239 wall_ms 347351
-PASS  generations: births happen  { "births": 35, "deaths": 37, "partnerships": 18, "came_of_age": 27, "retired": 31, "moves": 19, "estates": 7, "illnesses": 19, "newcomers": 0, "greetings": 2470 }
-PASS  generations: residents age, retire and die  { "deaths": 37, "retired": 31 }
-PASS  generations: children come of age  27
-PASS  generations: estates settle and the books still balance  { "estates": 7, "audit": [] }
+GEN 45 days: { "births": 30, "deaths": 35, "partnerships": 16, "came_of_age": 25, "retired": 30, "moves": 16, "estates": 6, "illnesses": 16, "newcomers": 0, "greetings": 2462 } population 42 -> 37 events 218 wall_ms 346680
+PASS  generations: births happen  { "births": 30, "deaths": 35, "partnerships": 16, "came_of_age": 25, "retired": 30, "moves": 16, "estates": 6, "illnesses": 16, "newcomers": 0, "greetings": 2462 }
+PASS  generations: residents age, retire and die  { "deaths": 35, "retired": 30 }
+PASS  generations: children come of age  25
+PASS  generations: estates settle and the books still balance  { "estates": 6, "audit": [] }
 PASS  generations: no dangling partners, homes, beds or member counts  { "dangling": 0, "bad_house": 0, "no_bed": 0 }
-PASS  generations: life events are recorded as history  [{ "day": 45, "type": "death", "who": ["V14", "V1002", "V1009", "V1014", "V1018"], "detail": "Milo died, aged 71" }, { "day": 45, "type": "death", "who": ["V17", "V1003", "V1013", "V1016", "V1020"], "detail": "Hett died, aged 73" }, { "day": 45, "type": "birth", "who": ["V1034", "V1014", "V1015"], "detail": "to Oli and Paz" }]
-PASS  generations: village still fed after 45 days  { "starved": 0, "population": 40 }
-PASS  all activity states observed  ["climb_stairs", "walk", "idle", "work", "eat", "fish_trip", "open_door", "cross_bridge", "climb_ladder", "cook", "sleep", "sit", "drink", "mend_nets", "shop", "fish", "wash", "swim"]
-RESULT: PASSED (57 passed, 0 failed)
-ERROR: Parameter "m" is null.
-   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
-ERROR: Parameter "m" is null.
-   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
-ERROR: Parameter "m" is null.
-   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
-ERROR: Parameter "m" is null.
-   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
-ERROR: Parameter "m" is null.
-   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
-ERROR: Parameter "m" is null.
-   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
-ERROR: Parameter "m" is null.
-   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
-ERROR: Parameter "m" is null.
-   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
-ERROR: Parameter "m" is null.
-   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
-ERROR: Parameter "m" is null.
-   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
-ERROR: Parameter "m" is null.
-   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
-ERROR: Parameter "m" is null.
-   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
-ERROR: Parameter "m" is null.
-   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
-ERROR: Parameter "m" is null.
-   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
-ERROR: Parameter "m" is null.
-   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
-ERROR: Parameter "m" is null.
-   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
-ERROR: Parameter "m" is null.
-   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
-ERROR: Parameter "m" is null.
-   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
-ERROR: Parameter "m" is null.
-   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
-ERROR: Parameter "m" is null.
-   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
-ERROR: Parameter "m" is null.
-   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
-ERROR: Parameter "m" is null.
-   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
-ERROR: Parameter "m" is null.
-   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
-ERROR: Parameter "m" is null.
-   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
-ERROR: Parameter "m" is null.
-   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
-ERROR: Parameter "m" is null.
-   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
-ERROR: Parameter "m" is null.
-   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
-ERROR: Parameter "m" is null.
-   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
-ERROR: Parameter "m" is null.
-   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
-ERROR: Parameter "m" is null.
-   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+PASS  generations: life events are recorded as history  [{ "day": 44, "type": "came_of_age", "who": ["V1024"], "detail": "" }, { "day": 44, "type": "hired", "who": ["V1022"], "detail": "server" }, { "day": 44, "type": "birth", "who": ["V1029", "V1006", "V1022"], "detail": "to Gil and Cai" }]
+FAIL  generations: village still fed after 45 days  { "starved": 2, "population": 37 }
+PASS  all activity states observed  ["climb_stairs", "walk", "idle", "work", "eat", "fish_trip", "open_door", "cross_bridge", "climb_ladder", "cook", "sleep", "sit", "drink", "mend_nets", "shop", "fish", "wash"]
+RESULT: FAILED (56 passed, 1 failed)
 ERROR: Parameter "m" is null.
    at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
 ERROR: Parameter "m" is null.
