@@ -5666,3 +5666,635 @@ ERROR: Parameter "m" is null.
 ERROR: Parameter "m" is null.
    at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
 == scenario G done in 8192 ms
+PASS  [Y] the run completed (28 game days; 28 = one year)  Day 29  05:59
+PASS  [Y] no route failures or failed object uses  { "failed_paths": 0, "failed_uses": 0 }
+PASS  [Y] nobody starves  0
+PASS  [Y] books balance, nothing negative  []
+PASS  [Y] no boat stays out more than 10 hours  0
+PASS  [Y] the market has fish during trading hours (06-20) at least 85% of the time  { "empty_trading_hours": 0, "of": 154 }
+PASS  [Y] no runaway wealth: richest household below 12x the median  { "min": 11, "median": 39, "max": 296 }
+PASS  [Y] every kind of event was recorded  { "economy": 40, "wildlife": 107, "fishing": 91, "weather": 99, "damage": 65, "repair": 54, "community": 43, "illness": 5, "recovery": 5, "birth": 5 }
+PASS  [Y] residents remember things that happened to them  
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+ERROR: Parameter "m" is null.
+   at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
+== scenario Y done in 208935 ms

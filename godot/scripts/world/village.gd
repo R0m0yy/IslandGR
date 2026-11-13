@@ -47,6 +47,32 @@ func _ready() -> void:
 	build()
 	if OS.has_feature("web") or "--diag" in OS.get_cmdline_user_args():
 		_diag_later()
+	# render bisection switches (web debugging): pass after "--" on the command line / loader args
+	var ua := OS.get_cmdline_user_args()
+	if day_night and day_night.env:
+		if "--nofog" in ua:
+			day_night.env.fog_enabled = false
+		if "--noglow" in ua:
+			day_night.env.glow_enabled = false
+		if "--nosky" in ua:
+			day_night.env.background_mode = Environment.BG_COLOR
+			day_night.env.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
+	if "--scale1" in ua:
+		get_viewport().scaling_3d_scale = 1.0
+	if "--nosea" in ua and has_node("Environment/Sea"):
+		get_node("Environment/Sea").visible = false
+	if "--noshadow" in ua and day_night:
+		day_night.sun.shadow_enabled = false
+		day_night.moon.shadow_enabled = false
+	if "--nochars" in ua:
+		for v in villagers:
+			v.visible = false
+		if hero_showcase:
+			hero_showcase.visible = false
+		if village_life:
+			village_life.visible = false
+	if "--noanimals" in ua and atmosphere and atmosphere.has_node("Wildlife"):
+		atmosphere.get_node("Wildlife").visible = false
 
 func _diag_later() -> void:
 	## One-off render diagnostics printed to the log (the web loader keeps them in window.__lt.log).
