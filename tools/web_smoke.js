@@ -38,7 +38,7 @@ const out = process.argv[3] || '.';
     const d = g.getImageData(0, 0, c.width, c.height).data; const s = new Set(); for (let i = 0; i < d.length; i += 16) s.add((d[i] >> 3) << 10 | (d[i+1] >> 3) << 5 | (d[i+2] >> 3)); return s.size; }, shot1.toString('base64'));
   check('a real picture is drawn (not a flat sky)', colours > 400, {distinct_colours: colours});
   const lg = await log();
-  const q = lg.split('\n').filter(l => /LT_QUALITY|LT_READY/.test(l));
+  const q = lg.split("\n").filter(l => /LT_QUALITY|LT_READY|LT_CLOCK/.test(l)).slice(-8);
   console.log('INFO  ' + q.join(' | '));
   console.log('RESULT: ' + (results.every(x => x) ? 'PASSED' : 'FAILED'));
   await b.close();

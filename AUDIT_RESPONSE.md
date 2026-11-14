@@ -25,3 +25,18 @@ Found while fixing: large households went hungry with food in the larder because
 meals) was cooked at a time and every chair was taken. A cook now fills the pot for the whole
 household, starts before the last meal is gone, and a resident with no free chair eats on the
 edge of their bed.
+
+## Results at this revision
+
+| Test | Result |
+|---|---|
+| Regression (`tests/test_runner.tscn`), incl. wage-claim and memory checks, 45-year generations | PASSED 61/61 |
+| Living-world scenarios (`tests/living_world_test.tscn`) | PASSED 61/61 |
+| Characters (`tests/hero_test.tscn`, headless) | PASSED 22/22 |
+| Follow visibility and figure budget (`tests/follow_test.tscn`, graphical) | PASSED 8/8 |
+| Browser gate (`tools/web_smoke.js`, Chromium software WebGL) | PASSED: village drawn in about 7 s from a local server, clock 42 game minutes in about 33 s, quality stepped itself down to level 3 at 2 to 3 fps |
+| Frame rate and loading time on the owner's device and the hosted URL | UNVERIFIED |
+
+The first browser gate run failed and found a second cause of the crawling clock: the engine
+clamps the frame delta on slow frames, so both the simulation and the quality monitor now use
+wall-clock time.

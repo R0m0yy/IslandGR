@@ -11,6 +11,7 @@ var time_scale: float = 1.0
 var auto: bool = true
 var steps: int = 0
 var _acc: float = 0.0
+var _last_us: int = 0
 var _light_t: float = 0.0
 
 func _process(delta: float) -> void:
@@ -19,7 +20,12 @@ func _process(delta: float) -> void:
 	## speed. Up to one second of real time is caught up per frame.
 	if not auto or village == null:
 		return
-	_acc += minf(delta, 1.0) * time_scale
+	# wall-clock time, not `delta`: the engine clamps delta on slow frames (about 0.13 s), which is
+	# exactly when the catch-up is needed
+	var now := Time.get_ticks_usec()
+	var real: float = delta if _last_us == 0 else (now - _last_us) / 1e6
+	_last_us = now
+	_acc += clampf(real, 0.0, 1.0) * time_scale
 	var n := 0
 	while _acc >= STEP and n < 400:
 		step(STEP)

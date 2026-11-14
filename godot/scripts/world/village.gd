@@ -653,6 +653,7 @@ func _process(delta: float) -> void:
 
 var _sep_t := 0.0
 var _clock_t := 0.0
+var _real_us := 0
 func _separate() -> void:
 	## People on foot do not stand inside one another: anyone standing or walking within
 	## arm's reach of someone else is drawn a step aside (figures only; the walk graph and
@@ -684,6 +685,11 @@ func _separate() -> void:
 		v.animator.sep = v.animator.sep.limit_length(0.45)
 
 func _adapt_quality(delta: float) -> void:
+	# wall-clock seconds: the engine's delta is clamped on slow frames and would hide a slow device
+	var now_us := Time.get_ticks_usec()
+	if _real_us != 0:
+		delta = clampf((now_us - _real_us) / 1e6, 0.0, 5.0)
+	_real_us = now_us
 	## Measure real frame rate over 4-second windows; below 20 fps step the quality down once
 	## (render scale, shadows, glow, character budget). Never steps back up: no flicker.
 	if sim == null or not sim.auto:

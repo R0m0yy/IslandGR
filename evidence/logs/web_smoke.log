@@ -1,0 +1,5 @@
+PASS  loader showed its stages and the game announced LT_READY  {"seconds":7.151,"stages":["Step 3 of 3 Â"]}
+PASS  village clock advances (>= 20 game minutes in 30 s at x1)  {"from":372,"to":414}
+PASS  a real picture is drawn (not a flat sky)  {"distinct_colours":2806}
+INFO  LT_CLOCK minutes=383 fps=2 quality=3 | LT_CLOCK minutes=388 fps=2 quality=3 | LT_CLOCK minutes=393 fps=2 quality=3 | LT_CLOCK minutes=398 fps=2 quality=3 | LT_CLOCK minutes=404 fps=3 quality=3 | LT_CLOCK minutes=408 fps=2 quality=3 | LT_CLOCK minutes=414 fps=2 quality=3 | LT_CLOCK minutes=415 fps=2 quality=3
+RESULT: PASSED
