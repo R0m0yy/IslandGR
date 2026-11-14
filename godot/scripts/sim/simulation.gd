@@ -13,15 +13,20 @@ var steps: int = 0
 var _acc: float = 0.0
 var _light_t: float = 0.0
 
-func _physics_process(delta: float) -> void:
+func _process(delta: float) -> void:
+	## Driven by rendered frames, not physics ticks: Godot caps physics catch-up per frame, so on a
+	## slow device (a few frames per second) the village clock used to crawl at a fraction of its
+	## speed. Up to half a second of real time is caught up per frame.
 	if not auto or village == null:
 		return
-	_acc += delta * time_scale
+	_acc += minf(delta, 0.5) * time_scale
 	var n := 0
 	while _acc >= STEP and n < 400:
 		step(STEP)
 		_acc -= STEP
 		n += 1
+	if n >= 400:
+		_acc = 0.0
 
 func advance(seconds: float) -> void:
 	var n := int(round(seconds / STEP))

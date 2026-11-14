@@ -48,6 +48,50 @@ var tree: AnimationTree
 var playback: AnimationNodeStateMachinePlayback
 var current: String = ""
 var rig: Node3D
+var impostor: Node3D = null         # cheap stand-in drawn when the full character is over budget
+var detailed := true
+static var _imp_meshes := {}
+
+func set_detailed(on: bool) -> void:
+	## Full animated character, or a two-piece stand-in in the same clothing colour and height.
+	## The resident is always represented; only the cost changes.
+	if model == null or on == detailed:
+		return
+	detailed = on
+	rig.visible = on
+	if tree:
+		tree.active = on
+	if not on and impostor == null:
+		_make_impostor()
+	if impostor:
+		impostor.visible = not on
+
+func _make_impostor() -> void:
+	if _imp_meshes.is_empty():
+		var body := CapsuleMesh.new(); body.radius = 0.17; body.height = 1.25; body.radial_segments = 6; body.rings = 1
+		var head := SphereMesh.new(); head.radius = 0.12; head.height = 0.24; head.radial_segments = 6; head.rings = 3
+		_imp_meshes = {"body": body, "head": head}
+	var h := 1.0
+	if skel and skel.find_bone("head") >= 0:
+		h = clampf(skel.get_bone_global_rest(skel.find_bone("head")).origin.y / 1.5, 0.55, 1.1)
+	impostor = Node3D.new()
+	impostor.name = "Impostor"
+	impostor.scale = Vector3(1, h, 1)
+	var cloth := Color.from_hsv(fposmod(0.58 + _look_hue, 1.0), 0.45, 0.75)
+	var skin := Color(0.45, 0.3, 0.22) * _look_tone
+	for spec in [["body", cloth, 0.68], ["head", skin, 1.5]]:
+		var mi := MeshInstance3D.new()
+		mi.mesh = _imp_meshes[spec[0]]
+		var m := StandardMaterial3D.new()
+		m.albedo_color = spec[1]
+		m.roughness = 0.9
+		mi.material_override = m
+		mi.position.y = spec[2]
+		mi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+		impostor.add_child(mi)
+	add_child(impostor)
+var _look_hue := 0.0
+var _look_tone := 1.0
 
 func build(_tint: Color = Color.WHITE) -> void:
 	## NEUTRAL TEMPORARY FIGURE. Character design is frozen until the owner
@@ -155,6 +199,8 @@ func build_model(key: String, seed_id: String) -> void:
 	var hue := rng.randf_range(-0.5, 0.5) if rng.randf() < 0.8 else 0.0
 	var val := rng.randf_range(0.82, 1.12)
 	var tone := rng.randf_range(0.82, 1.18)
+	_look_hue = hue
+	_look_tone = tone
 	var mats := {}
 	for mi in model.find_children("*", "MeshInstance3D", true, false):
 		var m: MeshInstance3D = mi
@@ -286,7 +332,7 @@ func phase() -> float:
 func _physics_process(_dt: float) -> void:
 	## Feet on the real surface: the walk graph is straight lines between nodes, the
 	## stairs, decks and rock are not. Only the figure moves; the simulation keeps its position.
-	if model == null or not visible or not is_inside_tree():
+	if model == null or not visible or not detailed or not is_inside_tree():
 		return
 	_ray_tick = (_ray_tick + 1) % 3
 	if _ray_tick != 0:
@@ -302,6 +348,13 @@ func _physics_process(_dt: float) -> void:
 
 func _process(dt: float) -> void:
 	if model == null:
+		return
+	if not detailed:
+		if impostor:
+			# lying down for sleep, a small bob when walking
+			var asleep := current == "sleep"
+			impostor.rotation.x = lerpf(impostor.rotation.x, -PI / 2 if asleep else 0.0, clampf(dt * 6.0, 0.0, 1.0))
+			impostor.position.y = (0.35 if asleep else 0.0) + (absf(sin(Time.get_ticks_msec() * 0.008)) * 0.04 if current in WALKING else 0.0)
 		return
 	# smooth the figure toward the simulation pose: ground height, walking lane, turning
 	var walking := current in WALKING

@@ -15,6 +15,7 @@ h1{margin:0;font:600 34px/1.1 "Space Grotesk","Inter",system-ui,sans-serif;lette
 #msg{margin:0;color:var(--mut);max-width:60ch}
 #bar{height:8px;background:var(--line);border-radius:4px;overflow:hidden}
 #bar i{display:block;height:100%;width:0;background:var(--accent);transition:width .25s}
+#stage-msg{color:var(--fg);font-weight:600;font-variant-numeric:tabular-nums}
 #err{display:none;color:var(--bad);white-space:pre-wrap;word-break:break-word;border:1px solid var(--bad);border-radius:8px;padding:12px;font:12px/1.5 ui-monospace,monospace}
 table{border-collapse:collapse;width:100%;font-size:13px}
 td{padding:5px 0;border-top:1px solid var(--line);vertical-align:top}
@@ -25,8 +26,9 @@ small{color:var(--mut)}
 <div id="stage"><canvas id="canvas" tabindex="0"></canvas></div>
 <div id="boot"><div id="card">
   <h1>Living Tides</h1>
-  <p id="msg">Loading Saltcrown (42 MB). The village starts at 06:00 and runs by itself: residents wake, fish, trade, shelter from storms and raise families. Click or tap the picture once it appears.</p>
+  <p id="msg">Loading Saltcrown (DOWNLOAD_MB MB). The village starts at 06:00 and runs by itself: residents wake, fish, trade, shelter from storms and raise families. Click or tap the picture once it appears.</p>
   <div id="bar" role="progressbar" aria-label="Loading"><i></i></div>
+  <div id="stage-msg" aria-live="polite">Step 1 of 3 · downloading</div>
   <div id="err"></div>
   <div class="keys"><table>
     <tr><td>iPad</td><td>drag with one finger to move · pinch to zoom · twist two fingers to turn · slide two fingers up or down to tilt · tap a resident, boat or building to select it · the button bar at the bottom has pause, speed, panels and follow modes</td></tr>
@@ -36,17 +38,35 @@ small{color:var(--mut)}
     <tr><td>Panels</td><td>I village · J journal · T timeline · F family tree · C cutaway · V show or hide the residents · H hide UI</td></tr>
     <tr><td>Save</td><td>F5 save · F9 load (kept in this browser)</td></tr>
   </table></div>
-  <small>Research build. In the browser the 20 residents nearest the camera are drawn; zoom in to see people at work. Frame rate depends on your graphics card; if it is slow, press 4 to speed time up and H to hide the interface.</small>
+  <small>Research build. In the browser the residents nearest the camera are drawn in full detail and the others as simple figures; the game lowers its own detail on slow devices. Frame rate depends on your graphics card; if it is slow, press 4 to speed time up and H to hide the interface.</small>
 </div></div>
 <script>
 // Game data ships as base64 text parts (the host serves only web file types). They are fetched, decoded and
 // joined here, and the engine's .wasm (gzip, 35 MB to 8 MB) is expanded before the loader reads it.
-const PARTS = {pck: 7, wasm: 2};
+const PARTS = {pck: PCK_PARTS, wasm: WASM_PARTS};
+const TOTAL_TEXT = TOTAL_TEXT_BYTES;      // bytes of all parts, for the progress bar
 const origFetch = window.fetch.bind(window);
+const prog = {got: 0, stage: 'download'};
+function show(){
+  const bar = document.querySelector('#bar i'), st = document.getElementById('stage-msg');
+  if (!bar || !st) return;
+  const mb = n => (n / 1048576 * 0.75).toFixed(0);        // base64 text is 4/3 of the data
+  if (prog.stage === 'download') { bar.style.width = Math.min(70, prog.got / TOTAL_TEXT * 70) + '%'; st.textContent = 'Step 1 of 3 · downloading ' + mb(prog.got) + ' of ' + mb(TOTAL_TEXT) + ' MB'; }
+  else if (prog.stage === 'engine') { bar.style.width = '80%'; st.textContent = 'Step 2 of 3 · starting the game engine'; }
+  else if (prog.stage === 'village') { bar.style.width = '92%'; st.textContent = 'Step 3 of 3 · building the village (can take a minute on a phone)'; }
+}
+async function part(url){
+  const r = await origFetch(url);
+  if (!r.ok) throw new Error('missing ' + url + ' (' + r.status + ')');
+  if (!r.body) { const t = await r.text(); prog.got += t.length; show(); return t; }
+  const rd = r.body.getReader(), dec = new TextDecoder(); let t = '';
+  for (;;) { const {done, value} = await rd.read(); if (done) break; t += dec.decode(value, {stream:true}); prog.got += value.length; show(); }
+  return t + dec.decode();
+}
 async function joined(prefix, n){
-  const texts = await Promise.all(Array.from({length:n}, (_, i) => origFetch(prefix + '.' + i + '.txt').then(r => { if (!r.ok) throw new Error('missing ' + prefix + '.' + i + ' (' + r.status + ')'); return r.text(); })));
+  const texts = await Promise.all(Array.from({length:n}, (_, i) => part(prefix + '.' + i + '.txt')));
   const out = []; let total = 0;
-  for (const t of texts) { const bin = atob(t.trim()); const u = new Uint8Array(bin.length); for (let i = 0; i < bin.length; i++) u[i] = bin.charCodeAt(i); out.push(u); total += u.length; }
+  for (let k = 0; k < texts.length; k++) { const bin = atob(texts[k].trim()); texts[k] = null; const u = new Uint8Array(bin.length); for (let i = 0; i < bin.length; i++) u[i] = bin.charCodeAt(i); out.push(u); total += u.length; }
   const all = new Uint8Array(total); let o = 0; for (const u of out) { all.set(u, o); o += u.length; }
   return all;
 }
@@ -73,14 +93,19 @@ if (!window.WebGL2RenderingContext) fail('This browser has no WebGL 2. Use a cur
 else if (typeof DecompressionStream === 'undefined') fail('This browser lacks DecompressionStream. Use a current Chrome, Edge or Firefox.');
 else {
   const engine = new Engine({executable:'index', canvasResizePolicy:2, focusCanvas:true,
-    fileSizes:{'index.pck':41696800,'index.wasm':35376909}, args:[],
+    fileSizes:{'index.pck':PCK_BYTES,'index.wasm':WASM_BYTES}, args:[],
     onExit:()=>{ msg.textContent='The game closed. Reload the page to start again.'; boot.style.display='flex'; }});
-  window.__lt = {engine, started:false, log:[]};
+  window.__lt = {engine, started:false, ready:false, log:[]};
+  const reveal = () => { if (window.__lt.ready) return; window.__lt.ready = true; boot.style.display='none'; document.getElementById('canvas').focus(); };
+  let slow = null;
   engine.startGame({executable:'index', mainPack:'index.pck',
-    onProgress:(c,t)=>{ bar.style.width = (t ? Math.min(100, c/t*100) : 50) + '%'; },
-    onPrint:(...a)=>{ window.__lt.log.push(a.join(' ')); },
+    onProgress:(c,t)=>{ if (t && c >= t && prog.stage === 'download') { prog.stage = 'engine'; show(); } },
+    onPrint:(...a)=>{ const l = a.join(' '); window.__lt.log.push(l);
+      if (l.indexOf('LT_READY') === 0) { clearTimeout(slow); reveal(); } },          // village drawn and clock moving
     onPrintError:(...a)=>{ window.__lt.log.push('ERR '+a.join(' ')); }
-  }).then(()=>{ window.__lt.started=true; boot.style.display='none'; document.getElementById('canvas').focus(); })
+  }).then(()=>{ window.__lt.started=true; prog.stage='village'; show();
+      slow = setTimeout(()=>{ if (!window.__lt.ready) { document.getElementById('stage-msg').textContent = 'Still building the village. This device is slow at 3D; the game will lower its own detail once it starts.'; } }, 45000);
+      setTimeout(reveal, 180000); })                                               // never hide a running game forever
     .catch(e=>fail(String(e && (e.stack || e.message) || e)));
 }
 </script>

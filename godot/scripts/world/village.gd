@@ -19,10 +19,14 @@ var fishing_spots: Array = []
 var stroll_nodes: Array = []
 var figures_visible: bool = true
 var low_quality: bool = false
-# Browsers / phones: only this many residents are drawn at once (the nearest to the camera).
-# WebGL ran out of per-character resources with ~35 animated characters on screen and
-# then drew no 3D at all (found by bisection, Session 8); hidden residents keep living.
-const FIGURE_BUDGET := 20
+# Browsers / phones: this many residents are drawn as full animated characters (the nearest to
+# the camera, and always the one being followed); the rest are drawn as simple stand-in figures.
+# WebGL drew no 3D at all with ~35 full characters on screen (bisection, Session 8).
+var figure_budget := 20
+var quality_level := 0              # 0 full .. 3 lowest; lowered automatically when frames are slow
+var _fps_t := 0.0
+var _fps_n := 0
+var _fps_wait := 6.0
 var _budget_t := 0.0         # phones / browsers: fewer pixels, no shadow pass, lighter sea
 var show_heroes: bool = true          # the four hero villagers on the Harbour Stair (presentation only)
 var hero_showcase = null
@@ -95,6 +99,17 @@ func _ready() -> void:
 	if "--noanimals" in ua and atmosphere and atmosphere.has_node("Wildlife"):
 		atmosphere.get_node("Wildlife").visible = false
 
+func _announce_ready() -> void:
+	## The web loader keeps its start card up until this line: the village is built AND frames
+	## are being drawn AND the clock is moving (not merely "the engine started").
+	var t0 := GameClock.total_minutes
+	for i in 3:
+		await get_tree().process_frame
+	await RenderingServer.frame_post_draw
+	while GameClock.total_minutes <= t0 and sim and sim.auto:
+		await get_tree().process_frame
+	print("LT_READY residents=", villagers.size(), " fps=", Engine.get_frames_per_second())
+
 func _diag_later() -> void:
 	## One-off render diagnostics printed to the log (the web loader keeps them in window.__lt.log).
 	for wait in [3.0, 12.0]:
@@ -133,6 +148,7 @@ func build() -> void:
 		_build_presentation()
 		if low_quality:
 			apply_figure_budget()
+		_announce_ready()
 
 # ------------------------------------------------------------------ helpers shared by the systems
 func household_name(hh: String) -> String:
@@ -621,20 +637,71 @@ func _build_presentation() -> void:
 			hs.free()
 
 func _process(delta: float) -> void:
-	if not low_quality or not with_presentation:
+	if not with_presentation:
+		return
+	_adapt_quality(delta)
+	if not low_quality:
 		return
 	_budget_t -= delta
 	if _budget_t <= 0.0:
 		_budget_t = 0.5
 		apply_figure_budget()
 
+func _adapt_quality(delta: float) -> void:
+	## Measure real frame rate over 4-second windows; below 20 fps step the quality down once
+	## (render scale, shadows, glow, character budget). Never steps back up: no flicker.
+	if _fps_wait > 0.0:
+		_fps_wait -= delta
+		return
+	_fps_t += delta
+	_fps_n += 1
+	if _fps_t < 4.0:
+		return
+	var fps := _fps_n / _fps_t
+	_fps_t = 0.0
+	_fps_n = 0
+	if fps < 20.0 and quality_level < 3:
+		set_quality(quality_level + 1)
+		print("LT_QUALITY level=", quality_level, " after ", snappedf(fps, 0.1), " fps")
+
+func set_quality(level: int) -> void:
+	quality_level = clampi(level, 0, 3)
+	low_quality = low_quality or quality_level > 0
+	var vp := get_viewport()
+	if quality_level >= 1:
+		vp.msaa_3d = Viewport.MSAA_DISABLED
+		vp.scaling_3d_scale = minf(vp.scaling_3d_scale, 0.7)
+		if day_night:
+			day_night.sun.shadow_enabled = false
+			day_night.moon.shadow_enabled = false
+		figure_budget = mini(figure_budget, 14)
+	if quality_level >= 2:
+		vp.scaling_3d_scale = minf(vp.scaling_3d_scale, 0.55)
+		if day_night and day_night.env:
+			day_night.env.glow_enabled = false
+		figure_budget = mini(figure_budget, 8)
+		for id in buildings:
+			for l in buildings[id].lights:
+				if is_instance_valid(l):
+					l.shadow_enabled = false
+	if quality_level >= 3:
+		vp.scaling_3d_scale = minf(vp.scaling_3d_scale, 0.42)
+		figure_budget = mini(figure_budget, 4)
+		if atmosphere and atmosphere.has_node("Wildlife"):
+			atmosphere.get_node("Wildlife").visible = false
+	apply_figure_budget()
+
 func apply_figure_budget() -> void:
 	var cam := get_viewport().get_camera_3d() if is_inside_tree() else null
 	var cp: Vector3 = cam.global_position if cam else Vector3.ZERO
+	var followed = camera_rig.follow if camera_rig else null
 	var list: Array = villagers.filter(func(v): return v.animator != null and v.animator.rig != null)
-	list.sort_custom(func(a, b): return a.global_position.distance_squared_to(cp) < b.global_position.distance_squared_to(cp))
+	list.sort_custom(func(a, b):
+		if (a == followed) != (b == followed):
+			return a == followed
+		return a.global_position.distance_squared_to(cp) < b.global_position.distance_squared_to(cp))
 	for i in list.size():
-		list[i].animator.rig.visible = i < FIGURE_BUDGET
+		list[i].animator.set_detailed(i < figure_budget)
 
 func set_figures_visible(on: bool) -> void:
 	## Simulation agents keep running; only the temporary figures are hidden.

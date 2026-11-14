@@ -15,6 +15,9 @@ var goal_yaw := deg_to_rad(40.0)
 var goal_pitch := deg_to_rad(-32.0)
 var follow = null                        # Villager or Boat
 var selected_building: Building = null
+var _follow_cut: Building = null         # building opened up because the followed resident is inside
+var auto_cutaway := true
+var _cut_sides: Array = []
 var family_hh: String = ""              # follow a whole household
 var cinematic: bool = false
 var _wi := -1
@@ -68,6 +71,28 @@ func release() -> void:
 		goal_dist = _saved_dist
 		goal_pitch = deg_to_rad(-32.0)
 	_clear_building()
+
+func _update_follow_cut() -> void:
+	## Following someone indoors opens that building (roof and camera-facing walls) so the
+	## resident stays visible; it closes again when they step out or the follow ends.
+	var want: Building = null
+	if auto_cutaway and follow != null and follow.has_method("inside_building") and village:
+		var id: String = follow.inside_building()
+		if id != "" and village.buildings.has(id):
+			want = village.buildings[id]
+	if want == _follow_cut:
+		if want:
+			var sides: Array = village.cut_sides()
+			if sides != _cut_sides:                          # walls follow the orbit
+				_cut_sides = sides
+				want.set_cutaway(true, sides)
+		return
+	if _follow_cut and _follow_cut != selected_building:
+		_follow_cut.set_cutaway(false)
+	_follow_cut = want
+	if want:
+		_cut_sides = village.cut_sides()
+		want.set_cutaway(true, _cut_sides)
 
 func _clear_building() -> void:
 	if selected_building:
@@ -182,6 +207,9 @@ func _process(dt: float) -> void:
 		goal_target += Basis(Vector3.UP, yaw) * mv.normalized() * dist * 0.6 * dt
 	if cinematic:
 		_cinema(dt)
+	if follow != null and not is_instance_valid(follow):
+		follow = null
+	_update_follow_cut()
 	if follow and is_instance_valid(follow):
 		goal_target = (follow.pos if follow is Boat else follow.global_position) + Vector3(0, 1.2, 0)
 	elif family_hh != "":
