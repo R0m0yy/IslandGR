@@ -569,7 +569,7 @@ ERROR: Parameter "m" is null.
    at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
 ERROR: Parameter "m" is null.
    at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
-== scenario A done in 7875 ms
+== scenario A done in 9501 ms
 PASS  [B] a neighbour noticed and brought food (within 120 game minutes)  { "giver": "Milo", "transaction": [537.8, "gift", "HH_H06", "HH_H07", "fish", 3] }
 PASS  [B] the goods really moved: recipient pantry gained what the giver lost  
 PASS  [B] recipients remember the kindness  ["Milo brought us 3 fish when we had nothing", "Milo brought us 3 fish when we had nothing"]
@@ -1139,7 +1139,7 @@ ERROR: Parameter "m" is null.
    at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
 ERROR: Parameter "m" is null.
    at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
-== scenario B done in 3416 ms
+== scenario B done in 3690 ms
 PASS  [C] gulls stole fish on their own (in 280 game minutes)  { "thefts": 3, "attempts": 13 }
 PASS  [C] every theft removed a fish from the right account in the ledger  ["BIZ_P01", "BIZ_P01", "BOAT_01"]
 PASS  [C] every theft is in the journal with its cause  
@@ -1708,7 +1708,7 @@ ERROR: Parameter "m" is null.
    at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
 ERROR: Parameter "m" is null.
    at: mesh_get_surface_count (servers/rendering/dummy/storage/mesh_storage.h:120)
-== scenario C done in 2276 ms
+== scenario C done in 2412 ms
 PASS  [D] boats at sea came home and none left during the storm  { "at_sea_when_it_broke": 4, "moored_now": 6, "departures": 0 }
 PASS  [D] people outdoors sought shelter  { "ran_for_shelter": 12, "still_strolling_or_shore_fishing": 0 }
 PASS  [D] the sea rose with the wind (wave model)  0.99

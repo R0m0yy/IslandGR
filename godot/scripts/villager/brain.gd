@@ -49,7 +49,9 @@ func decide() -> Dictionary:
 		# an older child left hungry (the grown-ups asleep or out) grills a fish for themselves
 		s["cook"] = hunger * 1.05 + 6.0
 	if adult:
-		s["cook"] = (need * 1.1 + 12.0) if (meals == 0 and raw > 0 and need > 30.0) else 0.0
+		# start the next pot before the last meal is gone: a table of six with one meal left is not fed
+		var low_meals: bool = meals == 0 or meals * 2 < int(w.households[v.hh].get("members", 1))
+		s["cook"] = (need * 1.1 + 12.0) if (low_meals and raw > 0 and need > 30.0) else 0.0
 		var shop_open := h >= 6.0 and h < 20.0
 		s["buy_food"] = (need * 1.0 + 11.0) if (meals == 0 and raw == 0 and shop_open and w.weather.state != "storm" and l.qty(Economy.MARKET, "fish") > 0 and purse >= w.economy.fish_sell_price()) else 0.0
 		var eatery_open: bool = h >= 7.0 and h < 21.0 and l.qty(Economy.EATERY, "meal") > 0
