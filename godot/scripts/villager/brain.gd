@@ -9,6 +9,7 @@ extends RefCounted
 var v = null
 var cooldown: Dictionary = {}          # activity -> game minute it may be retried
 var last_scores: Dictionary = {}
+var _repay := false
 var _gift_to: String = ""
 
 func _init(villager) -> void:
@@ -72,7 +73,9 @@ func decide() -> Dictionary:
 					if b and b.boat_state == "moored" and not w.weather.unsafe_at_sea() and b.is_available(v) and energy > 30.0:
 						# read the sky: the cautious and the inexperienced judge the same weather differently
 						var risk: float = w.weather.forecast(v.skills["fishing"], v.rng)
-						if risk > 0.22 + 0.4 * v.boldness:
+						# memory: someone caught out by a storm reads the same sky more warily for weeks
+						var wary: float = clampf(-(v.feeling("storm") + v.feeling("sea")) * 0.012, 0.0, 0.14)
+						if risk > 0.22 + 0.4 * v.boldness - wary:
 							if cooldown.get("boat_trip", -1.0) <= GameClock.total_minutes:
 								v.stats["stayed_ashore"] += 1
 								v.note("sky looks bad (risk %d%%): staying ashore" % int(risk * 100.0))
@@ -88,7 +91,8 @@ func decide() -> Dictionary:
 						elif w.economy.fish_buy_price() <= 2 and raw >= Economy.HOME_KEEP and v.ambition != "wealth":
 							s["mend_nets"] = 50.0                             # market glutted, larder full: not worth the trip today
 						else:
-							s["boat_trip"] = 58.0 + (6.0 if v.ambition == "sea" else 0.0)
+							# memory: full boats draw a fisherman back out, a run of empty ones dulls the appetite
+							s["boat_trip"] = 58.0 + (6.0 if v.ambition == "sea" else 0.0) + clampf(v.feeling("fishing") * 0.5, -6.0, 6.0)
 				elif job["role"] in ["carpenter", "apprentice"] and w.damaged_building() != "" and not w.weather.shelter_needed():
 					s["repair"] = 54.0
 				else:
@@ -96,6 +100,7 @@ func decide() -> Dictionary:
 				if false:
 					pass
 	if adult and v.sick_days <= 0:
+		_repay = false
 		# kindness: someone I know has an empty larder and I have food to spare
 		var spare: int = raw - 2 * maxi(1, w.households[v.hh]["members"])
 		if spare >= 2 and cooldown.get("give_food", -1.0) <= GameClock.total_minutes:
@@ -103,6 +108,18 @@ func decide() -> Dictionary:
 			if need_hh != "":
 				_gift_to = need_hh
 				s["give_food"] = 24.0 + 40.0 * v.generosity + 6.0 * float(w.economy.favours.get(need_hh + "|" + v.hh, 0))
+	if adult and v.sick_days <= 0 and v.goal.get("type", "") == "repay":
+		# a held commitment: return a kindness once there is food to spare (kept for up to 40 days)
+		var to_hh: String = v.goal.get("to", "")
+		if not w.households.has(to_hh) or w.households[to_hh].get("members", 0) <= 0 or GameClock.day() - int(v.goal.get("day", 0)) > 40:
+			v.goal = {}
+		elif raw - 2 * maxi(1, w.households[v.hh]["members"]) >= 2 and not night and cooldown.get("give_food", -1.0) <= GameClock.total_minutes:
+			_gift_to = to_hh
+			_repay = true
+			s["give_food"] = maxf(s.get("give_food", 0.0), 44.0)
+	# memory: people who were helped when they had nothing are readier to help in turn
+	if s.get("give_food", 0.0) > 0.0:
+		s["give_food"] += clampf((v.feeling("kindness") + v.feeling("charity")) * 0.4, 0.0, 8.0)
 	if v.sick_days > 0:
 		s["rest_home"] = 60.0
 	s["stroll"] = (14.0 + (100.0 - v.needs["social"]) * 0.2 * v.sociability) * out_f if not night else 0.0
@@ -200,6 +217,11 @@ func _plan(act: String) -> Array:
 			if _gift_to == "" or not w.households.has(_gift_to):
 				return []
 			cooldown["give_food"] = GameClock.total_minutes + 240.0
+			if _repay and v.goal.get("to", "") == _gift_to:
+				v.repaying = true
+				v.goal = {}
+				v.note("returning a kindness to %s" % w.household_name(_gift_to))
+			_repay = false
 			return [{"go": "door_" + w.households[_gift_to]["building"]}, {"gift": _gift_to, "item": "fish", "n": 2 + (1 if v.generosity > 0.7 else 0)}]
 		"repair":
 			var bid: String = w.damaged_building()

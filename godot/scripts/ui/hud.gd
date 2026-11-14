@@ -199,7 +199,10 @@ func resident_text(v) -> String:
 		t += "  next: " + ", ".join(nxt) + "\n"
 	t += "\nHunger %s\nThirst %s\nEnergy %s\nHygiene %s\nSocial %s\nMood %d · Health %d\n" % [_bar(n["hunger"], true), _bar(n["thirst"], true),
 		_bar(n["energy"], false), _bar(n["hygiene"], false), _bar(n["social"], false), i["mood"], i["health"]]
-	t += "\nPurse %d%s · pantry %s\n" % [i["household_money"], (" · owes %d" % debt) if debt > 0 else "", _items(i["pantry"])]
+	if i.get("goal", {}).get("type", "") == "repay":
+		t += "\nMeans to return %s's kindness when there is food to spare" % i["goal"].get("from", "a neighbour")
+	var owed_w: int = village.economy.wages_owed_to(i["household_id"]) if i.has("household_id") else 0
+	t += "\nPurse %d%s%s · pantry %s\n" % [i["household_money"], (" · owes %d" % debt) if debt > 0 else "", (" · is owed %d in wages" % owed_w) if owed_w > 0 else "", _items(i["pantry"])]
 	var sk = i["skills"]
 	t += "Skills: fishing %d · cooking %d · trade %d · carpentry %d\n" % [int(sk["fishing"] * 100), int(sk["cooking"] * 100), int(sk["trade"] * 100), int(sk["carpentry"] * 100)]
 	var tr = i["traits"]

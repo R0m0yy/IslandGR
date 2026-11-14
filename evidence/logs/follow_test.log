@@ -1,0 +1,14 @@
+PASS  a resident is indoors at 06:00  
+LT_READY residents=42 fps=1
+--
+PASS  following indoors opens the building (roof and camera-facing walls)  P05
+PASS  the followed resident is framed inside the screen  { "screen": (800, 461), "viewport": (1600, 900) }
+PASS  the resident leaves home during the morning  Day 1  07:00
+PASS  the building closes again once they are outside  
+LT_QUALITY level=2 after 7.5 fps
+--
+PASS  releasing the follow leaves no building open  
+PASS  budget: full characters capped, everyone else drawn as a stand-in, nobody invisible  { "full": 6, "stand_in": 36, "invisible": 0 }
+PASS  budget: the followed resident is always a full character  
+RESULT: PASSED (8 passed, 0 failed)
+WARNING: ObjectDB instances leaked at exit (run with --verbose for details).

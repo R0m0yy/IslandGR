@@ -164,7 +164,9 @@ func _serve(dt: float) -> void:
 		var customer = null
 		if st["cool"] <= 0.0:
 			for v in village.villagers:
-				if v.fsm.current_name == "idle" and not v.at_sea and v.global_position.distance_to(st["pos"]) < 3.2:
+				# a handover is only shown for a real sale (Economy.stall_sale moves goods and money)
+				if v.fsm.current_name == "idle" and not v.at_sea and v.age >= 14.0 and v.global_position.distance_to(st["pos"]) < 3.2 \
+						and village.economy.stall_sale(v, st["item"]):
 					customer = v
 					break
 		if customer:

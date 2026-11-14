@@ -35,6 +35,8 @@ var skills := {"fishing": 0.2, "cooking": 0.2, "trade": 0.2, "carpentry": 0.2}
 var memories: Array = []            # {"day", "type", "text", "valence"} - significant events only, capped
 var sick_days: int = 0
 var _react_t: float = 0.0
+var goal: Dictionary = {}              # a commitment held across days, e.g. {type: repay, to: household, from: name, day}
+var repaying := false
 var _hunger_break_at: float = -1.0
 var _shelter_t: float = 0.0
 var health: float = 100.0
@@ -86,6 +88,7 @@ func setup(rec: Dictionary, village) -> void:
 	for k in rec.get("skills", {}):
 		skills[k] = float(rec["skills"][k])
 	memories = rec.get("memories", []).duplicate(true)
+	goal = rec.get("goal", {}).duplicate(true)
 	sick_days = int(rec.get("sick_days", 0))
 	if rec.has("ambition"):
 		ambition = rec["ambition"]
@@ -184,7 +187,23 @@ func tick(dt: float, minutes: float) -> void:
 func remember(type: String, text: String, valence: float = 0.0) -> void:
 	memories.append({"day": GameClock.day(), "type": type, "text": text, "valence": valence})
 	if memories.size() > 30:
+		# forget the oldest everyday memory first; the events that mattered (a storm at sea,
+		# a neighbour's kindness) stay for life
+		for i in memories.size():
+			if absf(float(memories[i].get("valence", 0.0))) < 4.0:
+				memories.remove_at(i)
+				return
 		memories.pop_front()
+
+func feeling(type: String, span_days: float = 30.0) -> float:
+	## What past events of one kind add up to now: recent ones count fully, old ones fade.
+	## The brain reads this, so what happened to a resident changes what they choose next.
+	var t := 0.0
+	var today := float(GameClock.day())
+	for m in memories:
+		if m.get("type", "") == type:
+			t += float(m.get("valence", 0.0)) * clampf(1.0 - (today - float(m.get("day", today))) / span_days, 0.15, 1.0)
+	return t
 
 func react(clip: String, seconds: float) -> void:
 	## A brief visible reaction (shooing a gull, waving) that does not change the plan.
@@ -368,8 +387,8 @@ func info() -> Dictionary:
 		"activity": activity, "state": fsm.current_name, "going_to": path[-1] if not path.is_empty() else "",
 		"needs": needs.duplicate(), "mood": int(mood()), "health": int(health), "sick": sick_days > 0,
 		"skills": skills.duplicate(), "ambition": ambition, "traits": {"diligence": diligence, "sociability": sociability, "generosity": generosity, "boldness": boldness},
-		"memories": memories.slice(-5), "parents": parents, "kids": children,
-		"household_money": world.ledger.money(hh), "pantry": world.ledger.acc[hh]["items"].duplicate(),
+		"memories": memories.slice(-5), "goal": goal, "parents": parents, "kids": children,
+		"household_id": hh, "household_money": world.ledger.money(hh), "pantry": world.ledger.acc[hh]["items"].duplicate(),
 		"partner": partner, "children": children.size(), "friends": friends.slice(0, 4), "recent": log.slice(-5)}
 
 func inside_building() -> String:
@@ -391,7 +410,7 @@ func to_record() -> Dictionary:
 	if bed and shares_bed_of == "":
 		slot = home.all_of("bed").find(bed)
 	return {"id": villager_id, "name": display_name, "household": hh, "home": home.building_id, "bed_slot": slot, "job": job,
-		"shares_bed_of": shares_bed_of, "age": age, "partner": partner, "parents": parents, "children": children, "needs": needs.duplicate(), "health": health, "skills": skills.duplicate(), "memories": memories.duplicate(true),
+		"shares_bed_of": shares_bed_of, "age": age, "partner": partner, "parents": parents, "children": children, "needs": needs.duplicate(), "health": health, "skills": skills.duplicate(), "memories": memories.duplicate(true), "goal": goal.duplicate(true),
 		"sick_days": sick_days, "ambition": ambition, "at_node": at_node,
 		"stats": stats.duplicate(), "activity": activity, "state": fsm.current_name}
 

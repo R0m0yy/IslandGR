@@ -640,6 +640,10 @@ func _process(delta: float) -> void:
 	if not with_presentation:
 		return
 	_adapt_quality(delta)
+	_sep_t -= delta
+	if _sep_t <= 0.0:
+		_sep_t = 0.2
+		_separate()
 	if not low_quality:
 		return
 	_budget_t -= delta
@@ -647,9 +651,47 @@ func _process(delta: float) -> void:
 		_budget_t = 0.5
 		apply_figure_budget()
 
+var _sep_t := 0.0
+var _clock_t := 0.0
+func _separate() -> void:
+	## People on foot do not stand inside one another: anyone standing or walking within
+	## arm's reach of someone else is drawn a step aside (figures only; the walk graph and
+	## the simulation positions are untouched, so routes and timings do not change).
+	var on_foot: Array = []
+	for v in villagers:
+		if v.animator != null and v.animator.rig != null and not v.at_sea and v.fsm.current_name in ["idle", "walk", "climb_stairs", "cross_bridge"]:
+			on_foot.append(v)
+	for v in villagers:
+		if v.animator:
+			v.animator.sep = Vector3.ZERO
+	for i in on_foot.size():
+		var a = on_foot[i]
+		for j in range(i + 1, on_foot.size()):
+			var b = on_foot[j]
+			var d: Vector3 = b.global_position - a.global_position
+			if absf(d.y) > 1.0:
+				continue
+			d.y = 0.0
+			var l := d.length()
+			if l >= 0.55:
+				continue
+			# exactly coincident: split along a direction fixed by the pair, so it never flips
+			var dir: Vector3 = d / l if l > 0.02 else Vector3(cos(float(i * 7 + j)), 0, sin(float(i * 7 + j)))
+			var push: float = (0.55 - l) * 0.5
+			a.animator.sep -= dir * push
+			b.animator.sep += dir * push
+	for v in on_foot:
+		v.animator.sep = v.animator.sep.limit_length(0.45)
+
 func _adapt_quality(delta: float) -> void:
 	## Measure real frame rate over 4-second windows; below 20 fps step the quality down once
 	## (render scale, shadows, glow, character budget). Never steps back up: no flicker.
+	if sim == null or not sim.auto:
+		return                      # tests and capture scenes drive the clock themselves
+	_clock_t -= delta
+	if _clock_t <= 0.0 and OS.has_feature("web"):
+		_clock_t = 5.0
+		print("LT_CLOCK minutes=", int(GameClock.total_minutes), " fps=", Engine.get_frames_per_second(), " quality=", quality_level)
 	if _fps_wait > 0.0:
 		_fps_wait -= delta
 		return

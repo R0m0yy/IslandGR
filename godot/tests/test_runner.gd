@@ -235,6 +235,26 @@ func _ready() -> void:
 	check("cargo never exceeds a boat's capacity", village.boats.values().all(func(x): return village.ledger.qty(x.object_id, "fish") <= x.capacity_fish()))
 	check("households buy fish and meals with money", es["fish_bought"] > 0 and es["meals_sold"] > 0, {"fish_bought": es["fish_bought"], "meals_sold_by_eatery": es["meals_sold"]})
 	check("wages are paid; levy funds the council", es["wages_paid"] > 0 and es["levy_paid"] > 0, {"wages_paid": es["wages_paid"], "unpaid": es["wages_unpaid"], "levy_paid": es["levy_paid"], "levy_missed": es["levy_missed"], "council": village.ledger.money(Economy.COUNCIL)})
+	var owed_now: int = village.economy.arrears_total()
+	var raised: int = int(es.get("arrears_raised", 0))
+	check("unpaid wages become claims and are settled (under 15% still owed)", raised == 0 or float(owed_now) / float(raised) < 0.15, {"raised": raised, "settled": es.get("arrears_settled", 0), "still_owed": owed_now, "paid_on_the_day": es["wages_paid"], "late": es["wages_unpaid"]})
+	# memory changes behaviour: a storm remembered makes the same sky look riskier; a kindness
+	# received becomes a commitment that is acted on when there is food to spare
+	var adults: Array = village.villagers.filter(func(x): return x.age >= 18.0 and x.sick_days <= 0)
+	var ma = adults[0]
+	var mb = adults.filter(func(x): return x.hh != ma.hh)[0]
+	var f0: float = ma.feeling("storm")
+	ma.remember("storm", "caught at sea when the storm broke", -9.0)
+	check("memory: a remembered storm weighs on the resident", ma.feeling("storm") < f0 - 5.0, {"before": f0, "after": ma.feeling("storm")})
+	village.ledger.mint(mb.hh, "fish", 3, "test_stock")
+	mb.goal = {}
+	village.economy.give(mb, ma.hh, "fish", 2)
+	check("memory: a gift received becomes a held commitment to repay", ma.goal.get("type", "") == "repay" and ma.goal.get("to", "") == mb.hh, ma.goal)
+	village.ledger.mint(ma.hh, "fish", 2 * village.households[ma.hh]["members"] + 6, "test_stock")
+	ma.brain.cooldown.erase("give_food")
+	var was_h: float = GameClock.hour()
+	ma.brain.decide()
+	check("memory: the commitment raises the wish to bring food back", GameClock.hour() >= 21.0 or GameClock.hour() < 5.5 or ma.brain.last_scores.get("give_food", 0.0) >= 44.0, {"hour": was_h, "give_food": ma.brain.last_scores.get("give_food", 0.0)})
 	check("market price responds to stock", village.economy.fish_sell_price() >= 5 and village.economy.fish_buy_price() >= 3, {"stock": village.ledger.qty(Economy.MARKET, "fish"), "buy": village.economy.fish_buy_price(), "sell": village.economy.fish_sell_price()})
 	check("boat wear leads to paid repairs", es["repairs"] > 0 or worst_cond >= Boat.REPAIR_BELOW - Boat.TRIP_WEAR - 0.001, {"repairs": es["repairs"], "unaffordable": es["repairs_unaffordable"], "worst_condition": snappedf(worst_cond, 0.01)})
 	check("villagers drink and wash", tot["drinks"] > 0 and tot["washes"] > 0, {"drinks": tot["drinks"], "washes": tot["washes"]})

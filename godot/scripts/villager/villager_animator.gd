@@ -48,6 +48,8 @@ var tree: AnimationTree
 var playback: AnimationNodeStateMachinePlayback
 var current: String = ""
 var rig: Node3D
+var sep := Vector3.ZERO              # world-space sidestep away from people standing in the same spot (Village._separate)
+var _sep_now := Vector3.ZERO
 var impostor: Node3D = null         # cheap stand-in drawn when the full character is over budget
 var detailed := true
 static var _imp_meshes := {}
@@ -359,7 +361,10 @@ func _process(dt: float) -> void:
 	# smooth the figure toward the simulation pose: ground height, walking lane, turning
 	var walking := current in WALKING
 	rig.position.y = lerpf(rig.position.y, _ground_dy, clampf(dt * 10.0, 0.0, 1.0))
-	rig.position.x = lerpf(rig.position.x, lane if walking else 0.0, clampf(dt * 3.0, 0.0, 1.0))
+	_sep_now = _sep_now.lerp(sep, clampf(dt * 4.0, 0.0, 1.0))
+	var sl: Vector3 = global_transform.basis.inverse() * _sep_now
+	rig.position.x = lerpf(rig.position.x, (lane if walking else 0.0) + sl.x, clampf(dt * 3.0, 0.0, 1.0))
+	rig.position.z = lerpf(rig.position.z, sl.z, clampf(dt * 3.0, 0.0, 1.0))
 	var parent_yaw: float = get_parent().rotation.y if get_parent() is Node3D else 0.0
 	if not _yaw_init:
 		_yaw = parent_yaw; _yaw_init = true
