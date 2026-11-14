@@ -38,13 +38,17 @@ func tick(minutes: float) -> void:
 func is_done() -> bool:
 	return stove_state == "cooking" and progress >= COOK_MIN
 
-func finish(ledger: Ledger, hh: String) -> bool:
-	## Called by the cook when is_done(). One raw fish leaves the pantry, meals enter it.
-	if not ledger.consume(hh, "fish", 1, "cooked"):
-		return false
-	ledger.mint(hh, "meal", MEALS_PER_FISH, "cooked")
-	meals_cooked += MEALS_PER_FISH
-	return true
+func finish(ledger: Ledger, hh: String, fish: int = 1) -> bool:
+	## Called by the cook when is_done(). Raw fish leave the pantry, meals enter it. A cook
+	## feeding a big household puts more than one fish in the pot (`fish`), in the same time.
+	var done := 0
+	for i in maxi(1, fish):
+		if not ledger.consume(hh, "fish", 1, "cooked"):
+			break
+		ledger.mint(hh, "meal", MEALS_PER_FISH, "cooked")
+		meals_cooked += MEALS_PER_FISH
+		done += 1
+	return done > 0
 
 func _update_light() -> void:
 	if light:

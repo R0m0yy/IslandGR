@@ -172,6 +172,8 @@ func _plan(act: String) -> Array:
 			var seat = home.find("chair", v)
 			if seat == null:
 				seat = home.find("table", v)
+			if seat == null and v.bed != null and v.shares_bed_of == "":
+				seat = v.bed          # every chair taken at a full table: eat sitting on the edge of the bed
 			return _use(seat, "eat")
 		"eat_out":
 			var e = w.buildings.get("P06")

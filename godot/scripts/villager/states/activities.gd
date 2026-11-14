@@ -27,7 +27,9 @@ class CookState extends UseObjectState:
 		return cs == null or cs.is_done() or elapsed > 90.0
 	func finish() -> void:
 		var cs := obj as CookingStation
-		if cs and cs.finish(v.world.ledger, v.hh):
+		# one pot for the whole table: a fish feeds three, so a household of six cooks two
+		var pots: int = int(ceil(float(v.world.households[v.hh].get("members", 1)) / 3.0))
+		if cs and cs.finish(v.world.ledger, v.hh, pots):
 			v.stats["meals_cooked"] += CookingStation.MEALS_PER_FISH
 
 class EatState extends UseObjectState:
